@@ -8,6 +8,7 @@ require "uri"
 
 @repo = ""
 @main = ""
+@ins = ""
 
 OptionParser.new do |opts|
   opts.on("-h", "--help", "Enseña el comando de ayuda") do
@@ -47,6 +48,7 @@ OptionParser.new do |opts|
 
     @texto.gsub! 'mainTemp', @main
     @texto.gsub! 'repoTemp', @repo
+    @texto.gsub! 'instalacionTemp', "bundle install"
 
     if @verbose == true
       puts "Creando archivo en ruta padre ..."
