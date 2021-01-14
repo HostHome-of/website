@@ -1,0 +1,7 @@
+
+empezar [opciones...]
+
+Argumentos:
+    --verbose [-v] :: te dice que esta haciendo la maquina
+    --h [-help] :: Te enseña la ayuda
+    
