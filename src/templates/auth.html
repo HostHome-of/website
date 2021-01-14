@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es-ES">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,14 +11,21 @@
     <title>HostHome | Entrar, Registrarse</title>
   </head>
   <body>
+
+    {% if err %}
+      <div class="error">
+        <h5 style="color: red;">{{ err }}</h5>      
+      </div>
+    {% endif %}
+
     <div class="container">
       <div class="forms-container">
         <div class="signin-signup">
-          <form action="#" class="sign-in-form">
+          <form action="/login" method="POST" class="sign-in-form">
             <h2 class="title">Entrar</h2>
             <div class="input-field">
               <i class="fas fa-user"></i>
-              <input type="email" placeholder="Email o nombre" name="email_o_nombre" required/>
+              <input type="email" placeholder="Email" name="email" required/>
             </div>
             <div class="input-field">
               <i class="fas fa-lock"></i>

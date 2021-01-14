@@ -398,3 +398,19 @@ form.sign-in-form {
     left: 50%;
   }
 }
+
+
+.error {
+  border: 1px solid #ddd;
+  position: absolute;
+  top: 3%;
+  right: 0;
+  background: #fff;
+  padding: 10px;
+  height: 54px;
+  z-index: 100;
+  border-right: 5px solid rgb(207, 147, 147);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

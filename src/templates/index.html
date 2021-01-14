@@ -28,7 +28,7 @@
             {% if not user %}
                 <div class="showcase-form card">
                     <h2>Registrarse </h2>
-                    <form name="contact" netlify-honeypot="bot-field" method="POST" data-netlify="true">
+                    <form action="/register" method="POST" netlify-honeypot="bot-field" data-netlify="true">
                         <input type="hidden" name="form-name" value="contact">
                         <p class="hidden">
                             <label>No rellenes esto si eres un humano: <input name="bot-field" /></label>
@@ -37,10 +37,10 @@
                             <input type="text" name="name" placeholder="Nombre" required>
                         </div>
                         <div class="form-control">
-                            <input type="email" name="Email" placeholder="Email" required>
+                            <input type="email" name="mail" placeholder="Email" required>
                         </div>
                         <div class="form-control">
-                            <input type="password" name="psw" placeholder="Contraseña" required>
+                            <input type="password" name="password" placeholder="Contraseña" required>
                         </div>
                         <input type="submit" value="Enviar" class="btn btn-primary">
                     </form>

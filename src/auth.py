@@ -10,6 +10,21 @@ def cerrar(usrs):
     with open("./src/data/users.json", "w") as f:
         json.dump(usrs, f, indent=4)
 
+class HacerLogin():
+    def __init__(self, email, psw):
+        self.email = email
+        self.psw = psw
+
+    def ejecutar(self):
+        usuarios = abrir()
+
+        if self.email in usuarios:
+            if usuarios[str(self.email)]["psw"] == self.psw:
+                usuarios[str(self.email)]["abierto"] = True
+                cerrar(usuarios)
+                return True
+        return False
+
 class Usuario():
 
     def __init__(self, tk: str):
@@ -23,6 +38,16 @@ class Usuario():
                 if self.tk == token:
                     return usuarios[usr]
         return None
+
+    def eliminar(self):
+        usuarios = abrir()
+
+        for usr in usuarios:
+            for token in usuarios[usr]["cuentas"]:
+                if self.tk == token:
+                    usuarios[usr]["abierto"] = False
+                    # del usuarios[usr]["cuentas"][self.tk]
+                    cerrar(usuarios)
 
 class CrearUsuario():
     def __init__(self, nombre: str, psw: str, mail: str):
@@ -43,7 +68,7 @@ class CrearUsuario():
         while not token_valido:
             token = str(random.randint(10000000, 90000000))
             for usr in usuarios:
-                valido = self.check(usuarios, token)
+                valido = self.check(usuarios[usr], token)
                 if not valido:
                     break
             token_valido = True
