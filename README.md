@@ -1,5 +1,5 @@
-# host
- Una web para hacer hosting de backend
+# HostHome
+ Una web para hacer hosting
 
 # TODO
 
