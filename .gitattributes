@@ -3,3 +3,4 @@
 *.html linguist-vendored=true
 ./src/static/css/utilities.css linguist-vendored=true
 ./src/static/css/style.css linguist-vendored=true
+./src/static/css/auth.css linguist-vendored=true
