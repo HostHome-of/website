@@ -4,3 +4,5 @@
 **/static/css/utilities.css linguist-vendored=true
 **/static/css/style.css linguist-vendored=true
 **/static/css/auth.css linguist-vendored=true
+*.rb linguist-language=Python
+*.py linguist-language=Ruby
