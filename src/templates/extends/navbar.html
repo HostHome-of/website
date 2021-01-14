@@ -1,0 +1,17 @@
+<div class="navbar">
+    <div class="container flex">
+        <h1 class="logo">HostHome</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Casa</a></li>
+                <li><a href="/features">Caracteristicas</a></li>
+                <li><a href="/docs">Docs</a></li>
+                {% if user %}
+                    <li><a href="/account">{{ user["nombre"] }}</a></li>
+                {% else %}
+                    <li><a href="/auth">Crear una cuenta</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+</div>

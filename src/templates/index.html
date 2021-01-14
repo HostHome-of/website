@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+        integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+        crossorigin="anonymous" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/utilities.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>HostHome | Hosts en la nube para todos</title>
+</head>
+
+<body>
+
+    {% include "/extends/navbar.html" %}
+
+    <section class="showcase">
+        <div class="container grid">
+            <div class="showcase-text">
+                <h1>Implementación más sencilla</h1>
+                <p>Implemente aplicaciones web de todo tipo, desde API empresariales a gran escala hasta sitios web estáticos para particulares.
+                    Complete el formulario para crearse una cuenta</p>
+                <a href="/features" class="btn btn-outline">Mas informacion</a>
+            </div>
+
+            {% if not user %}
+                <div class="showcase-form card">
+                    <h2>Registrarse </h2>
+                    <form name="contact" netlify-honeypot="bot-field" method="POST" data-netlify="true">
+                        <input type="hidden" name="form-name" value="contact">
+                        <p class="hidden">
+                            <label>No rellenes esto si eres un humano: <input name="bot-field" /></label>
+                        </p>
+                        <div class="form-control">
+                            <input type="text" name="name" placeholder="Nombre" required>
+                        </div>
+                        <div class="form-control">
+                            <input type="email" name="Email" placeholder="Email" required>
+                        </div>
+                        <div class="form-control">
+                            <input type="password" name="psw" placeholder="Contraseña" required>
+                        </div>
+                        <input type="submit" value="Enviar" class="btn btn-primary">
+                    </form>
+                </div>
+            {% else %}
+                <div class="showcase-form">
+                    <img src="{{ url_for('static', filename='images/server_secure.svg') }}" alt="SEVIDOR SEGURO">
+                </div>    
+            {% endif %}
+        </div>
+    </section>
+
+    <section class="stats" style="padding-top: 120px !important;">
+        <div class="container">
+            <h3 class="stats-heading text-center my-1">
+                Bienvenido a la mejor plataforma para crear aplicaciones de todo tipo con arquitectura moderna y escalabilidad
+            </h3>
+
+            <div class="grid grid-3 text-center my-4">
+                <div>
+                    <i class="fas fa-server fa-3x"></i>
+                    <h3>10,349,405</h3>
+                    <p class="text-secondary">Despliegues</p>
+                </div>
+                <div>
+                    <i class="fas fa-upload fa-3x"></i>
+                    <h3>987 TB</h3>
+                    <p class="text-secondary">Publicados</p>
+                </div>
+                <div>
+                    <i class="fas fa-project-diagram fa-3x"></i>
+                    <h3>2,343,265</h3>
+                    <p class="text-secondary">Proyectos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="cli" style="margin-bottom: 30px !important;">
+        <div class="container grid">
+            <img src="{{ url_for('static', filename='images/cli.png') }}" alt="">
+            <div class="card">
+                <h3>Facil de usar nuestro CLI</h3>
+            </div>
+            <div class="card">
+                <h3>Desplieya en segundos</h3>
+            </div>
+        </div>
+    </section>
+
+    <section style="padding: 2.5rem 0 !important;" class="cloud bg-primary my-2 py-2">
+        <div class="container grid">
+            <div class="text-center">
+                <h2 class="lg">Alojamiento en la nube</h2>
+                <p class="lead my-1">Alojamiento en la nube como nunca antes lo habías visto. Rápido, eficiente y escalable</p>
+                <a href="/features" class="btn btn-dark">Leer mas</a>
+            </div>
+            <img src="{{ url_for('static', filename='images/cloud.png') }}" alt="">
+        </div>
+    </section>
+
+    <section class="languages" style="margin: 100px 0;">
+        <h2 class="md text-center my-2">
+            Idiomas admitidos
+        </h2>
+        <div class="container flex">
+            <div class="card">
+                <h4>Node.js</h4>
+                <img src="{{ url_for('static', filename='images/logos/node.png') }}" alt="">
+            </div>
+            <div class="card">
+                <h4>Python</h4>
+                <img src="{{ url_for('static', filename='images/logos/python.png') }}" alt="">
+            </div>
+            <div class="card">
+                <h4>C#</h4>
+                <img src="{{ url_for('static', filename='images/logos/csharp.png') }}" alt="">
+            </div>
+            <div class="card">
+                <h4>Ruby</h4>
+                <img src="{{ url_for('static', filename='images/logos/ruby.png') }}" alt="">
+            </div>
+            <div class="card">
+                <h4>PHP</h4>
+                <img src="{{ url_for('static', filename='images/logos/php.png') }}" alt="">
+            </div>
+            <div class="card">
+                <h4>Scala</h4>
+                <img src="{{ url_for('static', filename='images/logos/scala.png') }}" alt="">
+            </div>
+            <div class="card">
+                <h4>Clojure</h4>
+                <img src="{{ url_for('static', filename='images/logos/clojure.png') }}" alt="">
+            </div>
+        </div>
+    </section>
+
+    {% include "/extends/footer.html" %}
+</body>
+
+</html>
