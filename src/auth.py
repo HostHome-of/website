@@ -21,8 +21,10 @@ class HacerLogin():
         if self.email in usuarios:
             if usuarios[str(self.email)]["psw"] == self.psw:
                 usuarios[str(self.email)]["abierto"] = True
+                tk = CrearUsuario().tokenizar()
+                usuarios[str(self.email)]["cuentas"].append(tk)
                 cerrar(usuarios)
-                return True
+                return str(tk)
         return False
 
 class Usuario():
@@ -50,7 +52,7 @@ class Usuario():
                     cerrar(usuarios)
 
 class CrearUsuario():
-    def __init__(self, nombre: str, psw: str, mail: str):
+    def __init__(self, nombre: str=None, psw: str=None, mail: str=None):
         self.nombre = nombre
         self.psw = psw
         self.mail = mail

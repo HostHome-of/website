@@ -13,7 +13,7 @@ def PaginaPrincipal():
     try:
         if session['user_id']:
             usr = Usuario(session['user_id']).cojer()
-            if usr["abierto"] != True:
+            if not usr["abierto"] == True: 
                 usr = None
     except Exception as e:
         pass
@@ -28,10 +28,10 @@ def Cuenta():
     try:
         if session['user_id']:
             usr = Usuario(session['user_id']).cojer()
-            if usr["abierto"] != True:
+            if not usr["abierto"] == True: 
                 return redirect(url_for('Auth'))
     except Exception as e:
-        return redirect(url_for('PaginaPrincipal'))
+        return redirect(url_for('Auth'))
 
     return render_template("account.html", user=usr)
 
@@ -43,7 +43,7 @@ def Features():
     try:
         if session['user_id']:
             usr = Usuario(session['user_id']).cojer()
-            if usr["abierto"] != True:
+            if not usr["abierto"] == True: 
                 usr = None
     except Exception as e:
         pass
@@ -58,7 +58,7 @@ def Docs():
     try:
         if session['user_id']:
             usr = Usuario(session['user_id']).cojer()
-            if usr["abierto"] != True:
+            if not usr["abierto"] == True: 
                 usr = None
     except Exception as e:
         pass
@@ -102,6 +102,7 @@ def LogIn():
         usr = HacerLogin(mail, psw).ejecutar()
         if usr == False:
             return render_template("auth.html", err="Contraseña o email incorrectos")
+        session['user_id'] = usr
         return redirect(url_for("Cuenta"))
 
     return render_template("auth.html")
