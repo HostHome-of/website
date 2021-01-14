@@ -7,7 +7,7 @@
                 <li><a href="/features">Caracteristicas</a></li>
                 <li><a href="/docs">Docs</a></li>
                 {% if user %}
-                    <li><a href="/account">{{ user["nombre"] }}</a></li>
+                    <li><a href="/account"><i class="far fa-user" style="padding-right: 10px;"></i> {{ user["nombre"] }}</a></li>
                 {% else %}
                     <li><a href="/auth">Crear una cuenta</a></li>
                 {% endif %}
