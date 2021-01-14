@@ -187,12 +187,12 @@ pre {
   grid-row: 1 / span 2;
 }
 
-/* nuve */
+
 .cloud .grid {
   grid-template-columns: 4fr 3fr;
 }
 
-/* lenguages */
+
 
 .languages .flex {
   flex-wrap: wrap;
