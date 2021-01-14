@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    box-sizing: border-box;
+}
+
+main {
+    width: 100%;
+    height: 100vh; 
+    display: grid;
+    grid-template-columns: auto 2fr;
+    position: relative;
+    padding: 100px;
+}
+
+main aside {
+    width: 300px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main aside ul {
+    margin: 50px 50px 0 0;
+}
+
+main .wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    /* align-items: center; */
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+}
+
+main .wrapper .cuenta {
+    width: 50%;
+    height: 70%;
+    border-radius: 8px;
+    box-shadow: 0 20px 20px rgba(0, 0, 0, .2);
+}
+
+main .wrapper .cuenta * {
+    font-family: 'Poppins', sans-serif;
+}
+
+main .wrapper .cuenta .wrapper__cuenta {
+    padding: 30px;
+    position: relative;
+}
+
+main .wrapper .cuenta .wrapper__cuenta .title {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+main .wrapper .cuenta .wrapper__cuenta .title h1 {
+    font-weight: 900;
+}
+
+main .wrapper .cuenta .wrapper__cuenta .separador {
+    height: 1px;
+    background: rgb(233, 233, 233);
+    width: 100%;
+}
+
+main .wrapper .cuenta .wrapper__cuenta .info .nombre {
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+main .wrapper .cuenta .wrapper__cuenta .info .nombre .input input {
+    outline: none;
+    padding: 15px;
+    /* margin: 2px; */
+    width: 316px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    height: 37px;
+}
+
+main .wrapper .cuenta .wrapper__cuenta .info .nombre .input input:focus {
+    outline: none;
+}

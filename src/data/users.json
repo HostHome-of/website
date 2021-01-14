@@ -1,20 +1,12 @@
 {
-    "maubg2007@gmail.com": {
-        "mail": "maubg2007@gmail.com",
-        "nombre": "Mau BG",
+    "awd@awd.com": {
+        "mail": "awd@awd.com",
+        "nombre": "dawdawd",
         "psw": "123456",
         "cuentas": [
-            "30714695"
+            "50487851"
         ],
-        "abierto": true
-    },
-    "maubawdawdg2007@gmail.com": {
-        "mail": "maubawdawdg2007@gmail.com",
-        "nombre": "Maurete",
-        "psw": "awdawd",
-        "cuentas": [
-            "32662862"
-        ],
-        "abierto": false
+        "abierto": true,
+        "entrada": "14/1/2021"
     }
 }

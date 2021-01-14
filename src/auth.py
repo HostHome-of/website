@@ -1,4 +1,4 @@
-import json, random
+import json, random, datetime
 
 def abrir():
     with open("./src/data/users.json", "r") as f:
@@ -89,6 +89,8 @@ class CrearUsuario():
             tkN = self.tokenizar()
             usuarios[str(self.mail)]["cuentas"].append(str(tkN)) 
             usuarios[str(self.mail)]["abierto"] = True 
+            now = datetime.datetime.now()
+            usuarios[str(self.mail)]["entrada"] = f"{now.day}/{now.month}/{now.year}" 
 
             cerrar(usuarios)
             return str(tkN)

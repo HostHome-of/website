@@ -6,16 +6,56 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
         integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
         crossorigin="anonymous" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/utilities.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <title>awdjawdij</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/utilities.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/cuenta.css') }}">
+
+        <link rel="icon" href="{{ url_for('static', filename='images/favicon.png')}}">
+
+
+        <title>HostHome | {{ user["nombre"] }}</title>
 </head>
 <body>
     {% include "/extends/navbar.html" %}
-    <h1>Nombre: {{ user["nombre"] }}</h1>
-    <h1>Mail: {{ user["mail"] }}</h1>
-    <h1>Contraseña: {{ user["psw"] }}</h1>
-    <a href="/account/delete">Cerrar sesion</a>
+
+    <main>
+        <aside>
+            <ul>
+                <li><a href="#">Link1</a></li>
+                <li><a href="#">Link2</a></li>
+                <li><a href="#">Link3</a></li>
+                <li><a href="#">Link4</a></li>
+                <li><a href="#">Link5</a></li>
+            </ul>
+        </aside>
+        <div class="wrapper">
+            <div class="cuenta">
+                <div class="wrapper__cuenta">
+                    <div class="title">
+                        <h1>Cuenta</h1>
+                    </div>
+                    <div class="separador"></div>
+                    <div class="info">
+                        <div class="nombre">
+                            <div class="input">
+                                <h5>Nombre en pantalla</h5>
+                                <input type="text" name="nombre" value='{{ user["nombre"] }}' id="nombre" placeholder="nombre">                                
+                            </div>
+                            <div class="input">
+                                <h5>Apellidos</h5>
+                                <input type="text" name="" id="" placeholder="apellido">                                
+                            </div>
+                        </div>
+                        <!-- <h4>Mail: {{ user["mail"] }}</h4> -->
+                    </div>
+                    <div class="separador"></div>
+                    <h1>Contraseña: {{ user["psw"] }}</h1>
+                    <a href="/account/delete">Cerrar sesion</a>
+                </div>    
+            </div>
+        </div>
+    </main>
+
     {% include "/extends/footer.html" %}
 </body>
 </html>
