@@ -9,7 +9,7 @@
     * python
     * CS - Ayuda
     * NodeJS - Ayuda
-    * Ruby
+    * Ruby :: Queda por hacer deploy
     * PHP
     * Scala
     * Clojure - Ayuda
