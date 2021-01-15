@@ -1,10 +1,3 @@
 # Auto detect text files and perform LF normalization
 * text=auto
 *.html linguist-vendored=true
-**/static/css/utilities.css linguist-vendored=true
-**/static/css/style.css linguist-vendored=true
-**/static/css/auth.css linguist-vendored=true
-*.rb linguist-language=Python
-*/src/auth.py linguist-language=Ruby
-*/src/app.py linguist-language=Ruby
-*/main.py linguist-language=Ruby

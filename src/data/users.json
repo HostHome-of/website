@@ -1,24 +1,3 @@
 {
-    "wad@aw.com": {
-        "mail": "wad@aw.com",
-        "nombre": "PRUEBA",
-        "psw": "1234@1",
-        "cuentas": [
-            "89297238",
-            "11459251",
-            "15609511"
-        ],
-        "abierto": false,
-        "entrada": "15/1/2021"
-    },
-    "maubg2007@gmail.com": {
-        "mail": "maubg2007@gmail.com",
-        "nombre": "Mau BG",
-        "psw": "123",
-        "cuentas": [
-            "74085974"
-        ],
-        "abierto": true,
-        "entrada": "15/1/2021"
-    }
+    
 }
