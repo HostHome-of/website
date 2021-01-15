@@ -32,7 +32,7 @@ main .wrapper {
 
 main .wrapper .cuenta {
     width: 50%;
-    height: 70%;
+    /* height: 70%; */
     border-radius: 8px;
     box-shadow: 0 20px 20px rgba(0, 0, 0, .2);
 }
@@ -81,4 +81,53 @@ main .wrapper .cuenta .wrapper__cuenta .info .nombre .input input {
 
 main .wrapper .cuenta .wrapper__cuenta .info .nombre .input input:focus {
     outline: none;
+}
+
+@media (max-width: 600px) {
+    main {
+        padding: 0 !important;;
+    }
+
+    main .wrapper .cuenta {
+        width: 100% !important;
+    }
+}
+
+@media (max-width: 1200px) {
+    main .wrapper .cuenta {
+        width: auto !important;
+        height: auto !important;
+    }
+}
+
+@media (max-width: 1630px) {
+    main .wrapper .cuenta {
+        width: 65%;
+    }
+}
+
+@media (max-width: 1300px) {
+    main .wrapper .cuenta {
+        width: 80%;
+    }
+}
+
+@media (max-width: 930px) {
+    main .wrapper .cuenta .wrapper__cuenta .info .nombre {
+        flex-direction: column;
+    }
+
+    main .wrapper .cuenta .wrapper__cuenta .info .nombre .input {
+        margin: 20px 0;
+    }
+
+    main .wrapper .cuenta {
+        box-shadow: none;
+    }
+}
+
+@media (max-width: 930px) {
+    main .wrapper .cuenta .wrapper__cuenta .info .nombre .input input {
+        width: 304;
+    }
 }

@@ -126,7 +126,30 @@ def CrearProjecto():
         if session['user_id']:
             usr = Usuario(session['user_id']).cojer()
             if usr is not None:
-                return render_template("create.html", user=usr)
+                return render_template("projectos/cli.html", user=usr)
+    except Exception as e:
+        pass
+
+    return redirect(url_for('Auth'))
+
+@app.route("/project/new/github", methods=["POST", "GET"])
+def CrearProjectoGithub():
+
+    usr = None
+
+    if request.method == "POST":
+
+        nombre = request.form["nombre"]
+        repo = request.form["repo"]
+
+        p = Projecto().crear(nombre, repo)
+        return redirect("/project/{p}")
+
+    try:
+        if session['user_id']:
+            usr = Usuario(session['user_id']).cojer()
+            if usr is not None:
+                return render_template("projectos/github.html", user=usr)
     except Exception as e:
         pass
 
