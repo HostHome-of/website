@@ -126,7 +126,7 @@ def CrearProjecto():
         if session['user_id']:
             usr = Usuario(session['user_id']).cojer()
             if usr is not None:
-                return render_template("create.html")
+                return render_template("create.html", user=usr)
     except Exception as e:
         pass
 

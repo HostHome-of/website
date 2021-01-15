@@ -6,7 +6,6 @@ function checkSubmit() {
         return false;
     }
 
-    data = fetch()
     console.log(data)
     if (!repo.value.endsWith(".git")) {
         repo.value = repo.value + ".git"
