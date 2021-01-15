@@ -6,6 +6,27 @@ from src.projectos import Projecto
 app = Flask(__name__, static_url_path="/src/web/static")
 app.secret_key = "myllavecitasecretita123"
 
+# =================================================================================== API
+
+@app.route("/api/admin/getuser")
+def getUser():
+
+        
+    mail = request.args.get("mail", None)
+    psw = request.args.get("psw", None)
+
+    if psw is None or mail is None:
+        return {}
+
+    usr = HacerLogin(mail, psw).ejecutar()
+    if usr == False:
+        return {}
+    usr = Usuario(usr).cojer()
+    return usr
+
+
+# =================================================================================== END_API
+
 @app.route("/")
 def PaginaPrincipal():
 
