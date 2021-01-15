@@ -1,3 +1,13 @@
 {
-
+    "maubg2007@gmail.com": {
+        "mail": "maubg2007@gmail.com",
+        "nombre": "Mau BG",
+        "psw": "123",
+        "cuentas": [
+            "12729146",
+            "56616921"
+        ],
+        "abierto": true,
+        "entrada": "15/1/2021"
+    }
 }

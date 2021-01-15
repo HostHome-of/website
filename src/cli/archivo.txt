@@ -1,8 +1,9 @@
 main = mainTemp
-repo = repoTemp
 instalacion = instalacionTemp
+lenguage = tempLenguage
 
 --- ADVERTENCIA 
+
 BAJO NINGUN CONCEPTO SE PUEDE MOVER ESTE ARCHIVO O EDITARLO
 SI TENEIS ALGUN PROBLEMA PONERLO EN (https://github.com/maubg-debug/host/issues)
 Y SI TENEIS ALGO QUE MEJORAR PONERLO AQUI (https://github.com/maubg-debug/host/pulls)

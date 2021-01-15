@@ -6,7 +6,6 @@ require "uri"
 @ayuda = File.open("./src/cli/ayuda.txt", "r").read
 @texto = File.open("./src/cli/archivo.txt", "r").read
 
-@repo = ""
 @main = ""
 @ins = ""
 
@@ -31,23 +30,7 @@ OptionParser.new do |opts|
       break
     end
 
-    while true # Repo (Github, Bitbucket)
-      puts "Pon la url del repositorio (GitHub o BitBucket) * :: "
-      repo = gets
-      if repo == ""
-        next
-      end
-      urls = URI.extract(repo)
-      if urls.length == 1
-        if repo.start_with?("https://github.com/") or repo.start_with?("https://bitbucket.org/")
-          @repo = repo
-          break
-        end
-      end
-    end
-
     @texto.gsub! 'mainTemp', @main
-    @texto.gsub! 'repoTemp', @repo
     @texto.gsub! 'instalacionTemp', "bundle install"
 
     if @verbose == true
