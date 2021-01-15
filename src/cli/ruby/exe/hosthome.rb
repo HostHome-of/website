@@ -66,4 +66,5 @@ OptionParser.new do |opts|
       }
     end
   end
-end.parse!
+module hosthome
+end
