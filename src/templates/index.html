@@ -29,19 +29,19 @@
             {% if not user %}
                 <div class="showcase-form card">
                     <h2>Registrarse </h2>
-                    <form action="/register" method="POST" netlify-honeypot="bot-field" data-netlify="true">
+                    <form onsubmit="return crear()" method="POST" netlify-honeypot="bot-field" data-netlify="true">
                         <input type="hidden" name="form-name" value="contact">
                         <p class="hidden">
                             <label>No rellenes esto si eres un humano: <input name="bot-field" /></label>
                         </p>
                         <div class="form-control">
-                            <input type="text" name="name" placeholder="Nombre" required>
+                            <input type="text" id="nombre" name="name" placeholder="Nombre" required>
                         </div>
                         <div class="form-control">
-                            <input type="email" name="mail" placeholder="Email" required>
+                            <input type="email" id="email" name="mail" placeholder="Email" required>
                         </div>
                         <div class="form-control">
-                            <input type="password" name="password" placeholder="Contraseña" required>
+                            <input type="password" id="psw" minlength="8" name="password" placeholder="Contraseña" required>
                         </div>
                         <input type="submit" value="Enviar" class="btn btn-primary">
                     </form>
@@ -139,6 +139,8 @@
     </section>
 
     {% include "/extends/footer.html" %}
+
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
 </body>
 
 </html>

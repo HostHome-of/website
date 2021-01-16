@@ -176,14 +176,15 @@ def LogIn():
 
     if request.method == "POST":
     
-        mail = request.form["email"]
-        psw = request.form["psw"]
+        mail = request.args.get("mail")
+        psw = request.args.get("psw")
+        nombre = request.args.get("nm")
 
         usr = HacerLogin(mail, psw).ejecutar()
         if usr == False:
-            return render_template("auth.html", err="Contraseña o email incorrectos")
+            return None
         session['user_id'] = usr
-        return redirect(url_for("Cuenta"))
+        return {"estado": 200}
 
     return render_template("auth.html")
 
@@ -205,9 +206,9 @@ def Registrarse():
 
         usr = CrearUsuario(nombre, psw, mail).crear()
         if usr == False:
-            return render_template("register.html", err="Ese email ya existe")
+            return None
         session['user_id'] = usr
-        return redirect(url_for("Cuenta"))
+        return {"estado": 200}
 
     return render_template("register.html")
 

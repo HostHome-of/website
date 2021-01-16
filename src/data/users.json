@@ -1,20 +1,60 @@
 {
-    "awd@awd.com": {
-        "mail": "awd@awd.com",
-        "nombre": "awd",
-        "psw": "awdawd",
+    "maubg2007dd@gmail.com": {
+        "mail": "maubg2007dd@gmail.com",
+        "nombre": "Mau BG",
+        "psw": "awdawdawd",
         "cuentas": [
-            "31890092"
+            "34878307"
         ],
         "abierto": false,
         "entrada": "16/1/2021"
     },
-    "hola@mundo.com": {
-        "mail": "hola@mundo.com",
-        "nombre": "Maubg",
-        "psw": "TU MADRE LOL",
+    "maubg2007@gmail.com": {
+        "mail": "maubg2007@gmail.com",
+        "nombre": "Mau BG",
+        "psw": "awdawdawd",
         "cuentas": [
-            "66250268"
+            "89320568"
+        ],
+        "abierto": false,
+        "entrada": "16/1/2021"
+    },
+    "maubg20d07@gmail.com": {
+        "mail": "maubg20d07@gmail.com",
+        "nombre": "Mau BG",
+        "psw": "awdawdawdawd",
+        "cuentas": [
+            "14732277"
+        ],
+        "abierto": false,
+        "entrada": "16/1/2021"
+    },
+    "awd@awd.com": {
+        "mail": "awd@awd.com",
+        "nombre": "awdawdawd",
+        "psw": "awdawdawdawd",
+        "cuentas": [
+            "87030757"
+        ],
+        "abierto": false,
+        "entrada": "16/1/2021"
+    },
+    "awd@awdawd.com": {
+        "mail": "awd@awdawd.com",
+        "nombre": "awdawdawd",
+        "psw": "ddd",
+        "cuentas": [
+            "69275637"
+        ],
+        "abierto": false,
+        "entrada": "16/1/2021"
+    },
+    "awdawdawd@awd.com": {
+        "mail": "awdawdawd@awd.com",
+        "nombre": "awdawdawd",
+        "psw": "awdawdawd",
+        "cuentas": [
+            "66595732"
         ],
         "abierto": true,
         "entrada": "16/1/2021"

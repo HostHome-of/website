@@ -31,6 +31,12 @@ var questions = [
     function done() {
       
       register.className = 'close'
+
+      if (questions[2].value.length < 6) {
+        alert("La contraseña tiene que ser mallor a 6 caracteres");
+        window.location.replace("/register");
+        return;
+      }
       
       data = fetch("/register?nm=" + questions[0].value + "&psw=" + questions[2].value + "&mail=" + questions[1].value, {
         method: 'POST'
