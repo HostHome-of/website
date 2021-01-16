@@ -51,9 +51,9 @@ def Cuenta():
         if session['user_id']:
             usr = Usuario(session['user_id']).cojer()
             if not usr["abierto"] == True: 
-                return redirect(url_for('Auth'))
+                return redirect(url_for('re'))
     except Exception as e:
-        return redirect(url_for('Auth'))
+        return redirect(url_for('Registrarse'))
 
     return render_template("account.html", user=usr)
 
@@ -87,18 +87,6 @@ def Docs():
 
     return render_template("docs.html", user=usr)
 
-@app.route("/auth")
-def Auth():
-
-    try:
-        if session['user_id']:
-            if Usuario(session['user_id']).cojer()["abierto"] == True:
-                return redirect(url_for('PaginaPrincipal'))
-    except:
-        pass
-
-    return render_template("auth.html")
-
 @app.route("/account/delete")
 def EliminarCuenta():
 
@@ -128,7 +116,7 @@ def ProjectoView(id=None):
     except Exception as e:
         pass
 
-    return redirect(url_for('Auth'))   
+    return redirect(url_for('Registrarse'))   
 
 @app.route("/project/new", methods=["POST", "GET"])
 def CrearProjecto():
@@ -151,7 +139,7 @@ def CrearProjecto():
     except Exception as e:
         pass
 
-    return redirect(url_for('Auth'))
+    return redirect(url_for('Registrarse'))
 
 @app.route("/project/new/github", methods=["POST", "GET"])
 def CrearProjectoGithub():
@@ -174,10 +162,17 @@ def CrearProjectoGithub():
     except Exception as e:
         pass
 
-    return redirect(url_for('Auth'))
+    return redirect(url_for('Registrarse'))
 
 @app.route("/login", methods=["GET", "POST"])
 def LogIn():
+
+    try:
+        if session['user_id']:
+            if Usuario(session['user_id']).cojer()["abierto"] == True:
+                return redirect(url_for('PaginaPrincipal'))
+    except:
+        pass
 
     if request.method == "POST":
     
@@ -195,19 +190,26 @@ def LogIn():
 @app.route("/register", methods=["GET", "POST"])
 def Registrarse():
 
+    try:
+        if session['user_id']:
+            if Usuario(session['user_id']).cojer()["abierto"] == True:
+                return redirect(url_for('PaginaPrincipal'))
+    except:
+        pass
+
     if request.method == "POST":
 
-        mail = request.form["mail"]
-        psw = request.form["password"]
-        nombre = request.form["name"]
+        mail = request.args.get("mail")
+        psw = request.args.get("psw")
+        nombre = request.args.get("nm")
 
         usr = CrearUsuario(nombre, psw, mail).crear()
         if usr == False:
-            return render_template("auth.html", err="Ese email ya existe")
+            return render_template("register.html", err="Ese email ya existe")
         session['user_id'] = usr
         return redirect(url_for("Cuenta"))
 
-    return redirect(url_for("Auth"))
+    return render_template("register.html")
 
 def run():
     app.run()

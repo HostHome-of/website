@@ -1,3 +1,22 @@
 {
-    
+    "awd@awd.com": {
+        "mail": "awd@awd.com",
+        "nombre": "awd",
+        "psw": "awdawd",
+        "cuentas": [
+            "31890092"
+        ],
+        "abierto": false,
+        "entrada": "16/1/2021"
+    },
+    "hola@mundo.com": {
+        "mail": "hola@mundo.com",
+        "nombre": "Maubg",
+        "psw": "TU MADRE LOL",
+        "cuentas": [
+            "66250268"
+        ],
+        "abierto": true,
+        "entrada": "16/1/2021"
+    }
 }
