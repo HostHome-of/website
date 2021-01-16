@@ -29,7 +29,7 @@
             {% if not user %}
                 <div class="showcase-form card">
                     <h2>Registrarse </h2>
-                    <form onsubmit="return crear()" method="POST" netlify-honeypot="bot-field" data-netlify="true">
+                    <form onsubmit="return crear(event)" netlify-honeypot="bot-field" data-netlify="true">
                         <input type="hidden" name="form-name" value="contact">
                         <p class="hidden">
                             <label>No rellenes esto si eres un humano: <input name="bot-field" /></label>

@@ -182,7 +182,7 @@ def LogIn():
 
         usr = HacerLogin(mail, psw).ejecutar()
         if usr == False:
-            return None
+            return {}
         session['user_id'] = usr
         return {"estado": 200}
 
@@ -206,7 +206,7 @@ def Registrarse():
 
         usr = CrearUsuario(nombre, psw, mail).crear()
         if usr == False:
-            return None
+            return {}
         session['user_id'] = usr
         return {"estado": 200}
 
