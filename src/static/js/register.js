@@ -40,7 +40,7 @@ var questions = [
             if (window.confirm("Ese email ya existe ¿quieres entrar en tu cuenta?")) {
               window.location.href = "/login";
               return ;
-          } else {
+            } else {
               window.location.replace("/register");
               return ;
           }
