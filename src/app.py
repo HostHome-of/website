@@ -186,7 +186,7 @@ def LogIn():
         session['user_id'] = usr
         return {"estado": 200}
 
-    return render_template("auth.html")
+    return render_template("login.html")
 
 @app.route("/register", methods=["GET", "POST"])
 def Registrarse():
