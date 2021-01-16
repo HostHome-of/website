@@ -14,7 +14,6 @@
 </head>
 
 <body>
-
     {% include "/extends/navbar.html" %}
 
     <section class="showcase">
@@ -41,7 +40,7 @@
                             <input type="email" id="email" name="mail" placeholder="Email" required>
                         </div>
                         <div class="form-control">
-                            <input type="password" id="psw" minlength="8" name="password" placeholder="Contraseña" required>
+                            <input type="password" id="psw" minlength="6" name="password" placeholder="Contraseña" required>
                         </div>
                         <input type="submit" value="Enviar" class="btn btn-primary">
                     </form>
@@ -141,6 +140,8 @@
     {% include "/extends/footer.html" %}
 
     <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 
 </html>

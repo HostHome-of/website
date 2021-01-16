@@ -5,16 +5,19 @@ const psw = document.getElementById("psw");
 async function crear(event) {
     console.log("crear");
     event.preventDefault();
-    const response = await fetch("/register?nm=" + nombre.value + "&psw=" + psw.value + "&mail=" + mail.value, {
+    await fetch("/register?nm=" + nombre.value + "&psw=" + psw.value + "&mail=" + mail.value, {
         method: 'POST'
     }).then(response => response.json()).then(function(data) {
         console.log(data)
-        if (data == {}) {
-            alert("Ese email ya existe");
+        if (JSON.stringify(data) == "{}") {
+            if (window.confirm("Ese email ya existe, quieres entrar a ru cuenta?")) {
+                window.location.href = "/login";
+                return false;
+            }
+            window.location.replace("/");
             return false;
         } else {
-            alert("account");
-            //window.location.replace("/account");
+            window.location.replace("/account");
             return false;
         }
     });

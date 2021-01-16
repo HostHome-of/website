@@ -1,7 +1,7 @@
 var questions = [
     {question:"¿Cual es tu nombre?"},
     {question:"¿Cual es tu email?", pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/},
-    {question:"Create una contraseña", type: "password"}
+    {question:"Create una contraseña", type: "password", pattern: /^.{6,}$/}
   ]
   
   ;(function(){
@@ -28,18 +28,23 @@ var questions = [
       showCurrent()
     }
     
-    function done() {
+    async function done() {
       
       register.className = 'close'
-
-      if (questions[2].value.length < 6) {
-        alert("La contraseña tiene que ser mallor a 6 caracteres");
-        window.location.replace("/register");
-        return;
-      }
       
-      data = fetch("/register?nm=" + questions[0].value + "&psw=" + questions[2].value + "&mail=" + questions[1].value, {
+      await fetch("/register?nm=" + questions[0].value + "&psw=" + questions[2].value + "&mail=" + questions[1].value, {
         method: 'POST'
+      }).then(response => response.json()).then(function(data) {
+          console.log(data)
+          if (JSON.stringify(data) == "{}") {
+            if (window.confirm("Ese email ya existe ¿quieres entrar en tu cuenta?")) {
+              window.location.href = "/login";
+              return ;
+          } else {
+              window.location.replace("/register");
+              return ;
+          }
+        }
       });
       setTimeout(function() {   
         setTimeout(function() {
@@ -52,6 +57,7 @@ var questions = [
     function validate() {
   
       questions[position].value = inputField.value
+      
   
       if (!inputField.value.match(questions[position].pattern || /.+/)) wrong()
       else ok(function() {

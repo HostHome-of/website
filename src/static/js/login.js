@@ -33,7 +33,18 @@ var questions = [
       
       data = fetch("/login?psw=" + questions[1].value + "&mail=" + questions[0].value, {
         method: 'POST'
-      });
+      }).then(response => response.json()).then(function(data) {
+        console.log(data)
+        if (JSON.stringify(data) == "{}") {
+          if (window.confirm("Algo esta mal, quieres entrar crearte una cuenta?")) {
+            window.location.href = "/register";
+            return ;
+        } else {
+            window.location.replace("/login");
+            return ;
+        }
+      }
+    });
       setTimeout(function() {   
         setTimeout(function() {
             window.location.replace("/account")
