@@ -1,6 +1,6 @@
 var questions = [
     {question:"¿Cual es tu email?", pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/},
-    {question:"Create una contraseña", type: "password"}
+    {question:"Pon tu contraseña contraseña", type: "password"}
   ]
   
   ;(function(){
@@ -34,20 +34,18 @@ var questions = [
       data = fetch("/login?psw=" + questions[1].value + "&mail=" + questions[0].value, {
         method: 'POST'
       }).then(response => response.json()).then(function(data) {
-        console.log(data)
         if (JSON.stringify(data) == "{}") {
-          if (window.confirm("Algo esta mal, quieres entrar crearte una cuenta?")) {
+          if (confirm("Algo esta mal, quieres entrar crearte una cuenta?")) {
             window.location.href = "/register";
             return ;
-        } else {
-            window.location.replace("/login");
-            return ;
+          }
+          window.location.href = "/login";
+          return ;
         }
-      }
-    });
+      });
       setTimeout(function() {   
         setTimeout(function() {
-            window.location.replace("/account")
+            window.location.href = "/account"
         }, 50)
       }, eTime)
       

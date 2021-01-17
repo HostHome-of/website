@@ -107,3 +107,25 @@ h1 {
 .wrong #inputProgress {
   border-color: #ff2d26;
 }
+
+.ayuda {
+  background: #fff;
+  margin-top: 20px;
+  width: 410px;
+  padding: 15px 16px 15px;
+  box-shadow: 0 16px 24px 2px rgba(0,0,0,0.14), 0 6px 30px 5px rgba(0,0,0,0.12), 0 8px 10px -5px rgba(0,0,0,0.3);
+  display: flex;
+  align-items: center;
+  position: relative;
+  justify-content: space-around;
+}
+
+.ayuda a {
+  text-decoration: none;
+  color:#25a3ff;
+  font-weight: 800;
+}
+
+.ayuda a:hover {
+  text-decoration: none;
+}
