@@ -4,9 +4,10 @@
         "nombre": "maubg",
         "psw": "uui44k44",
         "cuentas": [
-            "10948382"
+            "10948382",
+            "40997435"
         ],
-        "abierto": false,
+        "abierto": true,
         "entrada": "17/1/2021"
     }
 }
