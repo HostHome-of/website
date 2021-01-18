@@ -1,3 +1,12 @@
 {
-    
+    "maubg@email.com": {
+        "mail": "maubg@email.com",
+        "nombre": "maubg",
+        "psw": "uui44k44",
+        "cuentas": [
+            "69265611"
+        ],
+        "abierto": true,
+        "entrada": "18/1/2021"
+    }
 }

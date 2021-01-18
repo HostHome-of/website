@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='images/favicon.png')}}">
     <title>HostHome | Hosts en la nube para todos</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 
 <body>
@@ -22,7 +23,7 @@
                 <h1>Implementación más sencilla</h1>
                 <p>Implemente aplicaciones web de todo tipo, desde API empresariales a gran escala hasta sitios web estáticos para particulares.
                     Complete el formulario para crearse una cuenta</p>
-                <a href="/features" class="btn btn-outline">Mas informacion</a>
+                <a href="/features" style="border: 1px solid #ddd;" class="btn">Mas informacion</a>
             </div>
 
             {% if not user %}
@@ -46,8 +47,8 @@
                     </form>
                 </div>
             {% else %}
-                <div class="showcase-form">
-                    <img src="{{ url_for('static', filename='images/host.png') }}" alt="SEVIDOR SEGURO">
+                <div class="showcase-form img">
+                    <img src="https://www.creative-tim.com/bits/assets/images/header_image.png" alt="SEVIDOR SEGURO">
                 </div>    
             {% endif %}
         </div>
@@ -55,9 +56,9 @@
 
     <section class="stats" style="padding-top: 120px !important;">
         <div class="container">
-            <h3 class="stats-heading text-center my-1">
+            <h4 class="stats-heading text-center my-1">
                 Bienvenido a la mejor plataforma para crear aplicaciones de todo tipo con arquitectura moderna y escalabilidad
-            </h3>
+            </h4>
 
             <div class="grid grid-3 text-center my-4">
                 <div>
@@ -140,8 +141,11 @@
     {% include "/extends/footer.html" %}
 
     <script src="{{ url_for('static', filename='js/index.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
+    
 </body>
 
 </html>
