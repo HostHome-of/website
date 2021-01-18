@@ -90,7 +90,7 @@ pre {
 
 
 .showcase {
-  height: 800px;
+  height: 740px;
   /* background-color: var(--primary-color); */
   /* color: #fff; */
   position: relative;
@@ -130,6 +130,7 @@ pre {
   width: 1000px;
   padding: 40px;
   z-index: 100;
+  top: -30%;
   justify-self: flex-end;
   animation: slideInFromRight 1s ease-in;
 }
@@ -320,6 +321,11 @@ pre {
 
 
 @media (max-width: 768px) {
+
+  .showcase-form.img {
+    width: 500px;
+    top: 0;
+  }
 
   .grid,
   .showcase .grid,
