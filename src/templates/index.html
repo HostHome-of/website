@@ -7,11 +7,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
         integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
         crossorigin="anonymous" />
+        
     <link rel="stylesheet" href="{{ url_for('static', filename='css/utilities.css') }}">
+
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='images/favicon.png')}}">
     <title>HostHome | Hosts en la nube para todos</title>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://htmlstream.com/preview/front-v2.7.0/assets/vendor/hs-megamenu/src/hs.megamenu.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.css">
+
 </head>
 
 <body>
@@ -55,7 +62,7 @@
     </section>
 
     <section class="stats" style="padding-top: 120px !important;">
-        <div class="container">
+        <div style="display: flex;flex-direction: column;" class="container">
             <h4 class="stats-heading text-center my-1">
                 Bienvenido a la mejor plataforma para crear aplicaciones de todo tipo con arquitectura moderna y escalabilidad
             </h4>
@@ -140,12 +147,13 @@
 
     {% include "/extends/footer.html" %}
 
-    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
-
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://htmlstream.com/preview/front-v2.9.2/assets/vendor/hs-megamenu/src/hs.megamenu.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
     <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
-    
 </body>
 
 </html>
