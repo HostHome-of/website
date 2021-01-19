@@ -9239,9 +9239,6 @@
     transform: translate(-50%, -50%);
   }
 
-  /*------------------------------------
-    Blog Thumb Minimal
-  ------------------------------------*/
   .u-blog-thumb-minimal {
     padding: .5rem;
     transition: 0.3s ease-in-out;
@@ -9260,9 +9257,6 @@
     width: 5rem;
   }
 
-  /*------------------------------------
-    Vertical Progress Bar
-  ------------------------------------*/
   .progress-vertical {
     display: -ms-flexbox;
     display: flex;
@@ -9273,10 +9267,6 @@
     background-color: #f8fafd;
     height: 12.5rem;
   }
-
-  /*------------------------------------
-    Paging Modern
-  ------------------------------------*/
   .u-paging-modern .u-paging-modern__arrow-icon-prev,
   .u-paging-modern .u-paging-modern__arrow-icon-next {
     transition: 0.3s;
@@ -9321,17 +9311,10 @@
     -webkit-transform: translateY(-8px);
     transform: translateY(-8px);
   }
-
-  /*------------------------------------
-    Popover
-  ------------------------------------*/
   .popover-header {
     font-weight: 500;
   }
 
-  /*------------------------------------
-    Quantity
-  ------------------------------------*/
   .u-quantity {
     width: 4rem;
   }
@@ -9363,9 +9346,6 @@
     color: #377dff;
   }
 
-  /*------------------------------------
-    Search Form - Push Top
-  ------------------------------------*/
   .u-search-push-top {
     display: none;
     background-color: #f8fafd;
@@ -9393,7 +9373,6 @@
     }
   }
 
-  /* Banner */
   .u-search-push-top__banner {
     background-color: #fff;
     box-shadow: 0 10px 25px rgba(151, 164, 175, 0.05);
@@ -12160,6 +12139,12 @@
       opacity: 1;
     }
   }
+
+  @media (max-width: 1120px) {
+    #navBar {
+      margin-right: 0 !important;
+    }
+  }
 </style>
 
 <div id="logoAndNav" style="display: flex; justify-content: center;" class="container">
@@ -12605,10 +12590,9 @@
                     <img class="img-fluid rounded mb-3"
                       src="{{ url_for('static', filename='images/banner.png') }}"
                       alt="Image Description">
-                    <span class="badge badge-success badge-pill badge-pos shadow-sm mt-3">New</span>
+                    <span class="badge badge-success badge-pill badge-pos shadow-sm mt-3">Nuevo</span>
                   </div>
-                  <span class="text-secondary font-size-1">Front makes you look at things from a different
-                    perspectives.</span>
+                  <span class="text-secondary font-size-1">HostHome, hosting en la nube como nunca antes  .</span>
                 </a>
               </div>
             </div>
@@ -12623,7 +12607,7 @@
           <div class="hs-mega-menu u-header__sub-menu" aria-labelledby="docsMegaMenu"
             style="min-width: 330px; display: none;">
             <div class="u-header__promo-item">
-              <a class="u-header__promo-link" href="../../documentation/index.html">
+              <a class="u-header__promo-link" href="/docs">
                 <div class="media align-items-center">
                   <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                     viewBox="0 0 120 120" style="enable-background:new 0 0 120 120;" xml:space="preserve"
@@ -12702,17 +12686,17 @@
                   </svg>
                   <div class="media-body">
                     <span class="u-header__promo-title">
-                      Documentation
+                      Documentacion
                       <span class="badge badge-primary badge-pill ml-1">v2.7</span>
                     </span>
-                    <small class="u-header__promo-text">Development guides</small>
+                    <small class="u-header__promo-text">Gia para desarrolladores</small>
                   </div>
                 </div>
               </a>
             </div>
             
             <div class="u-header__promo-item">
-              <a class="u-header__promo-link" href="../../starter/index.html">
+              <a class="u-header__promo-link" href="/docs">
                 <div class="media align-items-center">
                   <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                     viewBox="0 0 120 120" style="enable-background:new 0 0 120 120;" xml:space="preserve"
@@ -12771,8 +12755,8 @@
                       stroke-linejoin="round" stroke-miterlimit="10" cx="12" cy="16" r="3.1"></circle>
                   </svg>
                   <div class="media-body">
-                    <span class="u-header__promo-title">Get started</span>
-                    <small class="u-header__promo-text">Components and snippets</small>
+                    <span class="u-header__promo-title">Como empezar</span>
+                    <small class="u-header__promo-text">Un pequeño tutorial con cada lenguage</small>
                   </div>
                 </div>
               </a>
@@ -12782,17 +12766,17 @@
               <div class="row no-gutters">
                 <div class="col-6">
                   <div class="u-header__promo-footer-item">
-                    <small class="text-muted d-block">Check what's new</small>
-                    <a class="small" href="../../documentation/getting-started/changelog.html">
-                      Changelog
+                    <small class="text-muted d-block">Mira lo que hay nuevo</small>
+                    <a class="small" href="https://github.com/HostHome-of/website/commits/main">
+                      Commits
                     </a>
                   </div>
                 </div>
                 <div class="col-6 u-header__promo-footer-ver-divider">
                   <div class="u-header__promo-footer-item">
-                    <small class="text-muted d-block">Have a question?</small>
-                    <a class="small" href="http://htmlstream.com/contact-us">
-                      Contact us
+                    <small class="text-muted d-block">¿Tienes alguna pregunta?</small>
+                    <a class="small" href="">
+                      Contactanos
                     </a>
                   </div>
                 </div>
