@@ -1,32 +1,3 @@
 {
-    "maubg@email.com": {
-        "mail": "maubg@email.com",
-        "nombre": "maubg",
-        "psw": "uui44k44",
-        "cuentas": [
-            "69265611"
-        ],
-        "abierto": false,
-        "entrada": "18/1/2021"
-    },
-    "maubg@emailete.com": {
-        "mail": "maubg@emailete.com",
-        "nombre": "Maubg",
-        "psw": "micontrse\u00f1asupersecreta",
-        "cuentas": [
-            "35497817"
-        ],
-        "abierto": false,
-        "entrada": "18/1/2021"
-    },
-    "anastasia@email.com": {
-        "mail": "anastasia@email.com",
-        "nombre": "anastasia",
-        "psw": "awdawd",
-        "cuentas": [
-            "36259027"
-        ],
-        "abierto": false,
-        "entrada": "18/1/2021"
-    }
+    
 }

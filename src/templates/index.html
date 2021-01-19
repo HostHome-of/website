@@ -61,7 +61,7 @@
         </div>
     </section>
 
-    <section class="stats" style="padding-top: 120px !important;">
+    <section class="stats" id="intro" style="padding-top: 120px !important;">
         <div style="display: flex;flex-direction: column;" class="container">
             <h4 class="stats-heading text-center my-1">
                 Bienvenido a la mejor plataforma para crear aplicaciones de todo tipo con arquitectura moderna y escalabilidad
@@ -86,30 +86,31 @@
             </div>
         </div>
     </section>
-    <section class="cli" style="margin-bottom: 30px !important;">
+
+    <section class="cli" id="cli" style="margin: 120px 0 !important;">
         <div class="container grid">
             <img src="{{ url_for('static', filename='images/cli.png') }}" alt="">
             <div class="card">
-                <h3>Facil de usar nuestro CLI</h3>
+                <h4>Facil de usar nuestro CLI</h4>
             </div>
             <div class="card">
-                <h3>Desplieya en segundos</h3>
+                <h4>Desplieya en segundos</h4>
             </div>
         </div>
     </section>
 
-    <section style="padding: 2.5rem 0 !important;" class="cloud bg-primary my-2 py-2">
+    <section style="padding: 2.5rem 0 !important;" id="alojamiento_en_la_nube" class="cloud bg-primary my-2 py-2">
         <div class="container grid">
             <div class="text-center">
                 <h2 class="lg">Alojamiento en la nube</h2>
-                <p class="lead my-1">Alojamiento en la nube como nunca antes lo habías visto. Rápido, eficiente y escalable</p>
+                <p style="color: #fff; margin-bottom: 30px !important;" class="lead my-1">Alojamiento en la nube como nunca antes lo habías visto. Rápido, eficiente y escalable</p>
                 <a href="/features" class="btn btn-dark">Leer mas</a>
             </div>
             <img src="{{ url_for('static', filename='images/cloud.png') }}" alt="">
         </div>
     </section>
 
-    <section class="languages" style="margin: 100px 0;">
+    <section class="languages" id="idiomas" style="margin: 100px 0;">
         <h2 class="md text-center my-2">
             Idiomas admitidos
         </h2>

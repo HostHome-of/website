@@ -64,7 +64,7 @@ pre {
 
 
 .showcase {
-  height: 740px;
+  height: 500px;
   /* background-color: var(--primary-color); */
   /* color: #fff; */
   position: relative;
@@ -101,10 +101,10 @@ pre {
 
 .showcase-form.img {
   position: relative;
-  width: 1000px;
+  width: 500px;
   padding: 40px;
   z-index: 100;
-  top: -30%;
+  top: -10%;
   justify-self: flex-end;
   animation: slideInFromRight 1s ease-in;
 }
