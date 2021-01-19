@@ -2031,3 +2031,8 @@ p {
 #navbar .navbar {
     margin-bottom: 20px;
 }
+
+.texty-area {
+    resize: none;
+    height: 250px !important;
+}

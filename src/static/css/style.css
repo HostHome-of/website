@@ -350,3 +350,25 @@ pre {
     grid-column: 1;
   }
 }
+
+.bloby-wave {
+  animation: blobRotation 12s linear infinite;
+  height: 670px;
+  left: 650px;
+  margin: auto;
+  opacity: 0.96;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  top: 0px;
+  width: 1050px;
+  z-index: 21;
+}
+
+@keyframes blobRotation {
+  0% {
+    transform: rotate(0deg);
+  } 100% {
+    transform: rotate(360deg);
+  }
+}
