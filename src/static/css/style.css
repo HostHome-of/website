@@ -23,6 +23,7 @@ body {
   font-family: 'Lato', sans-serif;
   color: #333;
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
 ul {
@@ -117,9 +118,9 @@ pre {
 .showcase-form input[type='text'],
 .showcase-form input[type='email'] {
   border: 0;
-  border-bottom: 1px solid #b4becb;
+  /* border-bottom: 1px solid #b4becb; */
   width: 100%;
-  padding: 3px;
+  /* padding: 3px; */
   font-size: 16px;
 }
 
@@ -354,13 +355,13 @@ pre {
 .bloby-wave {
   animation: blobRotation 12s linear infinite;
   height: 670px;
-  left: 650px;
+  left: 35%;
   margin: auto;
   opacity: 0.96;
   pointer-events: none;
   position: absolute;
   right: 0;
-  top: 0px;
+  top: -12px;
   width: 1050px;
   z-index: 21;
 }

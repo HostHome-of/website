@@ -210,5 +210,5 @@
 }
 
 #logoAndNav {
-  all: inherit;
+  all: unset;
 }

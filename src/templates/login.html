@@ -1,37 +1,61 @@
 <!DOCTYPE html>
 <html lang="es-ES">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="{{ url_for('static', filename='images/favicon.png')}}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}" />
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700" />
-    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
-    <title>HostHome | Entrar</title>
-  </head>
-  <body>
+<head>
+	<title>Animated Login Form</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/auth.css') }}">
+	<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
 
-    <div id="progress"></div>
+	<img class="wave" src="{{ url_for('static', filename='images/wave.png') }}">
+	<div class="container">
+		<div class="img">
+			<img src="{{ url_for('static', filename='images/bg.svg') }}">
+		</div>
+		<div class="login-content">
+      <script>
+        async function ckeck(e) {
+          e.preventDefault();
+          await fetch("/login?psw=" + document.getElementById("psw").value + "&mail=" + document.getElementById("email").value, {
+            method: 'POST'
+          }).then(response => response.json()).then(function(data) {
+            if (JSON.stringify(data) == "{}") {
+              alert("Algo esta mal porfavor haz doble chequeo");
+              return false;
+            }
+          });
 
-    <div class="center">
-      <div id="register">
-
-        <i id="progressButton" class="ion-android-arrow-forward next"></i>
-
-        <div id="inputContainer">
-          <input id="inputField" required autofocus />
-          <label id="inputLabel"></label>
-          <div id="inputProgress"></div>
+          document.getElementById("logger").submit()
+        }
+      </script>
+			<form id="logger" onsubmit="return ckeck(event)" action="/account">
+				<!-- <img src="{{ url_for('static', filename='images/avatar.svg') }}"> -->
+				<h2 class="title">Bienvenido</h2>
+           		<div class="input-div one">
+           		   <div class="i">
+           		   		<i class="fas fa-envelope-open-text"></i>
+           		   </div>
+           		   <div class="div">
+           		   		<h5>Email</h5>
+           		   		<input id="email" type="email" required class="input">
+           		   </div>
+           		</div>
+           		<div class="input-div pass">
+           		   <div class="i"> 
+           		    	<i class="fas fa-lock"></i>
+           		   </div>
+           		   <div class="div">
+           		    	<h5>Contraseña</h5>
+           		    	<input id="psw" type="password" class="input">
+            	   </div>
+            	</div>
+            	<a href="#">¿Te olvidastes de la contrseña?</a>
+            	<input type="submit" class="btn" value="Login">
+            </form>
         </div>
-
-      </div>
-      <div class="ayuda">
-        <a href="/">Casa</a> | <a href="/register">No tienes una cuenta </a> | <a href="/login">Contraseña olvidada</a>
-      </div>
     </div>
-    
-    <script src="{{ url_for('static', filename='js/login.js') }}" ></script>
-
-  </body>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/auth.js') }}"></script>
+</body>
 </html>
