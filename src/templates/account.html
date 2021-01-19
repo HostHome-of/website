@@ -97,11 +97,15 @@
                                     {{ user['nombre'] }}<span class="font-weight-light"> | 2 hosts</span>
                                 </h3>
                                 <div class="h5 font-weight-300">
-                                    <i class="ni location_pin mr-2"></i>Madrid, España
+                                    <i class="ni location_pin mr-2"></i>{% if user["ciudad"] != "" and user["pais"] != "" %}{{ user["ciudad"] }}, {{ user["pais"] }} {% endif %}
                                 </div>
                                 <hr class="my-4">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae consequuntur dolorem eos est in! Quisquam</p>
-                                <a href="#">Leer mas</a>
+                                {% if user["info"] != "" %}
+                                    <p>{% if user["info"] != "" %}</p>
+                                    <!-- <a href="#">Leer mas</a> -->
+                                {% else %}
+                                    <p>El usuario <strong>{{ user["nombre"] }}</strong> no tiene ninguna BIO, es un poco rarito </p>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -136,7 +140,7 @@
                                                 <label class="form-control-label" for="input-email">Correo electronico</label>
                                                 <input type="email" id="input-email" value="{{ user['mail'] }}"
                                                     class="form-control form-control-alternative"
-                                                    placeholder="hothome@ejemplo.com">
+                                                    placeholder="hosthome@ejemplo.com">
                                             </div>
                                         </div>
                                     </div>
@@ -146,7 +150,7 @@
                                                 <label class="form-control-label" for="input-first-name">Primer nombre</label>
                                                 <input type="text" id="input-first-name"
                                                     class="form-control form-control-alternative"
-                                                    placeholder="Primer nombre">
+                                                    placeholder="Primer nombre" value="{{ user['primerNombre'] }}">
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
@@ -154,7 +158,7 @@
                                                 <label class="form-control-label" for="input-last-name">Apellido</label>
                                                 <input type="text" id="input-last-name"
                                                     class="form-control form-control-alternative"
-                                                    placeholder="Apellido">
+                                                    placeholder="Apellido" value="{{ user['apellido'] }}">
                                             </div>
                                         </div>
                                     </div>
@@ -168,7 +172,8 @@
                                                 <label class="form-control-label" for="input-address">Direccion</label>
                                                 <input id="input-address" class="form-control form-control-alternative"
                                                     placeholder="Direccion de casa"
-                                                    type="text">
+                                                    type="text"
+                                                    value="{{ user['direccion'] }}">
                                             </div>
                                         </div>
                                     </div>
@@ -177,21 +182,26 @@
                                             <div class="form-group focused">
                                                 <label class="form-control-label" for="input-city">Ciudad</label>
                                                 <input type="text" id="input-city"
-                                                    class="form-control form-control-alternative" placeholder="Ciuddad">
+                                                    class="form-control form-control-alternative"
+                                                    placeholder="Ciuddad"
+                                                    value="{{ user['ciudad'] }}">
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="form-group focused">
                                                 <label class="form-control-label" for="input-country">Pais</label>
                                                 <input type="text" id="input-country"
-                                                    class="form-control form-control-alternative" placeholder="Pais">
+                                                    class="form-control form-control-alternative" 
+                                                    placeholder="Pais"
+                                                    value="{{ user['pais'] }}">
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="form-group">
                                                 <label class="form-control-label" for="input-country">Codigo postal</label>
                                                 <input type="number" id="input-postal-code"
-                                                    class="form-control form-control-alternative">
+                                                    class="form-control form-control-alternative"
+                                                    value="{{ user['codigoPostal'] }}">
                                             </div>
                                         </div>
                                     </div>
@@ -202,7 +212,7 @@
                                     <div class="form-group focused">
                                         <label>Sobre mi</label>
                                         <textarea rows="4" class="texty-area form-control form-control-alternative"
-                                            placeholder="Soy una persona muy misteriosa"></textarea>
+                                            placeholder="Soy una persona muy misteriosa">{{ user['info'] }}</textarea>
                                     </div>
                                 </div>
                             </form>

@@ -29,7 +29,7 @@ def Cuenta():
         if session['user_id']:
             usr = Usuario(session['user_id']).cojer()
             if not usr["abierto"] == True: 
-                return redirect(url_for('re'))
+                return redirect(url_for('Registrarse'))
     except Exception as e:
         return redirect(url_for('Registrarse'))
 

@@ -90,10 +90,19 @@ class CrearUsuario():
             usuarios[str(self.mail)]["cuentas"] = [] 
             tkN = self.tokenizar()
             usuarios[str(self.mail)]["cuentas"].append(str(tkN)) 
-            usuarios[str(self.mail)]["abierto"] = True 
             usuarios[str(self.mail)]["pfp"] = "/src/web/static/pfp/default.png" 
             now = datetime.datetime.now()
             usuarios[str(self.mail)]["entrada"] = f"{now.day}/{now.month}/{now.year}" 
+
+            usuarios[str(self.mail)]["apellido"] = "" 
+            usuarios[str(self.mail)]["primerNombre"] = "" 
+
+            usuarios[str(self.mail)]["direccion"] = "" 
+            usuarios[str(self.mail)]["ciudad"] = "" 
+            usuarios[str(self.mail)]["pais"] = "" 
+            usuarios[str(self.mail)]["codigoPostal"] = "" 
+
+            usuarios[str(self.mail)]["info"] = ""
 
             cerrar(usuarios)
             return str(tkN)

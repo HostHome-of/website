@@ -86,7 +86,7 @@ pre {
 }
 
 .showcase-text {
-  animation: slideInFromLeft 1s ease-in;
+  /* animation: slideInFromLeft 1s ease-in; */
 }
 
 .showcase-form {
@@ -97,7 +97,7 @@ pre {
   padding: 40px;
   z-index: 100;
   justify-self: flex-end;
-  animation: slideInFromRight 1s ease-in;
+  /* animation: slideInFromRight 1s ease-in; */
 }
 
 .showcase-form.img {
@@ -107,7 +107,7 @@ pre {
   z-index: 100;
   top: -10%;
   justify-self: flex-end;
-  animation: slideInFromRight 1s ease-in;
+  /* animation: slideInFromRight 1s ease-in; */
 }
 
 .showcase-form .form-control {
