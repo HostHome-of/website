@@ -2053,7 +2053,6 @@ p {
 }
 
 .botones .cerrar {
-    margin-left: 40%;
     border: 1px solid #e74c3c;
     color: #e74c3c;
     border-radius: 10px;
@@ -2065,6 +2064,7 @@ p {
 }
 
 .botones .guardar {
+    margin-left: 40%;
     border: 1px solid #2ecc71;
     color: #2ecc71;
     border-radius: 10px;

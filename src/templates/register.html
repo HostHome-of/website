@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es-ES">
+
 <head>
 	<title>HostHome | Registrarse</title>
 	<link rel="icon" href="{{ url_for('static', filename='images/favicon.png')}}">
@@ -8,63 +9,115 @@
 	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<body>
 
-	<img class="wave" src="{{ url_for('static', filename='images/wave.png') }}">
-	<div class="container">
-		<div class="img">
-			<img src="{{ url_for('static', filename='images/bg.svg') }}">
+<body>
+	<div class="about">
+		<a class="bg_links social portfolio" href="https://www.rafaelalucas.com/dailyui" target="_blank">
+			<span class="icon"></span>
+		</a>
+		<a class="bg_links social dribbble" href="https://dribbble.com/rafaelalucas" target="_blank">
+			<span class="icon"></span>
+		</a>
+		<a class="bg_links social linkedin" href="https://www.linkedin.com/in/rafaelalucas/" target="_blank">
+			<span class="icon"></span>
+		</a>
+		<a class="bg_links logo"></a>
+	</div>
+
+	<div class="daily">
+		<a href="/" class="daily-title">HostHome</a>
+		<div class="btns">
+			<div class="buttons"><button class="btn sign">Registrarse</button></div>
+			<a href="/login"><div class="buttons"><button class="btn sign">Entrar</button></div></a>
 		</div>
-		<div class="login-content">
-      <script>
-        async function ckeck(e) {
-          e.preventDefault();
-          await fetch("/register?nm=" + document.getElementById("nombre").value + "&psw=" + document.getElementById("psw").value + "&mail=" + document.getElementById("email").value, {
-            method: 'POST'
-          }).then(response => response.json()).then(function(data) {
-            if (JSON.stringify(data) == "{}") {
-              alert("Ese email ya existe");
-              return false;
-            }
-          });
-          document.getElementById("logger").submit()
-        }
-      </script>
-			<form id="logger" onsubmit="return ckeck(event)" action="/account">
-				<!-- <img src="{{ url_for('static', filename='images/avatar.svg') }}"> -->
-				<h2 class="title">Registrarse</h2>
-           		<div class="input-div one">
-           		   <div class="i">
-           		   		<i class="fas fa-envelope-open-text"></i>
-           		   </div>
-           		   <div class="div">
-           		   		<h5>Email</h5>
-           		   		<input id="email" type="email" required class="input">
-           		   </div>
-               </div>
-           		<div class="input-div one">
-                <div class="i">
-                    <i class="fas fa-user"></i>
-                </div>
-                <div class="div">
-                    <h5>Nombre</h5>
-                    <input id="nombre" type="text" required class="input">
-                </div>
-             </div>
-           		<div class="input-div pass">
-           		   <div class="i"> 
-           		    	<i class="fas fa-lock"></i>
-           		   </div>
-           		   <div class="div">
-           		    	<h5>Contraseña</h5>
-           		    	<input id="psw" type="password" class="input">
-            	   </div>
-            	</div>
-				<p><a href="/login">¿Tienes una cuenta?</a></p>
-            	<input type="submit" class="btn" value="Login">
-            </form>
-        </div>
-    </div>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/auth.js') }}"></script>
+	</div>
+
+	<div class="modal open">
+		<div class="wrapper">
+			<div class="btn-close">
+				<span></span>
+				<span></span>
+			</div>
+
+			
+			<div class="title">
+				<h1>Registrarse</h1>
+			</div>
+			
+			<script>
+				async function check(e) {
+					e.preventDefault();
+					await fetch("/register?nm=" + document.getElementById("name").value + "&psw=" + document.getElementById("password").value + "&mail=" + document.getElementById("email").value, {
+					  method: 'POST'
+					}).then(response => response.json()).then(function(data) {
+						if (JSON.stringify(data) == "{}") {
+							alert("Ese email ya existe");
+							return false;
+					  	}
+					});
+					document.getElementById("formy").submit();
+				}
+
+				function mirar() {
+					const psw1 = document.getElementById("password").value;
+					const psw2 = document.getElementById("confirmpassword").value;
+					const mail = document.getElementById("email").value;
+					const nombre = document.getElementById("name").value;
+					const checky = document.getElementById("check");
+					const btn = document.getElementById("smb");
+
+					if (psw1 != psw2 || psw1 == "" || psw2 == "" || mail == "" || nombre == "" || !checky.checked) {
+						btn.disabled = true;
+						return ;
+					}
+
+					btn.disabled = false;
+				}
+			</script>
+			
+			<div class="left">
+				<div class="content">
+					<h2 class="subtitle">Rellena todo para crearte una cuenta</h2>
+					<form onsubmit="return check(event)" action="/account" id="formy">
+						<div class="input-wrapper">
+							<label for="name">Nombre</label>
+							<input onchange="mirar()" id="name" type="text">
+						</div>
+
+						<div class="input-wrapper">
+							<label for="email">E-mail</label>
+							<input onchange="mirar()" id="email" type="email">
+						</div>
+
+						<div class="input-wrapper">
+							<label for="password">Contraseña</label>
+							<input onchange="mirar()" id="password" type="password">
+						</div>
+
+						<div class="input-wrapper">
+							<label for="confirmpassword">Confirmar contraseña</label>
+							<input onchange="mirar()" id="confirmpassword" type="password">
+						</div>
+
+						<div class="terms">
+
+							<input onchange="mirar()" type="checkbox" id="check">
+							<label for="check"></label>
+							<p>Acepto el <a class="link" href="#">Termino de uso</a> & <a class="link" href="#">Politica de privacidad</a></p>
+						</div>
+
+						<button class="btn" id="smb" type="submit" disabled>Crear una cuenta</button>
+					</form>
+				</div>
+
+			</div>
+			
+			<div class="right">
+			</div>
+
+		</div>
+	</div>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/auth.js') }}"></script>
 </body>
+
 </html>
