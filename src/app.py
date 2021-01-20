@@ -5,6 +5,10 @@ from src.auth import CrearUsuario, HacerLogin, Usuario
 app = Flask(__name__, static_url_path="/src/web/static")
 app.secret_key = "myllavecitasecretita123"
 
+@app.errorhandler(404)
+def error_404(e):
+    return render_template('404.html'), 404
+
 @app.route("/")
 def PaginaPrincipal():
 

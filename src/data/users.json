@@ -16,6 +16,23 @@
         "pais": "",
         "codigoPostal": "",
         "info": "",
-        "abierto": true
+        "abierto": false
+    },
+    "maubg2007@gmail.com": {
+        "mail": "maubg2007@gmail.com",
+        "nombre": "Anastasia",
+        "psw": "1234",
+        "cuentas": [
+            "49207964"
+        ],
+        "pfp": "/src/web/static/pfp/default.png",
+        "entrada": "20/1/2021",
+        "abierto": true,
+        "primerNombre": "",
+        "direccion": "",
+        "ciudad": "",
+        "pais": "",
+        "codigoPostal": "",
+        "info": ""
     }
 }

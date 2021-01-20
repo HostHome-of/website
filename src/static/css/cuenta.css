@@ -2036,3 +2036,41 @@ p {
     resize: none;
     height: 250px !important;
 }
+
+.botones {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+}
+
+.botones button {
+    margin: 10px;
+    cursor: pointer;
+    outline: none;
+    transition: .2s;
+    padding: 5px 40px;
+}
+
+.botones .cerrar {
+    margin-left: 40%;
+    border: 1px solid #e74c3c;
+    color: #e74c3c;
+    border-radius: 10px;
+}
+
+.botones .cerrar:hover {
+    background: #e74c3c;
+    color: #fff;
+}
+
+.botones .guardar {
+    border: 1px solid #2ecc71;
+    color: #2ecc71;
+    border-radius: 10px;
+}
+
+.botones .guardar:hover {
+    background: #2ecc71;
+    color: #fff;
+}
