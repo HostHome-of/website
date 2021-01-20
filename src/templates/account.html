@@ -97,11 +97,14 @@
                                     {{ user['nombre'] }}<span class="font-weight-light"> | 2 hosts</span>
                                 </h3>
                                 <div class="h5 font-weight-300">
-                                    <i class="ni location_pin mr-2"></i>{% if user["ciudad"] != "" and user["pais"] != "" %}{{ user["ciudad"] }}, {{ user["pais"] }} {% endif %}
+                                    <i class="ni location_pin mr-2"></i>
+                                    {% if user["ciudad"] != "" and user["pais"] != "" %}
+                                        {{ user["ciudad"] }}, {{ user["pais"] }} 
+                                    {% endif %}
                                 </div>
                                 <hr class="my-4">
                                 {% if user["info"] != "" %}
-                                    <p>{% if user["info"] != "" %}</p>
+                                    <p>{{ user["info"] }}</p>
                                     <!-- <a href="#">Leer mas</a> -->
                                 {% else %}
                                     <p>El usuario <strong>{{ user["nombre"] }}</strong> no tiene ninguna BIO, es un poco rarito </p>

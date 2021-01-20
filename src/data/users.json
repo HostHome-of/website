@@ -4,7 +4,8 @@
         "nombre": "Maubg",
         "psw": "esta_esMi_contrase\u00f1a_superSecreta12345seis",
         "cuentas": [
-            "21318687"
+            "21318687",
+            "31259080"
         ],
         "pfp": "/src/web/static/pfp/default.png",
         "entrada": "20/1/2021",
@@ -15,6 +16,6 @@
         "pais": "",
         "codigoPostal": "",
         "info": "",
-        "abierto": false
+        "abierto": true
     }
 }
