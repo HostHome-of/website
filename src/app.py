@@ -31,6 +31,7 @@ def Cuenta():
             if not usr["abierto"] == True: 
                 return redirect(url_for('Registrarse'))
     except Exception as e:
+        print(e)
         return redirect(url_for('Registrarse'))
 
     return render_template("account.html", user=usr)
