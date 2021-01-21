@@ -5,45 +5,60 @@
             <div class="row">
 
                 <div class="col-lg-3 col-md-6 footer-contact">
-                    <h3>Resi.</h3>
+                    <h3>HostHome</h3>
                     <p>
-                        A108 Adam Street <br>
-                        New York, NY 535022<br>
-                        United States <br><br>
+                        Madrid, monteclaro <br>
+                        España <br><br>
                         <strong>Phone:</strong> +1 5589 55488 55<br>
-                        <strong>Email:</strong> info@example.com<br>
+                        <strong>Email:</strong> hosthome@email.com<br>
                     </p>
                 </div>
 
                 <div class="col-lg-2 col-md-6 footer-links">
-                    <h4>Useful Links</h4>
+                    <h4>Documentacion</h4>
                     <ul>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Python</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">NodeJs</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">ruby</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Cloujure</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">C#</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Scala</a></li>
                     </ul>
                 </div>
 
                 <div class="col-lg-3 col-md-6 footer-links">
-                    <h4>Our Services</h4>
+                    <h4>Paginas</h4>
                     <ul>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
-                        <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+                        {% if user %}
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Cuenta</a></li>
+                        {% else %}
+                           <li><i class="bx bx-chevron-right"></i> <a href="#">Entrar</a></li>
+                        {% endif %}
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Precios</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Documentacion</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Terminos y privacidad</a></li>
+                        <li><i class="bx bx-chevron-right"></i> <a href="#">Licencia</a></li>
                     </ul>
                 </div>
 
-                <div class="col-lg-4 col-md-6 footer-newsletter">
-                    <h4>Join Our Newsletter</h4>
-                    <p>Tamen quem nulla quae legam multos aute sint culpa legam noster magna</p>
-                    <form action="" method="post">
-                        <input type="email" name="email"><input type="submit" value="Subscribe">
-                    </form>
-                </div>
+                {% if user %}
+                    <div class="col-lg-4 col-md-6 footer-newsletter">
+                        <h4>Recibe notificaciones</h4>
+                        <p>Te llegaran notificaciones de tu hosts</p>
+                        <form action="" method="post">
+                            <input type="email" name="email" required><input type="submit" value="Subscribirte">
+                        </form>
+                    </div>
+                {% else %}
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Cuenta</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a href="/login">Entrar</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="/register">Registrarse</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Me olvide mi contraseña</a></li>
+                        </ul>
+                    </div>
+                {% endif %}
 
             </div>
         </div>
@@ -53,10 +68,10 @@
 
         <div class="mr-md-auto text-center text-md-left">
             <div class="copyright">
-                &copy; Copyright <strong><span>Resi</span></strong>. All Rights Reserved
+                &copy; <script>document.write(new Date().getFullYear())</script> Copyright <strong><span>HostHome</span></strong>. Todos los derechos reservados
             </div>
             <div class="credits">
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                Creado por <a href="https://maucode.com">Maubg</a>
             </div>
         </div>
         <div class="social-links text-center text-md-right pt-3 pt-md-0">

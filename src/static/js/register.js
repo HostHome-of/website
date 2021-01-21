@@ -1,4 +1,5 @@
 async function enviar(e) {
+    Notiflix.Loading.Init({svgColor:"#6493c6",});
     e.preventDefault();
     let no_es_valido = false;
     await fetch("/register?nm="+ document.getElementById("name").value + "&psw=" + document.getElementById("password").value + "&mail=" + document.getElementById("email").value, {

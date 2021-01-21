@@ -1,4 +1,4 @@
-import json, random, datetime
+import json, random, datetime, requests
 
 def abrir():
     with open("./src/data/users.json", "r") as f:
@@ -29,7 +29,7 @@ class HacerLogin():
 
 class Usuario():
 
-    def __init__(self, tk: str):
+    def __init__(self, tk: str=None):
         self.tk = tk
 
     def cojer(self):
@@ -50,6 +50,16 @@ class Usuario():
                     usuarios[usr]["abierto"] = False
                     # del usuarios[usr]["cuentas"][self.tk]
                     cerrar(usuarios)
+
+    def cojer_admins(self):
+        data = requests.get("https://raw.githubusercontent.com/HostHome-of/config/main/config.json").json()
+
+        return data["admins"]
+
+    def cojer_usuarios(self):
+        return abrir()
+
+
 
 class CrearUsuario():
     def __init__(self, nombre: str=None, psw: str=None, mail: str=None):

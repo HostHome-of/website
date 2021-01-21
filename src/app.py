@@ -22,7 +22,7 @@ def PaginaPrincipal():
     except Exception as e:
         pass
 
-    return render_template("index.html", user=usr)
+    return render_template("index.html", user=usr, usrAdmin=len(Usuario().cojer_admins()), usuarios=len(Usuario().cojer_usuarios()))
 
 @app.route("/account")
 def Cuenta():
