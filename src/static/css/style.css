@@ -662,7 +662,7 @@ section {
 }
 
 .services .iconbox-blue:hover .icon i {
-  color: #fff;
+  color: #fff !important;
 }
 
 .services .iconbox-blue:hover .icon path {

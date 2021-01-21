@@ -5,6 +5,7 @@
     <link rel="icon" href="{{ url_for('static', filename='images/favicon.png')}}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/cuenta.css') }}">
     <title>Cuenta | {{ user['nombre'] }}</title>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/notiflix/notiflix-2.7.0.min.css') }}">
 </head>
 
 <body style="overflow-x: hidden;">
@@ -219,9 +220,18 @@
                                     </div>
                                 </div>
                             </form>
+                            <script>
+                                function eliminar() {
+                                    Notiflix.Loading.Init({svgColor:"#6493c6",});
+                                    Notiflix.Loading.Circle();
+                                    setTimeout(function() {
+                                        window.location.replace("/account/delete")
+                                    }, 4000);
+                                }
+                            </script>
                             <div class="botones">
                                 <button class="guardar">Guardar cambios</button>
-                                <button onclick="window.location.href = '/account/delete'" class="cerrar">Cerrar sesion</button></>
+                                <button onclick="eliminar()" class="cerrar">Cerrar sesion</button></>
                             </div>
                         </div>
                     </div>
@@ -238,6 +248,8 @@
             </div>
         </div>
     </footer>
+
+	<script src="{{ url_for('static', filename='vendor/notiflix/notiflix-aio-2.7.0.min.js') }}"></script>
 </body>
 
 </html>
