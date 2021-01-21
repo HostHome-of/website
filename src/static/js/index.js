@@ -1,13 +1,6 @@
-/**
-* Template Name: Resi - v2.2.0
-* Template URL: https://bootstrapmade.com/resi-free-bootstrap-html-template/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
 !(function($) {
     "use strict";
   
-    // Smooth scroll for the navigation menu and links with .scrollto classes
     var scrolltoOffset = $('#header').outerHeight() - 16;
     $(document).on('click', '.nav-menu a, .mobile-nav a, .scrollto', function(e) {
       if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
@@ -40,7 +33,6 @@
       }
     });
   
-    // Activate smooth scroll on page load with hash links in the url
     $(document).ready(function() {
       if (window.location.hash) {
         var initial_nav = window.location.hash;
@@ -53,7 +45,6 @@
       }
     });
   
-    // Mobile Navigation
     if ($('.nav-menu').length) {
       var $mobile_nav = $('.nav-menu').clone().prop({
         class: 'mobile-nav d-lg-none'
@@ -88,7 +79,6 @@
       $(".mobile-nav, .mobile-nav-toggle").hide();
     }
   
-    // Navigation active state on scroll
     var nav_sections = $('section');
     var main_nav = $('.nav-menu, #mobile-nav');
   
@@ -111,7 +101,6 @@
       });
     });
   
-    // Toggle .header-scrolled class to #header when page is scrolled
     $(window).scroll(function() {
       if ($(this).scrollTop() > 100) {
         $('#header').addClass('header-scrolled');
@@ -124,7 +113,6 @@
       $('#header').addClass('header-scrolled');
     }
   
-    // Back to top button
     $(window).scroll(function() {
       if ($(this).scrollTop() > 100) {
         $('.back-to-top').fadeIn('slow');
@@ -140,13 +128,11 @@
       return false;
     });
   
-    // jQuery counterUp
     $('[data-toggle="counter-up"]').counterUp({
       delay: 10,
       time: 1000
     });
   
-    // Porfolio isotope and filter
     $(window).on('load', function() {
       var portfolioIsotope = $('.portfolio-container').isotope({
         itemSelector: '.portfolio-item'
@@ -161,13 +147,11 @@
         });
       });
   
-      // Initiate venobox (lightbox feature used in portofilo)
       $(document).ready(function() {
         $('.venobox').venobox();
       });
     });
   
-    // Portfolio details carousel
     $(".portfolio-details-carousel").owlCarousel({
       autoplay: true,
       dots: true,

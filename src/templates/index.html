@@ -44,7 +44,7 @@
                         <li><i class="ri-check-line"></i> Gratis</li>
                     </ul>
                     <div class="mt-3">
-                        {% if user %}
+                        {% if not user %}
                             <a href="/register" class="btn-get-started scrollto">Registrarte</a>
                         {% else %}
                             <a href="/account" class="btn-get-started scrollto">Cuenta</a>

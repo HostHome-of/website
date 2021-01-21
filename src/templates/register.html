@@ -8,21 +8,11 @@
 	<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/notiflix/notiflix-2.7.0.min.css') }}">
 </head>
 
 <body>
-	<div class="about">
-		<a class="bg_links social portfolio" href="https://www.rafaelalucas.com/dailyui" target="_blank">
-			<span class="icon"></span>
-		</a>
-		<a class="bg_links social dribbble" href="https://dribbble.com/rafaelalucas" target="_blank">
-			<span class="icon"></span>
-		</a>
-		<a class="bg_links social linkedin" href="https://www.linkedin.com/in/rafaelalucas/" target="_blank">
-			<span class="icon"></span>
-		</a>
-		<a class="bg_links logo"></a>
-	</div>
 
 	<div class="daily">
 		<a href="/" class="daily-title">HostHome</a>
@@ -45,19 +35,6 @@
 			</div>
 			
 			<script>
-				async function check(e) {
-					e.preventDefault();
-					await fetch("/register?nm=" + document.getElementById("name").value + "&psw=" + document.getElementById("password").value + "&mail=" + document.getElementById("email").value, {
-					  method: 'POST'
-					}).then(response => response.json()).then(function(data) {
-						if (JSON.stringify(data) == "{}") {
-							alert("Ese email ya existe");
-							return false;
-					  	}
-					});
-					document.getElementById("formy").submit();
-				}
-
 				function mirar() {
 					const psw1 = document.getElementById("password").value;
 					const psw2 = document.getElementById("confirmpassword").value;
@@ -78,7 +55,7 @@
 			<div class="left">
 				<div class="content">
 					<h2 class="subtitle">Rellena todo para crearte una cuenta</h2>
-					<form onsubmit="return check(event)" action="/account" id="formy">
+					<form id="logger" onsubmit="return enviar(event)" action="/account">
 						<div class="input-wrapper">
 							<label for="name">Nombre</label>
 							<input onchange="mirar()" id="name" type="text">
@@ -118,6 +95,8 @@
 		</div>
 	</div>
 	<script type="text/javascript" src="{{ url_for('static', filename='js/auth.js') }}"></script>
+	<script src="{{ url_for('static', filename='vendor/notiflix/notiflix-aio-2.7.0.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/register.js') }}"></script>
 </body>
 
 </html>

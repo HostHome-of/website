@@ -1,62 +1,86 @@
 <!DOCTYPE html>
 <html lang="es-ES">
+
 <head>
+	<title>HostHome | Registrarse</title>
+	<link rel="icon" href="{{ url_for('static', filename='images/favicon.png')}}">
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/auth.css') }}">
 	<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
-	<title>HostHome | Entrar</title>
-	<link rel="icon" href="{{ url_for('static', filename='images/favicon.png')}}">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/notiflix/notiflix-2.7.0.min.css') }}">
 </head>
+
 <body>
 
-	<img class="wave" src="{{ url_for('static', filename='images/wave.png') }}">
-	<div class="container">
-		<div class="img">
-			<img src="{{ url_for('static', filename='images/bg.svg') }}">
+	<div class="daily">
+		<a href="/" class="daily-title">HostHome</a>
+		<div class="btns">
+			<div class="buttons"><button class="btn sign">Entrar</button></div>
+			<a href="/register"><div class="buttons"><button class="btn sign">Registrarte</button></div></a>
 		</div>
-		<div class="login-content">
-      <script>
-        async function ckeck(e) {
-          e.preventDefault();
-          await fetch("/login?psw=" + document.getElementById("psw").value + "&mail=" + document.getElementById("email").value, {
-            method: 'POST'
-          }).then(response => response.json()).then(function(data) {
-            if (JSON.stringify(data) == "{}") {
-              alert("Algo esta mal porfavor haz doble chequeo");
-              return false;
-            }
-          });
+	</div>
 
-          document.getElementById("logger").submit()
-        }
-      </script>
-			<form id="logger" onsubmit="return ckeck(event)" action="/account">
-				<!-- <img src="{{ url_for('static', filename='images/avatar.svg') }}"> -->
-				<h2 class="title">Entrar</h2>
-           		<div class="input-div one">
-           		   <div class="i">
-           		   		<i class="fas fa-envelope-open-text"></i>
-           		   </div>
-           		   <div class="div">
-           		   		<h5>Email</h5>
-           		   		<input id="email" type="email" required class="input">
-           		   </div>
-           		</div>
-           		<div class="input-div pass">
-           		   <div class="i"> 
-           		    	<i class="fas fa-lock"></i>
-           		   </div>
-           		   <div class="div">
-           		    	<h5>Contraseña</h5>
-           		    	<input id="psw" type="password" class="input">
-            	   </div>
-            	</div>
-				<span><a href="/forgot">¿Te olvidastes de la contrseña?</a><a href="/register">¿Nuevo aqui?</a></span>
-				<input type="submit" class="btn" value="Login">
-            </form>
-        </div>
-    </div>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/auth.js') }}"></script>
+	<div class="modal open">
+		<div class="wrapper">
+			<div class="btn-close">
+				<span></span>
+				<span></span>
+			</div>
+
+			
+			<div class="title">
+				<h1>Entrar</h1>
+			</div>
+			
+			<script>
+				function mirar() {
+					const psw1 = document.getElementById("password").value;
+					const psw2 = document.getElementById("confirmpassword").value;
+					const mail = document.getElementById("email").value;
+					const nombre = document.getElementById("name").value;
+					const checky = document.getElementById("check");
+					const btn = document.getElementById("smb");
+
+					if (psw1 != psw2 || psw1 == "" || psw2 == "" || mail == "" || nombre == "" || !checky.checked) {
+						btn.disabled = true;
+						return ;
+					}
+
+					btn.disabled = false;
+				}
+			</script>
+			
+			<div class="left">
+				<div class="content">
+					<h2 class="subtitle">¿Que haces aqui?<br /> ¡entra ya!</h2>
+					<form id="logger" onsubmit="return enviar(event)" action="/account">
+
+						<div class="input-wrapper">
+							<label for="email">E-mail</label>
+							<input onchange="mirar()" id="email" type="email">
+						</div>
+
+						<div class="input-wrapper">
+							<label for="password">Contraseña</label>
+							<input onchange="mirar()" id="password" type="password">
+						</div>
+
+						<button class="btn" id="smb" type="submit" disabled>Entrar</button>
+					</form>
+				</div>
+
+			</div>
+			
+			<div class="right">
+			</div>
+
+		</div>
+	</div>
+	<script type="text/javascript" src="{{ url_for('static', filename='js/auth.js') }}"></script>
+	<script src="{{ url_for('static', filename='vendor/notiflix/notiflix-aio-2.7.0.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/login.js') }}"></script>
 </body>
+
 </html>
