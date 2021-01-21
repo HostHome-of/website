@@ -36,14 +36,11 @@
 			
 			<script>
 				function mirar() {
-					const psw1 = document.getElementById("password").value;
-					const psw2 = document.getElementById("confirmpassword").value;
+					const psw = document.getElementById("password").value;
 					const mail = document.getElementById("email").value;
-					const nombre = document.getElementById("name").value;
-					const checky = document.getElementById("check");
 					const btn = document.getElementById("smb");
 
-					if (psw1 != psw2 || psw1 == "" || psw2 == "" || mail == "" || nombre == "" || !checky.checked) {
+					if (psw == "" || mail == "") {
 						btn.disabled = true;
 						return ;
 					}

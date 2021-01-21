@@ -11,7 +11,7 @@ async function enviar(e) {
 
     if (no_es_valido == true) {
         Notiflix.Report.Failure('Un error',
-                                'Es posible que una de estas dos cosas esten mal <br /><ul><li> Email</li><li> Contraseña</li></ul>',
+                                'Es posible que una de estas dos cosas esten mal <br /><strong>Email</strong>, <strong>Contraseña</strong>',
                                 'Aceptar');
         setTimeout(function() {
             return false;
