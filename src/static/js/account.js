@@ -23,42 +23,42 @@ function guardar() {
         return;
     }
 
-    const url = "/update?mail="+email+"&nm="+nombre
+    let url = "/update?mail="+email+"&nm="+nombre
 
     const pm = document.getElementById("input-first-name").value;
 
     if (pm != "") {
-        url.concat("&pm="+pm)
+        url += "&pm="+pm
     }
 
     const ap = document.getElementById("input-last-name").value;
     if (ap != "") {
-        url.concat("&ap="+ap)
+        url += "&ap="+ap
     }
 
     const dir = document.getElementById("input-address").value;
     if (dir != "") {
-        url.concat("&dir="+dir)
+        url += "&dir="+dir
     }
 
     const ci = document.getElementById("input-city").value;
     if (ci != "") {
-        url.concat("&ci="+ci)
+        url += "&ci="+ci
     }
     
     const co = document.getElementById("input-country").value;
     if (co != "") {
-        url.concat("&pa="+co)
+        url += "&pa="+co
     }
     
     const po = document.getElementById("input-postal-code").value;
     if (po != "") {
-        url.concat("&co="+ po)
+        url += "&co="+ po
     }
 
     const bio = document.getElementById("bio").value;
     if (bio != "") {
-        url.concat("&bio="+bio)
+        url += "&bio="+bio
     }
 
     fetch(url, {
