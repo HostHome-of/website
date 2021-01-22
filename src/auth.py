@@ -59,6 +59,24 @@ class Usuario():
     def cojer_usuarios(self):
         return abrir()
 
+    def actualizar(self, mail, nombre, pm, ap, direccion, ci, pa, co, bio):
+        usuarios = abrir()
+
+        usuarios[str(mail)]["nombre"] = nombre
+        usuarios[str(mail)]["pfp"] = "/src/web/static/pfp/default.png"
+
+        usuarios[str(mail)]["primerNombre"] = pm
+        usuarios[str(mail)]["segundoNombre"] = ap
+
+        usuarios[str(mail)]["direccion"] = direccion
+        usuarios[str(mail)]["ciudad"] = ci 
+        usuarios[str(mail)]["pais"] = pa
+        usuarios[str(mail)]["codigoPostal"] = co
+
+        usuarios[str(mail)]["info"] = bio
+
+        cerrar(usuarios)
+
 
 
 class CrearUsuario():
@@ -106,6 +124,7 @@ class CrearUsuario():
             usuarios[str(self.mail)]["abierto"] = True 
 
             usuarios[str(self.mail)]["primerNombre"] = "" 
+            usuarios[str(self.mail)]["segundoNombre"] = "" 
 
             usuarios[str(self.mail)]["direccion"] = "" 
             usuarios[str(self.mail)]["ciudad"] = "" 

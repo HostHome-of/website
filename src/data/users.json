@@ -1,3 +1,20 @@
 {
-    
+    "maubg2007@gmail.com": {
+        "mail": "maubg2007@gmail.com",
+        "nombre": "Maubg",
+        "psw": "awd",
+        "cuentas": [
+            "71499364"
+        ],
+        "pfp": "/src/web/static/pfp/default.png",
+        "entrada": "22/1/2021",
+        "abierto": true,
+        "primerNombre": "",
+        "segundoNombre": "",
+        "direccion": "",
+        "ciudad": "",
+        "pais": "",
+        "codigoPostal": "",
+        "info": ""
+    }
 }

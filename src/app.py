@@ -24,6 +24,29 @@ def PaginaPrincipal():
 
     return render_template("index.html", user=usr, usrAdmin=len(Usuario().cojer_admins()), usuarios=len(Usuario().cojer_usuarios()))
 
+
+@app.route("/update", methods=["GET", "POST"])
+def Actualizar():
+
+    if request.method == "POST":
+        mail = request.args.get("mail", "")
+        nombre = request.args.get("nm", "")
+        pm = request.args.get("pm", "")
+        ap = request.args.get("ap", "")
+
+        direccion = request.args.get("dir", "")
+        ci = request.args.get("ci", "")
+        pa = request.args.get("pa", "")
+        co = request.args.get("co", "")
+
+        bio = request.args.get("bio", "")
+
+        Usuario().actualizar(mail, nombre, pm, ap, direccion, ci, pa, co, bio)
+        return {}
+    
+    return redirect(url_for("Cuenta"))
+
+
 @app.route("/account")
 def Cuenta():
 
@@ -82,70 +105,6 @@ def EliminarCuenta():
         pass
 
     return redirect(url_for('PaginaPrincipal'))
-
-# @app.route("/project/<id>", methods=["POST", "GET"])
-# def ProjectoView(id=None):
-
-#     usr = None
-
-#     try:
-#         if session['user_id']:
-#             usr = Usuario(session['user_id']).cojer()
-#             if usr is not None:
-#                 p = Projecto().cojer(id)
-#                 if p is not None:
-#                     return render_template("projecto.html", projecto=p)
-#                 return redirect(url_for("CrearProjecto"))
-#     except Exception as e:
-#         pass
-
-#     return redirect(url_for('Registrarse'))   
-
-# @app.route("/project/new", methods=["POST", "GET"])
-# def CrearProjecto():
-
-#     usr = None
-
-#     if request.method == "POST":
-
-#         nombre = request.form["nombre"]
-#         repo = request.form["repo"]
-
-#         p = Projecto().crear(nombre, repo)
-#         return redirect("/project/{p}")
-
-#     try:
-#         if session['user_id']:
-#             usr = Usuario(session['user_id']).cojer()
-#             if usr is not None:
-#                 return render_template("projectos/cli.html", user=usr)
-#     except Exception as e:
-#         pass
-
-#     return redirect(url_for('Registrarse'))
-
-@app.route("/project/new/github", methods=["POST", "GET"])
-def CrearProjectoGithub():
-
-    usr = None
-
-    if request.method == "POST":
-
-        nombre = request.form["nombre"]
-        repo = request.form["repo"]
-
-        p = Projecto().crear(nombre, repo)
-        return redirect("/project/{p}")
-
-    try:
-        if session['user_id']:
-            usr = Usuario(session['user_id']).cojer()
-            if usr is not None:
-                return render_template("projectos/github.html", user=usr)
-    except Exception as e:
-        pass
-
-    return redirect(url_for('Registrarse'))
 
 @app.route("/login", methods=["GET", "POST"])
 def LogIn():
