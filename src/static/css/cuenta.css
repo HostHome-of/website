@@ -1485,6 +1485,7 @@ a.text-white:focus {
     width: 100%;
     border-radius: 50%;
     min-width: 100%;
+    min-height: 100%;
 }
 
 .avatar-sm {
