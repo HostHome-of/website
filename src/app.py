@@ -123,13 +123,12 @@ def LogIn():
     
         mail = request.args.get("mail")
         psw = request.args.get("psw")
-        nombre = request.args.get("nm")
 
         usr = HacerLogin(mail, psw).ejecutar()
         if usr == False:
             return {}
         session['user_id'] = usr
-        return {"estado": 200}
+        return Usuario(usr).cojer()
 
     return render_template("login.html", key=env["CAPTCHA_WEB"])
 
