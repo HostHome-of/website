@@ -1,4 +1,5 @@
 # Auto detect text files and perform LF normalization
 * text=auto
 *.html linguist-vendored=true
-*.css linguist-language=Sass
+*.css linguist-vendored=true
+*.js linguist-language=TypeScript
