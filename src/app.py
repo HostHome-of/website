@@ -5,12 +5,24 @@ from flask import Flask, render_template, request, redirect, url_for, session, a
 from os import environ as env
 
 from src.auth import CrearUsuario, HacerLogin, Usuario
+from src.mail import enviarEmail
+
 from werkzeug.utils import secure_filename
 import os
 
 app = Flask(__name__, static_url_path="/src/web/static")
 app.secret_key = "myllavecitasecretita123"
 app.config["ALLOWED_IMAGE_EXTENSIONS"] = ["JPEG", "JPG", "PNG", "GIF"]
+
+def check_usuario():
+    try:
+        if session['user_id']:
+            usr = Usuario(session['user_id']).cojer()
+            if not usr["abierto"] == True: 
+                usr = None
+            return usr
+    except Exception as e:
+        return None
 
 @app.errorhandler(404)
 def error_404(e):
@@ -19,15 +31,7 @@ def error_404(e):
 @app.route("/")
 def PaginaPrincipal():
 
-    usr = None
-
-    try:
-        if session['user_id']:
-            usr = Usuario(session['user_id']).cojer()
-            if not usr["abierto"] == True: 
-                usr = None
-    except Exception as e:
-        pass
+    usr = check_usuario()
 
     return render_template("index.html", user=usr, usrAdmin=len(Usuario().cojer_admins()), usuarios=len(Usuario().cojer_usuarios()))
 
@@ -91,56 +95,29 @@ def Actualizar():
 @app.route("/account")
 def Cuenta():
 
-    usr = None
+    usr = check_usuario()
 
-    try:
-        if session['user_id']:
-            usr = Usuario(session['user_id']).cojer()
-            if not usr["abierto"] == True: 
-                return redirect(url_for('Registrarse'))
-    except Exception as e:
-        print(e)
+    if usr is None:
         return redirect(url_for('Registrarse'))
 
     return render_template("account.html", user=usr)
-
-@app.route("/features")
-def Features():
-
-    usr = None
-
-    try:
-        if session['user_id']:
-            usr = Usuario(session['user_id']).cojer()
-            if not usr["abierto"] == True: 
-                usr = None
-    except Exception as e:
-        pass
-
-    return render_template("features.html", user=usr)
-
+    
 @app.route("/account/delete")
 def EliminarCuenta():
 
-    usr = None
+    usr = check_usuario()
 
-    try:
-        if session['user_id']:
-            usr = Usuario(session['user_id']).eliminar()
-    except Exception as e:
-        pass
+    if usr is not None:
+        Usuario(session['user_id']).eliminar()
 
     return redirect(url_for('PaginaPrincipal'))
 
 @app.route("/login", methods=["GET", "POST"])
 def LogIn():
 
-    try:
-        if session['user_id']:
-            if Usuario(session['user_id']).cojer()["abierto"] == True:
-                return redirect(url_for('PaginaPrincipal'))
-    except:
-        pass
+    usr = check_usuario()
+    if usr is not None:
+        return redirect(url_for('PaginaPrincipal'))
 
     if request.method == "POST":
     
@@ -159,12 +136,9 @@ def LogIn():
 @app.route("/register", methods=["GET", "POST"])
 def Registrarse():
 
-    try:
-        if session['user_id']:
-            if Usuario(session['user_id']).cojer()["abierto"] == True:
-                return redirect(url_for('PaginaPrincipal'))
-    except:
-        pass
+    usr = check_usuario()
+    if usr is not None:
+        return redirect(url_for('PaginaPrincipal'))
 
     if request.method == "POST":
 
@@ -176,6 +150,8 @@ def Registrarse():
         if usr == False:
             return {}
         session['user_id'] = usr
+
+        enviarEmail(Usuario(usr).cojer(), "./src/templates/mails/recien.html", "Gracias por unirte")
         return {"estado": 200}
 
     return render_template("register.html", key=env["CAPTCHA_WEB"])
