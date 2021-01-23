@@ -1,0 +1,14 @@
+{
+  "name": "HostHome | App",
+  "short_name": "HostHome",
+  "start_url": "/",
+  "theme_color": "#5a5af3",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "./images/favicon.png",
+      "sizes": "267x241",
+      "type": "image/png"
+    }
+  ]
+}
