@@ -1,17 +1,5 @@
-function readURL(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        
-        reader.onload = function (e) {
-            $('#img__prev').attr('src', e.target.result);
-        }
-        
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
 $("#imgInp").change(function(){
-    readURL(this);
+    $("#formImg").submit();
 });
 
 function guardar() {
@@ -21,18 +9,6 @@ function guardar() {
     if (nombre == "" || email == "") {
         Notiflix.Notify.Failure('Email o nombre no pueden ser vacios');
         return;
-    }
-
-    img = document.getElementById("imgInp");
-
-    if (img.files && img.files[0]) {
-        var reader = new FileReader();
-        
-        reader.onload = function (e) {
-            fetch("/update?mail="+email+"&nm="+nombre+"&img="+e.target.result)
-        }
-        
-        reader.readAsDataURL(img.files[0]);
     }
 
     let url = "/update?mail="+email+"&nm="+nombre

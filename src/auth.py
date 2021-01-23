@@ -1,4 +1,5 @@
 import json, random, datetime, requests
+import io
 
 def abrir():
     with open("./src/data/users.json", "r") as f:
@@ -59,18 +60,16 @@ class Usuario():
     def cojer_usuarios(self):
         return abrir()
 
-    def actualizar(self, mail, nombre, pm, ap, direccion, ci, pa, co, bio, img):
+    def imagen(self, usr, nm):
+        mail = Usuario(usr).cojer()["mail"]
+        usrs = abrir()
+        usrs[mail]["pfp"] = f"/src/web/static/pfp/{nm}"
+        cerrar(usrs)
+
+    def actualizar(self, mail, nombre, pm, ap, direccion, ci, pa, co, bio):
         usuarios = abrir()
 
-        print(img)
-
-        if img != "":
-            file = open(f"src/static/pfp/{mail}.png", "wb")
-            file.write(img)
-            file.close()
-
         usuarios[str(mail)]["nombre"] = nombre
-        usuarios[str(mail)]["pfp"] = "/src/web/static/pfp/{mail}.png"
 
         usuarios[str(mail)]["primerNombre"] = pm
         usuarios[str(mail)]["segundoNombre"] = ap

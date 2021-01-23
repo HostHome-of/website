@@ -1,14 +1,16 @@
 from dotenv import load_dotenv
 load_dotenv()
 
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, abort
 from os import environ as env
 
 from src.auth import CrearUsuario, HacerLogin, Usuario
+from werkzeug.utils import secure_filename
+import os
 
 app = Flask(__name__, static_url_path="/src/web/static")
 app.secret_key = "myllavecitasecretita123"
-
+app.config["ALLOWED_IMAGE_EXTENSIONS"] = ["JPEG", "JPG", "PNG", "GIF"]
 
 @app.errorhandler(404)
 def error_404(e):
@@ -29,16 +31,47 @@ def PaginaPrincipal():
 
     return render_template("index.html", user=usr, usrAdmin=len(Usuario().cojer_admins()), usuarios=len(Usuario().cojer_usuarios()))
 
+def allowed_image(filename):
+    
+    if not "." in filename:
+        return False
+
+    ext = filename.rsplit(".", 1)[1]
+
+    if ext.upper() in app.config["ALLOWED_IMAGE_EXTENSIONS"]:
+        return True
+    else:
+        return False
+
+@app.route("/img", methods=["GET", "POST"])
+def Imagen():
+    
+    if request.method == "POST":
+        
+        image = request.files["imgInp"]
+
+
+        if image.filename == "":
+            print("bruh")
+            return redirect(url_for("Cuenta"))
+
+        if allowed_image(image.filename):
+            filename = secure_filename(image.filename)
+            image.save(os.path.join("./src/static/pfp/", filename))
+            Usuario().imagen(session['user_id'], filename)
+
+    return redirect(url_for("Cuenta"))
 
 @app.route("/update", methods=["GET", "POST"])
 def Actualizar():
 
     if request.method == "POST":
 
-        img = request.args.get("img", "")
+        mail = request.args.get("mail", None)
+        nombre = request.args.get("nm", None)
 
-        mail = request.args.get("mail", "")
-        nombre = request.args.get("nm", "")
+        if mail is None or nombre is None:
+            abort(404)
 
         pm = request.args.get("pm", "")
         ap = request.args.get("ap", "")
@@ -50,7 +83,7 @@ def Actualizar():
 
         bio = request.args.get("bio", "")
 
-        Usuario().actualizar(mail, nombre, pm, ap, direccion, ci, pa, co, bio, img)
+        Usuario().actualizar(mail, nombre, pm, ap, direccion, ci, pa, co, bio)
         return {}
     
     return redirect(url_for("Cuenta"))
