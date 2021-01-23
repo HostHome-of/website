@@ -63,12 +63,12 @@
 
 						<div class="input-wrapper">
 							<label for="email">E-mail</label>
-							<input onchange="mirar()" id="email" type="email">
+							<input oninput="mirar()" id="email" type="email">
 						</div>
 
 						<div class="input-wrapper">
 							<label for="password">Contraseña</label>
-							<input onchange="mirar()" id="password" type="password">
+							<input oninput="mirar()" id="password" type="password">
 						</div>
 
 						<div class="g-recaptcha" data-callback="noEsRobotito" data-sitekey="{{ key }}"></div>
