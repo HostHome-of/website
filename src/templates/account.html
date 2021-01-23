@@ -66,14 +66,12 @@
                 <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
                     <div class="card card-profile shadow">
                         <div class="row justify-content-center">
+                            <input type='file' id="imgInp" />
                             <div class="col-lg-3 order-lg-2">
-                                <div class="card-profile-image">
-                                    <input type='file' id="imgInp" />
-                                    <label id="pfp__upload_label" for="imgInp">
-                                        <img alt="Imagen" id="img__prev" src="{{ user['pfp'] }}"
-                                            class="rounded-circle circle">
-                                    </label>
-                                </div>
+                                <label style="width: 100%; height: 85px; z-index: 9999;" class="card-profile-image" for="imgInp">
+                                    <img alt="Imagen" id="img__prev" src="{{ user['pfp'] }}"
+                                        class="rounded-circle circle">
+                                </label>
                             </div>
                         </div>
                         <div style="position: absolute; width: 100%; background: transparent;"
@@ -83,7 +81,7 @@
                                 <a href="#" class="btn btn-sm btn-default float-right">Cambiar plan</a>
                             </div>
                         </div>
-                        <div style="height: 130px;"></div>
+                        <div style="height: 50px;"></div>
                         <div class="card-body pt-0 pt-md-4">
                             <!-- <div class="row">
                                 <div class="col">

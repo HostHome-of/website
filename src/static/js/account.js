@@ -23,6 +23,18 @@ function guardar() {
         return;
     }
 
+    img = document.getElementById("imgInp");
+
+    if (img.files && img.files[0]) {
+        var reader = new FileReader();
+        
+        reader.onload = function (e) {
+            fetch("/update?mail="+email+"&nm="+nombre+"&img="+e.target.result)
+        }
+        
+        reader.readAsDataURL(img.files[0]);
+    }
+
     let url = "/update?mail="+email+"&nm="+nombre
 
     const pm = document.getElementById("input-first-name").value;

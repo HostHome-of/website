@@ -1,9 +1,14 @@
+from dotenv import load_dotenv
+load_dotenv()
+
 from flask import Flask, render_template, request, redirect, url_for, session
+from os import environ as env
 
 from src.auth import CrearUsuario, HacerLogin, Usuario
 
 app = Flask(__name__, static_url_path="/src/web/static")
 app.secret_key = "myllavecitasecretita123"
+
 
 @app.errorhandler(404)
 def error_404(e):
@@ -29,8 +34,12 @@ def PaginaPrincipal():
 def Actualizar():
 
     if request.method == "POST":
+
+        img = request.args.get("img", "")
+
         mail = request.args.get("mail", "")
         nombre = request.args.get("nm", "")
+
         pm = request.args.get("pm", "")
         ap = request.args.get("ap", "")
 
@@ -41,7 +50,7 @@ def Actualizar():
 
         bio = request.args.get("bio", "")
 
-        Usuario().actualizar(mail, nombre, pm, ap, direccion, ci, pa, co, bio)
+        Usuario().actualizar(mail, nombre, pm, ap, direccion, ci, pa, co, bio, img)
         return {}
     
     return redirect(url_for("Cuenta"))
@@ -152,7 +161,7 @@ def Registrarse():
         session['user_id'] = usr
         return {"estado": 200}
 
-    return render_template("register.html")
+    return render_template("register.html", key=env["CAPTCHA_WEB"])
 
 def run():
     app.run()

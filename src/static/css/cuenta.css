@@ -1533,6 +1533,8 @@ a.text-white:focus {
 
 .card-profile-image {
     position: relative;
+    transition: .3s;
+    cursor: pointer;
 }
 
 .card-profile-image img {
@@ -1543,6 +1545,10 @@ a.text-white:focus {
     transform: translate(-50%, -30%);
     border-radius: .375rem;
     transition: .3s;
+    overflow: hidden;
+    min-height: 180px;
+    max-height: 180px;
+    min-width: 180px;
 }
 
 .card-profile-image:hover {

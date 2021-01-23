@@ -8,8 +8,9 @@
 	<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/notiflix/notiflix-2.7.0.min.css') }}">
+	<link rel="stylesheet" type="text/css"
+		href="{{ url_for('static', filename='vendor/notiflix/notiflix-2.7.0.min.css') }}">
+	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body>
@@ -18,7 +19,9 @@
 		<a href="/" class="daily-title">HostHome</a>
 		<div class="btns">
 			<div class="buttons"><button class="btn sign">Registrarse</button></div>
-			<a href="/login"><div class="buttons"><button class="btn sign">Entrar</button></div></a>
+			<a href="/login">
+				<div class="buttons"><button class="btn sign">Entrar</button></div>
+			</a>
 		</div>
 	</div>
 
@@ -29,29 +32,35 @@
 				<span></span>
 			</div>
 
-			
+
 			<div class="title">
 				<h1>Registrarse</h1>
 			</div>
-			
+
 			<script>
+				var noEsRobot = true;
+
+				function noEsRobotito() {
+					noEsRobot = false;
+					mirar()
+				}
+
 				function mirar() {
 					const psw1 = document.getElementById("password").value;
 					const psw2 = document.getElementById("confirmpassword").value;
 					const mail = document.getElementById("email").value;
 					const nombre = document.getElementById("name").value;
-					const checky = document.getElementById("check");
 					const btn = document.getElementById("smb");
 
-					if (psw1 != psw2 || psw1 == "" || psw2 == "" || mail == "" || nombre == "" || !checky.checked) {
+					if (psw1 != psw2 || psw1 == "" || psw2 == "" || mail == "" || nombre == "" || noEsRobot == true) {
 						btn.disabled = true;
-						return ;
+						return;
 					}
 
 					btn.disabled = false;
 				}
 			</script>
-			
+
 			<div class="left">
 				<div class="content">
 					<h2 class="subtitle">Rellena todo para crearte una cuenta</h2>
@@ -76,19 +85,23 @@
 							<input onchange="mirar()" id="confirmpassword" type="password">
 						</div>
 
-						<div class="terms">
+						<!-- <div class="terms">
 
 							<input onchange="mirar()" type="checkbox" id="check">
 							<label for="check"></label>
-							<p>Acepto el <a class="link" href="#">Termino de uso</a> & <a class="link" href="#">Politica de privacidad</a></p>
-						</div>
+							<p>Acepto el <a class="link" href="#">Termino de uso</a> & <a class="link" href="#">Politica
+									de privacidad</a></p>
+						</div> -->
+
+						<div class="g-recaptcha" data-callback="noEsRobotito" data-sitekey="{{ key }}"></div>
 
 						<button class="btn" id="smb" type="submit" disabled>Crear una cuenta</button>
+						<small>Al crearte una cuenta aceptas los terminos y privacidad</small>
 					</form>
 				</div>
 
 			</div>
-			
+
 			<div class="right">
 			</div>
 

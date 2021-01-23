@@ -59,11 +59,18 @@ class Usuario():
     def cojer_usuarios(self):
         return abrir()
 
-    def actualizar(self, mail, nombre, pm, ap, direccion, ci, pa, co, bio):
+    def actualizar(self, mail, nombre, pm, ap, direccion, ci, pa, co, bio, img):
         usuarios = abrir()
 
+        print(img)
+
+        if img != "":
+            file = open(f"src/static/pfp/{mail}.png", "wb")
+            file.write(img)
+            file.close()
+
         usuarios[str(mail)]["nombre"] = nombre
-        usuarios[str(mail)]["pfp"] = "/src/web/static/pfp/default.png"
+        usuarios[str(mail)]["pfp"] = "/src/web/static/pfp/{mail}.png"
 
         usuarios[str(mail)]["primerNombre"] = pm
         usuarios[str(mail)]["segundoNombre"] = ap
