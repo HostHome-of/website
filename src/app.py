@@ -52,7 +52,6 @@ def Imagen():
 
 
         if image.filename == "":
-            print("bruh")
             return redirect(url_for("Cuenta"))
 
         if allowed_image(image.filename):
@@ -120,21 +119,6 @@ def Features():
 
     return render_template("features.html", user=usr)
 
-@app.route("/docs")
-def Docs():
-
-    usr = None
-
-    try:
-        if session['user_id']:
-            usr = Usuario(session['user_id']).cojer()
-            if not usr["abierto"] == True: 
-                usr = None
-    except Exception as e:
-        pass
-
-    return render_template("docs.html", user=usr)
-
 @app.route("/account/delete")
 def EliminarCuenta():
 
@@ -170,7 +154,7 @@ def LogIn():
         session['user_id'] = usr
         return {"estado": 200}
 
-    return render_template("login.html")
+    return render_template("login.html", key=env["CAPTCHA_WEB"])
 
 @app.route("/register", methods=["GET", "POST"])
 def Registrarse():

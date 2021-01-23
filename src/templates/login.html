@@ -10,8 +10,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/notiflix/notiflix-2.7.0.min.css') }}">
+	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
-
 <body>
 
 	<div class="daily">
@@ -35,6 +35,13 @@
 			</div>
 			
 			<script>
+				var noEsRobot = true;
+
+				function noEsRobotito() {
+					noEsRobot = false;
+					mirar()
+				}
+
 				function mirar() {
 					const psw = document.getElementById("password").value;
 					const mail = document.getElementById("email").value;
@@ -63,6 +70,8 @@
 							<label for="password">Contraseña</label>
 							<input onchange="mirar()" id="password" type="password">
 						</div>
+
+						<div class="g-recaptcha" data-callback="noEsRobotito" data-sitekey="{{ key }}"></div>
 
 						<button class="btn" id="smb" type="submit" disabled>Entrar</button>
 					</form>
