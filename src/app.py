@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 load_dotenv()
 
-from flask import Flask, render_template, request, redirect, url_for, session, abort
+from flask import Flask, render_template, request, redirect, url_for, session, abort, send_file
 from os import environ as env
 
 from src.auth import CrearUsuario, HacerLogin, Usuario
@@ -13,6 +13,11 @@ import os
 app = Flask(__name__, static_url_path="/src/web/static")
 app.secret_key = "myllavecitasecretita123"
 app.config["ALLOWED_IMAGE_EXTENSIONS"] = ["JPEG", "JPG", "PNG", "GIF"]
+
+@app.route('/service-worker.js')
+@app.route('/sw.js')
+def sw():
+    return app.send_static_file('sw.js'), 200, {'Content-Type': 'text/javascript'}
 
 def check_usuario():
     try:

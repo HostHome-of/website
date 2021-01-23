@@ -26,6 +26,8 @@
     <link rel="stylesheet" href="https://htmlstream.com/preview/front-v2.7.0/assets/vendor/hs-megamenu/src/hs.megamenu.css">
 
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
 </head>
 
 <body>
@@ -511,6 +513,8 @@
 
     <script src="{{ url_for('static', filename='js/index.js') }}"></script>
     <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/global.js') }}"></script>
 
 </body>
 
