@@ -33,6 +33,23 @@ class Usuario():
     def __init__(self, tk: str=None):
         self.tk = tk
 
+    def activar(self, mail, codigo):
+        usuarios = abrir()
+        print(usuarios[mail]["tokenEntrada"])
+        print(codigo)
+        if int(usuarios[mail]["tokenEntrada"]) == int(codigo): # Bien
+            del usuarios[mail]["tokenEntrada"]
+            usuarios[mail]["autorizado"] = True
+            cerrar(usuarios)
+            return True
+        else: # Mal
+            return False
+
+    def destruir(self, mail):
+        usuarios = abrir()
+        del usuarios[mail]
+        cerrar(usuarios)
+
     def cojer(self):
         usuarios = abrir()
 
@@ -111,6 +128,9 @@ class CrearUsuario():
 
         return token
 
+    def autorizar(self):
+        pass
+
 
     def crear(self):
         usuarios = abrir()
@@ -138,6 +158,9 @@ class CrearUsuario():
             usuarios[str(self.mail)]["codigoPostal"] = "" 
 
             usuarios[str(self.mail)]["info"] = ""
+
+            usuarios[str(self.mail)]["autorizado"] = False
+            usuarios[str(self.mail)]["tokenEntrada"] = random.randint(1000, 9000)
 
             cerrar(usuarios)
             return str(tkN)

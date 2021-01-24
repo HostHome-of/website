@@ -47,7 +47,7 @@
 					const mail = document.getElementById("email").value;
 					const btn = document.getElementById("smb");
 
-					if (psw == "" || mail == "") {
+					if (psw == "" || mail == "" || noEsRobot == true) {
 						btn.disabled = true;
 						return ;
 					}

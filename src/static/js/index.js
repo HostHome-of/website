@@ -1,3 +1,11 @@
+// window.onload = function(evt) {
+//   Notification.requestPermission().then(function(permission) {
+//     if (Notification.permission == 'granted') {
+
+//     }
+//    });
+// }
+
 !(function($) {
     "use strict";
   

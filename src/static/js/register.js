@@ -8,16 +8,16 @@ async function enviar(e) {
 
     if (document.getElementById("password").value.length < 6) {
         Notiflix.Notify.Failure('La contraseña debe de ser mas de 6 caracteres.');
-        no_es_valido_psw = true
-        setTimeout(function() {
-            return false;
-        }, 5000);
+        no_es_valido_psw = true;
+        return false;
     }
     await fetch("/register?nm="+ document.getElementById("name").value + "&psw=" + document.getElementById("password").value + "&mail=" + document.getElementById("email").value, {
         method: 'POST'
     }).then(response => response.json()).then(function (data) {
         if (JSON.stringify(data) == "{}") {
             no_es_valido = true;
+        } else {
+            Notiflix.Loading.Circle();
         }
     });
 
@@ -28,12 +28,10 @@ async function enviar(e) {
         }, 5000);
     } else {
         if (no_es_valido_psw == false) {
-            Notiflix.Loading.Circle();
             setTimeout(function() {
-                window.location.replace("/account");
+                window.location.replace("/register/activation");
                 return false;
             }, 3000);
         }
     }
-    return false;
 }

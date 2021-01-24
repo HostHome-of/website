@@ -66,7 +66,7 @@
                 <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
                     <div class="card card-profile shadow">
                         <form method="POST" action="/img" id="formImg" enctype="multipart/form-data" class="row justify-content-center">
-                            <input type='file' id="imgInp" name="imgInp" />
+                            <input type='file' accept="image/*" id="imgInp" name="imgInp" />
                             <div class="col-lg-3 order-lg-2">
                                 <label style="width: 100%; height: 85px; z-index: 9999;" class="card-profile-image" for="imgInp">
                                     <img alt="Imagen" id="img__prev" src="{{ user['pfp'] }}"

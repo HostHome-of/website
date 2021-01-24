@@ -9,36 +9,55 @@ from src.mail import enviarEmail
 
 from werkzeug.utils import secure_filename
 import os
+import requests
 
 app = Flask(__name__, static_url_path="/src/web/static")
 app.secret_key = "myllavecitasecretita123"
 app.config["ALLOWED_IMAGE_EXTENSIONS"] = ["JPEG", "JPG", "PNG", "GIF"]
 
+# Docs / Url
+docs = requests.get("https://raw.githubusercontent.com/HostHome-of/config/main/config.json").json()["docs"]
+url_main = requests.get("https://raw.githubusercontent.com/HostHome-of/config/main/config.json").json()["url"]
+
+# Aplicacion instalable
 @app.route('/service-worker.js')
 @app.route('/sw.js')
 def sw():
     return app.send_static_file('sw.js'), 200, {'Content-Type': 'text/javascript'}
 
+@app.route("/src/web/static/images/favicon.png")
+def iconos():
+    return app.send_static_file('images/favicon.png'), 200, {'Content-Type': 'image/png'}
+
+# Errores
+
+@app.errorhandler(404)
+def error_404(e):
+    return render_template('404.html', docs=docs), 404
+
+# -----------------------------------------------------------------------------
+
+# Resto de la web
+
 def check_usuario():
     try:
         if session['user_id']:
             usr = Usuario(session['user_id']).cojer()
+            if usr["autorizado"] == False:
+                Usuario().destruir(Usuario(session['user_id']).cojer()["mail"])
+                return None
             if not usr["abierto"] == True: 
                 usr = None
             return usr
     except Exception as e:
         return None
 
-@app.errorhandler(404)
-def error_404(e):
-    return render_template('404.html'), 404
-
 @app.route("/")
 def PaginaPrincipal():
 
     usr = check_usuario()
 
-    return render_template("index.html", user=usr, usrAdmin=len(Usuario().cojer_admins()), usuarios=len(Usuario().cojer_usuarios()))
+    return render_template("index.html", user=usr, usrAdmin=len(Usuario().cojer_admins()), usuarios=len(Usuario().cojer_usuarios()), docs=docs)
 
 def allowed_image(filename):
     
@@ -58,7 +77,6 @@ def Imagen():
     if request.method == "POST":
         
         image = request.files["imgInp"]
-
 
         if image.filename == "":
             return redirect(url_for("Cuenta"))
@@ -105,7 +123,7 @@ def Cuenta():
     if usr is None:
         return redirect(url_for('Registrarse'))
 
-    return render_template("account.html", user=usr)
+    return render_template("account.html", user=usr, docs=docs)
     
 @app.route("/account/delete")
 def EliminarCuenta():
@@ -119,30 +137,27 @@ def EliminarCuenta():
 
 @app.route("/login", methods=["GET", "POST"])
 def LogIn():
-
-    usr = check_usuario()
-    if usr is not None:
-        return redirect(url_for('PaginaPrincipal'))
-
-    if request.method == "POST":
     
+    if request.method == "POST":
+        
         mail = request.args.get("mail")
         psw = request.args.get("psw")
 
         usr = HacerLogin(mail, psw).ejecutar()
+        print(usr)
         if usr == False:
             return {}
         session['user_id'] = usr
         return Usuario(usr).cojer()
 
+    usr = check_usuario()
+    if usr is not None:
+        return redirect(url_for('PaginaPrincipal'))
+
     return render_template("login.html", key=env["CAPTCHA_WEB"])
 
 @app.route("/register", methods=["GET", "POST"])
 def Registrarse():
-
-    usr = check_usuario()
-    if usr is not None:
-        return redirect(url_for('PaginaPrincipal'))
 
     if request.method == "POST":
 
@@ -155,10 +170,38 @@ def Registrarse():
             return {}
         session['user_id'] = usr
 
-        enviarEmail(Usuario(usr).cojer(), "./src/templates/mails/recien.html", "Gracias por unirte")
         return {"estado": 200}
 
+    usr = check_usuario()
+    if usr is not None:
+        return redirect(url_for('PaginaPrincipal'))
+
     return render_template("register.html", key=env["CAPTCHA_WEB"])
+
+@app.route("/register/activation")
+def activarCuenta():
+
+    url = f"{url_main}register/activation/{Usuario(session['user_id']).cojer()['tokenEntrada']}"
+    print(url)
+    email = render_template("mails/codigo.html", url=url)
+    try:
+        enviarEmail(Usuario(session['user_id']).cojer(), email, "Codigo de verificacion", True)
+    except:
+        pass
+    return "Mira email"
+
+@app.route("/register/activation/<codigo>")
+def activarCuentaCodigo(codigo):
+
+    data = Usuario().activar(Usuario(session['user_id']).cojer()["mail"], codigo)
+    if data == False:
+        return redirect("/")
+
+    try:
+        enviarEmail(Usuario(session['user_id']).cojer(), "./src/templates/mails/recien.html", "Gracias por unirte")
+    except:
+        pass
+    return redirect(url_for("Cuenta"))
 
 def run():
     app.run()

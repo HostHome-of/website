@@ -30,9 +30,9 @@
                     <h4>Paginas</h4>
                     <ul>
                         {% if user %}
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Cuenta</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="/account">Cuenta</a></li>
                         {% else %}
-                           <li><i class="bx bx-chevron-right"></i> <a href="#">Entrar</a></li>
+                           <li><i class="bx bx-chevron-right"></i> <a href="/register">Entrar</a></li>
                         {% endif %}
                         <li><i class="bx bx-chevron-right"></i> <a href="#">Precios</a></li>
                         <li><i class="bx bx-chevron-right"></i> <a href="#">Documentacion</a></li>
@@ -40,26 +40,13 @@
                         <li><i class="bx bx-chevron-right"></i> <a href="#">Licencia</a></li>
                     </ul>
                 </div>
-
-                {% if user %}
-                    <div class="col-lg-4 col-md-6 footer-newsletter">
-                        <h4>Recibe notificaciones</h4>
-                        <p>Te llegaran notificaciones de tu hosts</p>
-                        <form action="" method="post">
-                            <input type="email" name="email" required><input type="submit" value="Subscribirte">
-                        </form>
-                    </div>
-                {% else %}
-                    <div class="col-lg-3 col-md-6 footer-links">
-                        <h4>Cuenta</h4>
-                        <ul>
-                            <li><i class="bx bx-chevron-right"></i> <a href="/login">Entrar</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="/register">Registrarse</a></li>
-                            <li><i class="bx bx-chevron-right"></i> <a href="#">Me olvide mi contraseña</a></li>
-                        </ul>
-                    </div>
-                {% endif %}
-
+                <div class="col-lg-4 col-md-6 footer-newsletter">
+                    <h4>Recibe notificaciones</h4>
+                    <p>Te llegaran notificaciones de tu hosts</p>
+                    <form action="" method="post">
+                        <input type="email" name="email" required><input type="submit" value="Subscribirte">
+                    </form>
+                </div>
             </div>
         </div>
     </div>
