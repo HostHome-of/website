@@ -53,5 +53,5 @@ function guardar() {
         method: 'POST'
     })
 
-    window.location.replace("/account")
+    window.location.replace("/dashboard")
 }

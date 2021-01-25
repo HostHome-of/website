@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | {{ user["nombre"] }}</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cuenta.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@0.11.3/dist/tippy.css">
+</head>
+
+<body style="display: flex; overflow: hidden; font-family: Avenir Next,Helvetica Neue,Arial,sans-serif!important; font-feature-settings: 'kern','liga','pnum'; -webkit-font-smoothing: antialiased;" >
+    <div style="position: relative;" class="sideNav">
+        <div class="logo">
+            <a href="/">
+                <img src="{{ url_for('static', filename='images/favicon.png') }}" alt="LOGO">
+            </a>
+        </div>
+        <ul>
+            <a href="/dashboard/host" class="tippy" title="Mira tus hosts" data-duration="300" data-arrow="false" data-animation="shift" data-position="right" id="HostUsuario"><i style="color: rgb(255, 173, 40); margin-right: 10px;"
+                    class="fas fa-cloud-upload-alt"></i> 0 </a>
+            <a href="/help" class="tippy" title="Recibir ayuda" data-duration="300" data-arrow="false" data-animation="shift" data-position="right" id="help"><i class="far fa-life-ring"></i></a>
+            <a href="/dashboard/edit" class="tippy" title="Editar perfil" data-duration="300" data-arrow="false" data-animation="shift" data-position="right" id="edit"><i
+                    class="fas fa-cog"></i></a>
+        </ul>
+    </div>
+    <div class="wrapper__navy">
+        <div class="navy">
+            <a href="/dashboard/edit" class="acc">
+                <div class="pfp">
+                    <img src="{{ user['pfp'] }}" alt="PFP">
+                </div>
+                <div class="info">
+                    <div class="nm">
+                        {{ user['nombre'] }}
+                    </div>
+                    <div class="mail">
+                        {{ user['mail'] }}
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="pagina">
+            <div class="index">
+                <div>
+                    <p class="titulo">Hola 👋</p>
+                    <p class="desc">Escoje una accion y empieza con el hosting.</p>
+                </div>
+                <ul>
+                    <a class="carta" href=""></a>
+                    <a class="carta" href=""></a>
+                    <a class="carta" href=""></a>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/tippy.js@0.11.3/dist/tippy.min.js"></script>
+    <script src="https://unpkg.com/tippy.js@0.11.3/dist/tippy.standalone.js"></script>
+    <script src="https://unpkg.com/tippy.js@0.11.3/dist/tippy.js"></script>
+
+    <script>
+        new Tippy('#edit')
+        new Tippy('#HostUsuario')
+        new Tippy('#help')
+    </script>
+
+</body>
+
+</html>

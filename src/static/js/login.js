@@ -20,7 +20,7 @@ async function enviar(e) {
     } else {
         Notiflix.Loading.Circle();
         setTimeout(function() {
-            window.location.replace("/account");
+            window.location.replace("/dashboard");
             return false;
         }, 3000);
     }

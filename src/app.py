@@ -26,6 +26,7 @@ def sw():
     return app.send_static_file('sw.js'), 200, {'Content-Type': 'text/javascript'}
 
 @app.route("/src/web/static/images/favicon.png")
+@app.route("/favicon.ico")
 def iconos():
     return app.send_static_file('images/favicon.png'), 200, {'Content-Type': 'image/png'}
 
@@ -114,27 +115,6 @@ def Actualizar():
     
     return redirect(url_for("Cuenta"))
 
-
-@app.route("/account")
-def Cuenta():
-
-    usr = check_usuario()
-
-    if usr is None:
-        return redirect(url_for('Registrarse'))
-
-    return render_template("account.html", user=usr, docs=docs)
-    
-@app.route("/account/delete")
-def EliminarCuenta():
-
-    usr = check_usuario()
-
-    if usr is not None:
-        Usuario(session['user_id']).eliminar()
-
-    return redirect(url_for('PaginaPrincipal'))
-
 @app.route("/login", methods=["GET", "POST"])
 def LogIn():
     
@@ -202,6 +182,28 @@ def activarCuentaCodigo(codigo):
     except:
         pass
     return redirect(url_for("Cuenta"))
+
+# Dashboard
+
+@app.route("/dashboard")
+def Cuenta():
+
+    usr = check_usuario()
+
+    if usr is None:
+        return redirect(url_for('Registrarse'))
+
+    return render_template("dashboard/index.html", user=usr, docs=docs)
+    
+@app.route("/dashboard/account/delete")
+def EliminarCuenta():
+
+    usr = check_usuario()
+
+    if usr is not None:
+        Usuario(session['user_id']).eliminar()
+
+    return redirect(url_for('PaginaPrincipal'))
 
 def run():
     app.run()
