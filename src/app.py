@@ -186,9 +186,9 @@ def activarCuenta():
     email = render_template("mails/codigo.html", url=url)
     try:
         enviarEmail(Usuario(session['user_id']).cojer(), email, "Codigo de verificacion", True)
-    except:
-        pass
-    return "Mira email"
+    except Exception as e:
+        print(e)
+    return render_template("checkmail.html")
 
 @app.route("/register/activation/<codigo>")
 def activarCuentaCodigo(codigo):

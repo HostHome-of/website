@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HostHome | Mira tu email</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <style>
+
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .pure-material-button-contained {
+            position: relative;
+            font-family: inherit;
+            font-weight: 700;
+            cursor: pointer;
+            transition-duration: 0.1s;
+            transition-property: background-color, color, border-color, opacity, box-shadow;
+            transition-timing-function: ease-out;
+            outline: none;
+            border: 1px solid transparent;
+            margin: 0px;
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 12px 0px;
+            padding: 8px 18px;
+            min-height: 48px;
+            background-color: rgb(221, 234, 255);
+            color: rgb(0, 85, 221);
+            border-radius: 4px;
+        }
+
+        .pure-material-button-contained:hover {
+            background-color: rgb(226, 237, 255);
+        }
+
+        .pure-material-button-contained:active {
+            background-color: rgb(199, 211, 230);
+        }
+
+        #mirarEmail {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        #mirarEmail img {
+            display: block;
+            margin: 0px auto;
+            height: 230px;
+            width: 293px;
+        }
+    </style>
+    <div id="mirarEmail">
+        <img src="https://images.typeform.com/images/rbhkamXXHAEi/image/default">
+        <h1 style="margin: 40px 0 0 0;">Hola! 👋</h1>
+        <p>Te hemos enviado un email para que lo verifiques.</p>
+        <div style="display: flex;">
+            <button class="pure-material-button-contained">Button</button>
+            <button class="pure-material-button-contained">Button</button>
+        </div>
+    </div>
+</body>
+
+</html>

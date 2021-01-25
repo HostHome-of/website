@@ -1,3 +1,22 @@
 {
-    
+    "maubg2007@gmail.com": {
+        "mail": "maubg2007@gmail.com",
+        "nombre": "Mau BG",
+        "psw": "awdawd",
+        "cuentas": [
+            "56277723"
+        ],
+        "pfp": "/src/web/static/pfp/default.png",
+        "entrada": "25/1/2021",
+        "abierto": true,
+        "primerNombre": "",
+        "segundoNombre": "",
+        "direccion": "",
+        "ciudad": "",
+        "pais": "",
+        "codigoPostal": "",
+        "info": "",
+        "autorizado": false,
+        "tokenEntrada": 4207
+    }
 }

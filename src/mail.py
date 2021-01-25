@@ -26,4 +26,7 @@ def enviarEmail(usuario, archivo, t, ver: bool = False):
 
         smtp.login(env["EMAIL"], env["EMAIL_PSW"])
 
-        smtp.sendmail(env["EMAIL"], usuario["mail"], message.as_string())
+        msg = message.as_string()
+
+        smtp.sendmail(env["EMAIL"], usuario["mail"], msg)
+        smtp.quit()
