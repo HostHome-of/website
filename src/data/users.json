@@ -1,22 +1,3 @@
 {
-    "maubg2007@gmail.com": {
-        "mail": "maubg2007@gmail.com",
-        "nombre": "Mau BG",
-        "psw": "awdawd",
-        "cuentas": [
-            "21293325",
-            "89369764"
-        ],
-        "pfp": "/src/web/static/pfp/default.png",
-        "entrada": "26/1/2021",
-        "abierto": true,
-        "primerNombre": "",
-        "segundoNombre": "",
-        "direccion": "",
-        "ciudad": "",
-        "pais": "",
-        "codigoPostal": "",
-        "info": "",
-        "autorizado": true
-    }
+    
 }

@@ -205,6 +205,19 @@ def editarCuenta():
 
     return render_template("dashboard/edit.html", user=usr, docs=docs)
 
+@app.route("/dashboard/edit/<string:pagina>")
+def editarCuentaConPagina(pagina):
+
+    usr = check_usuario()
+
+    if usr is None:
+        return redirect(url_for('Registrarse'))
+
+    try:
+        return render_template(f"dashboard/{pagina}.html", user=usr, docs=docs)
+    except:
+        abort(404)
+
 @app.route("/dashboard/account/delete")
 def EliminarCuenta():
 

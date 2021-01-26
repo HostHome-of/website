@@ -23,12 +23,12 @@
             <a href="/dashboard/host" class="tippy" title="Mira tus hosts" data-duration="300" data-arrow="false"
                 data-animation="shift" data-position="right" id="HostUsuario"><i
                     style="color: rgb(255, 173, 40); margin-right: 10px;" class="fas fa-cloud-upload-alt"></i> 0 </a>
-            <a href="/dashboard" class="tippy" title="Pagina principal" data-duration="300" data-arrow="false"
-                data-animation="shift" data-position="right" id="edit"><i class="fas fa-home"></i></a>
             <a href="/help" class="tippy" title="Recibir ayuda" data-duration="300" data-arrow="false"
                 data-animation="shift" data-position="right" id="help"><i class="far fa-life-ring"></i></a>
             <a href="/dashboard/edit" class="tippy" title="Editar perfil" data-duration="300" data-arrow="false"
                 data-animation="shift" data-position="right" id="edit"><i class="fas fa-cog"></i></a>
+            <a href="/dashboard" class="tippy" title="Pagina principal" data-duration="300" data-arrow="false"
+                data-animation="shift" data-position="right" id="edit"><i class="fas fa-home"></i></a>
         </ul>
     </div>
     <div class="wrapper__navy">
@@ -152,8 +152,8 @@
             .pagina .edit__uno .nav {
                 width: 300px;
                 position: fixed;
-                left: 15%;
-                top: 20%;
+                left: 10%;
+                top: 30%;
             }
 
             .pagina .edit__uno .nav ul a .fa-chevron-right {
@@ -163,11 +163,15 @@
             }
 
             .main {
-                position: absolute;
-                top: 20%;
-                right: 10%;
-                width: 50%;
+                width: 55%;
                 height: 50vh;
+                position: relative;
+                margin-right: 50px;
+            }
+
+            .pagina {
+                padding-left: 0 !important;
+                padding-right: 0 !important;
             }
         </style>
         <div class="navy">
@@ -194,7 +198,7 @@
                             <div style="display: flex;"><i class="far fa-user"></i> Mi cuenta</div> <i
                                 class="fas fa-chevron-right"></i>
                         </a>
-                        <a href="/dashboard/edi/mail">
+                        <a href="/dashboard/edit/mail">
                             <div style="display: flex;"><i class="far fa-envelope"></i> Preferencias de email</div> <i
                                 class="fas fa-chevron-right"></i>
                         </a>
@@ -208,8 +212,110 @@
                         </a>
                     </ul>
                 </div>
+
+
+
                 <div class="main">
-                    AWD
+                    <div class="edit__box">
+                        <div class="headder">
+                            <div class="logo">
+                                <i class="far fa-user"></i>
+                            </div>
+                            <dic class="info">
+                                <div class="title">
+                                    Sobre ti
+                                </div>
+                                <div class="desc">
+                                    Informacion general sobre ti.
+                                </div>
+                            </dic>
+                        </div>
+                        <div class="wrapper">
+                            <div id="form">
+                                <div class="input">
+                                    <label for="mail">
+                                        <p>
+                                            Email
+                                        </p>
+                                    </label>
+                                    <input placeholder="Email" id="mail" value="{{ user['mail'] }}" type="mail" disabled>
+                                </div>
+                                <div class="input">
+                                    <label for="nombre">
+                                        <p>
+                                            Nombre
+                                        </p>
+                                    </label>
+                                    <input placeholder="Nombre" id="nombre" value="{{ user['nombre'] }}" type="text">
+                                </div>
+                                <div class="input">
+                                    <label for="sn">
+                                        <p>
+                                            Apellidos
+                                        </p>
+                                    </label>
+                                    <input placeholder="Apellidos" value="{{ user['segundoNombre'] }}" id="sn" type="text">
+                                </div>
+                                <div class="input">
+                                    <label for="eddad">
+                                        <p>
+                                            Eddad
+                                        </p>
+                                    </label>
+                                    <input placeholder="404" id="eddad" type="number">
+                                </div>
+                                <button disabled class="submit">
+                                    Actualizar perfil
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="edit__box">
+                        <div class="headder">
+                            <div class="logo">
+                                <i class="fas fa-unlock-alt"></i>
+                            </div>
+                            <dic class="info">
+                                <div class="title">
+                                    Cambiar contraseña
+                                </div>
+                                <div class="desc">
+                                    Puedes cambiar tu contraseña actual aqui.
+                                </div>
+                            </dic>
+                        </div>
+                        <div class="wrapper">
+                            <div id="form">
+                                <div class="input">
+                                    <label for="password">
+                                        <p>
+                                            Contraseña actual
+                                        </p>
+                                    </label>
+                                    <input placeholder="Contraseña actual" id="password" type="password">
+                                </div>
+                                <div class="input">
+                                    <label for="npassword">
+                                        <p>
+                                            Nueva contraseña
+                                        </p>
+                                    </label>
+                                    <input placeholder="Nueva contraseña" id="npassword" type="password">
+                                </div>                                
+                                <div class="input">
+                                    <label for="rpassword">
+                                        <p>
+                                            Repetir nueva contraseña
+                                        </p>
+                                    </label>
+                                    <input placeholder="Repetir contraseña" id="rpassword" type="password">
+                                </div>
+                                <button disabled class="submit">
+                                    Cambiar contraseña
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -149,15 +149,7 @@ class CrearUsuario():
             usuarios[str(self.mail)]["entrada"] = f"{now.day}/{now.month}/{now.year}"
             usuarios[str(self.mail)]["abierto"] = True 
 
-            usuarios[str(self.mail)]["primerNombre"] = "" 
             usuarios[str(self.mail)]["segundoNombre"] = "" 
-
-            usuarios[str(self.mail)]["direccion"] = "" 
-            usuarios[str(self.mail)]["ciudad"] = "" 
-            usuarios[str(self.mail)]["pais"] = "" 
-            usuarios[str(self.mail)]["codigoPostal"] = "" 
-
-            usuarios[str(self.mail)]["info"] = ""
 
             usuarios[str(self.mail)]["autorizado"] = False
             usuarios[str(self.mail)]["tokenEntrada"] = random.randint(1000, 9000)
