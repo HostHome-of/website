@@ -977,6 +977,24 @@ textarea.form-control {
     margin: 0px 0px 30px;
 }
 
+.pagina .index ul .carta.uno i {
+    width: 60px;
+    background-color: rgb(244, 247, 255);
+    color: rgb(34, 92, 255);
+    position: relative;
+    height: 60px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin: 0px;
+    min-width: 0px;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    display: flex;
+    font-size: 30px;
+}
+
 /* FIN DASHBOARD */
 
 /* NAV */
