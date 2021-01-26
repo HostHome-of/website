@@ -124,7 +124,6 @@ def LogIn():
         psw = request.args.get("psw")
 
         usr = HacerLogin(mail, psw).ejecutar()
-        print(usr)
         if usr == False:
             return {}
         session['user_id'] = usr
@@ -180,7 +179,8 @@ def activarCuentaCodigo(codigo):
     try:
         enviarEmail(Usuario(session['user_id']).cojer(), "./src/templates/mails/recien.html", "Gracias por unirte")
     except:
-        pass
+        print(e)
+
     return redirect(url_for("Cuenta"))
 
 # Dashboard
@@ -195,6 +195,16 @@ def Cuenta():
 
     return render_template("dashboard/index.html", user=usr, docs=docs)
     
+@app.route("/dashboard/edit")
+def editarCuenta():
+
+    usr = check_usuario()
+
+    if usr is None:
+        return redirect(url_for('Registrarse'))
+
+    return render_template("dashboard/edit.html", user=usr, docs=docs)
+
 @app.route("/dashboard/account/delete")
 def EliminarCuenta():
 

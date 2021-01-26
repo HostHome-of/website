@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | {{ user["nombre"] }}</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cuenta.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@0.11.3/dist/tippy.css">
+</head>
+
+<body
+    style="display: flex; font-family: Avenir Next,Helvetica Neue,Arial,sans-serif!important; font-feature-settings: 'kern','liga','pnum'; -webkit-font-smoothing: antialiased;">
+    <div style="position: relative;" class="sideNav">
+        <div class="logo">
+            <a href="/">
+                <img src="{{ url_for('static', filename='images/favicon.png') }}" alt="LOGO">
+            </a>
+        </div>
+        <ul>
+            <a href="/dashboard/host" class="tippy" title="Mira tus hosts" data-duration="300" data-arrow="false"
+                data-animation="shift" data-position="right" id="HostUsuario"><i
+                    style="color: rgb(255, 173, 40); margin-right: 10px;" class="fas fa-cloud-upload-alt"></i> 0 </a>
+            <a href="/dashboard" class="tippy" title="Pagina principal" data-duration="300" data-arrow="false"
+                data-animation="shift" data-position="right" id="edit"><i class="fas fa-home"></i></a>
+            <a href="/help" class="tippy" title="Recibir ayuda" data-duration="300" data-arrow="false"
+                data-animation="shift" data-position="right" id="help"><i class="far fa-life-ring"></i></a>
+            <a href="/dashboard/edit" class="tippy" title="Editar perfil" data-duration="300" data-arrow="false"
+                data-animation="shift" data-position="right" id="edit"><i class="fas fa-cog"></i></a>
+        </ul>
+    </div>
+    <div class="wrapper__navy">
+        <style>
+            .navy {
+                display: flex;
+                justify-content: flex-start;
+            }
+
+            .navy p {
+                margin: 0;
+                font-size: 24px;
+                font-weight: 500;
+                color: rgb(54, 73, 98);
+                text-align: left;
+                line-height: 1.5;
+                text-transform: none;
+                overflow: unset;
+                white-space: unset;
+                text-overflow: unset;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+                flex: 0 1 auto;
+            }
+
+            .navy a {
+                font-size: 24px;
+                font-weight: 500;
+                color: rgb(154, 164, 176);
+                text-align: left;
+                line-height: 1.5;
+                text-transform: none;
+                overflow: unset;
+                white-space: unset;
+                text-overflow: unset;
+                border-bottom: none;
+                text-decoration: none;
+                cursor: pointer;
+                margin-left: 100px;
+            }
+
+
+            .pagina .edit__uno .nav ul {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                /* align-items: center; */
+                margin: 0;
+                padding: 35px 0;
+                background-color: transparent;
+                border-radius: 4px;
+                position: relative;
+                transition: all 0.55s cubic-bezier(0.25, 0.8, 0.25, 1) 0s;
+                cursor: pointer;
+                box-sizing: border-box;
+                margin: 0px;
+                min-width: 0px;
+                -webkit-box-pack: justify;
+                justify-content: space-between;
+                -webkit-box-align: center;
+                /* align-items: center; */
+                display: flex;
+                background: transparent;
+            }
+
+            .pagina .edit__uno .nav ul a {
+                box-sizing: border-box;
+                margin: 10px 0;
+                min-width: 0px;
+                padding: 15px 30px;
+                background-color: transparent;
+                font-size: 16px;
+                font-weight: 600;
+                color: rgb(154, 164, 176);
+                text-align: left;
+                line-height: 1.5;
+                text-transform: none;
+                overflow: unset;
+                white-space: unset;
+                text-overflow: unset;
+                display: flex;
+                align-items: center;
+                justify-content: inherit;
+                transition: .2s;
+                width: 350px;
+            }
+
+            .pagina .edit__uno .nav ul a:hover {
+                box-shadow: rgba(20, 26, 40, 0.15) 0px 7px 42px;
+                transform: scale(1.01);
+            }
+
+            .pagina .edit__uno .nav ul .active {
+                box-sizing: border-box;
+                margin: 0px 0px 15px;
+                min-width: 0px;
+                padding: 15px 30px;
+                background-color: rgb(255, 255, 255);
+                font-size: 16px;
+                font-weight: 600;
+                color: rgb(154, 164, 176);
+                text-align: left;
+                line-height: 1.5;
+                text-transform: none;
+                overflow: unset;
+                white-space: unset;
+                text-overflow: unset;
+                display: flex;
+                align-items: center;
+                box-shadow: rgb(235, 241, 255) 0px 16px 20px 0px;
+            }
+
+            .pagina .edit__uno .nav ul a i {
+                color: rgb(54, 73, 98);
+                font-size: 24px;
+                display: flex;
+                margin: 0px 15px 0px 0px;
+            }
+
+            .pagina .edit__uno .nav {
+                width: 300px;
+                position: fixed;
+                left: 15%;
+                top: 20%;
+            }
+
+            .pagina .edit__uno .nav ul a .fa-chevron-right {
+                margin-left: 10px;
+                color: rgb(54, 73, 98);
+                font-size: 20px;
+            }
+
+            .main {
+                position: absolute;
+                top: 20%;
+                right: 10%;
+                width: 50%;
+                height: 50vh;
+            }
+        </style>
+        <div class="navy">
+            <a href="/dashboard">
+                Cuenta
+            </a>
+            <i style="font-size: 15px; color: rgb(34, 92, 255); display: flex; box-sizing: border-box; margin: 0px 15px; min-width: 0px;"
+                class="fas fa-chevron-right"></i>
+            <p>
+                Configuracion
+            </p>
+        </div>
+        <div class="pagina">
+            <div class="edit__uno">
+                <div class="nav">
+                    <div style="display: flex;" class="info">
+                        <img style="border-radius: 50%;" src="{{ user['pfp'] }}" alt="pfp">
+                        <p
+                            style="display: flex; justify-content: center; align-items: center; margin: 0 0 0 10px; font-size: 16px; font-weight: 600; color: rgb(54, 73, 98); text-align: left; line-height: 1.5; text-transform: none; overflow: unset; white-space: unset; text-overflow: unset;">
+                            {{ user["nombre"] }}</p>
+                    </div>
+                    <ul>
+                        <a href="/dashboard/edit" class="active">
+                            <div style="display: flex;"><i class="far fa-user"></i> Mi cuenta</div> <i
+                                class="fas fa-chevron-right"></i>
+                        </a>
+                        <a href="/dashboard/edi/mail">
+                            <div style="display: flex;"><i class="far fa-envelope"></i> Preferencias de email</div> <i
+                                class="fas fa-chevron-right"></i>
+                        </a>
+                        <a href="/dashboard/edit/org">
+                            <div style="display: flex;"><i class="fas fa-sitemap"></i> Organizacion</div> <i
+                                class="fas fa-chevron-right"></i>
+                        </a>
+                        <a href="/dashboard/edit/avanzado">
+                            <div style="display: flex;"><i class="fas fa-exclamation-circle"></i> Avanzado</div> <i
+                                class="fas fa-chevron-right"></i>
+                        </a>
+                    </ul>
+                </div>
+                <div class="main">
+                    AWD
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/tippy.js@0.11.3/dist/tippy.min.js"></script>
+    <script src="https://unpkg.com/tippy.js@0.11.3/dist/tippy.standalone.js"></script>
+    <script src="https://unpkg.com/tippy.js@0.11.3/dist/tippy.js"></script>
+
+    <script>
+        new Tippy('#edit')
+        new Tippy('#HostUsuario')
+        new Tippy('#help')
+    </script>
+
+</body>
+
+</html>
