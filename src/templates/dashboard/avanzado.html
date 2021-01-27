@@ -9,6 +9,16 @@
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/cuenta.css') }}">
     <link rel="stylesheet" href="https://unpkg.com/tippy.js@0.11.3/dist/tippy.css">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+
+    <link rel="stylesheet" type="text/css"
+        href="{{ url_for('static', filename='vendor/notiflix/notiflix-2.7.0.min.css') }}">
 </head>
 
 <body
@@ -142,7 +152,7 @@
             }
 
             .pagina .edit__uno .nav ul a i {
-                color: rgb(54, 73, 98);
+                color: rgb(54, 73, 98) !important;
                 font-size: 24px;
                 display: flex;
                 margin: 0px 15px 0px 0px;
@@ -157,7 +167,7 @@
 
             .pagina .edit__uno .nav ul a .fa-chevron-right {
                 margin-left: 10px;
-                color: rgb(54, 73, 98) !important;
+                color: rgb(54, 73, 98);
                 font-size: 20px;
             }
 
@@ -166,7 +176,7 @@
                 height: 70vh;
                 position: relative;
                 margin-right: 150px;
-            
+
             }
 
             .pagina {
@@ -194,7 +204,7 @@
                             {{ user["nombre"] }}</p>
                     </div>
                     <ul>
-                        <a href="/dashboard/edit" class="active">
+                        <a href="/dashboard/edit">
                             <div style="display: flex;"><i class="far fa-user"></i> Mi cuenta</div> <i
                                 class="fas fa-chevron-right"></i>
                         </a>
@@ -206,7 +216,7 @@
                             <div style="display: flex;"><i class="fas fa-sitemap"></i> Organizacion</div> <i
                                 class="fas fa-chevron-right"></i>
                         </a>
-                        <a href="/dashboard/edit/avanzado">
+                        <a href="/dashboard/edit/avanzado" class="active">
                             <div style="display: flex;"><i class="fas fa-exclamation-circle"></i> Avanzado</div> <i
                                 class="fas fa-chevron-right"></i>
                         </a>
@@ -219,100 +229,67 @@
                     <div class="edit__box">
                         <div class="headder">
                             <div class="logo">
-                                <i class="far fa-user"></i>
+                                <i class="fas fa-exclamation-triangle"></i>
                             </div>
                             <div class="info">
                                 <div class="title">
-                                    Sobre ti
+                                    Avanzado
                                 </div>
                                 <div class="desc">
-                                    Informacion general sobre ti.
+                                    Configuracion avanzada.
                                 </div>
                             </div>
                         </div>
                         <div class="wrapper">
+                            <style>
+                                #form {
+                                    display: flex;
+                                    justify-content: space-between;
+                                }
+                            </style>
                             <div id="form">
-                                <div class="input">
-                                    <label for="mail">
-                                        <p>
-                                            Email
-                                        </p>
-                                    </label>
-                                    <input placeholder="Email" id="mail" value="{{ user['mail'] }}" type="mail" disabled>
+                                <style>
+                                    .btn1 {
+                                        background: #0fbcf9 !important;
+                                    }
+                                </style>
+                                <script>
+
+                                    function eliminar() {
+                                        Notiflix.Loading.Init({ svgColor: "#6493c6", });
+                                        Notiflix.Loading.Circle();
+                                        setTimeout(function () {
+                                            window.location.replace("/dashboard/account/delete");
+                                        }, 5000);
+                                    }
+
+                                    function destruir() {
+                                        Notiflix.Loading.Init({ svgColor: "#6493c6", });
+                                        Notiflix.Confirm.Show(
+                                        'Eliminar cuenta', 
+                                        '¿Estas seguro que quieres destruir la cuenta? no podras recuperarla', 
+                                        'Eliminar cuenta', 
+                                        'Mejor no', 
+                                        function() { 
+                                            Notiflix.Loading.Circle();
+                                            setTimeout(function () {
+                                                window.location.replace("/dashboard/account/destroy");
+                                            }, 5000);
+                                        },
+                                        function() {
+
+                                        } );
+                                    }
+
+                                </script>
+                                <div onclick="eliminar()"
+                                    class="btn1 mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                                    Cerrar sesion
                                 </div>
-                                <div class="input">
-                                    <label for="nombre">
-                                        <p>
-                                            Nombre
-                                        </p>
-                                    </label>
-                                    <input placeholder="Nombre" id="nombre" value="{{ user['nombre'] }}" type="text">
+                                <div onclick="destruir()"
+                                    class="btn2 mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                                    Eliminar cuenta
                                 </div>
-                                <div class="input">
-                                    <label for="sn">
-                                        <p>
-                                            Apellidos
-                                        </p>
-                                    </label>
-                                    <input placeholder="Apellidos" value="{{ user['segundoNombre'] }}" id="sn" type="text">
-                                </div>
-                                <div class="input">
-                                    <label for="eddad">
-                                        <p>
-                                            Eddad
-                                        </p>
-                                    </label>
-                                    <input placeholder="Eddad" id="eddad" type="number">
-                                </div>
-                                <button disabled class="submit">
-                                    Actualizar perfil
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="edit__box">
-                        <div class="headder">
-                            <div class="logo">
-                                <i class="fas fa-unlock-alt"></i>
-                            </div>
-                            <div class="info">
-                                <div class="title">
-                                    Cambiar contraseña
-                                </div>
-                                <div class="desc">
-                                    Puedes cambiar tu contraseña actual aqui.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="wrapper">
-                            <div id="form">
-                                <div class="input">
-                                    <label for="password">
-                                        <p>
-                                            Contraseña actual
-                                        </p>
-                                    </label>
-                                    <input placeholder="Contraseña actual" id="password" type="password">
-                                </div>
-                                <div class="input">
-                                    <label for="npassword">
-                                        <p>
-                                            Nueva contraseña
-                                        </p>
-                                    </label>
-                                    <input placeholder="Nueva contraseña" id="npassword" type="password">
-                                </div>                                
-                                <div class="input">
-                                    <label for="rpassword">
-                                        <p>
-                                            Repetir nueva contraseña
-                                        </p>
-                                    </label>
-                                    <input placeholder="Repetir contraseña" id="rpassword" type="password">
-                                </div>
-                                <button disabled class="submit">
-                                    Cambiar contraseña
-                                </button>
                             </div>
                         </div>
                     </div>
@@ -326,10 +303,12 @@
     <script src="https://unpkg.com/tippy.js@0.11.3/dist/tippy.js"></script>
 
     <script>
-        new Tippy('#edit')
-        new Tippy('#HostUsuario')
-        new Tippy('#help')
+                                            new Tippy('#edit')
+                                            new Tippy('#HostUsuario')
+                                            new Tippy('#help')
     </script>
+
+    <script src="{{ url_for('static', filename='vendor/notiflix/notiflix-aio-2.7.0.min.js') }}"></script>
 
 </body>
 

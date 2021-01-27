@@ -1319,6 +1319,7 @@ textarea.form-control {
     box-shadow: rgb(34, 92, 255) 0px 0px 0px inset;
     border-top: 1px solid rgb(215, 219, 224);
     display: flex;
+    color: #485460 !important;
 }
 
 .wrapper__navy {

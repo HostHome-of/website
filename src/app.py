@@ -45,7 +45,7 @@ def check_usuario():
         if session['user_id']:
             usr = Usuario(session['user_id']).cojer()
             if usr["autorizado"] == False:
-                Usuario().destruir(Usuario(session['user_id']).cojer()["mail"])
+                Usuario().petar(Usuario(session['user_id']).cojer()["mail"])
                 return None
             if not usr["abierto"] == True: 
                 usr = None
@@ -58,7 +58,10 @@ def PaginaPrincipal():
 
     usr = check_usuario()
 
-    return render_template("index.html", user=usr, usrAdmin=len(Usuario().cojer_admins()), usuarios=len(Usuario().cojer_usuarios()), docs=docs)
+    if usr and request.args.get("r", None) == "true" or not usr:
+        return render_template("index.html", user=usr, usrAdmin=len(Usuario().cojer_admins()), usuarios=len(Usuario().cojer_usuarios()), docs=docs)
+
+    return redirect(url_for("Cuenta"))
 
 def allowed_image(filename):
     
@@ -160,7 +163,10 @@ def Registrarse():
 @app.route("/register/activation")
 def activarCuenta():
 
-    url = f"{url_main}register/activation/{Usuario(session['user_id']).cojer()['tokenEntrada']}"
+    try:
+        url = f"{url_main}register/activation/{Usuario(session['user_id']).cojer()['tokenEntrada']}"
+    except:
+        return redirect(url_for("Registrarse"))
     print(url)
     email = render_template("mails/codigo.html", url=url)
     try:
@@ -178,7 +184,7 @@ def activarCuentaCodigo(codigo):
 
     try:
         enviarEmail(Usuario(session['user_id']).cojer(), "./src/templates/mails/recien.html", "Gracias por unirte")
-    except:
+    except Exception as e:
         print(e)
 
     return redirect(url_for("Cuenta"))
@@ -225,6 +231,16 @@ def EliminarCuenta():
 
     if usr is not None:
         Usuario(session['user_id']).eliminar()
+
+    return redirect(url_for('PaginaPrincipal'))
+
+@app.route("/dashboard/account/destroy")
+def DestruirCuenta():
+
+    usr = check_usuario()
+
+    if usr is not None:
+        Usuario(session['user_id']).destruir()
 
     return redirect(url_for('PaginaPrincipal'))
 

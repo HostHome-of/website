@@ -35,8 +35,6 @@ class Usuario():
 
     def activar(self, mail, codigo):
         usuarios = abrir()
-        print(usuarios[mail]["tokenEntrada"])
-        print(codigo)
         if int(usuarios[mail]["tokenEntrada"]) == int(codigo): # Bien
             del usuarios[mail]["tokenEntrada"]
             usuarios[mail]["autorizado"] = True
@@ -44,11 +42,6 @@ class Usuario():
             return True
         else: # Mal
             return False
-
-    def destruir(self, mail):
-        usuarios = abrir()
-        del usuarios[mail]
-        cerrar(usuarios)
 
     def cojer(self):
         usuarios = abrir()
@@ -68,6 +61,21 @@ class Usuario():
                     usuarios[usr]["abierto"] = False
                     # del usuarios[usr]["cuentas"][self.tk]
                     cerrar(usuarios)
+
+    def petar(self, mail):
+        usrs = abrir()
+        del usrs[mail]
+        cerrar(usrs)
+
+    def destruir(self):
+        usuarios = abrir()
+
+        for usr in usuarios:
+            for token in usuarios[usr]["cuentas"]:
+                if self.tk == token:
+                    del usuarios[usr]
+                    cerrar(usuarios) 
+                    return
 
     def cojer_admins(self):
         data = requests.get("https://raw.githubusercontent.com/HostHome-of/config/main/config.json").json()
@@ -127,9 +135,6 @@ class CrearUsuario():
             token_valido = True
 
         return token
-
-    def autorizar(self):
-        pass
 
 
     def crear(self):

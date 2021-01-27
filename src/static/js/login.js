@@ -11,9 +11,8 @@ async function enviar(e) {
     });
 
     if (no_es_valido == true) {
-        Notiflix.Report.Failure('Un error',
-                                'Es posible que una de estas dos cosas esten mal <br /><strong>Email</strong>, <strong>Contraseña</strong>',
-                                'Aceptar');
+        Notiflix.Notify.Failure('Email o contraseña no validos');
+
         setTimeout(function() {
             return false;
         }, 5000);

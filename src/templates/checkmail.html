@@ -6,43 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HostHome | Mira tu email</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 
-<body>
+<body style="overflow: hidden;">
     <style>
-
         * {
             padding: 0;
             margin: 0;
             font-family: 'Poppins', sans-serif;
-        }
-
-        .pure-material-button-contained {
-            position: relative;
-            font-family: inherit;
-            font-weight: 700;
-            cursor: pointer;
-            transition-duration: 0.1s;
-            transition-property: background-color, color, border-color, opacity, box-shadow;
-            transition-timing-function: ease-out;
-            outline: none;
-            border: 1px solid transparent;
-            margin: 0px;
-            box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 12px 0px;
-            padding: 8px 18px;
-            min-height: 48px;
-            background-color: rgb(221, 234, 255);
-            color: rgb(0, 85, 221);
-            border-radius: 4px;
-        }
-
-        .pure-material-button-contained:hover {
-            background-color: rgb(226, 237, 255);
-        }
-
-        .pure-material-button-contained:active {
-            background-color: rgb(199, 211, 230);
         }
 
         #mirarEmail {
@@ -52,22 +27,43 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
+            transform: scale(1.1);
         }
 
         #mirarEmail img {
             display: block;
             margin: 0px auto;
-            height: 230px;
-            width: 293px;
+            /* height: 230px;
+            width: 293px; */
+        }
+
+        .mdl-button--accent.mdl-button--accent.mdl-button--raised, .mdl-button--accent.mdl-button--accent.mdl-button--fab {
+            background-color: #377dff;
+            transform: scale(1.1);
+        }
+
+        .btn2 {
+            background: #fff !important;
+            color: #377dff !important;
+            border: 1px solid #377dff !important;
         }
     </style>
     <div id="mirarEmail">
-        <img src="https://images.typeform.com/images/rbhkamXXHAEi/image/default">
-        <h1 style="margin: 40px 0 0 0;">Hola! 👋</h1>
+        <img src="https://img.icons8.com/fluent/96/000000/important-mail.png">
+        <h1 style="margin: 40px 0 0 0;">Verifica tu email</h1>
         <p>Te hemos enviado un email para que lo verifiques.</p>
-        <div style="display: flex;">
-            <button class="pure-material-button-contained">Button</button>
-            <button class="pure-material-button-contained">Button</button>
+        <div style="width: 500px; justify-content: space-around; display: flex;">
+            <script>
+                function reenviar() {
+                    window.location.replace("/register/activation");
+                }
+            </script>
+            <button onclick="reenviar()" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                Reenviar email
+            </button>
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent btn2">
+                Contactanos
+            </button>
         </div>
     </div>
 </body>
