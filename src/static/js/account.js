@@ -1,10 +1,10 @@
-$("#imgInp").change(function(){
-    $("#formImg").submit();
-});
+// $("#imgInp").change(function(){
+//     $("#formImg").submit();
+// });
 
 function guardar() {
-    const nombre = document.getElementById("input-username").value;
-    const email = document.getElementById("input-email").value;
+    const nombre = document.getElementById("nombre").value;
+    const email = document.getElementById("mail").value;
 
     if (nombre == "" || email == "") {
         Notiflix.Notify.Failure('Email o nombre no pueden ser vacios');
@@ -13,45 +13,84 @@ function guardar() {
 
     let url = "/update?mail="+email+"&nm="+nombre
 
-    const pm = document.getElementById("input-first-name").value;
+    const sn = document.getElementById("sn").value;
 
-    if (pm != "") {
-        url += "&pm="+pm
-    }
-
-    const ap = document.getElementById("input-last-name").value;
-    if (ap != "") {
-        url += "&ap="+ap
+    if (sn != "") {
+        url += "&segundo="+sn
     }
 
-    const dir = document.getElementById("input-address").value;
-    if (dir != "") {
-        url += "&dir="+dir
-    }
+    const eddad = document.getElementById("eddad").value;
 
-    const ci = document.getElementById("input-city").value;
-    if (ci != "") {
-        url += "&ci="+ci
-    }
-    
-    const co = document.getElementById("input-country").value;
-    if (co != "") {
-        url += "&pa="+co
-    }
-    
-    const po = document.getElementById("input-postal-code").value;
-    if (po != "") {
-        url += "&co="+ po
-    }
-
-    const bio = document.getElementById("bio").value;
-    if (bio != "") {
-        url += "&bio="+bio
+    if (eddad != "") {
+        url += "&edad="+eddad
     }
 
     fetch(url, {
         method: 'POST'
     })
 
-    window.location.replace("/dashboard")
+    window.location.replace("/dashboard/edit")
+}
+
+try {
+    var eddadAnterior = document.getElementById("eddad").value;
+    var apellidoAnterior = document.getElementById("sn").value;
+    var nombreAnterior = document.getElementById("nombre").value;
+} catch (e) {
+
+}
+
+function cambiarBtn() {
+    let btn = document.getElementById("btnSubmity");
+
+    if (document.getElementById("eddad").value != eddadAnterior || document.getElementById("sn").value != apellidoAnterior || document.getElementById("nombre").value != nombreAnterior) {
+        btn.disabled = false;
+    } else {
+        btn.disabled = true;
+    }
+}
+
+function upadeEmail(mail, nombre) {
+    checky1 = !document.getElementsByName("checky1")[0].checked;
+    checky2 = !document.getElementsByName("checky2")[0].checked;
+    checky3 = !document.getElementsByName("checky3")[0].checked;
+    checky4 = !document.getElementsByName("checky4")[0].checked;
+
+    console.log(mail)
+    console.log(nombre)
+
+    fetch("/update?email=true&mail="+mail+"&nm="+nombre+"&uno="+checky1+"&dos="+checky2+"&tres="+checky3+"&cuatro="+checky4, {
+        method: "POST"
+    })
+
+    Notiflix.Notify.Success('Cambios guardados');
+}
+
+function updatePasswordCheck() {
+    const psw = document.getElementById("password").value;
+    const npsw = document.getElementById("npassword").value;
+    const rpsw = document.getElementById("rpassword").value;
+
+    const btn = document.getElementById("spassword");
+
+    if (psw != "" && npsw != "" && rpsw != "") {
+        if (npsw == rpsw) {
+            btn.disabled = false;
+        } else {
+            btn.disabled = true;
+        }
+    } else {
+        btn.disabled = true;
+    }
+}
+
+function updatePassword() {
+    const psw = document.getElementById("password").value;
+    const npsw = document.getElementById("npassword").value;
+
+    if (psw != npsw) {
+
+    } else {
+        Notiflix.Notify.Failure('La contraseña nueva es igual a la anterior que has introducido');
+    }
 }

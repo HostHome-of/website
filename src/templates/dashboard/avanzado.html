@@ -274,22 +274,13 @@
 
                                     function destruir() {
                                         Notiflix.Loading.Init({ svgColor: "#6493c6", });
-                                        Notiflix.Confirm.Show(
-                                        'Eliminar cuenta', 
-                                        '¿Estas seguro que quieres destruir la cuenta? no podras recuperarla', 
-                                        'Eliminar cuenta', 
-                                        'Mejor no', 
-                                        function() { 
+                                        if (confirm("¿Estas seguro? No volveras a recuperarla")) {
                                             Notiflix.Loading.Circle();
                                             setTimeout(function () {
                                                 window.location.replace("/dashboard/account/destroy");
                                             }, 5000);
-                                        },
-                                        function() {
-
-                                        } );
+                                        }
                                     }
-
                                 </script>
                                 <div onclick="eliminar()"
                                     class="btn1 mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">

@@ -91,24 +91,28 @@ class Usuario():
         usrs[mail]["pfp"] = f"/src/web/static/pfp/{nm}"
         cerrar(usrs)
 
-    def actualizar(self, mail, nombre, pm, ap, direccion, ci, pa, co, bio):
+    def actualizar(self, mail, nombre, ap, eddad):
         usuarios = abrir()
 
+        usuarios[str(mail)]["segundoNombre"] = ap
         usuarios[str(mail)]["nombre"] = nombre
 
-        usuarios[str(mail)]["primerNombre"] = pm
-        usuarios[str(mail)]["segundoNombre"] = ap
-
-        usuarios[str(mail)]["direccion"] = direccion
-        usuarios[str(mail)]["ciudad"] = ci 
-        usuarios[str(mail)]["pais"] = pa
-        usuarios[str(mail)]["codigoPostal"] = co
-
-        usuarios[str(mail)]["info"] = bio
+        usuarios[str(mail)]["edad"] = eddad
 
         cerrar(usuarios)
 
+    def actualizarPreferencias(self, mail, uno, dos, tres, cuatro):
+        uno     = bool(uno)
+        dos     = bool(dos)
+        tres    = bool(tres)
+        cuatro  = bool(cuatro)
 
+        usuarios = abrir()
+        usuarios[str(mail)]["emails"]["uno"]    = uno
+        usuarios[str(mail)]["emails"]["dos"]    = dos
+        usuarios[str(mail)]["emails"]["tres"]   = tres
+        usuarios[str(mail)]["emails"]["cuatro"] = cuatro
+        cerrar(usuarios)
 
 class CrearUsuario():
     def __init__(self, nombre: str=None, psw: str=None, mail: str=None):
@@ -155,9 +159,16 @@ class CrearUsuario():
             usuarios[str(self.mail)]["abierto"] = True 
 
             usuarios[str(self.mail)]["segundoNombre"] = "" 
+            usuarios[str(self.mail)]["edad"] = "" 
 
             usuarios[str(self.mail)]["autorizado"] = False
             usuarios[str(self.mail)]["tokenEntrada"] = random.randint(1000, 9000)
+
+            usuarios[str(self.mail)]["emails"]           = {}
+            usuarios[str(self.mail)]["emails"]["uno"]    = True
+            usuarios[str(self.mail)]["emails"]["dos"]    = False
+            usuarios[str(self.mail)]["emails"]["tres"]   = False
+            usuarios[str(self.mail)]["emails"]["cuatro"] = True
 
             cerrar(usuarios)
             return str(tkN)

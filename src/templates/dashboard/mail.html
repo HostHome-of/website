@@ -9,6 +9,11 @@
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/cuenta.css') }}">
     <link rel="stylesheet" href="https://unpkg.com/tippy.js@0.11.3/dist/tippy.css">
+
+    <link rel="stylesheet" type="text/css"
+        href="{{ url_for('static', filename='vendor/notiflix/notiflix-2.7.0.min.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 </head>
 
 <body
@@ -229,14 +234,14 @@
                             <div class="logo">
                                 <i class="far fa-envelope"></i>
                             </div>
-                            <dic class="info">
+                            <div class="info">
                                 <div class="title">
                                     Preferencias de email
                                 </div>
                                 <div class="desc">
                                     Escoje los emails que quieres recibir de nosotros
                                 </div>
-                            </dic>
+                            </div>
                         </div>
                         <div class="wrapper">
                             <style>
@@ -398,7 +403,41 @@
                                             $(this).val(deger);
                                         }
                                     });
+                                    $("#sec2").on('change', function () {
+                                        if ($(this).is(':checked')) {
+                                            deger = "Hayır";
+                                            $(this).val(deger);
+                                        }
+                                        else {
+                                            deger = "Evet";
+                                            $(this).val(deger);
+                                        }
+                                    });
+                                    $("#sec3").on('change', function () {
+                                        if ($(this).is(':checked')) {
+                                            deger = "Hayır";
+                                            $(this).val(deger);
+                                        }
+                                        else {
+                                            deger = "Evet";
+                                            $(this).val(deger);
+                                        }
+                                    });
+                                    $("#sec4").on('change', function () {
+                                        if ($(this).is(':checked')) {
+                                            deger = "Hayır";
+                                            $(this).val(deger);
+                                        }
+                                        else {
+                                            deger = "Evet";
+                                            $(this).val(deger);
+                                        }
+                                    });
+
                                 });
+                            </script>
+                            <script>
+                                const nombre_y_mail = ["{{ user['mail'] }}", "{{ user['nombre'] }}"]
                             </script>
                             <div id="form">
                                 <div class="input">
@@ -411,7 +450,13 @@
                                         </div>
                                     </div>
                                     <div class="button radius" id="toggle-button">
-                                        <input type="checkbox" class="checkbox" id="sec" value="Evet">
+                                        {% if user["emails"]["uno"] %}
+                                            <input onclick="upadeEmail(nombre_y_mail[0], nombre_y_mail[1])"
+                                                type="checkbox" class="checkbox" name="checky1" id="sec" value="Evet">
+                                        {% else %}
+                                            <input onclick="upadeEmail(nombre_y_mail[0], nombre_y_mail[1])" checked type="checkbox"
+                                                class="checkbox" name="checky1" id="sec" value="Evet">
+                                        {% endif %}
                                         <div class="lump"></div>
                                         <div class="layer"></div>
                                     </div>
@@ -426,7 +471,13 @@
                                         </div>
                                     </div>
                                     <div class="button radius" id="toggle-button">
-                                        <input checked type="checkbox" class="checkbox" id="sec" value="Evet">
+                                        {% if user["emails"]["dos"] %}
+                                            <input onclick="upadeEmail(nombre_y_mail[0], nombre_y_mail[1])"
+                                                type="checkbox" class="checkbox" name="checky2" id="sec2" value="Evet">
+                                        {% else %}
+                                            <input onclick="upadeEmail(nombre_y_mail[0], nombre_y_mail[1])" checked type="checkbox"
+                                                class="checkbox" name="checky2" id="sec2" value="Evet">
+                                        {% endif %}
                                         <div class="lump"></div>
                                         <div class="layer"></div>
                                     </div>
@@ -441,7 +492,13 @@
                                         </div>
                                     </div>
                                     <div class="button radius" id="toggle-button">
-                                        <input checked type="checkbox" class="checkbox" id="sec" value="Evet">
+                                        {% if user["emails"]["tres"] %}
+                                            <input onclick="upadeEmail(nombre_y_mail[0], nombre_y_mail[1])"
+                                                type="checkbox" class="checkbox" name="checky3" id="sec3" value="Evet">
+                                        {% else %}
+                                            <input onclick="upadeEmail(nombre_y_mail[0], nombre_y_mail[1])" checked type="checkbox"
+                                                class="checkbox" name="checky3" id="sec3" value="Evet">
+                                        {% endif %}
                                         <div class="lump"></div>
                                         <div class="layer"></div>
                                     </div>
@@ -456,7 +513,13 @@
                                         </div>
                                     </div>
                                     <div class="button radius" id="toggle-button">
-                                        <input type="checkbox" class="checkbox" id="sec" value="Evet">
+                                        {% if user["emails"]["cuatro"] %}
+                                            <input onclick="upadeEmail(nombre_y_mail[0], nombre_y_mail[1])"
+                                            type="checkbox" class="checkbox" name="checky4" id="sec4" value="Evet">
+                                        {% else %}
+                                            <input onclick="upadeEmail(nombre_y_mail[0], nombre_y_mail[1])" checked type="checkbox"
+                                            class="checkbox" name="checky4" id="sec4" value="Evet">
+                                        {% endif %}
                                         <div class="lump"></div>
                                         <div class="layer"></div>
                                     </div>
@@ -473,7 +536,9 @@
     <script src="https://unpkg.com/tippy.js@0.11.3/dist/tippy.standalone.js"></script>
     <script src="https://unpkg.com/tippy.js@0.11.3/dist/tippy.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="{{ url_for('static', filename='/js/account.js') }}"></script>
+    <script src="{{ url_for('static', filename='vendor/notiflix/notiflix-aio-2.7.0.min.js') }}"></script>
 
     <script>
         new Tippy('#edit')

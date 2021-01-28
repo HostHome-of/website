@@ -97,23 +97,36 @@ def Actualizar():
 
     if request.method == "POST":
 
+        email = request.args.get("email", None)
+
         mail = request.args.get("mail", None)
         nombre = request.args.get("nm", None)
 
         if mail is None or nombre is None:
             abort(404)
 
-        pm = request.args.get("pm", "")
-        ap = request.args.get("ap", "")
+        if email is not None:
+            uno = request.args.get("uno", "false")
+            dos = request.args.get("dos", "false")
+            tres = request.args.get("tres", "false")
+            cuatro = request.args.get("cuatro", "false")
+            
+            uno    = uno    if uno    != "false" else ""
+            dos    = dos    if dos    != "false" else ""
+            tres   = tres   if tres   != "false" else ""
+            cuatro = cuatro if cuatro != "false" else ""
 
-        direccion = request.args.get("dir", "")
-        ci = request.args.get("ci", "")
-        pa = request.args.get("pa", "")
-        co = request.args.get("co", "")
+            print(uno)
+            print(dos)
+            print(tres)
+            print(cuatro)
 
-        bio = request.args.get("bio", "")
+            Usuario().actualizarPreferencias(mail, uno, dos, tres, cuatro)
 
-        Usuario().actualizar(mail, nombre, pm, ap, direccion, ci, pa, co, bio)
+        segundo = request.args.get("segundo", "")
+        edad = request.args.get("edad", "") 
+
+        Usuario().actualizar(mail, nombre, segundo, edad)
         return {}
     
     return redirect(url_for("Cuenta"))

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es-ES">
 
 <head>
     <meta charset="UTF-8">
@@ -9,6 +9,8 @@
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/cuenta.css') }}">
     <link rel="stylesheet" href="https://unpkg.com/tippy.js@0.11.3/dist/tippy.css">
+    <link rel="stylesheet" type="text/css"
+        href="{{ url_for('static', filename='vendor/notiflix/notiflix-2.7.0.min.css') }}">
 </head>
 
 <body
@@ -255,7 +257,7 @@
                                             Nombre
                                         </p>
                                     </label>
-                                    <input placeholder="Nombre" id="nombre" value="{{ user['nombre'] }}" type="text">
+                                    <input oninput="cambiarBtn()" placeholder="Nombre" id="nombre" value="{{ user['nombre'] }}" type="text">
                                 </div>
                                 <div class="input">
                                     <label for="sn">
@@ -263,7 +265,7 @@
                                             Apellidos
                                         </p>
                                     </label>
-                                    <input placeholder="Apellidos" value="{{ user['segundoNombre'] }}" id="sn" type="text">
+                                    <input oninput="cambiarBtn()" placeholder="Apellidos" value="{{ user['segundoNombre'] }}" id="sn" type="text">
                                 </div>
                                 <div class="input">
                                     <label for="eddad">
@@ -271,9 +273,9 @@
                                             Eddad
                                         </p>
                                     </label>
-                                    <input placeholder="Eddad" id="eddad" type="number">
+                                    <input oninput="cambiarBtn()" placeholder="Eddad" value="{{ user['edad'] }}" id="eddad" type="number">
                                 </div>
-                                <button disabled class="submit">
+                                <button disabled id="btnSubmity" onclick="guardar()" class="submit">
                                     Actualizar perfil
                                 </button>
                             </div>
@@ -301,7 +303,7 @@
                                             Contraseña actual
                                         </p>
                                     </label>
-                                    <input placeholder="Contraseña actual" id="password" type="password">
+                                    <input oninput="updatePasswordCheck()" placeholder="Contraseña actual" id="password" type="password">
                                 </div>
                                 <div class="input">
                                     <label for="npassword">
@@ -309,7 +311,7 @@
                                             Nueva contraseña
                                         </p>
                                     </label>
-                                    <input placeholder="Nueva contraseña" id="npassword" type="password">
+                                    <input oninput="updatePasswordCheck()" placeholder="Nueva contraseña" id="npassword" type="password">
                                 </div>                                
                                 <div class="input">
                                     <label for="rpassword">
@@ -317,9 +319,9 @@
                                             Repetir nueva contraseña
                                         </p>
                                     </label>
-                                    <input placeholder="Repetir contraseña" id="rpassword" type="password">
+                                    <input oninput="updatePasswordCheck()" placeholder="Repetir contraseña" id="rpassword" type="password">
                                 </div>
-                                <button disabled class="submit">
+                                <button onclick="updatePassword()" disabled class="submit" id="spassword">
                                     Cambiar contraseña
                                 </button>
                             </div>
@@ -340,6 +342,9 @@
         new Tippy('#help')
     </script>
 
+    <script src="{{ url_for('static', filename='vendor/notiflix/notiflix-aio-2.7.0.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='/js/account.js') }}"></script>
+    
 </body>
 
 </html>

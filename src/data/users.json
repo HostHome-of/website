@@ -1,1 +1,22 @@
-{}
+{
+    "maubg2007@gmail.com": {
+        "mail": "maubg2007@gmail.com",
+        "nombre": "Mau",
+        "psw": "awdawd",
+        "cuentas": [
+            "46418707"
+        ],
+        "pfp": "/src/web/static/pfp/default.png",
+        "entrada": "28/1/2021",
+        "abierto": true,
+        "segundoNombre": "BG",
+        "edad": "23",
+        "autorizado": true,
+        "emails": {
+            "uno": false,
+            "dos": false,
+            "tres": false,
+            "cuatro": false
+        }
+    }
+}
