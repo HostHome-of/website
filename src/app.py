@@ -230,7 +230,7 @@ def editarCuentaConPagina(pagina):
         return redirect(url_for('Registrarse'))
 
     try:
-        return render_template(f"dashboard/{pagina}.html", user=usr, docs=docs, pfp=usr["pfp"])
+        return render_template(f"dashboard/{pagina}.html", user=usr, docs=docs, pfp=usr["pfp"], key=env["CAPTCHA_WEB"])
     except:
         abort(404)
 

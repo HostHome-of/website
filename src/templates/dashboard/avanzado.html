@@ -19,6 +19,8 @@
 
     <link rel="stylesheet" type="text/css"
         href="{{ url_for('static', filename='vendor/notiflix/notiflix-2.7.0.min.css') }}">
+
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body
@@ -200,8 +202,24 @@
             <i style="font-size: 15px; color: rgb(34, 92, 255); display: flex; box-sizing: border-box; margin: 0px 15px; min-width: 0px;"
                 class="fas fa-chevron-right"></i>
             <p>
-                Configuracion
+                Avanzado
             </p>
+        </div>
+        <style>
+            #popup {
+                position: absolute;
+                top: 5%;
+                left: 40%;
+                background: #fff;
+                border-radius: 5px;
+                border: 1px solid #ddd;
+                padding: 20px;
+                z-index: 99999;
+                display: none;
+            }
+        </style>
+        <div id="popup">
+            <div class="g-recaptcha" data-callback="noEsRobotito" data-sitekey="{{ key }}"></div>
         </div>
         <div class="pagina">
             <div class="edit__uno">
@@ -274,14 +292,20 @@
                                         }, 5000);
                                     }
 
-                                    function destruir() {
-                                        Notiflix.Loading.Init({ svgColor: "#6493c6", });
-                                        if (confirm("¿Estas seguro? No volveras a recuperarla")) {
-                                            Notiflix.Loading.Circle();
-                                            setTimeout(function () {
-                                                window.location.replace("/dashboard/account/destroy");
-                                            }, 5000);
+                                    function destruir() {   
+                                        if (confirm("¿Estas seguro? No recuperaras tu cuenta.")) {
+                                            document.getElementById("popup").style.display = "block"
                                         }
+                                    }
+
+                                    function noEsRobotito() {
+                                        document.getElementById("popup").style.display = "none"
+                                        Notiflix.Loading.Init({ svgColor: "#6493c6", });
+
+                                        Notiflix.Loading.Circle();
+                                        setTimeout(function () {
+                                            window.location.replace("/dashboard/account/destroy");
+                                        }, 5000);                
                                     }
                                 </script>
                                 <div onclick="eliminar()"
@@ -305,9 +329,9 @@
     <script src="https://unpkg.com/tippy.js@0.11.3/dist/tippy.js"></script>
 
     <script>
-                                            new Tippy('#edit')
-                                            new Tippy('#HostUsuario')
-                                            new Tippy('#help')
+        new Tippy('#edit')
+        new Tippy('#HostUsuario')
+        new Tippy('#help')
     </script>
 
     <script src="{{ url_for('static', filename='vendor/notiflix/notiflix-aio-2.7.0.min.js') }}"></script>
