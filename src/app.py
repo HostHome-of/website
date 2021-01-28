@@ -221,6 +221,18 @@ def editarCuenta():
 
     return render_template("dashboard/edit.html", user=usr, docs=docs)
 
+@app.route("/dashboard/host")
+def mirarHosts():
+
+    usr = check_usuario()
+
+    if usr is None:
+        return redirect(url_for('Registrarse'))
+    
+    hosts = {}
+
+    return render_template("projectos/hosts.html", user=usr, docs=docs, hosts=hosts)
+
 @app.route("/dashboard/edit/<string:pagina>")
 def editarCuentaConPagina(pagina):
 
