@@ -29,7 +29,7 @@ function guardar() {
         method: 'POST'
     })
 
-    window.location.replace("/dashboard/edit")
+    window.location.reload()
 }
 
 try {

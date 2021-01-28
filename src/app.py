@@ -81,16 +81,17 @@ def Imagen():
     if request.method == "POST":
         
         image = request.files["imgInp"]
+        print(request.files)
 
         if image.filename == "":
-            return redirect(url_for("Cuenta"))
+            return redirect("/dashboard/edit/imagen")
 
         if allowed_image(image.filename):
             filename = secure_filename(image.filename)
             image.save(os.path.join("./src/static/pfp/", filename))
             Usuario().imagen(session['user_id'], filename)
 
-    return redirect(url_for("Cuenta"))
+    return redirect("/dashboard/edit/imagen")
 
 @app.route("/update", methods=["GET", "POST"])
 def Actualizar():
@@ -116,12 +117,8 @@ def Actualizar():
             tres   = tres   if tres   != "false" else ""
             cuatro = cuatro if cuatro != "false" else ""
 
-            print(uno)
-            print(dos)
-            print(tres)
-            print(cuatro)
-
             Usuario().actualizarPreferencias(mail, uno, dos, tres, cuatro)
+            return {"estado": 200}
 
         segundo = request.args.get("segundo", "")
         edad = request.args.get("edad", "") 
@@ -233,7 +230,7 @@ def editarCuentaConPagina(pagina):
         return redirect(url_for('Registrarse'))
 
     try:
-        return render_template(f"dashboard/{pagina}.html", user=usr, docs=docs)
+        return render_template(f"dashboard/{pagina}.html", user=usr, docs=docs, pfp=usr["pfp"])
     except:
         abort(404)
 
