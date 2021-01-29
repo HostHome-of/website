@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es-ES">
 
 <head>
     <meta charset="UTF-8">
@@ -20,6 +20,11 @@
 
 <body
     style="display: flex; overflow: hidden; font-family: Avenir Next,Helvetica Neue,Arial,sans-serif!important; font-feature-settings: 'kern','liga','pnum'; -webkit-font-smoothing: antialiased;">
+    <style>
+        a:hover {
+            text-decoration: none;
+        }
+    </style>
     <div style="position: relative;" class="sideNav">
         <div class="logo">
             <a href="/?r=true">
@@ -42,7 +47,14 @@
         <div class="navy">
             <a href="/dashboard/edit" class="acc">
                 <div class="pfp">
-                    <img src="{{ user['pfp'] }}" alt="PFP">
+                    <style>
+                        #pfpHolderNavy {
+                            background-image: url("{{ user['pfp'] }}");
+                            background-size: cover;
+                            background-position: center;
+                        }
+                    </style>
+                    <div id="pfpHolderNavy"></div>
                 </div>
                 <div class="info">
                     <div class="nm">
@@ -54,21 +66,33 @@
                 </div>
             </a>
         </div>
+        <style>
+            .pagina {
+                margin: 100px 0;
+            } 
+
+            .pagina .tarjeta {
+                background: #ddd;
+                width: 100px;
+                height: 200px;
+            }
+        </style>
         <div class="pagina">
-            <div class="index">
-                {% for host in hosts %}
+            {% for host in hosts %}
 
-                {% endfor %}
-                <!-- <div class="tarjeta">
-                    <div class="title">
+            {% endfor %}
+            <div class="tarjeta">
+                <div class="banner">
+                    
+                </div>
+                <div class="title">
 
-                    </div>
-                </div> -->
+                </div>
             </div>
         </div>
-        <div class="sumar">
+        <a href="/host/new" class="sumar">
             <i class="fas fa-plus"></i>
-        </div>
+        </a>
     </div>
 
     <script src="https://unpkg.com/tippy.js@0.11.3/dist/tippy.min.js"></script>

@@ -63,7 +63,6 @@ function upadeEmail(mail, nombre) {
         method: "POST"
     })
 
-    Notiflix.Notify.Success('Cambios guardados');
 }
 
 function updatePasswordCheck() {

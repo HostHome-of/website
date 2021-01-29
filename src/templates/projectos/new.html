@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | {{ user["nombre"] }}</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cuenta.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@0.11.3/dist/tippy.css">
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.0.0/magnific-popup.min.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.0.0/jquery.magnific-popup.min.js"></script>
+</head>
+
+<body
+    style="display: flex; overflow: hidden; font-family: Avenir Next,Helvetica Neue,Arial,sans-serif!important; font-feature-settings: 'kern','liga','pnum'; -webkit-font-smoothing: antialiased;">
+    <style>
+        a:hover {
+            text-decoration: none;
+        }
+    </style>
+    <div style="position: relative;" class="sideNav">
+        <div class="logo">
+            <a href="/?r=true">
+                <img src="{{ url_for('static', filename='images/favicon.png') }}" alt="LOGO">
+            </a>
+        </div>
+        <ul>
+            <a href="/dashboard/host" class="tippy" title="Mira tus hosts" data-duration="300" data-arrow="false"
+                data-animation="shift" data-position="right" id="HostUsuario"><i
+                    style="color: rgb(255, 173, 40); margin-right: 10px;" class="fas fa-cloud-upload-alt"></i> 0 </a>
+            <a href="/help" class="tippy" title="Recibir ayuda" data-duration="300" data-arrow="false"
+                data-animation="shift" data-position="right" id="help"><i class="far fa-life-ring"></i></a>
+            <a href="/dashboard/edit" class="tippy" title="Editar perfil" data-duration="300" data-arrow="false"
+                data-animation="shift" data-position="right" id="edit"><i class="fas fa-cog"></i></a>
+            <a href="/dashboard" class="tippy" title="Pagina principal" data-duration="300" data-arrow="false"
+                data-animation="shift" data-position="right" id="edit"><i class="fas fa-home"></i></a>
+        </ul>
+    </div>
+    <div class="wrapper__navy">
+        <div class="navy">
+            <a href="/dashboard/edit" class="acc">
+                <div class="pfp">
+                    <style>
+                        #pfpHolderNavy {
+                            background-image: url("{{ user['pfp'] }}");
+                            background-size: cover;
+                            background-position: center;
+                        }
+                    </style>
+                    <div id="pfpHolderNavy"></div>
+                </div>
+                <div class="info">
+                    <div class="nm">
+                        {{ user['nombre'] }}
+                    </div>
+                    <div class="mail">
+                        {{ user['mail'] }}
+                    </div>
+                </div>
+            </a>
+        </div>
+        <style>
+            .pagina {
+                margin: 100px 0;
+            }
+        </style>
+        <div class="pagina">
+            <div class="repoUrl">
+                <div class="container my-5">
+                    <style>
+                        .hide {
+                            display: none;
+                        }
+                    </style>
+                    <form onsubmit="return false;">
+                        <div class="form-group">
+                            <input type="text" id="inputrepo" class="form-control" placeholder="github.com/usuario/repo">
+                            <div id="list" class="list-group hide">
+                                {% for i in repos %}
+                                    <div onclick="console.log(this.innerText)" class="list-group-item">
+                                        {{ i }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <script>
+
+                            var KEYCODE_ESCAPE = 27;
+                            var KEYCODE_UP = 38;
+                            var KEYCODE_DOWN = 40;
+
+                            $('#inputrepo').on('focus', function () {
+
+                                $('#list').removeClass('hide');
+
+                            }).on('blur', function () {
+
+                                $('#list').addClass('hide');
+                                $('#list .list-group-item.active').removeClass('active');
+
+                            }).on('keyup', function (e) {
+
+                                if (e.keyCode === KEYCODE_DOWN) {
+
+                                    if ($('#list.hide').length > 0) {
+
+                                        $('#list.hide').removeClass('hide');
+
+                                    } else {
+
+                                        if ($('#list .list-group-item.active').length > 0) {
+                                            if ($('#list .list-group-item.active').is(':last-child')) {
+                                                $('#list .list-group-item.active').removeClass('active');
+                                                $('#list .list-group-item:first-child').addClass('active');
+                                            } else {
+                                                $('#list .list-group-item.active').removeClass('active').next().addClass('active');
+                                            }
+                                        } else {
+                                            $('#list .list-group-item:first-child').addClass('active');
+                                        }
+
+                                    }
+
+                                } else if (e.keyCode === KEYCODE_UP) {
+
+                                    if ($('#list.hide').length > 0) {
+                                        $('#list.hide').removeClass('hide');
+                                    } else {
+
+                                        if ($('#list .list-group-item.active').length > 0) {
+                                            if ($('#list .list-group-item.active').is(':first-child')) {
+                                                $('#list .list-group-item.active').removeClass('active');
+                                                $('#list .list-group-item:last-child').addClass('active');
+                                            } else {
+                                                $('#list .list-group-item.active').removeClass('active').prev().addClass('active');
+                                            }
+                                        } else {
+                                            $('#list .list-group-item:last-child').addClass('active');
+                                        }
+
+                                    }
+
+                                } else if (e.keyCode === KEYCODE_ESCAPE) {
+                                    $('#list').addClass('hide');
+                                    $('#list .list-group-item.active').removeClass('active');
+                                }
+                            });
+                        </script>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/tippy.js@0.11.3/dist/tippy.min.js"></script>
+    <script src="https://unpkg.com/tippy.js@0.11.3/dist/tippy.standalone.js"></script>
+    <script src="https://unpkg.com/tippy.js@0.11.3/dist/tippy.js"></script>
+
+    <script>
+        new Tippy('#edit')
+        new Tippy('#HostUsuario')
+        new Tippy('#help')
+    </script>
+
+</body>
+
+</html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es-ES">
 
 <head>
     <meta charset="UTF-8">
@@ -42,7 +42,14 @@
         <div class="navy">
             <a href="/dashboard/edit" class="acc">
                 <div class="pfp">
-                    <img src="{{ user['pfp'] }}" alt="PFP">
+                    <style>
+                        #pfpHolderNavy {
+                            background-image: url("{{ user['pfp'] }}");
+                            background-size: cover;
+                            background-position: center;
+                        }
+                    </style>
+                    <div id="pfpHolderNavy"></div>
                 </div>
                 <div class="info">
                     <div class="nm">

@@ -11,9 +11,31 @@ from werkzeug.utils import secure_filename
 import os
 import requests
 
+from flask_dance.contrib.github import make_github_blueprint, github
+
 app = Flask(__name__, static_url_path="/src/web/static")
 app.secret_key = "myllavecitasecretita123"
 app.config["ALLOWED_IMAGE_EXTENSIONS"] = ["JPEG", "JPG", "PNG", "GIF"]
+
+os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
+
+# GitHub login
+github_blueprint = make_github_blueprint(client_id=str(env["GITHUB_ID"]),
+                                        client_secret=str(env["GITHUB_KEY"]))
+
+app.register_blueprint(github_blueprint, url_prefix="/github_login")
+
+# Repos
+def get_repositories(url, usr):
+    result = []
+    r = requests.get(url=url)
+    if 'next' in r.links :
+        result += get_repositories(r.links['next']['url'], usr)
+
+    for repository in r.json():
+        result.append(f"{usr}/{repository.get('name')}")
+
+    return result
 
 # Docs / Url
 docs = requests.get("https://raw.githubusercontent.com/HostHome-of/config/main/config.json").json()["docs"]
@@ -233,6 +255,26 @@ def mirarHosts():
 
     return render_template("projectos/hosts.html", user=usr, docs=docs, hosts=hosts)
 
+@app.route("/host/new")
+def crearHost():
+
+    usr = check_usuario()
+
+    if usr is None:
+        return redirect(url_for('Registrarse'))
+
+    if not github.authorized:
+        return redirect(url_for("github.login"))
+
+    info_github = github.get("/user")
+
+    if info_github.ok:
+        info_json_github = info_github.json()
+        repos = get_repositories(str(f"https://api.github.com/users/{info_json_github['login']}/repos"), info_json_github['login'])
+        return render_template("projectos/new.html", user=usr, docs=docs, info_github=info_json_github, repos=repos)
+
+    return redirect(url_for("crearHost"))
+
 @app.route("/dashboard/edit/<string:pagina>")
 def editarCuentaConPagina(pagina):
 
@@ -245,6 +287,7 @@ def editarCuentaConPagina(pagina):
         return render_template(f"dashboard/{pagina}.html", user=usr, docs=docs, pfp=usr["pfp"], key=env["CAPTCHA_WEB"])
     except:
         abort(404)
+
 
 @app.route("/dashboard/account/delete")
 def EliminarCuenta():
