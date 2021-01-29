@@ -225,14 +225,17 @@
             <div class="edit__uno">
                 <div class="nav">
                     <div style="display: flex;" class="info">
-                                            <style>
-                        #pfpHolderNavy {
-                            background-image: url("{{ user['pfp'] }}");
-                            background-size: cover;
-                            background-position: center;
-                        }
-                    </style>
-                    <div id="pfpHolderNavy"></div>
+                        <style>
+                            #pfpHolderNavy {
+                                background-image: url("{{ user['pfp'] }}");
+                                background-size: cover;
+                                background-position: center;
+                                width: 44px;
+                                height: 44px;
+                                border-radius: 50%;
+                            }
+                        </style>
+                        <div id="pfpHolderNavy"></div>
                         <p
                             style="display: flex; justify-content: center; align-items: center; margin: 0 0 0 10px; font-size: 16px; font-weight: 600; color: rgb(54, 73, 98); text-align: left; line-height: 1.5; text-transform: none; overflow: unset; white-space: unset; text-overflow: unset;">
                             {{ user["nombre"] }}</p>
@@ -299,7 +302,7 @@
                                         }, 5000);
                                     }
 
-                                    function destruir() {   
+                                    function destruir() {
                                         if (confirm("¿Estas seguro? No recuperaras tu cuenta.")) {
                                             document.getElementById("popup").style.display = "block"
                                         }
@@ -312,7 +315,7 @@
                                         Notiflix.Loading.Circle();
                                         setTimeout(function () {
                                             window.location.replace("/dashboard/account/destroy");
-                                        }, 5000);                
+                                        }, 5000);
                                     }
                                 </script>
                                 <div onclick="eliminar()"

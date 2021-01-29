@@ -1404,6 +1404,7 @@ textarea.form-control {
 .sumar:hover {
     background-color: #23b9fc;
     transform: rotate(90deg);
+    color: #fff;
 }
 
 /* FIN MAS COSAS */

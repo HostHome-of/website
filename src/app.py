@@ -33,7 +33,10 @@ def get_repositories(url, usr):
         result += get_repositories(r.links['next']['url'], usr)
 
     for repository in r.json():
-        result.append(f"{usr}/{repository.get('name')}")
+        try:
+            result.append(f"{usr}/{repository.get('name')}")
+        except:
+            result.append(f"{usr}/{repository}")
 
     return result
 
@@ -73,12 +76,14 @@ def check_usuario():
                 usr = None
             return usr
     except Exception as e:
-        return None
+        return None 
 
 @app.route("/")
 def PaginaPrincipal():
 
     usr = check_usuario()
+    if request.args.get("g", None) == "1":
+        return redirect(url_for("crearHost"))
 
     if usr and request.args.get("r", None) == "true" or not usr:
         return render_template("index.html", user=usr, usrAdmin=len(Usuario().cojer_admins()), usuarios=len(Usuario().cojer_usuarios()), docs=docs)
@@ -308,6 +313,14 @@ def DestruirCuenta():
         Usuario(session['user_id']).destruir()
 
     return redirect(url_for('PaginaPrincipal'))
+
+@app.route("/dashboard/logout/<string:field>")
+def quitarTerceros(field):
+    if field == "github":
+        if github.authorized:
+            del github_blueprint.token
+    
+    return "ok"
 
 def run():
     app.run()

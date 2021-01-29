@@ -201,14 +201,17 @@
             <div class="edit__uno">
                 <div class="nav">
                     <div style="display: flex;" class="info">
-                                            <style>
-                        #pfpHolderNavy {
-                            background-image: url("{{ user['pfp'] }}");
-                            background-size: cover;
-                            background-position: center;
-                        }
-                    </style>
-                    <div id="pfpHolderNavy"></div>
+                        <style>
+                            #pfpHolderNavy {
+                                background-image: url("{{ user['pfp'] }}");
+                                background-size: cover;
+                                background-position: center;
+                                width: 44px;
+                                height: 44px;
+                                border-radius: 50%;
+                            }
+                        </style>
+                        <div id="pfpHolderNavy"></div>
                         <p
                             style="display: flex; justify-content: center; align-items: center; margin: 0 0 0 10px; font-size: 16px; font-weight: 600; color: rgb(54, 73, 98); text-align: left; line-height: 1.5; text-transform: none; overflow: unset; white-space: unset; text-overflow: unset;">
                             {{ user["nombre"] }}</p>
@@ -462,11 +465,11 @@
                                     </div>
                                     <div class="button radius" id="toggle-button">
                                         {% if user["emails"]["uno"] %}
-                                            <input onclick="upadeEmail(nombre_y_mail[0], nombre_y_mail[1])"
-                                                type="checkbox" class="checkbox" name="checky1" id="sec" value="Evet">
+                                        <input onclick="upadeEmail(nombre_y_mail[0], nombre_y_mail[1])" type="checkbox"
+                                            class="checkbox" name="checky1" id="sec" value="Evet">
                                         {% else %}
-                                            <input onclick="upadeEmail(nombre_y_mail[0], nombre_y_mail[1])" checked type="checkbox"
-                                                class="checkbox" name="checky1" id="sec" value="Evet">
+                                        <input onclick="upadeEmail(nombre_y_mail[0], nombre_y_mail[1])" checked
+                                            type="checkbox" class="checkbox" name="checky1" id="sec" value="Evet">
                                         {% endif %}
                                         <div class="lump"></div>
                                         <div class="layer"></div>
@@ -483,11 +486,11 @@
                                     </div>
                                     <div class="button radius" id="toggle-button">
                                         {% if user["emails"]["dos"] %}
-                                            <input onclick="upadeEmail(nombre_y_mail[0], nombre_y_mail[1])"
-                                                type="checkbox" class="checkbox" name="checky2" id="sec2" value="Evet">
+                                        <input onclick="upadeEmail(nombre_y_mail[0], nombre_y_mail[1])" type="checkbox"
+                                            class="checkbox" name="checky2" id="sec2" value="Evet">
                                         {% else %}
-                                            <input onclick="upadeEmail(nombre_y_mail[0], nombre_y_mail[1])" checked type="checkbox"
-                                                class="checkbox" name="checky2" id="sec2" value="Evet">
+                                        <input onclick="upadeEmail(nombre_y_mail[0], nombre_y_mail[1])" checked
+                                            type="checkbox" class="checkbox" name="checky2" id="sec2" value="Evet">
                                         {% endif %}
                                         <div class="lump"></div>
                                         <div class="layer"></div>
@@ -504,17 +507,17 @@
                                     </div>
                                     <div class="button radius" id="toggle-button">
                                         {% if user["emails"]["tres"] %}
-                                            <input onclick="upadeEmail(nombre_y_mail[0], nombre_y_mail[1])"
-                                                type="checkbox" class="checkbox" name="checky3" id="sec3" value="Evet">
+                                        <input onclick="upadeEmail(nombre_y_mail[0], nombre_y_mail[1])" type="checkbox"
+                                            class="checkbox" name="checky3" id="sec3" value="Evet">
                                         {% else %}
-                                            <input onclick="upadeEmail(nombre_y_mail[0], nombre_y_mail[1])" checked type="checkbox"
-                                                class="checkbox" name="checky3" id="sec3" value="Evet">
+                                        <input onclick="upadeEmail(nombre_y_mail[0], nombre_y_mail[1])" checked
+                                            type="checkbox" class="checkbox" name="checky3" id="sec3" value="Evet">
                                         {% endif %}
                                         <div class="lump"></div>
                                         <div class="layer"></div>
                                     </div>
                                 </div>
-                                <div class="input">
+                                <div style="border-bottom: none !important; margin-bottom: 0 !important;" class="input">
                                     <div class="info">
                                         <div class="title">
                                             Comentarios
@@ -525,11 +528,11 @@
                                     </div>
                                     <div class="button radius" id="toggle-button">
                                         {% if user["emails"]["cuatro"] %}
-                                            <input onclick="upadeEmail(nombre_y_mail[0], nombre_y_mail[1])"
-                                            type="checkbox" class="checkbox" name="checky4" id="sec4" value="Evet">
-                                        {% else %}
-                                            <input onclick="upadeEmail(nombre_y_mail[0], nombre_y_mail[1])" checked type="checkbox"
+                                        <input onclick="upadeEmail(nombre_y_mail[0], nombre_y_mail[1])" type="checkbox"
                                             class="checkbox" name="checky4" id="sec4" value="Evet">
+                                        {% else %}
+                                        <input onclick="upadeEmail(nombre_y_mail[0], nombre_y_mail[1])" checked
+                                            type="checkbox" class="checkbox" name="checky4" id="sec4" value="Evet">
                                         {% endif %}
                                         <div class="lump"></div>
                                         <div class="layer"></div>

@@ -52,6 +52,9 @@
                             background-image: url("{{ user['pfp'] }}");
                             background-size: cover;
                             background-position: center;
+                            width: 44px;
+                            height: 44px;
+                            border-radius: 50%;
                         }
                     </style>
                     <div id="pfpHolderNavy"></div>
@@ -72,88 +75,218 @@
             }
         </style>
         <div class="pagina">
-            <div class="repoUrl">
-                <div class="container my-5">
-                    <style>
-                        .hide {
-                            display: none;
-                        }
-                    </style>
-                    <form onsubmit="return false;">
-                        <div class="form-group">
-                            <input type="text" id="inputrepo" class="form-control" placeholder="github.com/usuario/repo">
-                            <div id="list" class="list-group hide">
-                                {% for i in repos %}
-                                    <div onclick="console.log(this.innerText)" class="list-group-item">
-                                        {{ i }}
+            <div class="edit__box">
+                <div class="headder">
+                    <div class="logo">
+                        <i class="far fa-plus-square"></i>
+                    </div>
+                    <div class="info">
+                        <div class="title">
+                            Crear un nuevo host
+                        </div>
+                        <div class="desc">
+                            Create un host rapido y sencillo
+                        </div>
+                    </div>
+                </div>
+                <div class="wrapper">
+                    <script>
+                        const nombre_y_mail = ["{{ user['mail'] }}", "{{ user['nombre'] }}"]
+                    </script>
+                    <div id="form">
+                        <style>
+                            .repoUrl {
+                                width: 100%;
+                            }
+                        </style>
+                        <div class="repoUrl">
+                            <div class="container my-5">
+                                <style>
+                                    .hide {
+                                        display: none;
+                                    }
+            
+                                    #list {
+                                        overflow-y: auto;
+                                        overflow-x: hidden;
+                                        text-overflow: ellipsis;
+                                        width: 500px;
+                                        max-height: 295px;
+                                        border: 1px solid #ddd;
+                                        border-radius: 10px;
+                                        border-top-left-radius: 0;
+                                        border-top-right-radius: 0;
+                                        position: absolute;
+                                        padding: 10px;
+                                        background: #fff;
+                                    }
+            
+                                    #inputrepo {
+                                        height: 100%;
+                                        padding: 10px 0;
+                                        outline: none;
+                                        border: none;
+                                        width: 400px;
+                                    }
+            
+                                    #inputrepo:focus {
+                                        outline: none !important;
+                                        border: none !important;
+                                        box-shadow: none !important;
+                                    }
+            
+                                    .inputy {
+                                        border: 1px solid #ddd;
+                                        position: relative;
+                                        /* justify-content: center; */
+                                        /* align-items: center; */
+                                        display: grid;
+                                        grid-template-columns: auto auto auto;
+                                        justify-content: center;
+                                        align-items: center;
+                                        width: 500px;
+                                    }
+            
+                                    .inputy label {
+                                        margin: auto 10px;
+                                        width: 30px;
+                                        display: flex;
+                                        justify-content: center;
+                                        align-items: center;
+                                        font-size: 20px;
+                                        cursor: pointer;
+                                    }
+            
+                                    #dropyIcon {
+                                        transform: rotate(0deg);
+                                    }
+            
+                                    #dropyIcon.up {
+                                        transform: rotate(180deg);
+                                    }
+            
+                                    #list::-webkit-scrollbar-track {
+                                        background-color: #F5F5F5;
+                                    }
+            
+                                    #list::-webkit-scrollbar {
+                                        width: 12px;
+                                        background-color: #F5F5F5;
+                                    }
+            
+                                    #list::-webkit-scrollbar-thumb {
+                                        border-radius: 1px;
+                                        background-color: rgb(182, 179, 179);
+                                    }
+
+                                    .list-group-item {
+                                        border: none;
+                                        border-radius: 5px;
+                                    }
+            
+                                    .list-group-item:hover {
+                                        cursor: pointer;
+                                        background: #ddd;
+                                    }
+                                </style>
+                                <form onsubmit="return false;">
+                                    <style>
+                                        .form-group {
+                                            font-family: Avenir Next, Helvetica Neue, Arial, sans-serif !important;
+                                            font-feature-settings: 'kern', 'liga', 'pnum';
+                                            -webkit-font-smoothing: antialiased;
+                                        }
+                                    </style>
+                                    <div class="form-group">
+                                        <h7 style="font-weight: 700;">Escoje tu repositorio</h7>
+                                        <div class="inputy">
+                                            <label for="inputrepo"><i class="fab fa-github"></i></label>
+                                            <input type="text" id="inputrepo" class="form-control"
+                                                placeholder="github.com/usuario/repo">
+                                            <label for="inputrepo"><i id="dropyIcon" class="fas fa-caret-up up"></i></label>
+                                        </div>
+                                        <div id="list" class="list-group hide">
+                                            {% for i in repos %}
+                                            <div onclick="updateRepoValue(this)" class="list-group-item"><i class="fas fa-book" style="margin-right: 10px;"></i>{{ i }}</div>
+                                            {% endfor %}
+                                        </div>
                                     </div>
-                                {% endfor %}
+                                    <script>
+                                        function updateRepoValue(divyThis) {
+                                            document.getElementById("inputrepo").value = "github.com/" + divyThis.textContent
+                                        }
+                                    </script>
+                                    <script>
+            
+                                        var KEYCODE_ESCAPE = 27;
+                                        var KEYCODE_UP = 38;
+                                        var KEYCODE_DOWN = 40;
+            
+                                        $('#inputrepo').on('focus', function () {
+            
+                                            $('#list').removeClass('hide');
+                                            $('#dropyIcon').removeClass('up');
+            
+                                        }).on('blur', function () {
+            
+                                            setTimeout(function(){
+                                                $('#list').addClass('hide');
+                                            }, 100)
+                                            $('#dropyIcon').addClass('up');
+                                            $('#list .list-group-item.active').removeClass('active');
+            
+                                        }).on('keyup', function (e) {
+            
+                                            if (e.keyCode === KEYCODE_DOWN) {
+            
+                                                if ($('#list.hide').length > 0) {
+            
+                                                    $('#list.hide').removeClass('hide');
+            
+                                                } else {
+            
+                                                    if ($('#list .list-group-item.active').length > 0) {
+                                                        if ($('#list .list-group-item.active').is(':last-child')) {
+                                                            $('#list .list-group-item.active').removeClass('active');
+                                                            $('#list .list-group-item:first-child').addClass('active');
+                                                        } else {
+                                                            $('#list .list-group-item.active').removeClass('active').next().addClass('active');
+                                                        }
+                                                    } else {
+                                                        $('#list .list-group-item:first-child').addClass('active');
+                                                    }
+            
+                                                }
+            
+                                            } else if (e.keyCode === KEYCODE_UP) {
+            
+                                                if ($('#list.hide').length > 0) {
+                                                    $('#list.hide').removeClass('hide');
+                                                } else {
+            
+                                                    if ($('#list .list-group-item.active').length > 0) {
+                                                        if ($('#list .list-group-item.active').is(':first-child')) {
+                                                            $('#list .list-group-item.active').removeClass('active');
+                                                            $('#list .list-group-item:last-child').addClass('active');
+                                                        } else {
+                                                            $('#list .list-group-item.active').removeClass('active').prev().addClass('active');
+                                                        }
+                                                    } else {
+                                                        $('#list .list-group-item:last-child').addClass('active');
+                                                    }
+            
+                                                }
+            
+                                            } else if (e.keyCode === KEYCODE_ESCAPE) {
+                                                $('#list').addClass('hide');
+                                                $('#list .list-group-item.active').removeClass('active');
+                                            }
+                                        });
+                                    </script>
+                                </form>
                             </div>
                         </div>
-                        <script>
-
-                            var KEYCODE_ESCAPE = 27;
-                            var KEYCODE_UP = 38;
-                            var KEYCODE_DOWN = 40;
-
-                            $('#inputrepo').on('focus', function () {
-
-                                $('#list').removeClass('hide');
-
-                            }).on('blur', function () {
-
-                                $('#list').addClass('hide');
-                                $('#list .list-group-item.active').removeClass('active');
-
-                            }).on('keyup', function (e) {
-
-                                if (e.keyCode === KEYCODE_DOWN) {
-
-                                    if ($('#list.hide').length > 0) {
-
-                                        $('#list.hide').removeClass('hide');
-
-                                    } else {
-
-                                        if ($('#list .list-group-item.active').length > 0) {
-                                            if ($('#list .list-group-item.active').is(':last-child')) {
-                                                $('#list .list-group-item.active').removeClass('active');
-                                                $('#list .list-group-item:first-child').addClass('active');
-                                            } else {
-                                                $('#list .list-group-item.active').removeClass('active').next().addClass('active');
-                                            }
-                                        } else {
-                                            $('#list .list-group-item:first-child').addClass('active');
-                                        }
-
-                                    }
-
-                                } else if (e.keyCode === KEYCODE_UP) {
-
-                                    if ($('#list.hide').length > 0) {
-                                        $('#list.hide').removeClass('hide');
-                                    } else {
-
-                                        if ($('#list .list-group-item.active').length > 0) {
-                                            if ($('#list .list-group-item.active').is(':first-child')) {
-                                                $('#list .list-group-item.active').removeClass('active');
-                                                $('#list .list-group-item:last-child').addClass('active');
-                                            } else {
-                                                $('#list .list-group-item.active').removeClass('active').prev().addClass('active');
-                                            }
-                                        } else {
-                                            $('#list .list-group-item:last-child').addClass('active');
-                                        }
-
-                                    }
-
-                                } else if (e.keyCode === KEYCODE_ESCAPE) {
-                                    $('#list').addClass('hide');
-                                    $('#list .list-group-item.active').removeClass('active');
-                                }
-                            });
-                        </script>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>

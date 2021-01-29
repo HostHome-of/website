@@ -204,21 +204,24 @@
             <i style="font-size: 15px; color: rgb(34, 92, 255); display: flex; box-sizing: border-box; margin: 0px 15px; min-width: 0px;"
                 class="fas fa-chevron-right"></i>
             <p>
-                Cambiar foto de perfil  
+                Cambiar foto de perfil
             </p>
         </div>
         <div class="pagina">
             <div class="edit__uno">
                 <div class="nav">
                     <div style="display: flex;" class="info">
-                                            <style>
-                        #pfpHolderNavy {
-                            background-image: url("{{ user['pfp'] }}");
-                            background-size: cover;
-                            background-position: center;
-                        }
-                    </style>
-                    <div id="pfpHolderNavy"></div>
+                        <style>
+                            #pfpHolderNavy {
+                                background-image: url("{{ user['pfp'] }}");
+                                background-size: cover;
+                                background-position: center;
+                                width: 44px;
+                                height: 44px;
+                                border-radius: 50%;
+                            }
+                        </style>
+                        <div id="pfpHolderNavy"></div>
                         <p
                             style="display: flex; justify-content: center; align-items: center; margin: 0 0 0 10px; font-size: 16px; font-weight: 600; color: rgb(54, 73, 98); text-align: left; line-height: 1.5; text-transform: none; overflow: unset; white-space: unset; text-overflow: unset;">
                             {{ user["nombre"] }}</p>
@@ -359,7 +362,8 @@
                             <div id="form">
                                 <div class="container">
                                     <div class="avatar-upload">
-                                        <form method="POST" action="/img" enctype="multipart/form-data" id="formularioConImg" class="avatar-edit">
+                                        <form method="POST" action="/img" enctype="multipart/form-data"
+                                            id="formularioConImg" class="avatar-edit">
                                             <input type='file' accept="image/*" id="imgInp" name="imgInp" />
                                             <label for="imgInp"></label>
                                         </form>
@@ -369,25 +373,25 @@
                                         </div>
                                     </div>
                                     <script>
-                                    function readURL(input) {
-                                        if (input.files && input.files[0]) {
-                                            var reader = new FileReader();
-                                            reader.onload = function (e) {
-                                                $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
-                                                $('#imagePreview').hide();
-                                                $('#imagePreview').fadeIn(650);
-                                                Notiflix.Notify.Warning('Porfavor espera 3 segundos');
-                                                setTimeout(function () {
-                                                    $("#formularioConImg").submit();
-                                                }, 5000);
+                                        function readURL(input) {
+                                            if (input.files && input.files[0]) {
+                                                var reader = new FileReader();
+                                                reader.onload = function (e) {
+                                                    $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+                                                    $('#imagePreview').hide();
+                                                    $('#imagePreview').fadeIn(650);
+                                                    Notiflix.Notify.Warning('Porfavor espera 3 segundos');
+                                                    setTimeout(function () {
+                                                        $("#formularioConImg").submit();
+                                                    }, 5000);
+                                                }
+                                                reader.readAsDataURL(input.files[0]);
                                             }
-                                            reader.readAsDataURL(input.files[0]);
                                         }
-                                    }
-                                    $("#imgInp").change(function () {
-                                        readURL(this);
-                                    });
-                                </script>
+                                        $("#imgInp").change(function () {
+                                            readURL(this);
+                                        });
+                                    </script>
                                 </div>
                             </div>
                         </div>
