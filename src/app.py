@@ -21,7 +21,8 @@ os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 # GitHub login
 github_blueprint = make_github_blueprint(client_id=str(env["GITHUB_ID"]),
-                                        client_secret=str(env["GITHUB_KEY"]))
+                                        client_secret=str(env["GITHUB_KEY"]),
+                                        redirect_to="crearHost")
 
 app.register_blueprint(github_blueprint, url_prefix="/github_login")
 
@@ -269,7 +270,7 @@ def crearHost():
         return redirect(url_for('Registrarse'))
 
     if not github.authorized:
-        return redirect(url_for("github.login"))
+        return redirect(url_for('github.login'))
 
     info_github = github.get("/user")
 
@@ -278,6 +279,7 @@ def crearHost():
         repos = get_repositories(str(f"https://api.github.com/users/{info_json_github['login']}/repos"), info_json_github['login'])
         return render_template("projectos/new.html", user=usr, docs=docs, info_github=info_json_github, repos=repos)
 
+    del github_blueprint.token
     return redirect(url_for("crearHost"))
 
 @app.route("/dashboard/edit/<string:pagina>")

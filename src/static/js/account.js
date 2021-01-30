@@ -93,3 +93,32 @@ function updatePassword() {
         Notiflix.Notify.Failure('La contraseña nueva es igual a la anterior que has introducido');
     }
 }
+
+function updateBtnForNewHosting() {
+    const btn = document.getElementById("btnSubmityHostNew");
+    const nombre = document.getElementById("hostNombre").value;
+    var input = document.getElementById("inputrepo").value;
+
+    if (input != "" && nombre != "") {
+        if (input.startsWith("github.com/")) {
+            btn.disabled = false;
+        } else {
+            btn.disabled = true;
+        }
+    } else {
+        btn.disabled = true;
+    }
+}
+
+function createHost() {
+    const repo = document.getElementById("inputrepo").value;
+    const url = "https://api."+repo.replace('github.com/', 'github.com/repos/')
+    fetch(url).then(response => response.json()).then(data => { 
+        if(!data.hasOwnProperty('git_url')){ 
+            alert("bruh")
+        } else {
+            var git_url = data['git_url']
+            alert(git_url)
+        }
+     });
+}
