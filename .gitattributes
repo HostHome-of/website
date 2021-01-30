@@ -3,3 +3,4 @@
 *.html linguist-vendored=true
 *.css linguist-vendored=true
 *.js linguist-language=TypeScript
+/src/app.py linguist-language=php
