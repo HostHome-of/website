@@ -16,6 +16,9 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.0.0/jquery.magnific-popup.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/notiflix/notiflix-2.7.0.min.css') }}">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body
@@ -243,7 +246,8 @@
                                             </label>
                                             <input oninput="updateBtnForNewHosting()" placeholder="Nombre del host" id="hostNombre" type="text">
                                         </div>
-                                        <button disabled id="btnSubmityHostNew" onclick="createHost()" class="submit">
+                                        <div style="margin: 10px auto;" class="g-recaptcha" data-callback="validateRobotitoCaptchaNewHost" data-sitekey="{{ key }}"></div>
+                                        <button style="cursor: pointer;" disabled id="btnSubmityHostNew" onclick="createHost()" class="submit">
                                             Crear host
                                         </button>
                                     </div>
@@ -332,6 +336,8 @@
     <script src="https://unpkg.com/tippy.js@0.11.3/dist/tippy.min.js"></script>
     <script src="https://unpkg.com/tippy.js@0.11.3/dist/tippy.standalone.js"></script>
     <script src="https://unpkg.com/tippy.js@0.11.3/dist/tippy.js"></script>
+
+    <script src="{{ url_for('static', filename='vendor/notiflix/notiflix-aio-2.7.0.min.js') }}"></script>
 
     <script>
         new Tippy('#edit')

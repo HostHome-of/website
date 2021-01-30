@@ -94,12 +94,19 @@ function updatePassword() {
     }
 }
 
+var noEsRobotNew = true;
+
+function validateRobotitoCaptchaNewHost() {
+    noEsRobotNew = false;
+    updateBtnForNewHosting()
+}
+
 function updateBtnForNewHosting() {
     const btn = document.getElementById("btnSubmityHostNew");
     const nombre = document.getElementById("hostNombre").value;
     var input = document.getElementById("inputrepo").value;
 
-    if (input != "" && nombre != "") {
+    if (input != "" && nombre != "" && !noEsRobotNew) {
         if (input.startsWith("github.com/")) {
             btn.disabled = false;
         } else {
@@ -115,10 +122,16 @@ function createHost() {
     const url = "https://api."+repo.replace('github.com/', 'github.com/repos/')
     fetch(url).then(response => response.json()).then(data => { 
         if(!data.hasOwnProperty('git_url')){ 
-            alert("bruh")
+            Notiflix.Notify.Failure('Ese repositorio no existe o no es de GitHub');
+            return false;
         } else {
             var git_url = data['git_url']
-            alert(git_url)
+            fetch("/host/new?nombre="+document.getElementById("hostNombre").value, {
+                method: "POST",
+                headers: {
+                    "url": git_url
+                }
+            })
         }
-     });
+    });
 }

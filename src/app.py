@@ -6,6 +6,7 @@ from os import environ as env
 
 from src.auth import CrearUsuario, HacerLogin, Usuario
 from src.mail import enviarEmail
+from src.sockets import enviar
 
 from werkzeug.utils import secure_filename
 import os
@@ -261,8 +262,15 @@ def mirarHosts():
 
     return render_template("projectos/hosts.html", user=usr, docs=docs, hosts=hosts)
 
-@app.route("/host/new")
+@app.route("/host/new", methods=["GET", "POST"])
 def crearHost():
+
+    if request.method == "POST":
+        nombre = request.args.get("nombre")
+        url    = request.headers.get("url") 
+        data = enviar(f"crear|{nombre}|{url}")
+        print(data)
+        return {"estado": 200}
 
     usr = check_usuario()
 
@@ -277,7 +285,7 @@ def crearHost():
     if info_github.ok:
         info_json_github = info_github.json()
         repos = get_repositories(str(f"https://api.github.com/users/{info_json_github['login']}/repos"), info_json_github['login'])
-        return render_template("projectos/new.html", user=usr, docs=docs, info_github=info_json_github, repos=repos)
+        return render_template("projectos/new.html", user=usr, docs=docs, info_github=info_json_github, repos=repos, key=env["CAPTCHA_WEB"])
 
     del github_blueprint.token
     return redirect(url_for("crearHost"))

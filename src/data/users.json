@@ -4,19 +4,19 @@
         "nombre": "Mau BG",
         "psw": "awdawd",
         "cuentas": [
-            "74589645"
+            "40923917"
         ],
         "pfp": "/src/web/static/pfp/google.jpg",
         "entrada": "30/1/2021",
         "abierto": true,
-        "segundoNombre": "",
-        "edad": "",
+        "segundoNombre": "lel",
+        "edad": "56",
         "autorizado": true,
         "emails": {
             "uno": true,
-            "dos": false,
-            "tres": false,
-            "cuatro": true
+            "dos": true,
+            "tres": true,
+            "cuatro": false
         }
     }
 }
