@@ -74,7 +74,7 @@ def check_usuario():
             if usr["autorizado"] == False:
                 Usuario().petar(Usuario(session['user_id']).cojer()["mail"])
                 return None
-            if not usr["abierto"] == True: 
+            if not usr["cuentas"][str(session['user_id'])] == True: 
                 usr = None
             return usr
     except Exception as e:
@@ -269,7 +269,8 @@ def crearHost():
         nombre = request.args.get("nombre")
         url    = request.headers.get("url") 
         data = enviar(f"crear|{nombre}|{url}")
-        print(data)
+        if data[0] == False:
+            return {"error": data[1]}
         return {"estado": 200}
 
     usr = check_usuario()

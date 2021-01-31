@@ -3,20 +3,23 @@
         "mail": "maubg2007@gmail.com",
         "nombre": "Mau BG",
         "psw": "awdawd",
-        "cuentas": [
-            "40923917"
-        ],
-        "pfp": "/src/web/static/pfp/google.jpg",
-        "entrada": "30/1/2021",
-        "abierto": true,
-        "segundoNombre": "lel",
-        "edad": "56",
+        "cuentas": {
+            "19745970": true,
+            "77396806": true,
+            "44413186": true,
+            "36484532": true,
+            "56106589": true
+        },
+        "pfp": "/src/web/static/pfp/default.png",
+        "entrada": "31/1/2021",
+        "segundoNombre": "",
+        "edad": "",
         "autorizado": true,
         "emails": {
             "uno": true,
-            "dos": true,
-            "tres": true,
-            "cuatro": false
+            "dos": false,
+            "tres": false,
+            "cuatro": true
         }
     }
 }

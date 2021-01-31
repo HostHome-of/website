@@ -131,7 +131,13 @@ function createHost() {
                 headers: {
                     "url": git_url
                 }
-            })
+            }).then(response => response.json()).then(data => {
+                if (!data.hasOwnProperty('error')) {
+                    Notiflix.Notify.Failure(data["error"]);
+                } else {
+                    alert("Hecho!")
+                }
+            });
         }
     });
 }

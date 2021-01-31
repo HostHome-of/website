@@ -21,9 +21,8 @@ class HacerLogin():
 
         if self.email in usuarios:
             if usuarios[str(self.email)]["psw"] == self.psw:
-                usuarios[str(self.email)]["abierto"] = True
                 tk = CrearUsuario().tokenizar()
-                usuarios[str(self.email)]["cuentas"].append(tk)
+                usuarios[str(self.email)]["cuentas"][str(tk)] = True
                 cerrar(usuarios)
                 return str(tk)
         return False
@@ -49,7 +48,8 @@ class Usuario():
         for usr in usuarios:
             for token in usuarios[usr]["cuentas"]:
                 if self.tk == token:
-                    return usuarios[usr]
+                    if usuarios[usr]["cuentas"][token] == True:
+                        return usuarios[usr]
         return None
 
     def eliminar(self):
@@ -58,8 +58,7 @@ class Usuario():
         for usr in usuarios:
             for token in usuarios[usr]["cuentas"]:
                 if self.tk == token:
-                    usuarios[usr]["abierto"] = False
-                    # del usuarios[usr]["cuentas"][self.tk]
+                    usuarios[usr]["cuentas"][self.tk] = False
                     cerrar(usuarios)
 
     def petar(self, mail):
@@ -150,13 +149,12 @@ class CrearUsuario():
             usuarios[str(self.mail)]["mail"] = self.mail
             usuarios[str(self.mail)]["nombre"] = self.nombre
             usuarios[str(self.mail)]["psw"] = self.psw 
-            usuarios[str(self.mail)]["cuentas"] = [] 
+            usuarios[str(self.mail)]["cuentas"] = {}
             tkN = self.tokenizar()
-            usuarios[str(self.mail)]["cuentas"].append(str(tkN)) 
+            usuarios[str(self.mail)]["cuentas"][str(tkN)] = True 
             usuarios[str(self.mail)]["pfp"] = "/src/web/static/pfp/default.png" 
             now = datetime.datetime.now()
             usuarios[str(self.mail)]["entrada"] = f"{now.day}/{now.month}/{now.year}"
-            usuarios[str(self.mail)]["abierto"] = True 
 
             usuarios[str(self.mail)]["segundoNombre"] = "" 
             usuarios[str(self.mail)]["edad"] = "" 
