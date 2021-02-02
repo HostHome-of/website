@@ -152,7 +152,7 @@ class CrearUsuario():
             usuarios[str(self.mail)]["cuentas"] = {}
             tkN = self.tokenizar()
             usuarios[str(self.mail)]["cuentas"][str(tkN)] = True 
-            usuarios[str(self.mail)]["pfp"] = "/src/web/static/pfp/default.png" 
+            usuarios[str(self.mail)]["pfp"] = f"/src/web/static/pfp/default_hosthome.png" 
             now = datetime.datetime.now()
             usuarios[str(self.mail)]["entrada"] = f"{now.day}/{now.month}/{now.year}"
 
