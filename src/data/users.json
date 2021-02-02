@@ -1,25 +1,23 @@
 {
     "maubg2007@gmail.com": {
         "mail": "maubg2007@gmail.com",
-        "nombre": "Mau BG",
+        "nombre": "Mau",
         "psw": "awdawd",
         "cuentas": {
-            "19745970": true,
-            "77396806": true,
-            "44413186": true,
-            "36484532": true,
-            "56106589": true
+            "51548443": true,
+            "15391595": true,
+            "59936122": true
         },
-        "pfp": "/src/web/static/pfp/default.png",
-        "entrada": "31/1/2021",
-        "segundoNombre": "",
-        "edad": "",
+        "pfp": "/src/web/static/pfp/google.jpg",
+        "entrada": "2/2/2021",
+        "segundoNombre": "BG",
+        "edad": "65",
         "autorizado": true,
         "emails": {
-            "uno": true,
-            "dos": false,
+            "uno": false,
+            "dos": true,
             "tres": false,
-            "cuatro": true
+            "cuatro": false
         }
     }
 }

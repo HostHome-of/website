@@ -20,6 +20,6 @@ def enviar(msg: str="Usuario no puso nada lel XD"):
             cliente.close()
             print(type(msg))
             print(msg)
-            return data
+            return data["mensage"]
     except:
         print("Servidor desconectado")
