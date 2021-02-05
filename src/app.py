@@ -260,7 +260,7 @@ def mirarHosts():
     
     hosts = {}
 
-    return render_template("projectos/hosts.html", user=usr, docs=docs, hosts=hosts)
+    return render_template("projectos/hosts.html", hostsLen=len(hosts), user=usr, docs=docs, hosts=hosts)
 
 @app.route("/host/new", methods=["GET", "POST"])
 def crearHost():

@@ -6,17 +6,18 @@
         "cuentas": {
             "51548443": false,
             "15391595": true,
-            "59936122": true
+            "59936122": true,
+            "37969183": true
         },
         "pfp": "/src/web/static/pfp/google.jpg",
         "entrada": "2/2/2021",
         "segundoNombre": "BG",
-        "edad": "65",
+        "edad": "68",
         "autorizado": true,
         "emails": {
-            "uno": false,
+            "uno": true,
             "dos": true,
-            "tres": false,
+            "tres": true,
             "cuatro": false
         }
     }

@@ -12162,11 +12162,10 @@
                     <span class="u-header__sub-menu-title">Pagina principal</span>
                     <ul class="u-header__sub-menu-nav-group mb-3">
                       <li><a class="nav-link u-header__sub-menu-nav-link" href="/">Pagina principal</a></li>
-                      <li><a class="nav-link u-header__sub-menu-nav-link" href="/#intro">Intro</a></li>
-                      <li><a class="nav-link u-header__sub-menu-nav-link" href="/#cli">Nuestro CLI</a></li>
-                      <li><a class="nav-link u-header__sub-menu-nav-link" href="/#alojamiento_en_la_nube">Alojamiento en
-                          la nube</a></li>
-                      <li><a class="nav-link u-header__sub-menu-nav-link" href="/#idiomas">Idiomas admitidos</a></li>
+                      <li><a class="nav-link u-header__sub-menu-nav-link" href="/#about">Intro</a></li>
+                      <li><a class="nav-link u-header__sub-menu-nav-link" href="{{ docs }}cli">Nuestro CLI</a></li>
+                      <li><a class="nav-link u-header__sub-menu-nav-link" href="/#services">Personalidades</a></li>
+                      <li><a class="nav-link u-header__sub-menu-nav-link" href="{{ docs }}idiomas">Idiomas admitidos</a></li>
                     </ul>
 
                     <span class="u-header__sub-menu-title">Colaborar</span>
@@ -12181,7 +12180,7 @@
 
                     <span class="u-header__sub-menu-title">Documentacion</span>
                     <ul class="u-header__sub-menu-nav-group">
-                      <li><a class="nav-link u-header__sub-menu-nav-link" href="/geting_started">Como empezar</a></li>
+                      <li><a class="nav-link u-header__sub-menu-nav-link" href="{{ docs }}geting_started">Como empezar</a></li>
                       <li><a class="nav-link u-header__sub-menu-nav-link" href="{{ docs }}">Documentacion</a></li>
                     </ul>
                   </div>
@@ -12189,30 +12188,27 @@
                   <div class="col-sm-6">
                     <span class="u-header__sub-menu-title">Idiomas admitidos</span>
                     <ul class="u-header__sub-menu-nav-group mb-3">
-                      <li><a class="nav-link u-header__sub-menu-nav-link" href="{{ docs }}/python">Python </a></li>
-                      <li><a class="nav-link u-header__sub-menu-nav-link" href="{{ docs }}/nodejs">NodeJs </a></li>
-                      <li><a class="nav-link u-header__sub-menu-nav-link" href="{{ docs }}/ruby">Ruby </a></li>
-                      <li><a class="nav-link u-header__sub-menu-nav-link" href="{{ docs }}/scala">Scala</a></li>
-                      <li><a class="nav-link u-header__sub-menu-nav-link" href="{{ docs }}/cs">C# <span
+                      <li><a class="nav-link u-header__sub-menu-nav-link" href="{{ docs }}len/python">Python </a></li>
+                      <li><a class="nav-link u-header__sub-menu-nav-link" href="{{ docs }}len/nodejs">NodeJs </a></li>
+                      <li><a class="nav-link u-header__sub-menu-nav-link" href="{{ docs }}len/ruby">Ruby </a></li>
+                      <li><a class="nav-link u-header__sub-menu-nav-link" href="{{ docs }}len/scala">Scala</a></li>
+                      <li><a class="nav-link u-header__sub-menu-nav-link" href="{{ docs }}len/cs">C# <span
                             class="badge badge-success badge-pill ml-1">Nuevo</span></a></li>
-                      <li><a class="nav-link u-header__sub-menu-nav-link" href="{{ docs }}/clojure">Clojure <span
+                      <li><a class="nav-link u-header__sub-menu-nav-link" href="{{ docs }}len/clojure">Clojure <span
                             class="badge badge-success badge-pill ml-1">Nuevo</span></a></li>
                     </ul>
 
-                    <span class="u-header__sub-menu-title">Idiomas admitidos</span>
+                    <span class="u-header__sub-menu-title">Instalaciones</span>
                     <ul class="u-header__sub-menu-nav-group mb-3">
-                      <li><a class="nav-link u-header__sub-menu-nav-link" href="/licencia">Licencia </a></li>
-                      <li><a class="nav-link u-header__sub-menu-nav-link" href="/pyp">Politica y privacidad </a></li>
+                      <li><a class="nav-link u-header__sub-menu-nav-link" target="_blank" href="https://www.npmjs.com/package/@maubg/hosthome-cli">npm </a></li>
+                      <li><a class="nav-link u-header__sub-menu-nav-link" target="_blank" href="https://pypi.org/project/HostHome-cli/">pip </a></li>
+                      <li><a class="nav-link u-header__sub-menu-nav-link" target="_blank" href="https://yarnpkg.com/package/@maubg/hosthome-cli">Yarn </a></li>
                     </ul>
 
-                    <span class="u-header__sub-menu-title">Subscribirse</span>
-                    <form class="u-header__sub-menu-nav-group" action="">
-                      <p>Subscribete para recibir notificaciones</p>
-                      <input type="email" name="email"
-                        style="padding: .22rem .5rem; font-size: .875rem; line-height: 1.5; transform: translateY(1px);"
-                        placeholder="Email" required>
-                      <button class="btn btn-sm btn-primary transition-3d-hover" type="submit">Subscribirse</button>
-                    </form>
+                    <span class="u-header__sub-menu-title">Licencia</span>
+                    <ul class="u-header__sub-menu-nav-group mb-3">
+                      <li><a class="nav-link u-header__sub-menu-nav-link" href="/licencia">Licencia</a></li>
+                    </ul>
                   </div>
                 </div>
               </div>
@@ -12665,7 +12661,7 @@
             </div>
             
             <div class="u-header__promo-item">
-              <a class="u-header__promo-link" href="{{ docs }}">
+              <a class="u-header__promo-link" href="{{ docs }}geting_started">
                 <div class="media align-items-center">
                   <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                     viewBox="0 0 120 120" style="enable-background:new 0 0 120 120;" xml:space="preserve"
