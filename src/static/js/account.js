@@ -2,7 +2,7 @@
 //     $("#formImg").submit();
 // });
 
-function guardar() {
+async function guardar() {
     const nombre = document.getElementById("nombre").value;
     const email = document.getElementById("mail").value;
 
@@ -25,7 +25,7 @@ function guardar() {
         url += "&edad="+eddad
     }
 
-    fetch(url, {
+    await fetch(url, {
         method: 'POST'
     })
 

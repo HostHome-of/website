@@ -25,8 +25,9 @@
             <a href="/dashboard/host" class="tippy" title="Mira tus hosts" data-duration="300" data-arrow="false"
                 data-animation="shift" data-position="right" id="HostUsuario"><i
                     style="color: rgb(255, 173, 40); margin-right: 10px;" class="fas fa-cloud-upload-alt"></i> 0 </a>
-                        <a href="{{ docs }}" target="_blank" class="tippy" title="Recibir ayuda" data-duration="300" data-arrow="false"
-                data-animation="shift" data-position="right" id="help"><i class="far fa-life-ring"></i></a>
+            <a href="{{ docs }}" target="_blank" class="tippy" title="Recibir ayuda" data-duration="300"
+                data-arrow="false" data-animation="shift" data-position="right" id="help"><i
+                    class="far fa-life-ring"></i></a>
             <a href="/dashboard/edit" class="tippy" title="Editar perfil" data-duration="300" data-arrow="false"
                 data-animation="shift" data-position="right" id="edit"><i class="fas fa-cog"></i></a>
             <a href="/dashboard" class="tippy" title="Pagina principal" data-duration="300" data-arrow="false"
@@ -168,7 +169,7 @@
                 height: 70vh;
                 position: relative;
                 margin-right: 150px;
-            
+
             }
 
             @media only screen and (max-width: 1400px) {
@@ -199,17 +200,17 @@
             <div class="edit__uno">
                 <div class="nav">
                     <div style="display: flex;" class="info">
-                    <style>
-                        #pfpHolderNavy {
-                            background-image: url("{{ user['pfp'] }}");
-                            background-size: cover;
-                            background-position: center;
-                            width: 44px;
-                            height: 44px;
-                            border-radius: 50%;
-                        }
-                    </style>
-                    <div id="pfpHolderNavy"></div>
+                        <style>
+                            #pfpHolderNavy {
+                                background-image: url("{{ user['pfp'] }}");
+                                background-size: cover;
+                                background-position: center;
+                                width: 44px;
+                                height: 44px;
+                                border-radius: 50%;
+                            }
+                        </style>
+                        <div id="pfpHolderNavy"></div>
                         <p
                             style="display: flex; justify-content: center; align-items: center; margin: 0 0 0 10px; font-size: 16px; font-weight: 600; color: rgb(54, 73, 98); text-align: left; line-height: 1.5; text-transform: none; overflow: unset; white-space: unset; text-overflow: unset;">
                             {{ user["nombre"] }}</p>
@@ -222,18 +223,18 @@
                         <a href="/dashboard/edit/imagen">
                             <div style="display: flex;"><i class="far fa-images"></i> Cambiar img de perfil</div> <i
                                 class="fas fa-chevron-right"></i>
-                        <a href="/dashboard/edit/mail">
-                            <div style="display: flex;"><i class="far fa-envelope"></i> Preferencias de email</div> <i
-                                class="fas fa-chevron-right"></i>
-                        </a>
-                        <a href="/dashboard/edit/org">
-                            <div style="display: flex;"><i class="fas fa-sitemap"></i> Organizacion</div> <i
-                                class="fas fa-chevron-right"></i>
-                        </a>
-                        <a href="/dashboard/edit/avanzado">
-                            <div style="display: flex;"><i class="fas fa-exclamation-circle"></i> Avanzado</div> <i
-                                class="fas fa-chevron-right"></i>
-                        </a>
+                            <a href="/dashboard/edit/mail">
+                                <div style="display: flex;"><i class="far fa-envelope"></i> Preferencias de email</div>
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                            <a href="/dashboard/edit/org">
+                                <div style="display: flex;"><i class="fas fa-sitemap"></i> Organizacion</div> <i
+                                    class="fas fa-chevron-right"></i>
+                            </a>
+                            <a href="/dashboard/edit/avanzado">
+                                <div style="display: flex;"><i class="fas fa-exclamation-circle"></i> Avanzado</div> <i
+                                    class="fas fa-chevron-right"></i>
+                            </a>
                     </ul>
                 </div>
 
@@ -262,7 +263,8 @@
                                             Email
                                         </p>
                                     </label>
-                                    <input placeholder="Email" id="mail" value="{{ user['mail'] }}" type="mail" disabled>
+                                    <input placeholder="Email" id="mail" value="{{ user['mail'] }}" type="mail"
+                                        disabled>
                                 </div>
                                 <div class="input">
                                     <label for="nombre">
@@ -270,7 +272,8 @@
                                             Nombre
                                         </p>
                                     </label>
-                                    <input oninput="cambiarBtn()" placeholder="Nombre" id="nombre" value="{{ user['nombre'] }}" type="text">
+                                    <input oninput="cambiarBtn()" placeholder="Nombre" id="nombre"
+                                        value="{{ user['nombre'] }}" type="text">
                                 </div>
                                 <div class="input">
                                     <label for="sn">
@@ -278,7 +281,8 @@
                                             Apellidos
                                         </p>
                                     </label>
-                                    <input oninput="cambiarBtn()" placeholder="Apellidos" value="{{ user['segundoNombre'] }}" id="sn" type="text">
+                                    <input oninput="cambiarBtn()" placeholder="Apellidos"
+                                        value="{{ user['segundoNombre'] }}" id="sn" type="text">
                                 </div>
                                 <div class="input">
                                     <label for="eddad">
@@ -286,7 +290,8 @@
                                             Eddad
                                         </p>
                                     </label>
-                                    <input oninput="cambiarBtn()" placeholder="Eddad" value="{{ user['edad'] }}" id="eddad" type="number">
+                                    <input oninput="cambiarBtn()" placeholder="Eddad" value="{{ user['edad'] }}"
+                                        id="eddad" type="number">
                                 </div>
                                 <button disabled id="btnSubmity" onclick="guardar()" class="submit">
                                     Actualizar perfil
@@ -301,19 +306,91 @@
                             </div>
                             <div class="info">
                                 <div class="title">
-                                    Cambiar contraseña
+                                    Applicaciones
                                 </div>
                                 <div class="desc">
-                                    Puedes decidir las integraciones que quieras.
+                                    Puedes escojer las applicaciones vinculadas.
                                 </div>
                             </div>
                         </div>
                         <section id="apps" class="wrapper">
                             <div id="form">
                                 <div style="display: flex; flex-direction:row;" class="input">
-                                    <input oninput="updatePasswordCheck()" placeholder="Nueva contraseña" id="npassword" type="password">
-                                    <button>awd</button>
-                                </div>                                
+                                    <style>
+                                        #githubApp {
+                                            background-color: transparent;
+                                            position: relative;
+                                            display: block;
+                                            transition: border 0.2s ease-in-out 0s;
+                                            box-sizing: border-box;
+                                            /* cursor: text; */
+                                            padding: 5px 18px;
+                                            font-family: "Avenir Next", "Helvetica Neue", sans-serif;
+                                            font-size: 16px;
+                                            font-weight: 500;
+                                            line-height: 26px;
+                                            border: 1px solid rgb(215, 219, 224);
+                                            width: 100%;
+                                            color: rgb(54, 73, 98);
+                                            border-radius: 4px;
+                                            outline: none;
+                                            display: flex;
+                                            transition: .4s;
+                                            align-items: center;
+                                        }
+
+                                        .GithubBotonOAlgo:hover {
+                                            opacity: 1 !important;
+                                        }
+                                    </style>
+                                    <script>
+                                        const github_uri = "{{ url_for('github.login') }}"
+
+                                        function abrirAuthGithub() {
+                                            window.open(github_uri, "_blank", "height=600,width=1200,top=100,left=100")
+                                        }
+
+                                        function cerrarSesionEnGithub() {
+                                            fetch("/dashboard/logout/github", {
+                                                method: "POST"
+                                            })
+                                            Notiflix.Loading.Init({svgColor:"#6493c6",});
+
+                                            Notiflix.Notify.Success('Se ha hecho logout en GitHub!');
+
+                                            Notiflix.Confirm.Show('Atencion','El logout de token se ha completado pero sigues autorizado. Para desautorizarte ve a este link y dale a remover HostHome','Abrir config','Continuar',function(){ 
+                                                window.open("https://github.com/settings/applications", "_blank");
+                                                window.location.reload();
+                                            }, function(){ 
+                                                Notiflix.Loading.Circle();
+                                                setTimeout(function() {
+                                                    window.location.reload();
+                                                }, 1000)
+                                            });
+
+                                        }
+                                    </script>
+                                    {% if github %}
+                                        <div id="githubApp">
+                                            <i style="font-size: 30px; border-right: 1px solid #ddd; padding-right: 15px;"
+                                                class="fab fa-github"></i>
+                                            <a href="https://github.com/{{ github['login'] }}" target="_blank" style="margin: 0 0 0 10px; color: #000;">
+                                                github.com/{{ github['login'] }}
+                                            </a>
+                                        </div>
+                                        <button class="GithubBotonOAlgo" onclick="cerrarSesionEnGithub()"
+                                            style="transition: .3s; opacity: .7; border: none; outline: none; border-radius: 5px; color: #fff; background: rgb(255,64,129); padding: 0 40px; margin: 0 10px; cursor: pointer;">Eliminar</button>
+                                    {% else %}
+                                        <div id="githubApp">
+                                            <i style="font-size: 30px; border-right: 1px solid #ddd; padding-right: 15px;" class="fab fa-github"></i>
+                                            <h4 style="margin: 0 0 0 10px;">
+                                                No tienes ninguna cuenta vinculada
+                                            </h4>
+                                        </div>
+                                        <button class="GithubBotonOAlgo" onclick="abrirAuthGithub()"
+                                            style="transition: .3s; opacity: .7; border: none; outline: none; border-radius: 5px; color: #fff; background: rgb(34, 92, 255); padding: 0 40px; margin: 0 10px; cursor: pointer;">Login</button>
+                                    {% endif %}
+                                </div>
                             </div>
                         </section>
                     </div>
@@ -339,7 +416,8 @@
                                             contraseña
                                         </p>
                                     </label>
-                                    <input oninput="updatePasswordCheck()" placeholder="Contraseña actual" id="password" type="password">
+                                    <input oninput="updatePasswordCheck()" placeholder="Contraseña actual" id="password"
+                                        type="password">
                                 </div>
                                 <div class="input">
                                     <label for="npassword">
@@ -347,15 +425,17 @@
                                             Nueva contraseña
                                         </p>
                                     </label>
-                                    <input oninput="updatePasswordCheck()" placeholder="Nueva contraseña" id="npassword" type="password">
-                                </div>                                
+                                    <input oninput="updatePasswordCheck()" placeholder="Nueva contraseña" id="npassword"
+                                        type="password">
+                                </div>
                                 <div class="input">
                                     <label for="rpassword">
                                         <p>
                                             Repetir nueva contraseña
                                         </p>
                                     </label>
-                                    <input oninput="updatePasswordCheck()" placeholder="Repetir contraseña" id="rpassword" type="password">
+                                    <input oninput="updatePasswordCheck()" placeholder="Repetir contraseña"
+                                        id="rpassword" type="password">
                                 </div>
                                 <button onclick="updatePassword()" disabled class="submit" id="spassword">
                                     Cambiar contraseña
@@ -380,7 +460,7 @@
 
     <script src="{{ url_for('static', filename='vendor/notiflix/notiflix-aio-2.7.0.min.js') }}"></script>
     <script src="{{ url_for('static', filename='/js/account.js') }}"></script>
-    
+
 </body>
 
 </html>

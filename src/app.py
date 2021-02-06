@@ -23,9 +23,25 @@ os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 # GitHub login
 github_blueprint = make_github_blueprint(client_id=str(env["GITHUB_ID"]),
                                         client_secret=str(env["GITHUB_KEY"]),
-                                        redirect_to="crearHost")
+                                        redirect_to="quitarWindow")
 
 app.register_blueprint(github_blueprint, url_prefix="/github_login")
+
+# Esto es un mal gasto
+@app.route("/quitar/window")
+def quitarWindow():
+    return """
+        <html>
+            <body onload="cerrar()">
+                <script>
+                    function cerrar() {
+                        opener.location.reload(1);
+                        window.close();
+                    }
+                </script>
+            </body>
+        </html>
+    """
 
 # Repos
 def get_repositories(url, usr):
@@ -248,7 +264,15 @@ def editarCuenta():
     if usr is None:
         return redirect(url_for('Registrarse'))
 
-    return render_template("dashboard/edit.html", user=usr, docs=docs)
+    githubUsr = None
+
+    if github.authorized:
+        info_github = github.get("/user")
+
+        if info_github.ok:
+            githubUsr = info_github.json()
+
+    return render_template("dashboard/edit.html", user=usr, docs=docs, github=githubUsr)
 
 @app.route("/dashboard/host")
 def mirarHosts():
@@ -329,13 +353,16 @@ def DestruirCuenta():
 
     return redirect(url_for('PaginaPrincipal'))
 
-@app.route("/dashboard/logout/<string:field>")
+@app.route("/dashboard/logout/<string:field>", methods=["GET", "POST"])
 def quitarTerceros(field):
-    if field == "github":
-        if github.authorized:
-            del github_blueprint.token
-    
-    return "ok"
+    if request.method == "POST":
+        if field == "github":
+            if github.authorized:
+                del github_blueprint.token
+        
+        return "ok"
+
+    return redirect(url_for("Cuenta"))
 
 def run():
     app.run()
