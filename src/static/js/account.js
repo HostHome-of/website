@@ -132,6 +132,7 @@ function createHost() {
                     "url": git_url
                 }
             }).then(response => response.json()).then(data => {
+                console.log(data)
                 if (!data.hasOwnProperty('error')) {
                     Notiflix.Notify.Failure(data["error"]);
                 } else {

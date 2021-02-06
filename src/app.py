@@ -268,8 +268,12 @@ def crearHost():
     if request.method == "POST":
         nombre = request.args.get("nombre")
         url    = request.headers.get("url") 
+        if url is None:
+            abort(404)
         data = enviar(f"crear|{nombre}|{url}")
-        if data[0] == False:
+        print(data)
+        print(data[0])
+        if bool(data[0]) == False:
             return {"error": data[1]}
         return {"estado": 200}
 

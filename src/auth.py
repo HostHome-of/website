@@ -1,6 +1,9 @@
 import json, random, datetime, requests
 import io
 
+import hashlib
+import os
+
 def abrir():
     with open("./src/data/users.json", "r") as f:
         usrs = json.load(f)
@@ -113,6 +116,28 @@ class Usuario():
         usuarios[str(mail)]["emails"]["cuatro"] = cuatro
         cerrar(usuarios)
 
+class Psw():
+    def __init__(self, texto: str, email: str):
+        self.texto: str = texto
+        self.email: str = email
+
+    def insertar(self):
+        usuarios = abrir()
+        usuario = usuarios[self.email]
+
+        salt = os.urandom(32) 
+
+        key = hashlib.pbkdf2_hmac(
+            'sha256', 
+            self.texto.encode('utf-8'), 
+            salt, 
+            100000, 
+            dklen=128 
+        )
+
+        usuario["psw"] = str(key)
+        cerrar(usuarios)
+
 class CrearUsuario():
     def __init__(self, nombre: str=None, psw: str=None, mail: str=None):
         self.nombre = nombre
@@ -148,7 +173,7 @@ class CrearUsuario():
             usuarios[str(self.mail)] = {}
             usuarios[str(self.mail)]["mail"] = self.mail
             usuarios[str(self.mail)]["nombre"] = self.nombre
-            usuarios[str(self.mail)]["psw"] = self.psw 
+            usuarios[str(self.mail)]["psw"] = self.psw
             usuarios[str(self.mail)]["cuentas"] = {}
             tkN = self.tokenizar()
             usuarios[str(self.mail)]["cuentas"][str(tkN)] = True 
@@ -169,6 +194,7 @@ class CrearUsuario():
             usuarios[str(self.mail)]["emails"]["cuatro"] = True
 
             cerrar(usuarios)
+            # Psw(self.psw, str(self.mail)).insertar() 
             return str(tkN)
         
         return False

@@ -256,7 +256,12 @@
                                                     Nombre
                                                 </p>
                                             </label>
-                                            <input oninput="updateBtnForNewHosting()" placeholder="Nombre del host"
+                                            <script>
+                                                function changeValueForUnlinkTheGithubRepository(input) {
+                                                    input.value = input.value.replace('https://github.com/', 'github.com/');
+                                                }
+                                            </script>
+                                            <input onchange="changeValueForUnlinkTheGithubRepository(this)" oninput="updateBtnForNewHosting()" placeholder="Nombre del host"
                                                 id="hostNombre" type="text">
                                         </div>
                                         <div style="margin: 10px auto;" class="g-recaptcha"
