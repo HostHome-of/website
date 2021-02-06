@@ -297,6 +297,29 @@
                     <div class="edit__box">
                         <div class="headder">
                             <div class="logo">
+                                <i class="fas fa-puzzle-piece"></i>
+                            </div>
+                            <div class="info">
+                                <div class="title">
+                                    Cambiar contraseña
+                                </div>
+                                <div class="desc">
+                                    Puedes decidir las integraciones que quieras.
+                                </div>
+                            </div>
+                        </div>
+                        <section id="apps" class="wrapper">
+                            <div id="form">
+                                <div style="display: flex; flex-direction:row;" class="input">
+                                    <input oninput="updatePasswordCheck()" placeholder="Nueva contraseña" id="npassword" type="password">
+                                    <button>awd</button>
+                                </div>                                
+                            </div>
+                        </section>
+                    </div>
+                    <div class="edit__box">
+                        <div class="headder">
+                            <div class="logo">
                                 <i class="fas fa-unlock-alt"></i>
                             </div>
                             <div class="info">
@@ -313,7 +336,7 @@
                                 <div class="input">
                                     <label for="password">
                                         <p>
-                                            Contraseña actual
+                                            contraseña
                                         </p>
                                     </label>
                                     <input oninput="updatePasswordCheck()" placeholder="Contraseña actual" id="password" type="password">
