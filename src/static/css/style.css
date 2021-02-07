@@ -8266,3 +8266,14 @@ section {
   align-items: center;
   flex-direction: column;
 }
+
+@media screen and (max-width: 1400px) {
+  .header__wrapper.visible .header__item span {
+    font-size: 50px;
+  }
+
+  .header__contacts {
+    margin-left: 340px;
+    margin-right: 50px;
+  }
+}
