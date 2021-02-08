@@ -23,7 +23,7 @@
 </head>
 
 <body
-    style="display: flex; overflow: hidden; font-family: Avenir Next,Helvetica Neue,Arial,sans-serif!important; font-feature-settings: 'kern','liga','pnum'; -webkit-font-smoothing: antialiased;">
+    style="display: flex; font-family: Avenir Next,Helvetica Neue,Arial,sans-serif!important; font-feature-settings: 'kern','liga','pnum'; -webkit-font-smoothing: antialiased;">
     <style>
         a:hover {
             text-decoration: none;
@@ -39,8 +39,9 @@
             <a href="/dashboard/host" class="tippy" title="Mira tus hosts" data-duration="300" data-arrow="false"
                 data-animation="shift" data-position="right" id="HostUsuario"><i
                     style="color: rgb(255, 173, 40); margin-right: 10px;" class="fas fa-cloud-upload-alt"></i> 0 </a>
-                        <a href="{{ docs }}" target="_blank" class="tippy" title="Recibir ayuda" data-duration="300" data-arrow="false"
-                data-animation="shift" data-position="right" id="help"><i class="far fa-life-ring"></i></a>
+            <a href="{{ docs }}" target="_blank" class="tippy" title="Recibir ayuda" data-duration="300"
+                data-arrow="false" data-animation="shift" data-position="right" id="help"><i
+                    class="far fa-life-ring"></i></a>
             <a href="/dashboard/edit" class="tippy" title="Editar perfil" data-duration="300" data-arrow="false"
                 data-animation="shift" data-position="right" id="edit"><i class="fas fa-cog"></i></a>
             <a href="/dashboard" class="tippy" title="Pagina principal" data-duration="300" data-arrow="false"
@@ -76,9 +77,10 @@
         <style>
             .pagina {
                 margin: 100px 0;
+                height: auto;
             }
         </style>
-        <div class="pagina">
+        <div class="pagina" style="flex-direction: column;">
             <div class="edit__box">
                 <div class="headder">
                     <div class="logo">
@@ -261,16 +263,10 @@
                                                     input.value = input.value.replace('https://github.com/', 'github.com/');
                                                 }
                                             </script>
-                                            <input onchange="changeValueForUnlinkTheGithubRepository(this)" oninput="updateBtnForNewHosting()" placeholder="Nombre del host"
+                                            <input onchange="changeValueForUnlinkTheGithubRepository(this)"
+                                                oninput="updateBtnForNewHosting()" placeholder="Nombre del host"
                                                 id="hostNombre" type="text">
                                         </div>
-                                        <div style="margin: 10px auto;" class="g-recaptcha"
-                                            data-callback="validateRobotitoCaptchaNewHost" data-sitekey="{{ key }}">
-                                        </div>
-                                        <button style="cursor: pointer;" disabled id="btnSubmityHostNew"
-                                            onclick="createHost()" class="submit">
-                                            Crear host
-                                        </button>
                                     </div>
                                     <script>
                                         function updateRepoValue(divyThis) {
@@ -351,6 +347,292 @@
                     </div>
                 </div>
             </div>
+            <div class="edit__box">
+                <div class="headder">
+                    <div class="logo">
+                        <i class="fas fa-key"></i>
+                    </div>
+                    <div class="info">
+                        <div class="title">
+                            Configuraciom
+                        </div>
+                        <div class="desc">
+                            Dale a si si tu projecto usa algo como un .env
+                        </div>
+                    </div>
+                </div>
+                <style>
+                    .button-cover {
+                        height: 100px;
+                        width: 200px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        background-color: #fff;
+                        box-shadow: 0 10px 20px -8px #c5d6d6;
+                        border-radius: 4px
+                    }
+
+                    .lump,
+                    .layer {
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        bottom: 0;
+                        left: 0
+                    }
+
+                    .button {
+                        position: relative;
+                        width: 74px;
+                        height: 36px;
+                        overflow: hidden
+                    }
+
+                    .button.radius,
+                    .button.radius .layer {
+                        border-radius: 100px
+                    }
+
+                    .button.b2 {
+                        border-radius: 2px
+                    }
+
+                    .checkbox {
+                        position: relative;
+                        width: 100%;
+                        height: 30px;
+                        padding: 0;
+                        margin: 0;
+                        opacity: 0;
+                        cursor: pointer;
+                        z-index: 3
+                    }
+
+                    .lump {
+                        z-index: 2;
+                    }
+
+                    .layer {
+                        width: 100%;
+                        background-color: #ebf7fc;
+                        transition: .3s ease all;
+                        z-index: 1;
+                        height: 30px;
+                    }
+
+                    #toggle-button .lump:before {
+                        content: '✔️';
+                        position: absolute;
+                        top: 7px;
+                        left: 4px;
+                        width: 20px;
+                        height: 10px;
+                        color: #fff;
+                        font-size: 13px;
+                        font-weight: 700;
+                        text-align: center;
+                        line-height: 1;
+                        padding: 9px 4px;
+                        background-color: #4BB543;
+                        display: flex;
+                        border-radius: 50%;
+                        transition: .3s ease all, left .3s cubic-bezier(0.18, 0.89, 0.35, 1.15);
+                        justify-content: center;
+                        align-items: center;
+                    }
+
+                    #toggle-button .checkbox:active+.lump:before {
+                        width: 46px;
+                        border-radius: 100px
+                    }
+
+                    #toggle-button .checkbox:checked:active+.lump:before {
+                        margin-left: -26px
+                    }
+
+                    #toggle-button .checkbox:checked+.lump:before {
+                        content: '❌';
+                        left: 42px;
+                        background-color: #F44336
+                    }
+
+                    #toggle-button .checkbox:checked~.layer {
+                        background-color: #fcebeb
+                    }
+                </style>
+                <script>
+                    $(document).ready(function () {
+                        var deger = "Evet";
+                        $("#sec").on('change', function () {
+                            if ($(this).is(':checked')) {
+                                deger = "Hayır";
+                                document.getElementById("editor").style.display = "none";
+                                document.getElementById("nombreArchivoConfig").style.display = "none";
+                                $(this).val(deger);
+                            }
+                            else {
+                                deger = "Evet";
+                                document.getElementById("editor").style.display = "block";
+                                document.getElementById("nombreArchivoConfig").style.display = "block";
+                                $(this).val(deger);
+                            }
+                        });
+                    });
+                </script>
+                <style>
+                    #formy .input {
+                        background-color: transparent;
+                        position: relative;
+                        border-bottom: 1px solid rgb(215, 219, 224);
+                        border-radius: 0px;
+                    }
+
+                    #formy .input {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        padding-bottom: 12px;
+                    }
+
+                    #formy .input .info .title {
+                        font-size: 16px;
+                        font-weight: 700;
+                        color: rgb(54, 73, 98);
+                        text-align: left;
+                        line-height: 1.5;
+                        text-transform: none;
+                        overflow: unset;
+                        white-space: unset;
+                        text-overflow: unset;
+                    }
+
+                    #formy .input .info .desc {
+                        font-size: 16px;
+                        font-weight: 500;
+                        color: rgb(54, 73, 98);
+                        text-align: left;
+                        line-height: 1.5;
+                        text-transform: none;
+                        overflow: unset;
+                        white-space: unset;
+                        text-overflow: unset;
+                    }
+
+                    .center {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 100%;
+                        height: 100vh
+                    }
+
+                    .button-cover {
+                        height: 100px;
+                        width: 200px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        background-color: #fff;
+                        box-shadow: 0 10px 20px -8px #c5d6d6;
+                        border-radius: 4px
+                    }
+
+                    .lump,
+                    .layer {
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        bottom: 0;
+                        left: 0
+                    }
+
+                    .button {
+                        position: relative;
+                        width: 74px;
+                        height: 36px;
+                        overflow: hidden
+                    }
+
+                    .button.radius,
+                    .button.radius .layer {
+                        border-radius: 100px
+                    }
+
+                    .button.b2 {
+                        border-radius: 2px
+                    }
+                </style>
+                <div id="formy" class="wrapper">
+                    <div class="input">
+                        <div class="info">
+                            <div class="title">
+                                Configuracion
+                            </div>
+                            <div class="desc">
+                                Tu projecto tiene algun archivo de configuracion? (Puedes cambiarlo despues)
+                            </div>
+                        </div>
+                        <div class="button radius" id="toggle-button">
+                            <input type="checkbox" class="checkbox" name="checky" id="sec" value="Evet" checked>
+                            <div class="lump"></div>
+                            <div class="layer"></div>
+                        </div>
+                    </div>
+                    <style>
+                        #editor {
+                            position: relative;
+                            width: 100%;
+                            height: 336px;
+                            position: relative;
+                            box-shadow: 0 10px 40px rgb(0 0 0 / 16%);
+                            display: none;
+                            margin-top: 10px;
+                        }
+
+                        #nombreArchivoConfig {
+                            position: relative;
+                            width: 100%;
+                            height: 50px;
+                            position: relative;
+                            box-shadow: 0 10px 40px rgb(0 0 0 / 16%);
+                            display: none;
+                            margin-top: 10px;
+                            outline: none;
+                            border: none;
+                            padding: 10px;
+                        }
+                    </style>
+                    <input placeholder="NombreDelArchivoSecreto.extension" id="nombreArchivoConfig" type="text" />
+                    <div id="editor"></div>
+                </div>
+            </div>
+            <div class="edit__box">
+                <div class="headder">
+                    <div class="logo">
+                        <i class="fas fa-vote-yea"></i>
+                    </div>
+                    <div class="info">
+                        <div class="title">
+                            Confirmar
+                        </div>
+                        <div class="desc">
+                            Dale al boton cuando estes listo
+                        </div>
+                    </div>
+                </div>
+                <div class="wrapper">
+                    <div id="form">
+                        <div style="margin: 10px auto;" class="g-recaptcha"
+                            data-callback="validateRobotitoCaptchaNewHost" data-sitekey="{{ key }}">
+                        </div>
+                        <button style="cursor: pointer;" disabled id="btnSubmityHostNew" onclick="createHost()"
+                            class="submit">
+                            Crear host
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -364,6 +646,25 @@
         new Tippy('#edit')
         new Tippy('#HostUsuario')
         new Tippy('#help')
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"
+        integrity="sha512-GZ1RIgZaSc8rnco/8CXfRdCpDxRCphenIiZ2ztLy3XQfCbQUSCuk8IudvNHxkRA3oUg6q0qejgN/qqyG1duv5Q=="
+        crossorigin="anonymous"></script>
+    <script>
+        function setEditor() {
+            window.eh = ace.edit("editor");
+            eh.setTheme("ace/theme/dracula");
+            eh.session.setMode("ace/mode/json");
+            eh.setOptions({
+                fontSize: 20,
+                cursorStyle: "wide",
+                enableLiveAutocompletion: true,
+                enableBasicAutocompletion: true
+            })
+        }
+
+        setEditor()
     </script>
 
     <script src="{{ url_for('static', filename='js/account.js') }}"></script>

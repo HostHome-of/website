@@ -2528,8 +2528,8 @@ a.btn {
   -ms-flex-negative: 0;
   flex-shrink: 0;
   width: 340px;
-  margin-right: auto;
-  margin-right: 240px;
+  margin-right: 102px;
+  margin-left: 100px;
 }
 
 .header__line {

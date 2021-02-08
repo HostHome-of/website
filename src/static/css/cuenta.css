@@ -71,7 +71,7 @@ body {
     margin: 0;
     text-align: left;
     color: #525f7f;
-    background-color: #f8f9fe;
+    background: rgb(244, 247, 255);
 }
 
 [tabindex='-1']:focus {
@@ -922,6 +922,7 @@ textarea.form-control {
     height: 100%;
     padding-left: 120px;
     padding-right: 120px;
+    background: rgb(244, 247, 255);
 }
 
 .pagina .index {
@@ -1328,6 +1329,7 @@ textarea.form-control {
     height: 100vh;
     display: flex;
     flex-direction: column;
+    background: rgb(244, 247, 255);
 }
 
 .navy {

@@ -100,8 +100,8 @@ def check_usuario():
 def PaginaPrincipal():
 
     usr = check_usuario()
-    if request.args.get("g", None) == "1":
-        return redirect(url_for("crearHost"))
+    # if request.args.get("g", None) == "1":
+    #     return redirect(url_for("crearHost"))
 
     if usr and request.args.get("r", None) == "true" or not usr:
         return render_template("index.html", user=usr, usrAdmin=len(Usuario().cojer_admins()), usuarios=len(Usuario().cojer_usuarios()), docs=docs)

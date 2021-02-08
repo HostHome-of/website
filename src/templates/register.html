@@ -2,112 +2,92 @@
 <html lang="es-ES">
 
 <head>
-	<title>HostHome | Registrarse</title>
+	<title>HostHome | Entrar</title>
 	<link rel="icon" href="{{ url_for('static', filename='images/favicon.png')}}">
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/auth.css') }}">
 	<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css"
-		href="{{ url_for('static', filename='vendor/notiflix/notiflix-2.7.0.min.css') }}">
-	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
-	<link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
-</head>
 
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/notiflix/notiflix-2.7.0.min.css') }}">
+	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
 <body>
 
-	<div class="daily">
-		<a href="/" class="daily-title">HostHome</a>
-		<div class="btns">
-			<div class="buttons"><button class="btn sign">Registrarse</button></div>
-			<a href="/login">
-				<div class="buttons"><button class="btn sign">Entrar</button></div>
-			</a>
-		</div>
-	</div>
-
-	<div class="modal open">
-		<div class="wrapper">
-			<div class="btn-close">
-				<span></span>
-				<span></span>
+	<div class="wrapper">
+		<div class="left">
+			<div class="logo">
+				<a href="/" class="logete">
+					<img src="{{ url_for('static', filename='images/favicon.png') }}" alt="" srcset="">
+					<h3 class="texto">
+						HostHome
+					</h3>
+				</a>
 			</div>
+			<div class="form" id="formy">
+				<h1 style="font-size: 55px;">¡Hola!</h1>
+				<h2 style="font-size: 30px;">¿Nos conocemos?</h2>
+				<div style="height: 50px; width: 100%;"></div>
+				<script>
+					function mirarSiEsValido() {
+						const btn = document.getElementById("btnLogin");
+						const mail = document.getElementById("email").value;
+						const psw = document.getElementById("psw").value;
+						const npsw = document.getElementById("rpsw").value;
+						const nombre = document.getElementById("nombre").value;
 
-
-			<div class="title">
-				<h1>Registrarse</h1>
-			</div>
-
-			<script>
-				var noEsRobot = true;
-
-				function noEsRobotito() {
-					noEsRobot = false;
-					mirar()
-				}
-
-				function mirar() {
-					const psw1 = document.getElementById("password").value;
-					const psw2 = document.getElementById("confirmpassword").value;
-					const mail = document.getElementById("email").value;
-					const nombre = document.getElementById("name").value;
-					const btn = document.getElementById("smb");
-
-					if (psw1 != psw2 || psw1 == "" || psw2 == "" || mail == "" || nombre == "" || noEsRobot == true) {
-						btn.disabled = true;
-						return;
+						if (psw != "" && mail != "" && npsw != "" && npsw == psw && nombre != "") {
+							btn.disabled = false;
+						} else {
+							btn.disabled = true;
+						}
 					}
 
-					btn.disabled = false;
-				}
-			</script>
+					function cambiarARobot() {
+						const form = document.getElementById("formy");
+						const recaptcha = document.getElementById("recaptcha");
 
-			<div class="left">
-				<div class="content">
-					<h2 class="subtitle">Rellena todo para crearte una cuenta</h2>
-					<form id="logger" onsubmit="return enviar(event)" action="/register/activation">
-						<div class="input-wrapper">
-							<label for="name">Nombre</label>
-							<input oninput="mirar()" id="name" type="text">
-						</div>
-
-						<div class="input-wrapper">
-							<label for="email">E-mail</label>
-							<input oninput="mirar()" id="email" type="email">
-						</div>
-
-						<div class="input-wrapper">
-							<label for="password">Contraseña</label>
-							<input oninput="mirar()" id="password" type="password">
-						</div>
-
-						<div class="input-wrapper">
-							<label for="confirmpassword">Confirmar contraseña</label>
-							<input oninput="mirar()" id="confirmpassword" type="password">
-						</div>
-
-						<!-- <div class="terms">
-
-							<input onchange="mirar()" type="checkbox" id="check">
-							<label for="check"></label>
-							<p>Acepto el <a class="link" href="#">Termino de uso</a> & <a class="link" href="#">Politica
-									de privacidad</a></p>
-						</div> -->
-
-						<div class="g-recaptcha" data-callback="noEsRobotito" data-sitekey="{{ key }}"></div>
-
-						<button class="btn" id="smb" type="submit" disabled>Crear una cuenta</button>
-						<small>Al crearte una cuenta aceptas los terminos y privacidad</small>
-					</form>
+						form.style.display = "none";
+						recaptcha.style.display = "block";
+					}
+				</script>
+				<div class="input">
+					<label for="email">Email</label>
+					<input oninput="mirarSiEsValido()" placeholder="nombre@email.com" type="email" name="email" id="email" autocomplete="off">
 				</div>
-
+				<div class="input">
+					<label for="nombre">Nombre</label>
+					<input oninput="mirarSiEsValido()" placeholder="Nombre" type="text" name="nombre" id="nombre" autocomplete="off">
+				</div>
+				<div class="input">
+					<label for="psw">Contraseña</label>
+					<input oninput="mirarSiEsValido()" type="password" placeholder="********" name="psw" id="psw" autocomplete="off">
+				</div>
+				<div class="input">
+					<label for="rpsw">Repetir contraseña</label>
+					<input oninput="mirarSiEsValido()" type="password" placeholder="********" name="rpsw" id="rpsw" autocomplete="off">
+				</div>
+				<button disabled onclick="cambiarARobot()" class="subBtn" id="btnLogin">Registrarse</button>
+				<div class="extra">
+					<p>Tienes una cuenta? <a href="/login">Entrar</a></p>
+				</div>
 			</div>
-
-			<div class="right">
+			<div id="recaptcha">
+				<h3 style="margin-bottom: 30px;">Demuestra que no eres un robot</h3>
+				<div class="g-recaptcha" data-callback="enviar" data-sitekey="{{ key }}"></div>
 			</div>
-
+		</div>
+		<div class="right">
+			<div style="height: 10vh; width: 100%;"></div>
+			<div style="width: 100%; height: 90vh; padding: 65px;">
+				<img src="{{ url_for('static', filename='images/login.png') }}">
+			</div>
 		</div>
 	</div>
+	
 	<script type="text/javascript" src="{{ url_for('static', filename='js/auth.js') }}"></script>
 	<script src="{{ url_for('static', filename='vendor/notiflix/notiflix-aio-2.7.0.min.js') }}"></script>
 	<script src="{{ url_for('static', filename='js/register.js') }}"></script>
