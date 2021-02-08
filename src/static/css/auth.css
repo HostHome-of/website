@@ -39,6 +39,7 @@ body {
 	position: relative;
 	height: 100%;
 	flex-direction: column;
+	justify-content: space-between;
 }
 
 .wrapper .right img {
