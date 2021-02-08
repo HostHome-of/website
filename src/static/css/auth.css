@@ -20,8 +20,13 @@ body {
 }
 
 .wrapper .left {
-	width: 820px;
+	width: 920px;
 	position: relative;
+	overflow-y: auto;
+}
+
+.wrapper .left::-webkit-scrollbar {
+	display: none;
 }
 
 .wrapper .right {
