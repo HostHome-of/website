@@ -5046,7 +5046,7 @@ body:not(.touch-device) .owl-item:hover .details__preview .details__img img {
 
   .header__wrapper .header__center {
     max-width: 100%;
-    padding-left: 380px;
+/*     padding-left: 380px; */
   }
 
   .header__contacts {
