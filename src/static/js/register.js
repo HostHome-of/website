@@ -9,7 +9,9 @@ async function enviar() {
     if (document.getElementById("psw").value.length < 6) {
         Notiflix.Notify.Failure('La contraseña debe de ser mas de 6 caracteres.');
         no_es_valido_psw = true;
-        return false;
+        setTimeout(function() {
+            window.location.reload();
+        }, 5000);
     }
     await fetch("/register?nm="+ document.getElementById("nombre").value + "&psw=" + document.getElementById("psw").value + "&mail=" + document.getElementById("email").value, {
         method: 'POST'

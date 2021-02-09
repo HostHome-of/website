@@ -13,6 +13,7 @@ async function enviar(e) {
         Notiflix.Notify.Failure('Email o contraseña no validos');
 
         setTimeout(function() {
+            window.location.reload();
             return false;
         }, 5000);
     } else {

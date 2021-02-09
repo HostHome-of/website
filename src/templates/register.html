@@ -64,11 +64,11 @@
 				</div>
 				<div class="input">
 					<label for="psw">Contraseña</label>
-					<input oninput="mirarSiEsValido()" type="password" placeholder="********" name="psw" id="psw" autocomplete="off">
+					<input style="-webkit-text-security:disc;" oninput="mirarSiEsValido()" type="password" placeholder="********" name="psw" id="psw" autocomplete="off">
 				</div>
 				<div class="input">
 					<label for="rpsw">Repetir contraseña</label>
-					<input oninput="mirarSiEsValido()" type="password" placeholder="********" name="rpsw" id="rpsw" autocomplete="off">
+					<input style="-webkit-text-security:disc;" oninput="mirarSiEsValido()" type="password" placeholder="********" name="rpsw" id="rpsw" autocomplete="off">
 				</div>
 				<button disabled onclick="cambiarARobot()" class="subBtn" id="btnLogin">Registrarse</button>
 				<div class="extra">
@@ -76,13 +76,20 @@
 				</div>
 			</div>
 			<div id="recaptcha">
+				<style>
+					#recaptcha img {
+						width: 300px;
+						margin-bottom: 12px;
+					}
+				</style>
+				<img src="{{ url_for('static', filename='images/secure.png') }}">
 				<h3 style="margin-bottom: 30px;">Demuestra que no eres un robot</h3>
 				<div class="g-recaptcha" data-callback="enviar" data-sitekey="{{ key }}"></div>
 			</div>
 		</div>
 		<div class="right">
 			<div style="height: 10vh; width: 100%;"></div>
-			<div style="width: 100%; height: 90vh; padding: 65px;">
+			<div style="width: 100%;">
 				<img src="{{ url_for('static', filename='images/login.png') }}">
 			</div>
 		</div>

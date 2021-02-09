@@ -23,7 +23,7 @@
 </head>
 
 <body
-    style="display: flex; font-family: Avenir Next,Helvetica Neue,Arial,sans-serif!important; font-feature-settings: 'kern','liga','pnum'; -webkit-font-smoothing: antialiased;">
+    style="overflow:hidden;display: flex; font-family: Avenir Next,Helvetica Neue,Arial,sans-serif!important; font-feature-settings: 'kern','liga','pnum'; -webkit-font-smoothing: antialiased;">
     <style>
         a:hover {
             text-decoration: none;
@@ -76,562 +76,180 @@
         </div>
         <style>
             .pagina {
-                margin: 100px 0;
+                /* margin: 100px 0; */
                 height: auto;
+                padding-left: 0;
             }
         </style>
         <div class="pagina" style="flex-direction: column;">
-            <div class="edit__box">
-                <div class="headder">
-                    <div class="logo">
-                        <i class="far fa-plus-square"></i>
-                    </div>
-                    <div class="info">
-                        <div class="title">
+            <style>
+                .pagina .left {
+                    width: 25%;
+                    background-color: #fff;
+                    box-shadow: rgb(0 0 0 / 5%) 0px 15px 24px 0px;
+                    position: relative;
+                    z-index: 1;
+                    border-radius: 0px;
+                    height: 100vh;
+                    margin-left: 70px;
+                    margin-top: 80px;
+                }
+
+                .pagina .left .header {
+                    background-color: rgb(244, 247, 255);
+                    border: none;
+                    z-index: 1;
+                    border-radius: 0px;
+                    position: relative;
+                    transition: all 0.55s cubic-bezier(0.25, 0.8, 0.25, 1) 0s;
+                    box-shadow: rgb(20 26 40 / 8%) 4px 0px 14px;
+                    box-sizing: border-box;
+                    margin: 0px;
+                    min-width: 0px;
+                    -webkit-box-pack: justify;
+                    justify-content: space-between;
+                    -webkit-box-align: center;
+                    align-items: center;
+                    display: flex;
+                    cursor: pointer;
+                }
+
+                .pagina .left .header .icono {
+                    width: 40px;
+                    background-color: rgb(54, 73, 98);
+                    color: rgb(255, 255, 255);
+                    position: relative;
+                    height: 40px;
+                    border-radius: 4px;
+                    box-sizing: border-box;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                }
+
+                .pagina .left .header .titulo {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin-left: 20px;
+                    /* font-weight: 600; */
+                    font-size: 16px;
+                    font-weight: 600;
+                    color: rgb(54, 73, 98);
+                    text-align: left;
+                    line-height: 1.5;
+                    text-transform: none;
+                    overflow: unset;
+                    white-space: unset;
+                    text-overflow: unset;
+                }
+
+                .pagina .left .content {
+                    padding: 40px 30px;
+                    width: 100%;
+                    position: relative;
+                }
+
+                .pagina .left .content .add {
+                    background-color: transparent;
+                    position: relative;
+                    border-width: 1px;
+                    border-style: dashed;
+                    border-color: rgb(34, 92, 255);
+                    border-radius: 4px;
+                    display: flex;
+                    width: 100%;
+                    padding: 15px;
+                    display: flex;
+                    align-items: center;
+                    flex-direction: column;
+                    cursor: pointer;
+                }
+
+                .pagina .left .content .add .flexy {
+                    display: flex;
+                    width: 100%;
+                    align-items: center;
+                }
+
+                .pagina .left .content .add .icono {
+                    width: 36px;
+                    height: 36px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 50%;
+                    color: rgb(34, 92, 255);
+                    border: 1px solid rgb(34, 92, 255);
+                }
+
+                .pagina .left .content .add .texto {
+                    margin-left: 10px;
+                }
+
+                .pagina .left .content .add .texto .texto1 {
+                    font-size: 16px;
+                    font-weight: 700;
+                    color: rgb(34, 92, 255);
+                    text-align: left;
+                    line-height: 1.5;
+                    text-transform: none;
+                    overflow: unset;
+                    white-space: unset;
+                    text-overflow: unset;
+                    cursor: pointer;
+                }
+
+                .pagina .left .content .add .texto .texto2 {
+                    font-size: 13px;
+                    font-weight: 600;
+                    color: rgb(189, 206, 255);
+                    text-align: left;
+                    line-height: 1.5;
+                    text-transform: none;
+                    overflow: unset;
+                    white-space: unset;
+                    text-overflow: unset;
+                    cursor: pointer;
+                }
+            </style>
+            <div class="left">
+                <div class="header">
+                    <div style="box-sizing: border-box; margin: 0px; min-width: 0px; padding: 15px; display: flex;">
+                        <div class="icono">
+                            <i class="fas fa-sign-in-alt"></i>
+                        </div>
+                        <div class="titulo">
                             Crear un nuevo host
                         </div>
-                        <div class="desc">
-                            Create un host rapido y sencillo
-                        </div>
                     </div>
                 </div>
-                <div class="wrapper">
-                    <script>
-                        const nombre_y_mail = ["{{ user['mail'] }}", "{{ user['nombre'] }}"]
-                        const git_name = "{{ info_github['login'] }}"
-                    </script>
-                    <div id="form">
-                        <style>
-                            .repoUrl {
-                                width: 100%;
-                            }
-                        </style>
-                        <div class="repoUrl">
-                            <div id="noSeQuePonerAquiXdNecesitoSugerencias" class="container my-5">
-                                <style>
-                                    .hide {
-                                        display: none;
-                                    }
-
-                                    #list {
-                                        overflow-y: auto;
-                                        overflow-x: hidden;
-                                        text-overflow: ellipsis;
-                                        width: 100%;
-                                        max-height: 295px;
-                                        border: 1px solid #ddd;
-                                        border-radius: 10px;
-                                        border-top-left-radius: 0;
-                                        border-top-right-radius: 0;
-                                        position: absolute;
-                                        padding: 10px;
-                                        background: #fff;
-                                    }
-
-                                    #inputrepo {
-                                        height: 100%;
-                                        padding: 10px 0;
-                                        outline: none;
-                                        border: none;
-                                        width: 500px;
-                                    }
-
-                                    @media only screen and (max-width: 1400px) {
-                                        #inputrepo {
-                                            width: 255px;
-                                        }
-
-                                        #noSeQuePonerAquiXdNecesitoSugerencias {
-                                            margin-top: 0 !important;
-                                        }
-                                    }
-
-                                    #inputrepo:focus {
-                                        outline: none !important;
-                                        border: none !important;
-                                        box-shadow: none !important;
-                                    }
-
-                                    .inputy {
-                                        border: 1px solid #ddd;
-                                        position: relative;
-                                        /* justify-content: center; */
-                                        /* align-items: center; */
-                                        display: grid;
-                                        grid-template-columns: auto auto auto;
-                                        justify-content: center;
-                                        align-items: center;
-                                        width: 100%;
-                                        margin: 0;
-                                    }
-
-                                    .inputy label {
-                                        margin: auto 10px;
-                                        width: 30px;
-                                        display: flex;
-                                        justify-content: center;
-                                        align-items: center;
-                                        font-size: 20px;
-                                        cursor: pointer;
-                                    }
-
-                                    #dropyIcon {
-                                        transform: rotate(0deg);
-                                    }
-
-                                    #dropyIcon.up {
-                                        transform: rotate(180deg);
-                                    }
-
-                                    #list::-webkit-scrollbar-track {
-                                        background-color: #F5F5F5;
-                                    }
-
-                                    #list::-webkit-scrollbar {
-                                        width: 12px;
-                                        background-color: #F5F5F5;
-                                    }
-
-                                    #list::-webkit-scrollbar-thumb {
-                                        border-radius: 1px;
-                                        background-color: rgb(182, 179, 179);
-                                    }
-
-                                    .list-group-item {
-                                        border: none;
-                                        border-radius: 5px;
-                                    }
-
-                                    .list-group-item:hover {
-                                        cursor: pointer;
-                                        background: #ddd;
-                                    }
-
-                                    .edit__box {
-                                        width: 46%;
-                                    }
-
-                                    .pagina {
-                                        display: flex;
-                                        justify-content: center;
-                                        align-items: center;
-                                    }
-
-                                    .edit__box .wrapper #form .input {
-                                        box-sizing: border-box;
-                                        margin: 30px 0px;
-                                    }
-
-                                    .mb-5,
-                                    .my-5 {
-                                        margin-bottom: 0 !important;
-                                    }
-                                </style>
-                                <form autocomplete="off" onsubmit="return false;">
-                                    <style>
-                                        .form-group {
-                                            font-family: Avenir Next, Helvetica Neue, Arial, sans-serif !important;
-                                            font-feature-settings: 'kern', 'liga', 'pnum';
-                                            -webkit-font-smoothing: antialiased;
-                                            position: relative;
-                                        }
-                                    </style>
-                                    <div class="form-group">
-                                        <h7 style="font-weight: 700;">Escoje tu repositorio</h7>
-                                        <div class="inputy">
-                                            <label style="border-right: 1px solid #ddd; padding-right: 15px;"
-                                                for="inputrepo"><i class="fab fa-github"></i></label>
-                                            <input oninput="updateBtnForNewHosting()" type="text" id="inputrepo"
-                                                class="form-control" placeholder="github.com/usuario/repo">
-                                            <label for="inputrepo"><i id="dropyIcon"
-                                                    class="fas fa-caret-up up"></i></label>
-                                        </div>
-                                        <div style="z-index: 999;" id="list" class="list-group hide">
-                                            {% for i in repos %}
-                                            <div onclick="updateRepoValue(this)" class="list-group-item"><i
-                                                    class="fas fa-book" style="margin-right: 10px;"></i>{{ i }}</div>
-                                            {% endfor %}
-                                        </div>
-                                        <div class="input">
-                                            <label for="mail">
-                                                <p>
-                                                    Nombre
-                                                </p>
-                                            </label>
-                                            <script>
-                                                function changeValueForUnlinkTheGithubRepository(input) {
-                                                    input.value = input.value.replace('https://github.com/', 'github.com/');
-                                                }
-                                            </script>
-                                            <input onchange="changeValueForUnlinkTheGithubRepository(this)"
-                                                oninput="updateBtnForNewHosting()" placeholder="Nombre del host"
-                                                id="hostNombre" type="text">
-                                        </div>
-                                    </div>
-                                    <script>
-                                        function updateRepoValue(divyThis) {
-                                            document.getElementById("inputrepo").value = "github.com/" + divyThis.textContent;
-                                            updateBtnForNewHosting();
-                                        }
-                                    </script>
-                                    <script>
-
-                                        var KEYCODE_ESCAPE = 27;
-                                        var KEYCODE_UP = 38;
-                                        var KEYCODE_DOWN = 40;
-
-                                        $('#inputrepo').on('focus', function () {
-
-                                            $('#list').removeClass('hide');
-                                            $('#dropyIcon').removeClass('up');
-
-                                        }).on('blur', function () {
-
-                                            setTimeout(function () {
-                                                $('#list').addClass('hide');
-                                            }, 200)
-                                            $('#dropyIcon').addClass('up');
-                                            $('#list .list-group-item.active').removeClass('active');
-
-                                        }).on('keyup', function (e) {
-
-                                            if (e.keyCode === KEYCODE_DOWN) {
-
-                                                if ($('#list.hide').length > 0) {
-
-                                                    $('#list.hide').removeClass('hide');
-
-                                                } else {
-
-                                                    if ($('#list .list-group-item.active').length > 0) {
-                                                        if ($('#list .list-group-item.active').is(':last-child')) {
-                                                            $('#list .list-group-item.active').removeClass('active');
-                                                            $('#list .list-group-item:first-child').addClass('active');
-                                                        } else {
-                                                            $('#list .list-group-item.active').removeClass('active').next().addClass('active');
-                                                        }
-                                                    } else {
-                                                        $('#list .list-group-item:first-child').addClass('active');
-                                                    }
-
-                                                }
-
-                                            } else if (e.keyCode === KEYCODE_UP) {
-
-                                                if ($('#list.hide').length > 0) {
-                                                    $('#list.hide').removeClass('hide');
-                                                } else {
-
-                                                    if ($('#list .list-group-item.active').length > 0) {
-                                                        if ($('#list .list-group-item.active').is(':first-child')) {
-                                                            $('#list .list-group-item.active').removeClass('active');
-                                                            $('#list .list-group-item:last-child').addClass('active');
-                                                        } else {
-                                                            $('#list .list-group-item.active').removeClass('active').prev().addClass('active');
-                                                        }
-                                                    } else {
-                                                        $('#list .list-group-item:last-child').addClass('active');
-                                                    }
-
-                                                }
-
-                                            } else if (e.keyCode === KEYCODE_ESCAPE) {
-                                                $('#list').addClass('hide');
-                                                $('#list .list-group-item.active').removeClass('active');
-                                            }
-                                        });
-                                    </script>
-                                </form>
+                <div class="content">
+                    <div class="add">
+                        <div class="flexy">
+                            <div class="icono">
+                                <i class="fas fa-plus"></i>
                             </div>
+                            <div class="texto">
+                                <div class="texto1">
+                                    Añadir informacion
+                                </div>
+                                <div class="texto2">
+                                    Configuracion, repo, ...
+                                </div>
+                            </div>
+                        </div>
+                        <div class="opciones">
+                            <ul>
+                                <li></li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="edit__box">
-                <div class="headder">
-                    <div class="logo">
-                        <i class="fas fa-key"></i>
-                    </div>
-                    <div class="info">
-                        <div class="title">
-                            Configuraciom
-                        </div>
-                        <div class="desc">
-                            Dale a si si tu projecto usa algo como un .env
-                        </div>
-                    </div>
-                </div>
-                <style>
-                    .button-cover {
-                        height: 100px;
-                        width: 200px;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        background-color: #fff;
-                        box-shadow: 0 10px 20px -8px #c5d6d6;
-                        border-radius: 4px
-                    }
+            <div class="right">
 
-                    .lump,
-                    .layer {
-                        position: absolute;
-                        top: 0;
-                        right: 0;
-                        bottom: 0;
-                        left: 0
-                    }
-
-                    .button {
-                        position: relative;
-                        width: 74px;
-                        height: 36px;
-                        overflow: hidden
-                    }
-
-                    .button.radius,
-                    .button.radius .layer {
-                        border-radius: 100px
-                    }
-
-                    .button.b2 {
-                        border-radius: 2px
-                    }
-
-                    .checkbox {
-                        position: relative;
-                        width: 100%;
-                        height: 30px;
-                        padding: 0;
-                        margin: 0;
-                        opacity: 0;
-                        cursor: pointer;
-                        z-index: 3
-                    }
-
-                    .lump {
-                        z-index: 2;
-                    }
-
-                    .layer {
-                        width: 100%;
-                        background-color: #ebf7fc;
-                        transition: .3s ease all;
-                        z-index: 1;
-                        height: 30px;
-                    }
-
-                    #toggle-button .lump:before {
-                        content: '✔️';
-                        position: absolute;
-                        top: 7px;
-                        left: 4px;
-                        width: 20px;
-                        height: 10px;
-                        color: #fff;
-                        font-size: 13px;
-                        font-weight: 700;
-                        text-align: center;
-                        line-height: 1;
-                        padding: 9px 4px;
-                        background-color: #4BB543;
-                        display: flex;
-                        border-radius: 50%;
-                        transition: .3s ease all, left .3s cubic-bezier(0.18, 0.89, 0.35, 1.15);
-                        justify-content: center;
-                        align-items: center;
-                    }
-
-                    #toggle-button .checkbox:active+.lump:before {
-                        width: 46px;
-                        border-radius: 100px
-                    }
-
-                    #toggle-button .checkbox:checked:active+.lump:before {
-                        margin-left: -26px
-                    }
-
-                    #toggle-button .checkbox:checked+.lump:before {
-                        content: '❌';
-                        left: 42px;
-                        background-color: #F44336
-                    }
-
-                    #toggle-button .checkbox:checked~.layer {
-                        background-color: #fcebeb
-                    }
-                </style>
-                <script>
-                    $(document).ready(function () {
-                        var deger = "Evet";
-                        $("#sec").on('change', function () {
-                            if ($(this).is(':checked')) {
-                                deger = "Hayır";
-                                document.getElementById("editor").style.display = "none";
-                                document.getElementById("nombreArchivoConfig").style.display = "none";
-                                $(this).val(deger);
-                            }
-                            else {
-                                deger = "Evet";
-                                document.getElementById("editor").style.display = "block";
-                                document.getElementById("nombreArchivoConfig").style.display = "block";
-                                $(this).val(deger);
-                            }
-                        });
-                    });
-                </script>
-                <style>
-                    #formy .input {
-                        background-color: transparent;
-                        position: relative;
-                        border-bottom: 1px solid rgb(215, 219, 224);
-                        border-radius: 0px;
-                    }
-
-                    #formy .input {
-                        display: flex;
-                        align-items: center;
-                        justify-content: space-between;
-                        padding-bottom: 12px;
-                    }
-
-                    #formy .input .info .title {
-                        font-size: 16px;
-                        font-weight: 700;
-                        color: rgb(54, 73, 98);
-                        text-align: left;
-                        line-height: 1.5;
-                        text-transform: none;
-                        overflow: unset;
-                        white-space: unset;
-                        text-overflow: unset;
-                    }
-
-                    #formy .input .info .desc {
-                        font-size: 16px;
-                        font-weight: 500;
-                        color: rgb(54, 73, 98);
-                        text-align: left;
-                        line-height: 1.5;
-                        text-transform: none;
-                        overflow: unset;
-                        white-space: unset;
-                        text-overflow: unset;
-                    }
-
-                    .center {
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        width: 100%;
-                        height: 100vh
-                    }
-
-                    .button-cover {
-                        height: 100px;
-                        width: 200px;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        background-color: #fff;
-                        box-shadow: 0 10px 20px -8px #c5d6d6;
-                        border-radius: 4px
-                    }
-
-                    .lump,
-                    .layer {
-                        position: absolute;
-                        top: 0;
-                        right: 0;
-                        bottom: 0;
-                        left: 0
-                    }
-
-                    .button {
-                        position: relative;
-                        width: 74px;
-                        height: 36px;
-                        overflow: hidden
-                    }
-
-                    .button.radius,
-                    .button.radius .layer {
-                        border-radius: 100px
-                    }
-
-                    .button.b2 {
-                        border-radius: 2px
-                    }
-                </style>
-                <div id="formy" class="wrapper">
-                    <div class="input">
-                        <div class="info">
-                            <div class="title">
-                                Configuracion
-                            </div>
-                            <div class="desc">
-                                Tu projecto tiene algun archivo de configuracion? (Puedes cambiarlo despues)
-                            </div>
-                        </div>
-                        <div class="button radius" id="toggle-button">
-                            <input type="checkbox" class="checkbox" name="checky" id="sec" value="Evet" checked>
-                            <div class="lump"></div>
-                            <div class="layer"></div>
-                        </div>
-                    </div>
-                    <style>
-                        #editor {
-                            position: relative;
-                            width: 100%;
-                            height: 336px;
-                            position: relative;
-                            box-shadow: 0 10px 40px rgb(0 0 0 / 16%);
-                            display: none;
-                            margin-top: 10px;
-                        }
-
-                        #nombreArchivoConfig {
-                            position: relative;
-                            width: 100%;
-                            height: 50px;
-                            position: relative;
-                            box-shadow: 0 10px 40px rgb(0 0 0 / 16%);
-                            display: none;
-                            margin-top: 10px;
-                            outline: none;
-                            border: none;
-                            padding: 10px;
-                        }
-                    </style>
-                    <input placeholder="NombreDelArchivoSecreto.extension" id="nombreArchivoConfig" type="text" />
-                    <div id="editor"></div>
-                </div>
-            </div>
-            <div class="edit__box">
-                <div class="headder">
-                    <div class="logo">
-                        <i class="fas fa-vote-yea"></i>
-                    </div>
-                    <div class="info">
-                        <div class="title">
-                            Confirmar
-                        </div>
-                        <div class="desc">
-                            Dale al boton cuando estes listo
-                        </div>
-                    </div>
-                </div>
-                <div class="wrapper">
-                    <div id="form">
-                        <div style="margin: 10px auto;" class="g-recaptcha"
-                            data-callback="validateRobotitoCaptchaNewHost" data-sitekey="{{ key }}">
-                        </div>
-                        <button style="cursor: pointer;" disabled id="btnSubmityHostNew" onclick="createHost()"
-                            class="submit">
-                            Crear host
-                        </button>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

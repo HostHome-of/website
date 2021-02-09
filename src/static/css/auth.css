@@ -22,7 +22,6 @@ body {
 .wrapper .left {
 	width: 920px;
 	position: relative;
-	overflow-y: auto;
 }
 
 .wrapper .left::-webkit-scrollbar {
@@ -201,5 +200,22 @@ body {
 
 #recaptcha {
 	display: none;
-	margin: 200px 100px;
+	margin: 70px 100px;
+}
+
+@media only screen and (max-width: 1460px) {
+	.wrapper .left	{
+		overflow-y: auto;
+	}
+}
+
+@media only screen and (max-width: 1030px) {
+	.wrapper .left	{
+		width: 100%;
+		height:	auto;
+	}
+
+	.wrapper .right {
+		display: none;
+	}
 }

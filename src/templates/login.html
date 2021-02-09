@@ -9,12 +9,14 @@
 	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='vendor/notiflix/notiflix-2.7.0.min.css') }}">
+	<link rel="stylesheet" type="text/css"
+		href="{{ url_for('static', filename='vendor/notiflix/notiflix-2.7.0.min.css') }}">
 	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
 	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
+
 <body>
 
 	<div class="wrapper">
@@ -51,14 +53,17 @@
 						form.style.display = "none";
 						recaptcha.style.display = "block";
 					}
+
 				</script>
 				<div class="input">
 					<label for="email">Email</label>
-					<input oninput="mirarSiEsValido()" placeholder="nombre@email.com" type="email" name="email" id="email" autocomplete="off">
+					<input oninput="mirarSiEsValido()" placeholder="nombre@email.com" type="email" name="email"
+						id="email" autocomplete="off">
 				</div>
 				<div class="input">
 					<label for="psw">Contraseña</label>
-					<input oninput="mirarSiEsValido()" type="password" placeholder="********" name="psw" id="psw" autocomplete="off">
+					<input oninput="mirarSiEsValido()" style="-webkit-text-security:disc;" type="password" placeholder="********" name="psw" id="psw"
+						autocomplete="off">
 				</div>
 				<button disabled onclick="cambiarARobot()" class="subBtn" id="btnLogin">Entrar</button>
 				<div class="extra">
@@ -67,22 +72,29 @@
 				</div>
 			</div>
 			<div id="recaptcha">
+				<style>
+					#recaptcha img {
+						width: 300px;
+						margin-bottom: 12px;
+					}
+				</style>
+				<img src="{{ url_for('static', filename='images/secure.png') }}">
 				<h3 style="margin-bottom: 30px;">Demuestra que no eres un robot</h3>
 				<div class="g-recaptcha" data-callback="enviar" data-sitekey="{{ key }}"></div>
 			</div>
 		</div>
 		<div class="right">
 			<div style="height: 10vh; width: 100%;"></div>
-			<div style="width: 100%; height: 90vh; padding: 65px;">
+			<div style="width: 100%;">
 				<img src="{{ url_for('static', filename='images/login.png') }}">
 			</div>
 		</div>
 	</div>
-	
+
 	<script type="text/javascript" src="{{ url_for('static', filename='js/auth.js') }}"></script>
 	<script src="{{ url_for('static', filename='vendor/notiflix/notiflix-aio-2.7.0.min.js') }}"></script>
 	<script src="{{ url_for('static', filename='js/login.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/global.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/global.js') }}"></script>
 
 </body>
 
