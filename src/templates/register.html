@@ -32,6 +32,8 @@
 				<h2 style="font-size: 30px;">¿Nos conocemos?</h2>
 				<div style="height: 50px; width: 100%;"></div>
 				<script>
+					var codigo = 0000;
+
 					function mirarSiEsValido() {
 						const btn = document.getElementById("btnLogin");
 						const mail = document.getElementById("email").value;
@@ -47,11 +49,34 @@
 					}
 
 					function cambiarARobot() {
+						if (enviar() == false) {
+							return false;
+						} 
 						const form = document.getElementById("formy");
 						const recaptcha = document.getElementById("recaptcha");
 
 						form.style.display = "none";
 						recaptcha.style.display = "block";
+					}
+
+					function cambiarAEmail() {
+						const mail = document.getElementById("emailVer");
+						const recaptcha = document.getElementById("recaptcha");
+
+						
+
+						fetch("/register/activation", {
+							method: "POST"
+						}).then(response => response.json()).then(data => {
+							if (data["codigo"] != 500) {
+								codigo = data["codigo"]
+							} else {
+								Notiflix.Notify.Failure('Ups... un error intentalo en un rato');
+							}
+						})
+
+						mail.style.display = "block";
+						recaptcha.style.display = "none";
 					}
 				</script>
 				<div class="input">
@@ -84,7 +109,53 @@
 				</style>
 				<img src="{{ url_for('static', filename='images/secure.png') }}">
 				<h3 style="margin-bottom: 30px;">Demuestra que no eres un robot</h3>
-				<div class="g-recaptcha" data-callback="enviar" data-sitekey="{{ key }}"></div>
+				<div class="g-recaptcha" data-callback="cambiarAEmail" data-sitekey="{{ key }}"></div>
+			</div>
+			<script>
+				function verCodigoRes() {
+					const btn = document.getElementById("btnLoginCodigo");
+
+					if (document.getElementById("codigo").value.length == 4) {
+						btn.disabled = false;
+					} else {
+						btn.disabled = true;
+					}
+				}
+
+				function verficarCodigo() {
+					// const btn = document.getElementById("btnLoginCodigo")
+					const input = document.getElementById("codigo")
+
+					fetch("/register/activation/"+input.value, {
+						method: "POST"
+					}).then(response => response.json()).then(
+						data => {
+							if (data["codigo"] == 200) {
+								Notiflix.Loading.Init({svgColor:"#6493c6",});
+								Notiflix.Loading.Circle();
+								setTimeout(function() {
+									window.location.replace("/");
+								}, 5000);
+							} else {
+								Notiflix.Notify.Failure('Es posible que el codigo este incorrecto');
+							}
+						}
+					)
+				}
+			</script>
+			<div style="display: none" id="emailVer">
+				<h3 style="margin-bottom: 30px;"></h3>
+				<h1 style="font-size: 55px;">Verifica tu cuenta!</h1>
+				<h2 style="font-size: 30px;">Mira tu email y pon el codigo de verificacion</h2>
+				<div style="height: 50px; width: 100%;"></div>
+				<div class="input">
+					<label for="codigo">Codigo de verificacion</label>
+					<input oninput="verCodigoRes()" id="codigo" type="number" placeholder="0000">
+				</div>
+				<button disabled onclick="verficarCodigo()" class="subBtn" id="btnLoginCodigo">Verificar cuenta</button>
+				<div class="extra">
+					<p>Has cambiado de opinion? <a href="/register">Cancelar</a></p>
+				</div>
 			</div>
 		</div>
 		<div class="right">

@@ -198,6 +198,133 @@ body {
 	text-decoration: none;
 }
 
+
+/* awd */
+.wrapper .left #emailVer {
+	height: 100%;
+	width: 100%;
+	padding: 10px 60px;
+}
+
+.wrapper .left #emailVer .input {
+	position: relative;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	margin: 15px 0;
+}
+
+.wrapper .left #emailVer .input input {
+	width: 100%;
+	outline: none;
+	border-radius: 5px;
+	border: 1px solid rgb(215, 219, 224);
+	/* height: 50px; */
+	padding: 10px 18px;
+	margin-top: 5px;
+	font-size: 16px;
+	transition: .3s;
+	color: rgb(54, 73, 98);
+	font-weight: 500;
+	line-height: 26px;
+}
+
+.wrapper .left #emailVer .input label {
+	font-size: 16px;
+    font-weight: 600;
+    color: rgb(54, 73, 98);
+    text-align: left;
+    line-height: 1.5;
+    text-transform: none;
+    overflow: unset;
+    white-space: unset;
+    text-overflow: unset;
+}
+
+.wrapper .left #emailVer .input input:hover {
+	border: 1px solid #999;
+}
+
+.wrapper .left #emailVer .input input:focus {
+	border: 1px solid rgb(34, 92, 255);
+}
+
+.wrapper .left #emailVer .subBtn {
+	width: 100%;
+    position: relative;
+    display: inline-flex;
+    font-family: "Avenir Next", "Helvetica Neue", sans-serif;
+    -webkit-box-align: center;
+    align-items: center;
+    font-weight: 700;
+    white-space: nowrap;
+    font-size: 13px;
+    -webkit-box-pack: center;
+    justify-content: center;
+    text-decoration: none;
+    cursor: pointer;
+    appearance: none;
+    padding: 9px 18px;
+    line-height: 28px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: all 0.55s cubic-bezier(0.25, 0.8, 0.25, 1) 0s;
+    background-color: rgb(34, 92, 255);
+    color: rgb(255, 255, 255);
+    box-shadow: none;
+    border: 1px solid rgb(34, 92, 255);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.wrapper .left #emailVer .subBtn:focus {
+	outline: none;
+}
+
+.wrapper .left #emailVer .subBtn:disabled {
+	cursor: default;
+    background-color: rgb(215, 219, 224);
+    border-color: rgb(215, 219, 224);
+    box-shadow: none;
+	cursor: pointer;
+}
+
+.wrapper .left #emailVer .subBtn:active {
+	transform: scale(0.95);
+}
+
+.wrapper .left #emailVer .extra {
+	margin-top: 20px;
+}
+
+.wrapper .left #emailVer .extra p {
+	font-size: 15px;
+    font-weight: 500;
+    color: rgb(54, 73, 98);
+    text-align: left;
+    line-height: 1.5;
+    text-transform: none;
+    overflow: unset;
+    white-space: unset;
+    text-overflow: unset;
+	text-decoration: none;
+}
+
+.wrapper .left #emailVer .extra a:hover,
+.wrapper .left #emailVer .extra a {
+	font-size: 15px;
+    font-weight: 500;
+    color: rgb(34, 92, 255);
+    text-align: left;
+    line-height: 1.5;
+    text-transform: none;
+    overflow: unset;
+    white-space: unset;
+    text-overflow: unset;
+	text-decoration: none;
+}
+/* awd */
+
 #recaptcha {
 	display: none;
 	margin: 70px 100px;

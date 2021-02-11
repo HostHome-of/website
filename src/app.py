@@ -215,34 +215,37 @@ def Registrarse():
 
     return render_template("register.html", key=env["CAPTCHA_WEB"])
 
-@app.route("/register/activation")
+@app.route("/register/activation", methods=["GET", "POST"])
 def activarCuenta():
 
-    try:
-        url = f"{url_main}register/activation/{Usuario(session['user_id']).cojer()['tokenEntrada']}"
-    except:
-        return redirect(url_for("Registrarse"))
-    print(url)
-    email = render_template("mails/codigo.html", url=url)
-    try:
-        enviarEmail(Usuario(session['user_id']).cojer(), email, "Codigo de verificacion", True)
-    except Exception as e:
-        print(e)
-    return render_template("checkmail.html")
+    if request.method == "POST":
+        codigo = f"{Usuario(session['user_id']).cojer()['tokenEntrada']}"
+        print(codigo)
+        email = render_template("mails/codigo.html", codigo=codigo)
+        try:
+            enviarEmail(Usuario(session['user_id']).cojer(), email, "Codigo de verificacion", True)
+        except Exception as e:
+            print(e)
+            return {"codigo": 500}
+        return {"codigo": Usuario(session['user_id']).cojer()['tokenEntrada']}
+    return "tu que haces aqui?"
 
-@app.route("/register/activation/<codigo>")
+@app.route("/register/activation/<codigo>", methods=["GET", "POST"])
 def activarCuentaCodigo(codigo):
 
-    data = Usuario().activar(Usuario(session['user_id']).cojer()["mail"], codigo)
-    if data == False:
-        return redirect("/")
+    if request.method == "POST":
+        data = Usuario().activar(Usuario(session['user_id']).cojer()["mail"], codigo)
+        if data == False:
+            return {"codigo": 500}
 
-    try:
-        enviarEmail(Usuario(session['user_id']).cojer(), "./src/templates/mails/recien.html", "Gracias por unirte")
-    except Exception as e:
-        print(e)
+        try:
+            email = render_template("mails/recien.html", url=url_main)
+            enviarEmail(Usuario(session['user_id']).cojer(), email, "Gracias por unirte", True)
+        except Exception as e:
+            print(e)
+            return {"codigo": 500}
 
-    return redirect(url_for("Cuenta"))
+        return {"codigo": 200}
 
 # Dashboard
 
