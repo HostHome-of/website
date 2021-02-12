@@ -87,6 +87,10 @@ video {
   vertical-align: baseline;
 }
 
+::-webkit-scrollbar {
+	display: none;
+}
+
 html {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
