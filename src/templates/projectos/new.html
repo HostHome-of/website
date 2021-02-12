@@ -226,6 +226,7 @@
                     min-width: 0px;
                     padding: 10px 15px;
                     transition: .4s;
+                    position: relative;
                 }
 
                 .pagina .left .content .add .opciones .opcion .icono__opcion {
@@ -280,6 +281,20 @@
                 .pagina .left .content .add .opciones .opcion:nth-child(4):hover {
                     background: rgb(246, 251, 237);
                 }
+
+                .pagina .left .content .add .opciones .opcion.disabled::before {
+                    content: "";
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    cursor: no-drop !important;
+                    background: #ddd;
+                    z-index: 9;
+                    opacity: 0.5;
+                }
+
             </style>
             <div class="left">
                 <div class="header">
@@ -292,6 +307,69 @@
                         </div>
                     </div>
                 </div>
+                <style>
+                #lista .opcion {
+                    box-sizing: border-box;
+                    margin: 0px;
+                    min-width: 0px;
+                    padding: 10px 15px;
+                    transition: .4s;
+                }
+
+                #lista .icono__opcion {
+                    box-sizing: border-box;
+                    margin: 0px;
+                    min-width: 0px;
+                    -webkit-box-align: center;
+                    align-items: center;
+                    -webkit-box-pack: center;
+                    justify-content: center;
+                    display: flex;
+                    color: #fff;
+                    width: 36px;
+                    background-color: rgb(54, 73, 98);
+                    color: rgb(255, 255, 255);
+                    position: relative;
+                    height: 36px;
+                    border-radius: 4px;
+                    box-sizing: border-box;
+                    margin: 3px 0px 0px;
+                    min-width: 0px;
+                }
+
+                #lista .config .icono__opcion {
+                    background: rgb(131, 210, 255);
+                    transition: .2s;
+                }
+
+                #lista .config:hover {
+                    background: rgb(238, 249, 255);
+                }
+
+                #lista .basico .icono__opcion {
+                    background: rgb(136, 141, 255);
+                }
+
+                #lista .basico:hover {
+                    background: rgb(243, 244, 255);
+                }
+
+                #lista .extra .icono__opcion {
+                    background: rgb(255, 121, 96);
+                }
+
+                #lista .extra:hover {
+                    background: rgb(255, 241, 239);
+                }
+
+                #lista .miembros .icono__opcion {
+                    background: rgb(165, 209, 70);
+                }
+
+                #lista .miembros:hover {
+                    background: rgb(246, 251, 237);
+                }             
+                </style>
                 <div id="lista">
 
                 </div>
@@ -345,26 +423,102 @@
                     var config = false;
                     var extra = false;
                     var miembros = false;
-                    var nuevaLista;
 
                     function addToList(id) {
                         // console.log(id)
+                        if (document.getElementById(id).classList.contains('disabled')) return;
                         lista = document.getElementById("lista");
                         if (id == "basico") {
                             basico = true;
-                            nuevaLista = document.createElement("div");
-                            nuevaLista.innerHTML = ""
+                            var nuevaLista = document.createElement("div");
+                            nuevaLista.innerHTML = `
+                            <div style="display: flex; align-items: center;" class="opcion">
+                                <div class="icono__opcion">
+                                    <i class="far fa-plus-square"></i>
+                                </div>
+                                <div
+                                    style="box-sizing: border-box; margin: 0px 0px 0px 15px; min-width: 0px; flex: 1 1 0%;">
+                                    <div style="margin: 2px 0px 3px; font-size: 16px; font-weight: 600; color: rgb(54, 73, 98); text-align: left; line-height: 1; text-transform: none; overflow: unset; white-space: unset; text-overflow: unset; cursor: pointer;"
+                                        class="texto__opcion">
+                                        Basico
+                                    </div>
+                                    <div style="font-size: 13px; font-weight: 500; color: rgb(119, 134, 153); text-align: left; line-height: 1.5; text-transform: none; overflow: unset; white-space: unset; text-overflow: unset; cursor: pointer;"
+                                        class="text__opcion_2">
+                                        Informacion basica de tu hosting
+                                    </div>
+                                </div>
+                            </div>
+                            `;
+                            nuevaLista.classList.add("basico");
                         } else if (id == "config") {
                             config = true;
+                            var nuevaLista = document.createElement("div");
+                            nuevaLista.classList.add("config");
+                            nuevaLista.innerHTML = `                            
+                            <div style="display: flex; align-items: center;" class="opcion">
+                                <div class="icono__opcion">
+                                    <i class="fas fa-unlock-alt"></i>
+                                </div>
+                                <div
+                                    style="box-sizing: border-box; margin: 0px 0px 0px 15px; min-width: 0px; flex: 1 1 0%;">
+                                    <div style="margin: 2px 0px 3px; font-size: 16px; font-weight: 600; color: rgb(54, 73, 98); text-align: left; line-height: 1; text-transform: none; overflow: unset; white-space: unset; text-overflow: unset; cursor: pointer;"
+                                        class="texto__opcion">
+                                        Configuracion
+                                    </div>
+                                    <div style="font-size: 13px; font-weight: 500; color: rgb(119, 134, 153); text-align: left; line-height: 1.5; text-transform: none; overflow: unset; white-space: unset; text-overflow: unset; cursor: pointer;"
+                                        class="text__opcion_2">
+                                        Añadir un archivo de configuracion.
+                                    </div>
+                                </div>
+                            </div>`;
                         } else if (id == "extra") {
                             extra = true;
+                            var nuevaLista = document.createElement("div");
+                            nuevaLista.classList.add("extra");
+                            nuevaLista.innerHTML = `                            
+                            <div style="display: flex; align-items: center;" class="opcion">
+                                <div class="icono__opcion">
+                                    <i class="fas fa-info"></i>
+                                </div>
+                                <div
+                                    style="box-sizing: border-box; margin: 0px 0px 0px 15px; min-width: 0px; flex: 1 1 0%;">
+                                    <div style="margin: 2px 0px 3px; font-size: 16px; font-weight: 600; color: rgb(54, 73, 98); text-align: left; line-height: 1; text-transform: none; overflow: unset; white-space: unset; text-overflow: unset; cursor: pointer;"
+                                        class="texto__opcion">
+                                        Extra
+                                    </div>
+                                    <div style="font-size: 13px; font-weight: 500; color: rgb(119, 134, 153); text-align: left; line-height: 1.5; text-transform: none; overflow: unset; white-space: unset; text-overflow: unset; cursor: pointer;"
+                                        class="text__opcion_2">
+                                        Informacion extra.
+                                    </div>
+                                </div>
+                            </div>`;
                         } else if (id == "miembros") {
                             miembros = true;
+                            var nuevaLista = document.createElement("div");
+                            nuevaLista.classList.add("miembros");
+                            nuevaLista.innerHTML = `                            
+                            <div style="display: flex; align-items: center;" class="opcion">
+                                <div class="icono__opcion">
+                                    <i class="fas fa-user-plus"></i>
+                                </div>
+                                <div
+                                    style="box-sizing: border-box; margin: 0px 0px 0px 15px; min-width: 0px; flex: 1 1 0%;">
+                                    <div style="margin: 2px 0px 3px; font-size: 16px; font-weight: 600; color: rgb(54, 73, 98); text-align: left; line-height: 1; text-transform: none; overflow: unset; white-space: unset; text-overflow: unset; cursor: pointer;"
+                                        class="texto__opcion">
+                                        Miembros
+                                    </div>
+                                    <div style="font-size: 13px; font-weight: 500; color: rgb(119, 134, 153); text-align: left; line-height: 1.5; text-transform: none; overflow: unset; white-space: unset; text-overflow: unset; cursor: pointer;"
+                                        class="text__opcion_2">
+                                        Añadir miembros a este hosting.
+                                    </div>
+                                </div>
+                            </div>`;
                         }
 
                         nuevaLista.id = "used"
                         nuevaLista.classList.add(id+"_used")
                         lista.appendChild(nuevaLista)
+                        document.getElementById(id).classList.add("disabled")
                     }
                 </script>
                 <div class="content">
