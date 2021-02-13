@@ -1,0 +1,320 @@
+<div style="background: #fff;" class="basico_right" id="basico_right">
+    <div class="pagina1">
+        <div class="header">
+            <div class="titulo">
+                <div class="icono">
+                    <i class="far fa-plus-square"></i>
+                </div>
+                <div class="texto">
+                    Basico
+                </div>
+            </div>
+            <div class="eliminarHeader tippy" data-theme="light" title="Eliminar" data-duration="300" data-arrow="true"
+                data-animation="shift" data-position="left">
+                <i class="fas fa-trash-alt"></i>
+            </div>
+        </div>
+        <div id="form">
+            <div class="input">
+                <label for="nombre">
+                    <p>
+                        Nombre del hosting
+                    </p>
+                </label>
+                <input autocomplete="off" id="nombre" type="text" name="" id="">
+            </div>
+            <div style="padding: 30px 0 10px;" class="input">
+                <label>
+                    <p>
+                        Escoje repositorio
+                    </p>
+                </label>
+                <style>
+                    .repositorios {
+                        width: 100%;
+                        padding: 10px;
+                        position: relative;
+                        overflow: scroll;
+                        height: 65vh;
+                    }
+
+                    ::-webkit-scrollbar {
+                        display: block;
+                    }
+
+                    .repositorios header {
+                        width: 100%;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                    }
+
+                    .repositorios header .btnRepo {
+                        outline: none;
+                        border: none;
+                        border-radius: 4px;
+                        color: #bdbdbd;
+                        outline: none;
+                        border: none;
+                        background: #d5d5d5;
+                        padding: 10px 20px;
+                        border-radius: 2.5px;
+                        margin-right: 20px;
+                        font-size: 1em;
+                        font-weight: 600;
+                        transition: .2s;
+                        width: 170px;
+                        text-align: center;
+                    }
+
+                    .repositorios header .btnRepo:hover {
+                        cursor: pointer;
+                        background: #3d3d44;
+                    }
+
+                    .repositorios header .btnRepo:focus {
+                        outline: none;
+                        border: none;
+                    }
+
+                    .repositorios header .tags {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        padding-left: 25%;
+                        padding-right: 8%;
+                        width: 80%;
+                    }
+
+                    .repositorios header .tags div {
+                        display: inline-block;
+                        margin: 0 20px;
+                        text-align: center;
+                        font-family: "Open Sans", sans-serif;
+                        font-weight: 600;
+                    }
+
+                    .repo {
+                        display: flex;
+                        align-items: center;
+                        margin: 20px 0;
+                        padding: 20px;
+                        background: #fff;
+                        border-radius: 5px;
+                        box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.1);
+                        justify-content: space-between;
+                        cursor: pointer;
+                        transition: .1s;
+                    }
+
+                    /* 
+                    .repo:hover {
+                        transform: translateX(15px);
+                    } */
+
+                    .repo .cubo {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-family: 'Poppins', sans-serif;
+                    }
+
+                    .repo .cubo .icon {
+                        /* background: #9575cd; */
+                        width: 50px;
+                        height: 50px;
+                        border-radius: 5px;
+                        margin-right: 20px;
+                    }
+
+                    .repo .cubo .nombre {
+                        width: 200px;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        overflow: hidden;
+                    }
+
+                    .repo .info {
+                        display: flex;
+                        align-items: center;
+                        width: 100%;
+                        justify-content: space-around;
+                        font-weight: 600;
+                        font-family: 'Poppins', sans-serif;
+                    }
+
+                    .repo .info .rama {
+                        width: 65px;
+                        /* overflow: hidden; */
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        overflow: hidden;
+                    }
+
+                    .repo .info .len {
+                        width: 75px;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        overflow: hidden;
+                    }
+
+                    .iconCubo {
+                        display: flex;
+                        justify-content: center;
+                        font-size: 20px;
+                        color: #fff;
+                        align-items: center;
+                    }
+
+                    .repoEnLista.active .cubo .iconCubo {
+                        background-color: #28B463 !important;
+                    }
+
+                    .repoEnLista {
+                        transition: .1s;
+                    }
+
+                    .repoEnLista:hover {
+                        transform: scale(1.02);
+                    }
+
+                    #btnRepo:disabled {
+                        cursor: no-drop;
+                    }
+
+                    #btnRepo:disabled:hover {
+                        background: #d5d5d5;
+                    }
+                </style>
+                <script>
+                    function confirmarRepo(id) {
+                        const repo = document.getElementById(id);
+
+                        for (i = 0; i < document.getElementsByClassName("repoEnLista").length; i++) {
+                            document.getElementsByClassName("repoEnLista")[i].style.display = "none";
+                        }
+
+                        document.getElementById(id).style.display = "flex";
+                        document.getElementById(id).innerHTML = document.getElementById(id).innerHTML.replace('<i class="fas fa-book"></i>', '<i class="fas fa-check"></i>')
+                        document.getElementById(id).classList.add("active");
+                        document.getElementById("btnRepo").disabled = true;
+                    }
+                </script>
+                <div class="repositorios">
+                    <header>
+                        <button class="btnRepo" id="btnRepo">
+                            Repo external
+                        </button>
+                        <div class="tags">
+                            <div style="cursor: context-menu;" class="tippy" data-theme="light"
+                                title="Es detectado por AI, puedes cambiarlo" data-duration="300" data-arrow="true"
+                                data-animation="shift" data-position="top">
+                                Lenguage
+                            </div>
+                            <div style="cursor: context-menu;" class="tippy" data-theme="light" title="El repositorio"
+                                data-duration="300" data-arrow="true" data-animation="shift" data-position="bottom">
+                                URL
+                            </div>
+                            <div style="cursor: context-menu;" class="tippy" data-theme="light"
+                                title="Rama por defecto en GitHub" data-duration="300" data-arrow="true"
+                                data-animation="shift" data-position="top">
+                                Rama
+                            </div>
+                        </div>
+                    </header>
+                    {% for repo in repos %}
+                    <div class="repo repoEnLista" onclick="confirmarRepo(this.id)" id="{{ repo }}">
+                        <div class="cubo">
+                            <div class="icon iconCubo">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div class="nombre">
+                                <!-- {{ repos[repo]["usr"] }}/ -->
+                                {{ repo }}
+                            </div>
+                            <div class="name" style="width: 85px;"> </div>
+                        </div>
+                        <div class="info">
+                            <div class="len">
+                                {{ repos[repo]["len"] }}
+                            </div>
+                            <div class="url">
+                                <a target="_blank" href='{{ repos[repo]["url"] }}'>
+                                    Repositorio
+                                </a>
+                            </div>
+                            <div class="rama">
+                                {{ repos[repo]["branch"] }}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <script>
+                        function crearCubos() {
+                            const colores = ["#7f8c8d"] // "#4FC3F7", "#f48fb1", "#9575cd", "#28B463", "#F1C40F", "#EC7063"
+
+                            const cubos = document.getElementsByClassName("iconCubo")
+                            var randomColor;
+                            for (i = 0; i < cubos.length; i++) {
+                                randomColor = colores[Math.floor(Math.random() * colores.length)];
+                                cubos[i].style.backgroundColor = randomColor
+                            }
+                        }
+
+                        crearCubos();
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        .pagina2 {
+            position: relative;
+            height: 100%;
+            font-family: "Roboto", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+            width: 30%;
+            font-weight: 300;
+        }
+
+        .pagina2 .banner {
+            width: 100%;
+            background: #3498db;
+            color: #fff;
+            display: flex;
+            font-size: 20px;
+            font-weight: 300;
+            padding: 20px;
+            align-items: center;
+        }
+
+        .pagina2 h1 {
+            font-size: 2em;
+        }
+
+        .docs {
+            font-family: "Roboto", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+        }
+
+        @media only screen and (max-width: 1400px) {
+
+            .pagina2 {
+                display: none !important;
+            }
+
+            .text__opcion_2 {
+                text-overflow: ellipsis !important;
+                width: 120px !important;
+                overflow: hidden !important;
+                white-space: nowrap !important;
+            }
+
+            .pagina1 {
+                width: 100% !important;
+            }
+        }
+    </style>
+    <div class="pagina2">
+        <iframe style="width: 100%; height: 100%;" frameborder="0" src="http://127.0.0.1:8000/"
+            frameborder="0"></iframe>
+    </div>
+</div>

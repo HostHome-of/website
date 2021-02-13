@@ -1325,6 +1325,15 @@ textarea.form-control {
     border-top: 1px solid rgb(215, 219, 224);
     display: flex;
     color: #485460 !important;
+    position: relative;
+}
+
+.sideNav ul a:hover {
+    background: rgb(250, 250, 251);
+}
+
+.tippy-tooltip-content {
+    padding: 10px;
 }
 
 .wrapper__navy {
@@ -1401,7 +1410,7 @@ textarea.form-control {
     color: #fff;
     border-radius: 50%;
     z-index: 9999;
-    background-color: #03a9f4;
+    background-color: rgb(34, 92, 255);
     box-shadow: 0 4px 11px 0px rgb(0 0 0 / 38%);
     transition: .3s;
     cursor: pointer;

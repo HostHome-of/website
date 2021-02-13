@@ -1,3 +1,21 @@
 {
-    
+    "maubg2007@gmail.com": {
+        "mail": "maubg2007@gmail.com",
+        "nombre": "Maubg",
+        "psw": "awdawd",
+        "cuentas": {
+            "78225720": true
+        },
+        "pfp": "/src/web/static/pfp/google.jpg",
+        "entrada": "13/2/2021",
+        "segundoNombre": "Balad\u00e9s",
+        "edad": "34",
+        "autorizado": true,
+        "emails": {
+            "uno": false,
+            "dos": false,
+            "tres": false,
+            "cuatro": false
+        }
+    }
 }

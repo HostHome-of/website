@@ -45,16 +45,21 @@ def quitarWindow():
 
 # Repos
 def get_repositories(url, usr):
-    result = []
+    result = {}
     r = requests.get(url=url)
     if 'next' in r.links :
-        result += get_repositories(r.links['next']['url'], usr)
+        get_repositories(r.links['next']['url'], usr)
 
     for repository in r.json():
         try:
-            result.append(f"{usr}/{repository.get('name')}")
+            result[repository.get('name')] = {}
+            result[repository.get('name')]["len"] = repository.get('language')
+            result[repository.get('name')]["branch"] = repository.get("default_branch")
+            result[repository.get('name')]["url"] = repository.get("html_url")
+            result[repository.get('name')]["usr"] = usr
+            
         except:
-            result.append(f"{usr}/{repository}")
+            pass
 
     return result
 
