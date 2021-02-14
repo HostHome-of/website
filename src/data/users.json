@@ -4,7 +4,8 @@
         "nombre": "Maubg",
         "psw": "awdawd",
         "cuentas": {
-            "78225720": true
+            "78225720": true,
+            "69753500": true
         },
         "pfp": "/src/web/static/pfp/google.jpg",
         "entrada": "13/2/2021",
