@@ -1,0 +1,160 @@
+<style>
+    #config_right {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        /* justify-content: center; */
+        align-items: center;
+    }
+
+    #config_right .pagina1 {
+        width: 70%;
+        border-right: 1px solid #ddd;
+        padding: 0 20px;
+        height: 100%;
+    }
+
+    #config_right .pagina1 .header {
+        box-sizing: border-box;
+        margin: 0px 30px;
+        min-width: 0px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        background-color: transparent;
+        position: relative;
+        border-bottom: 1px solid rgb(215, 219, 224);
+        border-radius: 0px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #config_right .pagina1 .header .titulo {
+        box-sizing: border-box;
+        margin: 0px;
+        min-width: 0px;
+        -webkit-box-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        align-items: center;
+        display: flex;
+        font-size: 20px;
+        font-weight: 600;
+        color: rgb(54, 73, 98);
+        text-align: left;
+        line-height: 1.5;
+        text-transform: none;
+        overflow: unset;
+        white-space: unset;
+        text-overflow: unset;
+    }
+
+    #config_right .pagina1 .header .titulo .icono {
+        width: 36px;
+        background-color: rgb(131, 210, 255);
+        color: rgb(255, 255, 255);
+        position: relative;
+        height: 36px;
+        border-radius: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #config_right .pagina1 .header .titulo .texto {
+        margin: 0px 0px 0px 15px;
+    }
+
+    #config_right .pagina1 .header .eliminarHeader {
+        color: rgb(154, 164, 176);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+    }
+</style>
+<div style="background: #fff; display: none;" class="config_right" id="config_right">
+    <div class="pagina1">
+        <div class="header">
+            <div class="titulo">
+                <div class="icono">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <div class="texto">
+                    Configuracion
+                </div>
+            </div>
+            <div class="eliminarHeader tippy" data-theme="light" title="Eliminar" data-duration="300" data-arrow="true"
+                data-animation="shift" data-position="left">
+                <i class="fas fa-trash-alt"></i>
+            </div>
+        </div>
+        <div id="form">
+            <div class="input">
+                <label for="nombre" class="tippy" data-theme="light" title="Luego puedes cambiarlo" data-duration="300" data-arrow="true"
+                data-animation="shift" data-position="right">
+                    <p>
+                        Nombre del archivo de configuracion
+                    </p>
+                </label>
+                <input placeholder="config.extension" autocomplete="off" id="nombre" type="text" name="" id="">
+            </div>
+            <div style="padding: 30px 0 10px;" class="input">
+                <label>
+                    <p>
+                        Escribe tu config
+                    </p>
+                </label>
+               <div id="editor" style="width: 100%; height: 50vh; box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px; border-radius: 5px;"></div> 
+            </div>
+        </div>
+    </div>
+    <style>
+        .pagina2 {
+            position: relative;
+            height: 100%;
+            font-family: "Roboto", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+            width: 30%;
+            font-weight: 300;
+        }
+
+        .pagina2 .banner {
+            width: 100%;
+            background: #3498db;
+            color: #fff;
+            display: flex;
+            font-size: 20px;
+            font-weight: 300;
+            padding: 20px;
+            align-items: center;
+        }
+
+        .pagina2 h1 {
+            font-size: 2em;
+        }
+
+        .docs {
+            font-family: "Roboto", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+        }
+
+        @media only screen and (max-width: 1400px) {
+
+            .pagina2 {
+                display: none !important;
+            }
+
+            .text__opcion_2 {
+                text-overflow: ellipsis !important;
+                width: 120px !important;
+                overflow: hidden !important;
+                white-space: nowrap !important;
+            }
+
+            .pagina1 {
+                width: 100% !important;
+            }
+        }
+    </style>
+    <div class="pagina2">
+        <iframe style="width: 100%; height: 100%;" frameborder="0" src="http://127.0.0.1:8000/#introduccion"
+            frameborder="0"></iframe>
+    </div>
+</div>

@@ -357,6 +357,11 @@
                                             Notiflix.Loading.Init({svgColor:"#6493c6",});
 
                                             Notiflix.Notify.Success('Se ha hecho logout en GitHub!');
+                                            Notiflix.Notify.Info('Espera 3 segundos porfavor');
+
+                                            setTimeout(function() {
+                                                window.location.reload();
+                                            }, 4000)
 
                                             // Notiflix.Confirm.Show('Atencion','El logout de token se ha completado pero sigues autorizado. Para desautorizarte ve a este link y dale a remover HostHome','Abrir config','Continuar',function(){ 
                                             //     window.open("https://github.com/settings/applications", "_blank");

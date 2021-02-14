@@ -22,7 +22,8 @@
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback">
 </head>
 
 <body
@@ -78,10 +79,60 @@
                     </div>
                 </div>
             </a>
+            <style>
+                .navy {
+                    display: flex;
+                    justify-content: space-between;
+                }
+
+                #crearHosting {
+                    position: relative;
+                    display: inline-flex;
+                    font-family: "Avenir Next", "Helvetica Neue", sans-serif;
+                    -webkit-box-align: center;
+                    align-items: center;
+                    font-weight: 700;
+                    white-space: nowrap;
+                    font-size: 13px;
+                    -webkit-box-pack: center;
+                    justify-content: center;
+                    text-decoration: none;
+                    cursor: pointer;
+                    appearance: none;
+                    padding: 9px 18px;
+                    line-height: 28px;
+                    border-radius: 4px;
+                    box-sizing: border-box;
+                    transition: all 0.55s cubic-bezier(0.25, 0.8, 0.25, 1) 0s;
+                    background-color: rgb(244, 247, 255);
+                    color: rgb(34, 92, 255);
+                    box-shadow: none;
+                    border: 1px solid rgb(26, 26, 27);
+                    text-transform: uppercase;
+                    letter-spacing: 0.1em;
+                    margin-right: 30px;
+                    border: none;
+                    outline: none;
+                }
+
+                #crearHosting:focus {
+                    border: none;
+                    outline: none;
+                }
+
+                #crearHosting.disabled {
+                    cursor: no-drop;
+                }
+            </style>
+            <button class="tippy disabled" data-theme="light"
+                title="Crear tu hosts, la configuracion puede ser cambiada despues" data-duration="300"
+                data-arrow="true" data-animation="shift" data-position="left" id="crearHosting">
+                Crear hosting
+            </button>
         </div>
         <style>
             .pagina {
-                /* margin: 80px 0 0 0; */
+                padding: 80px 0 0 0;
                 height: auto;
                 padding: 0;
             }
@@ -321,7 +372,7 @@
                         box-sizing: border-box;
                         margin: 0px;
                         min-width: 0px;
-                        padding: 10px 15px;
+                        padding: 20px 15px;
                         transition: .4s;
                     }
 
@@ -364,7 +415,7 @@
                         min-width: 0px;
                         margin: 20px;
                         cursor: pointer;
-                        padding: 10px;
+                        /* padding: 10px; */
                         background-color: rgb(255, 255, 255);
                         border: 1px solid rgb(215, 219, 224);
                         border-radius: 4px;
@@ -457,6 +508,29 @@
                         }
                     }
 
+                    function changePage(id) {
+                        // console.log(id)
+                        const listItem = document.getElementById(id);
+                        const pagina = document.getElementById(id.replace("_listPage", "_right"));
+
+                        const divs = ["extra", "miembros", "config", "basico"]
+                        for (i = 0; i < divs.length; i++) {
+                            if (divs[i] != id) {
+                                console.log(divs[i])
+                                try {
+                                    document.getElementById(divs[i] + "_listPage").parentNode.classList.remove("active");
+                                    document.getElementById(divs[i] + "_right").style.display = "none";
+                                } catch {
+                                    // console.log("")
+                                }
+                            }
+                        }
+
+                        listItem.parentNode.classList.add("active");
+                        pagina.style.display = "flex";
+
+                    }
+
                     var basico = false;
                     var config = false;
                     var extra = false;
@@ -464,13 +538,15 @@
 
                     function addToList(id) {
                         // console.log(id)
+                        mirarClick()
+
                         if (document.getElementById(id).classList.contains('disabled')) return;
                         lista = document.getElementById("lista");
                         if (id == "basico") {
                             basico = true;
                             var nuevaLista = document.createElement("div");
                             nuevaLista.innerHTML = `
-                            <div style="display: flex; align-items: center;" class="opcion">
+                            <div onclick="changePage(this.id)" id="basico_listPage" style="display: flex; align-items: center; width: 100%; height: 100%;" class="opcion">
                                 <div class="icono__opcion">
                                     <i class="far fa-plus-square"></i>
                                 </div>
@@ -486,7 +562,7 @@
                                     </div>
                                 </div>
                                 <div class="eliminar">
-                                    <i class="fas fa-trash-alt"></i>
+                                    <i style="cursor: no-drop" class="fas fa-trash-alt"></i>
                                 </div>
                             </div>
                             `;
@@ -496,7 +572,7 @@
                             var nuevaLista = document.createElement("div");
                             nuevaLista.classList.add("config");
                             nuevaLista.innerHTML = `                            
-                            <div style="display: flex; align-items: center;" class="opcion">
+                            <div onclick="changePage(this.id)" id="config_listPage" style="display: flex; align-items: center; width: 100%; height: 100%;" class="opcion">
                                 <div class="icono__opcion">
                                     <i class="fas fa-unlock-alt"></i>
                                 </div>
@@ -520,7 +596,7 @@
                             var nuevaLista = document.createElement("div");
                             nuevaLista.classList.add("extra");
                             nuevaLista.innerHTML = `                            
-                            <div style="display: flex; align-items: center;" class="opcion">
+                            <div onclick="changePage(this.id)"  id="extra_listPage"  style="display: flex; align-items: center; width: 100%; height: 100%;" class="opcion">
                                 <div class="icono__opcion">
                                     <i class="fas fa-info"></i>
                                 </div>
@@ -544,7 +620,7 @@
                             var nuevaLista = document.createElement("div");
                             nuevaLista.classList.add("miembros");
                             nuevaLista.innerHTML = `                            
-                            <div style="display: flex; align-items: center;" class="opcion">
+                            <div onclick="changePage(this.id)" id="miembros_listPage" style="display: flex; align-items: center; width: 100%; height: 100%;" class="opcion">
                                 <div class="icono__opcion">
                                     <i class="fas fa-user-plus"></i>
                                 </div>
@@ -572,17 +648,19 @@
                         const divs = ["extra", "miembros", "config", "basico"]
                         for (i = 0; i < divs.length; i++) {
                             if (divs[i] != id) {
-                                console.log(divs[i])
+                                // sconsole.log(divs[i])
                                 try {
                                     document.getElementsByClassName(divs[i] + "_used")[0].classList.remove("active")
+                                    document.getElementById(divs[i] + "_right").style.display = "none";
                                 } catch {
-                                    console.log("")
+                                    // console.log("")
                                 }
                             }
                         }
 
                         lista.appendChild(nuevaLista)
-                        document.getElementById(id).classList.add("disabled")
+                        document.getElementById(id).classList.add("disabled");
+                        document.getElementById(id + "_right").style.display = "flex"
                     }
                 </script>
                 <div class="content">
@@ -673,6 +751,23 @@
                     </div>
                 </div>
             </div>
+            <script>
+                function updateBtnForNewHosting() {
+                    const btn = document.getElementById("crearHosting");
+
+                    // Inputs
+                    // Input :: basico
+                    const input1 = document.getElementById("nombre");
+                    if (document.getElementsByClassName("repositorios")[0].contains("active")) {
+                        var input2 = document.getElementsByClassName("repositorios")[0].firstChild;
+
+                        while (!child.classList.contains == "repoEnLista") {
+                            input2 = child.nextSibling;
+                        }
+                        
+                    }
+                }
+            </script>
             <style>
                 .pagina .right {
                     width: 100%;
@@ -804,9 +899,12 @@
                     margin: 0;
                 }
             </style>
-            <div class="right">
+            <div class="right"
+                style="background: url(https://cdn.dribbble.com/users/3809802/screenshots/10373511/media/8259019d3ef70c373be081e011404779.jpg); background-size: 85%; background-repeat: no-repeat; background-position: center;">
                 <!-- LAS PAGINAS ESTAN EN OTROS ARCHIVOS YA QUE SON MUY LARGAS -->
                 {% include "/projectos/paginas/uno.html" %}
+                {% include "/projectos/paginas/dos.html" %}
+                {% include "/projectos/paginas/tres.html" %}
             </div>
         </div>
     </div>
@@ -827,7 +925,7 @@
     <script>
         function setEditor() {
             window.eh = ace.edit("editor");
-            eh.setTheme("ace/theme/dracula");
+            eh.setTheme("ace/theme/github");
             eh.session.setMode("ace/mode/json");
             eh.setOptions({
                 fontSize: 20,
