@@ -7,7 +7,9 @@
             "78225720": true,
             "69753500": false,
             "17893939": false,
-            "35115352": true
+            "35115352": true,
+            "29216738": false,
+            "57199673": true
         },
         "pfp": "/src/web/static/pfp/google.jpg",
         "entrada": "13/2/2021",
@@ -26,7 +28,8 @@
         "nombre": "Testyyy",
         "psw": "awdawd",
         "cuentas": {
-            "65751553": true
+            "65751553": true,
+            "79375483": true
         },
         "pfp": "/src/web/static/pfp/google.jpg",
         "entrada": "14/2/2021",

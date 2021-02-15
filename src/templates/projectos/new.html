@@ -429,6 +429,11 @@
                         box-shadow: rgb(20 26 40 / 8%) 4px 0px 14px;
                     }
 
+                    #lista #used.error {
+                        border: 1px solid rgb(255, 121, 96);
+                        box-shadow: rgb(20 26 40 / 8%) 4px 0px 14px;
+                    }
+
                     #lista .basico .icono__opcion {
                         background: rgb(136, 141, 255);
                     }
@@ -536,6 +541,28 @@
                     var extra = false;
                     var miembros = false;
 
+                    function eliminar(div) {
+                        const variable = div.id.replace("_listPage", "")
+
+                        if (variable == "basico") {
+                            return;
+                            basico = true;
+                            div.parentNode.remove();
+                        } else if (variable == "config") {
+                            config = true
+                            div.parentNode.remove();
+                        } else if (variable == "extra") {
+                            extra = true
+                            div.parentNode.remove();
+                        } else if (variable == "miembros") {
+                            miembros = true
+                            div.parentNode.remove();
+                        }
+
+                        document.getElementById(variable+"_right").style.display = "none";
+                        document.getElementById(variable).classList.remove("disabled")
+                    }
+
                     function addToList(id) {
                         // console.log(id)
                         mirarClick()
@@ -561,8 +588,8 @@
                                         Informacion basica de tu hosting
                                     </div>
                                 </div>
-                                <div class="eliminar">
-                                    <i style="cursor: no-drop" class="fas fa-trash-alt"></i>
+                                <div class="eliminar" >
+                                    <i onclick="eliminar(this.parentNode.parentNode)" style="cursor: no-drop" class="fas fa-trash-alt"></i>
                                 </div>
                             </div>
                             `;
@@ -588,7 +615,7 @@
                                     </div>
                                 </div>
                                 <div class="eliminar">
-                                    <i class="fas fa-trash-alt"></i>
+                                    <i onclick="eliminar(this.parentNode.parentNode)" class="fas fa-trash-alt"></i>
                                 </div>
                             </div>`;
                         } else if (id == "extra") {
@@ -612,7 +639,7 @@
                                     </div>
                                 </div>
                                 <div class="eliminar">
-                                    <i class="fas fa-trash-alt"></i>
+                                    <i onclick="eliminar(this.parentNode.parentNode)" class="fas fa-trash-alt"></i>
                                 </div>
                             </div>`;
                         } else if (id == "miembros") {
@@ -636,7 +663,7 @@
                                     </div>
                                 </div>
                                 <div class="eliminar">
-                                    <i class="fas fa-trash-alt"></i>
+                                    <i onclick="eliminar(this.parentNode.parentNode)" class="fas fa-trash-alt"></i>
                                 </div>
                             </div>`;
                         }
