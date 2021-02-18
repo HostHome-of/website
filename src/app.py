@@ -1,18 +1,19 @@
 from dotenv import load_dotenv
 load_dotenv()
 
-from flask import Flask, render_template, request, redirect, url_for, session, abort, send_file
+from flask import Flask, render_template, request, redirect, url_for, session, abort, send_file, flash
 from os import environ as env
 
 from src.auth import CrearUsuario, HacerLogin, Usuario
 from src.mail import enviarEmail
-from src.sockets import enviar
 
 from werkzeug.utils import secure_filename
 import os
 import requests
 
 from flask_dance.contrib.github import make_github_blueprint, github
+from functools import wraps
+from flask.json import jsonify
 
 app = Flask(__name__, static_url_path="/src/web/static")
 app.secret_key = "myllavecitasecretita123"
@@ -88,18 +89,47 @@ def error_404(e):
 
 # Resto de la web
 
+def login_required(function_to_protect):
+    @wraps(function_to_protect)
+    def wrapper(*args, **kwargs):
+        user_id = request.cookies.get('user_id')
+        if user_id:
+            user = Usuario(request.cookies.get('user_id')).cojer()
+            if not user["autorizado"]:
+                Usuario().petar(user["mail"])
+                return redirect(url_for('login'))
+            if user:
+                return function_to_protect(*args, **kwargs)
+            else:
+                return redirect(url_for('login'))
+        else:
+            flash("Please log in")
+            return redirect(url_for('login'))
+    return wrapper 
+
+def already_logedin(function_to_protect):
+    @wraps(function_to_protect)
+    def wrapper(*args, **kwargs):
+        user_id = request.cookies.get('user_id')
+        user = Usuario(user_id).cojer()
+        if user:
+            return redirect("/")
+        else:
+            return function_to_protect(*args, **kwargs)
+    return wrapper 
+
 def check_usuario():
-    try:
-        if session['user_id']:
-            usr = Usuario(session['user_id']).cojer()
-            if usr["autorizado"] == False:
-                Usuario().petar(Usuario(session['user_id']).cojer()["mail"])
-                return None
-            if not usr["cuentas"][str(session['user_id'])] == True: 
-                usr = None
-            return usr
-    except Exception as e:
-        return None 
+    if request.cookies.get('user_id'):
+        usr = Usuario(request.cookies.get('user_id')).cojer()
+        if usr is None:
+            return None
+        if not usr["autorizado"]:
+            Usuario().petar(Usuario(request.cookies.get('user_id')).cojer()["mail"])
+            return None
+        if not usr["cuentas"][str(request.cookies.get('user_id'))]: 
+            return None
+        return usr
+    return None
 
 @app.route("/")
 def PaginaPrincipal():
@@ -139,7 +169,7 @@ def Imagen():
         if allowed_image(image.filename):
             filename = secure_filename(image.filename)
             image.save(os.path.join("./src/static/pfp/", filename))
-            Usuario().imagen(session['user_id'], filename)
+            Usuario().imagen(request.cookies.get('user_id'), filename)
 
     return redirect("/dashboard/edit/imagen")
 
@@ -178,8 +208,11 @@ def Actualizar():
     
     return redirect(url_for("Cuenta"))
 
+# ============================================== Autentificacion
+
 @app.route("/login", methods=["GET", "POST"])
-def LogIn():
+@already_logedin
+def login():
     
     if request.method == "POST":
         
@@ -189,16 +222,14 @@ def LogIn():
         usr = HacerLogin(mail, psw).ejecutar()
         if usr == False:
             return {}
-        session['user_id'] = usr
-        return Usuario(usr).cojer()
-
-    usr = check_usuario()
-    if usr is not None:
-        return redirect(url_for('PaginaPrincipal'))
+        out = jsonify(state=0, msg=Usuario(usr).cojer())
+        out.set_cookie('user_id', 'usr')
+        return out
 
     return render_template("login.html", key=env["CAPTCHA_WEB"])
 
 @app.route("/register", methods=["GET", "POST"])
+@already_logedin
 def Registrarse():
 
     if request.method == "POST":
@@ -210,13 +241,9 @@ def Registrarse():
         usr = CrearUsuario(nombre, psw, mail).crear()
         if usr == False:
             return {}
-        session['user_id'] = usr
-
-        return {"estado": 200}
-
-    usr = check_usuario()
-    if usr is not None:
-        return redirect(url_for('PaginaPrincipal'))
+        out = jsonify(state=0, msg={"estado": 200})
+        out.set_cookie('user_id', usr)
+        return out
 
     return render_template("register.html", key=env["CAPTCHA_WEB"])
 
@@ -224,37 +251,43 @@ def Registrarse():
 def activarCuenta():
 
     if request.method == "POST":
-        codigo = f"{Usuario(session['user_id']).cojer()['tokenEntrada']}"
+        usuario = Usuario(request.cookies.get('user_id')).cojer()
+        codigo = str(usuario["tokenEntrada"])
+        nombre = usuario["nombre"]
         print(codigo)
-        email = render_template("mails/codigo.html", codigo=codigo)
+        email = render_template("mails/codigo.html", codigo=codigo, nombre=nombre)
         try:
-            enviarEmail(Usuario(session['user_id']).cojer(), email, "Codigo de verificacion", True)
+            enviarEmail(Usuario(request.cookies.get('user_id')).cojer(), email, "Codigo de verificacion", True)
         except Exception as e:
             print(e)
             return {"codigo": 500}
-        return {"codigo": Usuario(session['user_id']).cojer()['tokenEntrada']}
+        return {"codigo": Usuario(request.cookies.get('user_id')).cojer()['tokenEntrada']}
     return "tu que haces aqui?"
 
 @app.route("/register/activation/<codigo>", methods=["GET", "POST"])
 def activarCuentaCodigo(codigo):
 
     if request.method == "POST":
-        data = Usuario().activar(Usuario(session['user_id']).cojer()["mail"], codigo)
+        data = Usuario().activar(Usuario(request.cookies.get('user_id')).cojer()["mail"], codigo)
         if data == False:
             return {"codigo": 500}
 
         try:
             email = render_template("mails/recien.html", url=url_main)
-            enviarEmail(Usuario(session['user_id']).cojer(), email, "Gracias por unirte", True)
+            enviarEmail(Usuario(request.cookies.get('user_id')).cojer(), email, "Gracias por unirte", True)
         except Exception as e:
             print(e)
             return {"codigo": 500}
 
         return {"codigo": 200}
 
-# Dashboard
+# ============================================== FIN Autentificacion
+
+
+# ============================================== Dashboard
 
 @app.route("/dashboard")
+@login_required
 def Cuenta():
 
     usr = check_usuario()
@@ -265,6 +298,7 @@ def Cuenta():
     return render_template("dashboard/index.html", user=usr, docs=docs)
     
 @app.route("/dashboard/edit")
+@login_required
 def editarCuenta():
 
     usr = check_usuario()
@@ -283,6 +317,7 @@ def editarCuenta():
     return render_template("dashboard/edit.html", user=usr, docs=docs, github=githubUsr)
 
 @app.route("/dashboard/host")
+@login_required
 def mirarHosts():
 
     usr = check_usuario()
@@ -295,19 +330,8 @@ def mirarHosts():
     return render_template("projectos/hosts.html", hostsLen=len(hosts), user=usr, docs=docs, hosts=hosts)
 
 @app.route("/host/new", methods=["GET", "POST"])
+@login_required
 def crearHost():
-
-    if request.method == "POST":
-        nombre = request.args.get("nombre")
-        url    = request.headers.get("url") 
-        if url is None:
-            abort(404)
-        data = enviar(f"crear|{nombre}|{url}")
-        print(data)
-        print(data[0])
-        if bool(data[0]) == False:
-            return {"error": data[1]}
-        return {"estado": 200}
 
     usr = check_usuario()
 
@@ -328,6 +352,7 @@ def crearHost():
     return redirect(url_for("crearHost"))
 
 @app.route("/dashboard/edit/<string:pagina>")
+@login_required
 def editarCuentaConPagina(pagina):
 
     usr = check_usuario()
@@ -342,26 +367,29 @@ def editarCuentaConPagina(pagina):
 
 
 @app.route("/dashboard/account/delete")
+@login_required
 def EliminarCuenta():
 
     usr = check_usuario()
 
     if usr is not None:
-        Usuario(session['user_id']).eliminar()
+        Usuario(request.cookies.get('user_id')).eliminar()
 
     return redirect(url_for('PaginaPrincipal'))
 
 @app.route("/dashboard/account/destroy")
+@login_required
 def DestruirCuenta():
 
     usr = check_usuario()
 
     if usr is not None:
-        Usuario(session['user_id']).destruir()
+        Usuario(request.cookies.get('user_id')).destruir()
 
     return redirect(url_for('PaginaPrincipal'))
 
 @app.route("/dashboard/logout/<string:field>", methods=["GET", "POST"])
+@login_required
 def quitarTerceros(field):
     if request.method == "POST":
         if field == "github":
@@ -371,6 +399,9 @@ def quitarTerceros(field):
         return "ok"
 
     return redirect(url_for("Cuenta"))
+
+# ============================================== FIN Dashboard
+
 
 def run():
     app.run()
