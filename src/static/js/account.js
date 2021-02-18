@@ -56,9 +56,6 @@ function upadeEmail(mail, nombre) {
     checky3 = !document.getElementsByName("checky3")[0].checked;
     checky4 = !document.getElementsByName("checky4")[0].checked;
 
-    console.log(mail)
-    console.log(nombre)
-
     fetch("/update?email=true&mail="+mail+"&nm="+nombre+"&uno="+checky1+"&dos="+checky2+"&tres="+checky3+"&cuatro="+checky4, {
         method: "POST"
     })

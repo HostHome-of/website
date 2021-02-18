@@ -202,7 +202,30 @@
                 </script>
                 <div class="repositorios">
                     <header>
-                        <button class="btnRepo" id="btnRepo">
+                        <script>
+                            function crearHostExternal() {
+                                swal("Escribe la url del repositorio:", {
+                                    content: "input",
+                                }).then((value) => {
+                                    const re = /(?:git|ssh|https?|git@[-\w.]+):(\/\/)?(.*?)(\.git)(\/?|\#[-\d\w._]+?)$/
+                                    if (!re.test(value)) {
+                                        swal("No es valido!", "Mete una url de .git valido.", "error");
+                                        return
+                                    }
+
+                                    for (i = 0; i < document.getElementsByClassName("repoEnLista").length; i++) {
+                                        document.getElementsByClassName("repoEnLista")[i].style.display = "none";
+                                    }
+
+                                    swal("Añadido!", "Se ha añadido tu repositorio custom a la lista", "success");
+                                    // document.getElementById(id).innerHTML = `${value}`
+                                    // document.getElementById(id).classList.add("active");
+
+                                    document.getElementById("btnRepo").disabled = true;
+                                });
+                            }
+                        </script>
+                        <button onclick="crearHostExternal()" class="btnRepo" id="btnRepo">
                             Repo external
                         </button>
                         <div class="tags">
@@ -314,6 +337,7 @@
         }
     </style>
     <div class="pagina2">
-        <iframe style="width: 100%; height: 100%;" frameborder="0" src="http://127.0.0.1:8000/" frameborder="0"></iframe>
+        <iframe style="width: 100%; height: 100%;" frameborder="0" src="http://127.0.0.1:8000/"
+            frameborder="0"></iframe>
     </div>
 </div>

@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="es-ES">
 
-<head>
+ <head>
+      <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+  <script src="{{ url_for('static', filename='sw.js') }}"></script>
 	<title>HostHome | Entrar</title>
 	<link rel="icon" href="{{ url_for('static', filename='images/favicon.png')}}">
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/auth.css') }}">
@@ -15,6 +17,7 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
 	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+	
 </head>
 
 <body>

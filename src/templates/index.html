@@ -1,448 +1,573 @@
 <!DOCTYPE html>
 <html lang="es-ES">
-  <head>
-    <meta charset="utf-8">
-    <title>HostHome</title>
 
-    <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet">
+<head>
+  <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+  <script src="{{ url_for('static', filename='sw.js') }}"></script>
+  <meta charset="utf-8">
+  <title>HostHome</title>
 
-    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='vendor/icofont/icofont.min.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='vendor/remixicon/remixicon.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='vendor/venobox/venobox.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='vendor/owl.carousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.css">
-    <link rel="stylesheet" href="https://htmlstream.com/preview/front-v2.7.0/assets/vendor/hs-megamenu/src/hs.megamenu.css">
+  <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/icofont/icofont.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/remixicon/remixicon.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/venobox/venobox.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/owl.carousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
 
-    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.css">
+  <link rel="stylesheet"
+    href="https://htmlstream.com/preview/front-v2.7.0/assets/vendor/hs-megamenu/src/hs.megamenu.css">
 
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
 
-    <meta name="format-detection" content="telephone=no">
-    <link rel="apple-touch-icon" sizes="180x180" href="/src/web/static/images/favicon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/src/web/static/images/favicon.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/src/web/static/images/favicon.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
 
-    <meta name="msapplication-TileColor" content="#4C40F7">
-    <meta name="theme-color" content="#ffffff">
-    <meta name="description" content="HostHome | Hosting gratis para todo el mundo sin limites!">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="HostHome">
-    <meta name="twitter:title" content="HostHome | Hosting gratis">
-    <meta name="twitter:description" content="HostHome | Hosting gratis para todo el mundo sin limites!">
-    <meta name="twitter:creator" content="@MauBG6">
-    <meta name="twitter:image" content="{{ url_for('static', filename='images/banner.png') }}">
-    <meta property="og:title" content="HostHome">
-    <meta property="og:type" content="Article">
-    <meta property="og:image" content="{{ url_for('static', filename='images/banner.png') }}">
-    <meta property="og:description" content="HostHome | Hosting gratis para todo el mundo sin limites!">
-    <meta property="og:site_name" content="HostHome | Hostings gratis">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="apple-touch-icon" sizes="180x180" href="/src/web/static/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/src/web/static/images/favicon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/src/web/static/images/favicon.png">
 
-    <script>
+  <meta name="msapplication-TileColor" content="#4C40F7">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="HostHome | Hosting gratis para todo el mundo sin limites!">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="HostHome">
+  <meta name="twitter:title" content="HostHome | Hosting gratis">
+  <meta name="twitter:description" content="HostHome | Hosting gratis para todo el mundo sin limites!">
+  <meta name="twitter:creator" content="@MauBG6">
+  <meta name="twitter:image" content="{{ url_for('static', filename='images/banner.png') }}">
+  <meta property="og:title" content="HostHome">
+  <meta property="og:type" content="Article">
+  <meta property="og:image" content="{{ url_for('static', filename='images/banner.png') }}">
+  <meta property="og:description" content="HostHome | Hosting gratis para todo el mundo sin limites!">
+  <meta property="og:site_name" content="HostHome | Hostings gratis">
+
+
+  <script>
     var viewportmeta = document.querySelector('meta[name="viewport"]');
     if (viewportmeta) {
-        if (screen.width < 375) {
-            var newScale = screen.width / 375;
-            viewportmeta.content = 'width=375, minimum-scale=' + newScale + ', maximum-scale=1.0, user-scalable=no, initial-scale=' + newScale + '';
-        } else {
-            viewportmeta.content = 'width=device-width, maximum-scale=1.0, initial-scale=1.0';
-        }
+      if (screen.width < 375) {
+        var newScale = screen.width / 375;
+        viewportmeta.content = 'width=375, minimum-scale=' + newScale + ', maximum-scale=1.0, user-scalable=no, initial-scale=' + newScale + '';
+      } else {
+        viewportmeta.content = 'width=device-width, maximum-scale=1.0, initial-scale=1.0';
+      }
     }
   </script>
-  </head>
-  <body>
-    <div class="page">
-      <div class="main">
+</head>
+
+<body>
+  <div class="page">
+    <div class="main">
+      <div class="header js-header" id="header">
         <div class="header js-header" id="header">
-            <div class="header js-header" id="header">
-                <div class="header__center center"><a class="header__logo" href="/">
-                <img class="header__pic" src="/src/web/static/images/favicon.png" alt=""></a>
-                <div class="header__social header__social_main">
-                    <a class="header__link" target="_blank" href="{{ docs }}"><i style="font-size: 25px;" class="far fa-file-alt icon"></i>Documentacion</a>
-                    {% if user %}
-                        <a class="header__link" href="/dashboard"><i style="font-size: 25px;" class="fas fa-user icon"></i> Tu cuenta</a></div>
-                    {% else %}
-                        <a class="header__link" href="/register"><i style="font-size: 25px;" class="fas fa-user-plus icon"></i> Registrarse</a>
-                        <a class="header__link" href="/login"><i style="font-size: 25px;" class="fas fa-sign-in-alt icon"></i> Entrar</a></div>
-                    {% endif %}
-                    <style>
-                        .js-header-burger:focus {
-                            outline: none;
-                        }
-                    </style>
-                    <button class="header__burger js-header-burger"></button>
-                </div>
-                <div class="header__wrapper js-header-wrapper">
-                  <div class="header__preview"><a class="header__logo" href="/" style="display: flex; color: #fff; align-items: center;"><img class="header__pic" src="/src/web/static/images/favicon.png" alt=""> <h2 style="margin-left: 15px;">HostHome</h2></a>
-                    <div class="header__img"><img class="header__pic" src="/src/web/static/images/bg-header.png" alt=""></div>
-                  </div>
-                  <div class="header__center center">
-                    <div class="header__contacts"><a class="header__line" target="_blank" href="mailto:host.home.official@gmail.com">
-                        <div class="header__icon">
-                            <svg id="icon-email" class="icon icon-email" viewBox="0 0 18 15">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M2.422.267A2.133 2.133 0 0 0 .29 2.4v9.956c0 1.178.955 2.133 2.133 2.133h12.8a2.133 2.133 0 0 0 2.134-2.133V2.4A2.133 2.133 0 0 0 15.222.267h-12.8zM1.712 2.4c0-.393.318-.711.71-.711h12.8c.393 0 .712.318.712.711v9.956a.711.711 0 0 1-.712.71h-12.8a.711.711 0 0 1-.71-.71V2.4zm2.635.92a.711.711 0 1 0-1.005 1.005l4.977 4.978a.711.711 0 0 0 1.006 0l4.978-4.978a.711.711 0 1 0-1.006-1.006L8.822 7.794 4.347 3.32zM5.77 9.007a.711.711 0 0 1 0 1.006l-1.422 1.422a.711.711 0 0 1-1.005-1.005l1.422-1.423a.711.711 0 0 1 1.005 0zm7.112 0a.711.711 0 1 0-1.006 1.006l1.422 1.422a.711.711 0 0 0 1.006-1.005l-1.422-1.423z"></path>
-                            </svg>
-                        </div>
-                        <div class="header__text">host.home.official@gmail.com</div>
-                      </a>
-                      <a href="https://github.com/HostHome-of" target="_blank" class="header__line">
-                        <div class="header__icon"><svg width="24" height="24" class="icon" id="icon-place" viewBox="0 0 18 18">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.273.85a.711.711 0 0 0-.9 0L.55 7.25a.711.711 0 0 0 .9 1.1L8.822 2.32l5.85 4.786a.711.711 0 1 0 .901-1.1L9.273.85zM3.845 9.222a.711.711 0 0 0-1.423 0v7.111c0 .393.319.711.711.711h6.4a.711.711 0 1 0 0-1.422H3.845v-6.4zm9.931 0a2.041 2.041 0 0 0-2.11 2.008c.002.242.113.6.36 1.053.238.44.566.9.907 1.328.31.386.62.732.867.996.248-.264.558-.61.867-.996.342-.427.67-.888.908-1.328.246-.453.357-.81.359-1.053a2.042 2.042 0 0 0-2.158-2.008zm2.869 2.003h.71c0 .599-.244 1.21-.53 1.737a10.784 10.784 0 0 1-1.047 1.537 18.529 18.529 0 0 1-1.45 1.602l-.026.025-.008.008-.003.003-.49-.515-.492.515-.003-.003-.007-.008-.027-.025a17.888 17.888 0 0 1-.432-.44c-.276-.29-.646-.697-1.017-1.162-.37-.462-.754-.995-1.048-1.537-.286-.527-.53-1.138-.53-1.737v-.01A3.464 3.464 0 0 1 13.8 7.8a3.464 3.464 0 0 1 3.556 3.416l-.711.01zm-3.336 4.912l.491-.515.491.515a.712.712 0 0 1-.982 0zm.491-4.07a.711.711 0 1 0 0-1.423.711.711 0 0 0 0 1.423z"></path>
-                        </svg></div>
-                        <div class="header__text">
-                          <p>github.com/HostHome-of</p>
-                        </div>
-                      </a>
-                      <a target="_blank" class="header__line" href="tel:+34644920570">
-                        <div class="header__icon"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg></div>
-                        <div class="header__text">+34 644 92 05 70 </div>
-                      </a>
-                    </div>
-                    <nav class="header__nav"><a class="header__item" target="_blank" href="{{ docs }}"><span>Documentacion</span></a><a class="header__item"
-                        target="_blank" href="{{ docs }}len"><span>Lenguages</span></a><a class="header__item" target="_blank" href="{{ docs }}cli"><span>CLIs</span></a><a class="header__item"
-                            href="#"><span>Contactanos</span></a></nav>
-                    <div class="header__social header__social_inner">
-                        <a class="header__link" target="_blank" href="{{ docs }}"><i style="font-size: 25px;" class="far fa-file-alt icon"></i>Documentacion</a>
-                        {% if user %}
-                            <a class="header__link" href="/dashboard"><i style="font-size: 25px;" class="fas fa-user icon"></i> Tu cuenta</a></div>
-                        {% else %}
-                            <a class="header__link" href="/register"><i style="font-size: 25px;" class="fas fa-user-plus icon"></i> Registrarse</a>
-                            <a class="header__link" href="/login"><i style="font-size: 25px;" class="fas fa-sign-in-alt icon"></i> Entrar</a></div>
-                        {% endif %}
-                  </div>
-                </div>
-              </div>
-        </div>
-        <div class="main__bg"><img class="main__pic" src="/src/web/static/images/bg-main.jpg" alt=""></div>
-        <div class="main__center center">
-          <div class="main__wrap">
-            <div class="main__stage stage" data-aos="transform">HostHome</div>
-            <style>
-                .js-scroll {
-                    text-decoration: none !important;
-                }
-            </style>
-            <h1 class="main__title title h1"><span data-aos="transform" data-aos-delay="150">Hostings</span><span data-aos="transform" data-aos-delay="300">gratis para</span><span data-aos="transform" data-aos-delay="450">todo el</span><span data-aos="transform" data-aos-delay="600">mundo!</span></h1><a class="scroll js-scroll" href="#details" data-aos="transform">
-              <div class="scroll__icon"><img class="scroll__pic" src="/src/web/static/images/scroll.svg" alt=""></div>
-              <div class="scroll__text">Hacer scroll</div>
-            </a>
+          <div class="header__center center"><a class="header__logo" href="/">
+              <img class="header__pic" src="/src/web/static/images/favicon.png" alt=""></a>
+            <div class="header__social header__social_main">
+              <a class="header__link" target="_blank" href="{{ docs }}"><i style="font-size: 25px;"
+                  class="far fa-file-alt icon"></i>Documentacion</a>
+              {% if user %}
+              <a class="header__link" href="/dashboard"><i style="font-size: 25px;" class="fas fa-user icon"></i> Tu
+                cuenta</a>
+            </div>
+            {% else %}
+            <a class="header__link" href="/register"><i style="font-size: 25px;" class="fas fa-user-plus icon"></i>
+              Registrarse</a>
+            <a class="header__link" href="/login"><i style="font-size: 25px;" class="fas fa-sign-in-alt icon"></i>
+              Entrar</a>
           </div>
+          {% endif %}
+          <style>
+            .js-header-burger:focus {
+              outline: none;
+            }
+          </style>
+          <button class="header__burger js-header-burger"></button>
         </div>
-        <div class="main__view" data-aos>
-          <div class="main__preview"><img class="main__pic" src="/src/web/static/images/main-pic-6.png" alt=""></div>
-          <div class="main__preview"><img class="main__pic js-parallax" data-scale="2.5" data-orientation="up" src="/src/web/static/images/main-pic-1.png" alt=""></div>
-          <div class="main__preview"><img class="main__pic js-parallax" data-scale="1.5" data-orientation="up" src="/src/web/static/images/main-pic-2.png" alt=""></div>
-          <div class="main__preview"><img class="main__pic" src="/src/web/static/images/main-pic-3.png" alt=""></div>
-          <div class="main__preview"><img class="main__pic" src="/src/web/static/images/main-pic-4.png" alt=""></div>
-          <div class="main__preview"><img class="main__pic js-parallax" data-scale="4.5" data-orientation="up" src="/src/web/static/images/main-pic-5.png" alt=""></div>
-          <div class="main__preview"><img class="main__pic js-parallax" data-scale="1.5" data-orientation="down" src="/src/web/static/images/main-pic-7.png" alt=""></div>
-        </div>
-        <div class="main__figures">
-          <div class="main__figure" data-aos="animation-translate-y"><img class="main__pic js-parallax" data-scale="2.2" data-orientation="down" src="/src/web/static/images/figure-1.png" alt=""></div>
-          <div class="main__figure" data-aos="animation-translate-y" data-aos-delay="200"><img class="main__pic js-parallax" data-scale="2.2" data-orientation="up" src="/src/web/static/images/figure-2.png" alt=""></div>
-          <div class="main__figure" data-aos="animation-translate-y" data-aos-delay="400"><img class="main__pic" src="/src/web/static/images/figure-3.png" alt=""></div>
+        <div class="header__wrapper js-header-wrapper">
+          <div class="header__preview"><a class="header__logo" href="/"
+              style="display: flex; color: #fff; align-items: center;"><img class="header__pic"
+                src="/src/web/static/images/favicon.png" alt="">
+              <h2 style="margin-left: 15px;">HostHome</h2>
+            </a>
+            <div class="header__img"><img class="header__pic" src="/src/web/static/images/bg-header.png" alt=""></div>
+          </div>
+          <div class="header__center center">
+            <div class="header__contacts"><a class="header__line" target="_blank"
+                href="mailto:host.home.official@gmail.com">
+                <div class="header__icon">
+                  <svg id="icon-email" class="icon icon-email" viewBox="0 0 18 15">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M2.422.267A2.133 2.133 0 0 0 .29 2.4v9.956c0 1.178.955 2.133 2.133 2.133h12.8a2.133 2.133 0 0 0 2.134-2.133V2.4A2.133 2.133 0 0 0 15.222.267h-12.8zM1.712 2.4c0-.393.318-.711.71-.711h12.8c.393 0 .712.318.712.711v9.956a.711.711 0 0 1-.712.71h-12.8a.711.711 0 0 1-.71-.71V2.4zm2.635.92a.711.711 0 1 0-1.005 1.005l4.977 4.978a.711.711 0 0 0 1.006 0l4.978-4.978a.711.711 0 1 0-1.006-1.006L8.822 7.794 4.347 3.32zM5.77 9.007a.711.711 0 0 1 0 1.006l-1.422 1.422a.711.711 0 0 1-1.005-1.005l1.422-1.423a.711.711 0 0 1 1.005 0zm7.112 0a.711.711 0 1 0-1.006 1.006l1.422 1.422a.711.711 0 0 0 1.006-1.005l-1.422-1.423z">
+                    </path>
+                  </svg>
+                </div>
+                <div class="header__text">host.home.official@gmail.com</div>
+              </a>
+              <a href="https://github.com/HostHome-of" target="_blank" class="header__line">
+                <div class="header__icon"><svg width="24" height="24" class="icon" id="icon-place" viewBox="0 0 18 18">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M9.273.85a.711.711 0 0 0-.9 0L.55 7.25a.711.711 0 0 0 .9 1.1L8.822 2.32l5.85 4.786a.711.711 0 1 0 .901-1.1L9.273.85zM3.845 9.222a.711.711 0 0 0-1.423 0v7.111c0 .393.319.711.711.711h6.4a.711.711 0 1 0 0-1.422H3.845v-6.4zm9.931 0a2.041 2.041 0 0 0-2.11 2.008c.002.242.113.6.36 1.053.238.44.566.9.907 1.328.31.386.62.732.867.996.248-.264.558-.61.867-.996.342-.427.67-.888.908-1.328.246-.453.357-.81.359-1.053a2.042 2.042 0 0 0-2.158-2.008zm2.869 2.003h.71c0 .599-.244 1.21-.53 1.737a10.784 10.784 0 0 1-1.047 1.537 18.529 18.529 0 0 1-1.45 1.602l-.026.025-.008.008-.003.003-.49-.515-.492.515-.003-.003-.007-.008-.027-.025a17.888 17.888 0 0 1-.432-.44c-.276-.29-.646-.697-1.017-1.162-.37-.462-.754-.995-1.048-1.537-.286-.527-.53-1.138-.53-1.737v-.01A3.464 3.464 0 0 1 13.8 7.8a3.464 3.464 0 0 1 3.556 3.416l-.711.01zm-3.336 4.912l.491-.515.491.515a.712.712 0 0 1-.982 0zm.491-4.07a.711.711 0 1 0 0-1.423.711.711 0 0 0 0 1.423z">
+                    </path>
+                  </svg></div>
+                <div class="header__text">
+                  <p>github.com/HostHome-of</p>
+                </div>
+              </a>
+              <a target="_blank" class="header__line" href="tel:+34644920570">
+                <div class="header__icon"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    viewBox="0 0 24 24">
+                    <path
+                      d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                  </svg></div>
+                <div class="header__text">+34 644 92 05 70 </div>
+              </a>
+            </div>
+            <nav class="header__nav"><a class="header__item" target="_blank"
+                href="{{ docs }}"><span>Documentacion</span></a><a class="header__item" target="_blank"
+                href="{{ docs }}len"><span>Lenguages</span></a><a class="header__item" target="_blank"
+                href="{{ docs }}cli"><span>CLIs</span></a><a class="header__item" href="#"><span>Contactanos</span></a>
+            </nav>
+            <div class="header__social header__social_inner">
+              <a class="header__link" target="_blank" href="{{ docs }}"><i style="font-size: 25px;"
+                  class="far fa-file-alt icon"></i>Documentacion</a>
+              {% if user %}
+              <a class="header__link" href="/dashboard"><i style="font-size: 25px;" class="fas fa-user icon"></i> Tu
+                cuenta</a>
+            </div>
+            {% else %}
+            <a class="header__link" href="/register"><i style="font-size: 25px;" class="fas fa-user-plus icon"></i>
+              Registrarse</a>
+            <a class="header__link" href="/login"><i style="font-size: 25px;" class="fas fa-sign-in-alt icon"></i>
+              Entrar</a>
+          </div>
+          {% endif %}
         </div>
       </div>
-      <div class="details" id="details">
-        <div class="details__center center">
-          <div class="details__head" data-aos="animation-scale-y">
-            <div class="details__stage stage">Quienes somos</div>
-            <h3 class="details__info h3">Hacemos hostings gratis para todos, <br>Con unas caracteristicas impresionantes.</h3>
+    </div>
+  </div>
+  <div class="main__bg"><img class="main__pic" src="/src/web/static/images/bg-main.jpg" alt=""></div>
+  <div class="main__center center">
+    <div class="main__wrap">
+      <div class="main__stage stage" data-aos="transform">HostHome</div>
+      <style>
+        .js-scroll {
+          text-decoration: none !important;
+        }
+      </style>
+      <h1 class="main__title title h1"><span data-aos="transform" data-aos-delay="150">Hostings</span><span
+          data-aos="transform" data-aos-delay="300">gratis para</span><span data-aos="transform"
+          data-aos-delay="450">todo el</span><span data-aos="transform" data-aos-delay="600">mundo!</span></h1><a
+        class="scroll js-scroll" href="#details" data-aos="transform">
+        <div class="scroll__icon"><img class="scroll__pic" src="/src/web/static/images/scroll.svg" alt=""></div>
+        <div class="scroll__text">Hacer scroll</div>
+      </a>
+    </div>
+  </div>
+  <div class="main__view" data-aos>
+    <div class="main__preview"><img class="main__pic" src="/src/web/static/images/main-pic-6.png" alt=""></div>
+    <div class="main__preview"><img class="main__pic js-parallax" data-scale="2.5" data-orientation="up"
+        src="/src/web/static/images/main-pic-1.png" alt=""></div>
+    <div class="main__preview"><img class="main__pic js-parallax" data-scale="1.5" data-orientation="up"
+        src="/src/web/static/images/main-pic-2.png" alt=""></div>
+    <div class="main__preview"><img class="main__pic" src="/src/web/static/images/main-pic-3.png" alt=""></div>
+    <div class="main__preview"><img class="main__pic" src="/src/web/static/images/main-pic-4.png" alt=""></div>
+    <div class="main__preview"><img class="main__pic js-parallax" data-scale="4.5" data-orientation="up"
+        src="/src/web/static/images/main-pic-5.png" alt=""></div>
+    <div class="main__preview"><img class="main__pic js-parallax" data-scale="1.5" data-orientation="down"
+        src="/src/web/static/images/main-pic-7.png" alt=""></div>
+  </div>
+  <div class="main__figures">
+    <div class="main__figure" data-aos="animation-translate-y"><img class="main__pic js-parallax" data-scale="2.2"
+        data-orientation="down" src="/src/web/static/images/figure-1.png" alt=""></div>
+    <div class="main__figure" data-aos="animation-translate-y" data-aos-delay="200"><img class="main__pic js-parallax"
+        data-scale="2.2" data-orientation="up" src="/src/web/static/images/figure-2.png" alt=""></div>
+    <div class="main__figure" data-aos="animation-translate-y" data-aos-delay="400"><img class="main__pic"
+        src="/src/web/static/images/figure-3.png" alt=""></div>
+  </div>
+  </div>
+  <div class="details" id="details">
+    <div class="details__center center">
+      <div class="details__head" data-aos="animation-scale-y">
+        <div class="details__stage stage">Quienes somos</div>
+        <h3 class="details__info h3">Hacemos hostings gratis para todos, <br>Con unas caracteristicas impresionantes.
+        </h3>
+      </div>
+      <h2 class="details__title" data-aos="animation-scale-y">Crea. Empuja. <br>Hostea. </h2>
+      <style>
+        .elHoverNoFuncionaAsiqueLeCambioElColorDeTextoABlanco:hover {
+          color: #fff;
+        }
+      </style>
+      <div class="details__btn" data-aos="animation-translate-y"><button onclick="window.location.replace('/dashboard')"
+          class="btn btn_purple elHoverNoFuncionaAsiqueLeCambioElColorDeTextoABlanco"><span
+            class="btn__text">Comenzar</span><svg style="width: 25px;fill: #fff;" class="icon" id="icon-arrow-right"
+            viewBox="0 0 22 16">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+              d="M14.707.293a1 1 0 1 0-1.414 1.414L18.586 7H1a1 1 0 0 0 0 2h17.586l-5.293 5.293a1 1 0 0 0 1.414 1.414l7-7A.996.996 0 0 0 22 8m-.076-.383a.997.997 0 0 0-.217-.324l-7-7m7.217 7.324a.996.996 0 0 1 .076.374z">
+            </path>
+          </svg></button></div>
+      <div class="details__container">
+        <div class="details__slider owl-carousel js-slider-details">
+          <div class="details__item">
+            <div class="details__preview details__preview_cursor" data-aos="animation-scale">
+              <div class="details__img"><img class="details__pic" src="/src/web/static/images/cursor.png" alt=""></div>
+            </div>
+            <h5 class="details__category h5" data-aos="animation-scale-y">Video tutoriales</h5>
+            <div class="details__text" data-aos="animation-scale-y">Tenemos videos explicativos para que puedas enteder
+              que esta pasando.</div>
+            <div class="details__btn" data-aos="animation-scale-y"><button onclick="window.location.href = '/dashboard'"
+                class="btn btn_dark">Ir a mi cuenta </button></div>
           </div>
-          <h2 class="details__title" data-aos="animation-scale-y">Crea. Empuja. <br>Hostea. </h2>
-          <style>
-              .elHoverNoFuncionaAsiqueLeCambioElColorDeTextoABlanco:hover {
+          <div class="details__item">
+            <div class="details__preview details__preview_hand" data-aos="animation-scale" data-aos-delay="150">
+              <div class="details__img"><img class="details__pic" src="/src/web/static/images/hand.png" alt=""></div>
+            </div>
+            <h5 class="details__category h5" data-aos="animation-scale-y" data-aos-delay="150">Es tu host</h5>
+            <div class="details__text" data-aos="animation-scale-y" data-aos-delay="150">Puedes hacer lo que quieras con
+              tu host backend asta los limites de tu imaginacion.</div>
+            <div class="details__btn" data-aos="animation-scale-y"><button onclick="window.location.href = '/host/new'"
+                class="btn btn_dark">Crear nuevo host </button></div>
+          </div>
+          <div class="details__item">
+            <div class="details__preview details__preview_color" data-aos="animation-scale" data-aos-delay="300">
+              <div class="details__img"><img class="details__pic" src="/src/web/static/images/color-picker.png" alt="">
+              </div>
+            </div>
+            <h5 class="details__category h5" data-aos="animation-scale-y" data-aos-delay="300">Personalizable</h5>
+            <div class="details__text" data-aos="animation-scale-y" data-aos-delay="300">Puedes personalizar totalmente
+              tu host y tomar tus propias decisiones.</div>
+            <div class="details__btn" data-aos="animation-scale-y"><button
+                onclick="window.location.href = '/dashboard/edit'" class="btn btn_dark">Editar perfil </button></div>
+          </div>
+          <div class="details__item">
+            <div class="details__preview details__preview_cursor" data-aos="animation-scale">
+              <div class="details__img"><img class="details__pic" src="/src/web/static/images/cursor.png" alt=""></div>
+            </div>
+            <h5 class="details__category h5" data-aos="animation-scale-y">Video tutoriales</h5>
+            <div class="details__text" data-aos="animation-scale-y">Tenemos videos explicativos para que puedas enteder
+              que esta pasando.</div>
+            <div class="details__btn" data-aos="animation-scale-y"><button onclick="window.location.href = '/dashboard'"
+                class="btn btn_dark">Ir a mi cuenta </button></div>
+          </div>
+          <div class="details__item">
+            <div class="details__preview details__preview_hand" data-aos="animation-scale" data-aos-delay="150">
+              <div class="details__img"><img class="details__pic" src="/src/web/static/images/hand.png" alt=""></div>
+            </div>
+            <h5 class="details__category h5" data-aos="animation-scale-y" data-aos-delay="150">Es tu host</h5>
+            <div class="details__text" data-aos="animation-scale-y" data-aos-delay="150">Puedes hacer lo que quieras con
+              tu host backend asta los limites de tu imaginacion.</div>
+            <div class="details__btn" data-aos="animation-scale-y"><button onclick="window.location.href = '/host/new'"
+                class="btn btn_dark">Crear nuevo host </button></div>
+          </div>
+          <div class="details__item">
+            <div class="details__preview details__preview_color" data-aos="animation-scale" data-aos-delay="300">
+              <div class="details__img"><img class="details__pic" src="/src/web/static/images/color-picker.png" alt="">
+              </div>
+            </div>
+            <h5 class="details__category h5" data-aos="animation-scale-y" data-aos-delay="300">Personalizable</h5>
+            <div class="details__text" data-aos="animation-scale-y" data-aos-delay="300">Puedes personalizar totalmente
+              tu host y tomar tus propias decisiones.</div>
+            <div class="details__btn" data-aos="animation-scale-y"><button
+                onclick="window.location.href = '/dashboard/edit'" class="btn btn_dark">Editar perfil </button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <style>
+      .owl-nav button:focus {
+        outline: none;
+      }
+    </style>
+    <div class="details__figures">
+      <div class="details__figure"><img class="details__pic js-parallax" data-scale="2" data-orientation="down"
+          src="/src/web/static/images/figure-1.png" alt=""></div>
+      <div class="details__figure"><img class="details__pic js-parallax" data-scale="2" data-orientation="up"
+          src="/src/web/static/images/figure-2.png" alt=""></div>
+      <div class="details__figure"><img class="details__pic js-parallax" data-scale="1.2" data-orientation="up"
+          src="/src/web/static/images/figure-3.png" alt=""></div>
+    </div>
+    {% if user %}
+    <a class="details__contact" href="/dashboard">Ve a tu cuenta</a>
+    {% else %}
+    <a class="details__contact" href="/register">Registrarse</a>
+    {% endif %}
+  </div>
+  <div class="work">
+    <div class="work__circles"></div>
+    <div class="work__center center">
+      <div class="work__wrap">
+        <div class="work__stage stage stage_pink" data-aos="animation-scale-y">Que es lo que hacemos</div>
+        <h2 class="work__title title h1" data-aos="animation-scale-y" data-aos-delay="150">Hosting gratis para todos con
+          unos lenguages especificos.</h2>
+        <div class="work__text" data-aos="animation-scale-y" data-aos-delay="300">Los projectos deven estar con un
+          archivo llamado <strong>.hosthome</strong> para que funciones.</div><a class="scroll js-scroll"
+          data-aos="animation-scale-y" href="#review">
+          <div class="scroll__icon"><img class="scroll__pic" src="/src/web/static/images/scroll.svg" alt=""></div>
+          <div class="scroll__text">Hacer scroll</div>
+        </a>
+      </div>
+    </div>
+    <div class="work__preview"><img class="work__pic js-parallax" data-scale="2" data-orientation="down"
+        src="/src/web/static/images/work-cube.png" alt=""></div>
+    <div class="work__figures" data-aos>
+      <div class="work__figure"><img class="work__pic js-parallax" data-scale="1.3" data-orientation="up"
+          src="/src/web/static/images/work-cube-1.png" alt=""></div>
+      <div class="work__figure"><img class="work__pic js-parallax" data-scale="1.5" data-orientation="up left"
+          src="/src/web/static/images/work-cube-2.png" alt=""></div>
+      <div class="work__figure"><img class="work__pic js-parallax" data-scale="1.3" data-orientation="up right"
+          src="/src/web/static/images/work-cube-3.png" alt=""></div>
+      <div class="work__figure"><img class="work__pic" src="/src/web/static/images/work-cube-4.png" alt=""></div>
+      <div class="work__figure"><img class="work__pic js-parallax" data-scale="1.1" data-orientation="left"
+          src="/src/web/static/images/work-cube-5.png" alt=""></div>
+      <div class="work__figure"><img class="work__pic js-parallax" data-scale="1.2" data-orientation="right"
+          src="/src/web/static/images/work-cube-6.png" alt=""></div>
+      <div class="work__figure"><img class="work__pic js-parallax" data-scale="1.2" data-orientation="down"
+          src="/src/web/static/images/work-cube-7.png" alt=""></div>
+    </div>
+  </div>
+  <div class="review" id="review">
+    <div class="review__center center">
+      <div class="review__stage stage" data-aos="animation-scale-y">Lo que la gente piensa de nosotros</div>
+      <h2 class="review__title title h1" data-aos="animation-scale-y" data-aos-delay="200">Confiados por los
+        <br>clientes.</h2>
+      <div class="review__container" data-aos="animation-translate-y" data-aos-delay="400">
+        <div class="review__slider owl-carousel js-slider-review">
+          <div class="review__item">
+            <div class="review__text">“ Esta muy bien el servicio con gran rapidez y facil de usar, y me encanta la idea
+              de el <strong>.env</strong> ”</div>
+            <div class="review__author">
+              <div class="review__ava"><img class="review__pic" src="https://randomuser.me/api/portraits/men/87.jpg"
+                  alt=""></div>
+              <div class="review__details">
+                <div class="review__man h5">Roberto z</div>
+                <div class="review__company">robertoz@hotmail.com</div>
+              </div>
+            </div>
+          </div>
+          <div class="review__item">
+            <div class="review__text">“ Es muy facil crearse una cuenta y el crearse un host. Pero si pusiera una queja,
+              es que no es del todo para mobiles.”</div>
+            <div class="review__author">
+              <div class="review__ava"><img class="review__pic"
+                  src="https:\/\/tinyfac.es\/data\/avatars\/852EC6E1-347C-4187-9D42-DF264CCF17BF-200w.jpeg" alt="">
+              </div>
+              <div class="review__details">
+                <div class="review__man h5">Jeffrey Kam</div>
+                <div class="review__company">jeffkammer@gmail.com</div>
+              </div>
+            </div>
+          </div>
+          <div class="review__item">
+            <div class="review__text">“ ¡ME ENCANTA! Los CLIs son bastante buenos y sencillos con una buena
+              documentacion. ”</div>
+            <div class="review__author">
+              <div class="review__ava"><img class="review__pic" src="https://randomuser.me/api/portraits/women/68.jpg"
+                  alt=""></div>
+              <div class="review__details">
+                <div class="review__man h5">Marco Sousa</div>
+                <div class="review__company">hackertyper@gmail.com</div>
+              </div>
+            </div>
+          </div>
+          <div class="review__item">
+            <div class="review__text">“ En mi opinion creo que es una muy buena opcion para hosting ya que es gratis,
+              pero lo que mas me impresiona esque este todo en github. ”</div>
+            <div class="review__author">
+              <div class="review__ava"><img class="review__pic"
+                  src="https://avatars.githubusercontent.com/u/68229077?s=400&u=6332f6e89ad071a4ac13ebde26ab6b10ef58f9d1&v=4"
+                  alt=""></div>
+              <div class="review__details">
+                <div class="review__man h5">Maubg</div>
+                <div class="review__company">maubg2007@gmail.com</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="review__bg">
+      <div class="review__preview"><img class="review__pic js-parallax" data-scale="1.5" data-orientation="down"
+          src="/src/web/static/images/review-cube.png" alt=""></div>
+      <div class="review__preview"><img class="review__pic" src="/src/web/static/images/review-cube.png" alt=""></div>
+    </div>
+  </div>
+  <div class="wrapper wrapper_dark">
+    <div class="contacts">
+      <div class="contacts__center center">
+        <div class="contacts__container">
+          <div class="contacts__wrap">
+            <div class="contacts__stage stage" data-aos="animation-scale-y">Dinos hola 👋</div>
+            <h2 class="contacts__title h1" data-aos="animation-scale-y" data-aos-delay="200">Dinos lo que <br>quieras.
+            </h2>
+            <div class="contacts__info" data-aos="animation-scale-y" data-aos-delay="400">Puedes decirnos tu opinion,
+              errores ¡Lo que quieras!</div>
+          </div>
+          <div class="contacts__row">
+            <div class="contacts__details" data-aos="animation-translate-y"><a class="contacts__line"
+                href="mailto:host.home.official@gmail.com">
+                <div class="contacts__icon"><svg class="icon" id="icon-email" viewBox="0 0 18 15">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M2.422.267A2.133 2.133 0 0 0 .29 2.4v9.956c0 1.178.955 2.133 2.133 2.133h12.8a2.133 2.133 0 0 0 2.134-2.133V2.4A2.133 2.133 0 0 0 15.222.267h-12.8zM1.712 2.4c0-.393.318-.711.71-.711h12.8c.393 0 .712.318.712.711v9.956a.711.711 0 0 1-.712.71h-12.8a.711.711 0 0 1-.71-.71V2.4zm2.635.92a.711.711 0 1 0-1.005 1.005l4.977 4.978a.711.711 0 0 0 1.006 0l4.978-4.978a.711.711 0 1 0-1.006-1.006L8.822 7.794 4.347 3.32zM5.77 9.007a.711.711 0 0 1 0 1.006l-1.422 1.422a.711.711 0 0 1-1.005-1.005l1.422-1.423a.711.711 0 0 1 1.005 0zm7.112 0a.711.711 0 1 0-1.006 1.006l1.422 1.422a.711.711 0 0 0 1.006-1.005l-1.422-1.423z">
+                    </path>
+                  </svg></div>
+                <div class="contacts__text">host.home.official@gmail.com</div>
+              </a>
+              <div class="contacts__line">
+                <div class="contacts__icon"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    viewBox="0 0 24 24">
+                    <path
+                      d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm1 18h-2v-8h2v8zm-1-12.25c.69 0 1.25.56 1.25 1.25s-.56 1.25-1.25 1.25-1.25-.56-1.25-1.25.56-1.25 1.25-1.25z" />
+                  </svg></div>
+                <div class="contacts__text">
+                  <p>Una compania de hosts</p>
+                  <p>gratis para todos</p>
+                </div>
+              </div><a class="contacts__line" href="tel:+34644920570">
+                <div class="contacts__icon"><svg class="icon" id="icon-phone" viewBox="0 0 17 18">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M6.689 2.978c0-.393.318-.711.71-.711h7.112c.393 0 .711.318.711.71v4.267a.711.711 0 0 1-.711.712H8.822c-.11 0-.22.025-.318.075l-1.815.907v-5.96zm.71-2.134a2.133 2.133 0 0 0-2.132 2.134v7.11a.711.711 0 0 0 1.029.637L8.99 9.378h5.521a2.133 2.133 0 0 0 2.133-2.134V2.978A2.133 2.133 0 0 0 14.511.844H7.4zM2.423 2.267A2.133 2.133 0 0 0 .29 4.4v11.378c0 1.178.955 2.133 2.133 2.133h7.823a2.133 2.133 0 0 0 2.133-2.133V10.8a.711.711 0 0 0-1.422 0v4.978a.711.711 0 0 1-.711.71H2.422a.711.711 0 0 1-.71-.71V4.4c0-.393.318-.711.71-.711h1.423a.711.711 0 0 0 0-1.422H2.422z">
+                    </path>
+                  </svg></div>
+                <div class="contacts__text">+34 644 92 05 70</div>
+              </a>
+            </div>
+            <style>
+              .contacts__form .field__input:disabled {
+                background: #ddd;
+              }
+
+              .contacts__form .field__icon .icon {
+                width: 17px;
+              }
+            </style>
+            <form class="contacts__form" data-aos="animation-translate-y" data-aos-delay="200">
+              <div class="contacts__field field">
+                <div class="field__wrap"><input class="field__input" {% if user %}value="{{ user['nombre'] }}"
+                    disabled{% endif %} type="text" name="name" placeholder="Nombre " />
+                  <div class="field__icon"><svg class="icon" id="icon-profile" viewBox="0 0 17 18">
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M8.5.875a4.5 4.5 0 0 0-4.5 4.5v2a4.5 4.5 0 0 0 9 0v-2a4.5 4.5 0 0 0-4.5-4.5zM6 5.375a2.5 2.5 0 0 1 5 0v2a2.5 2.5 0 0 1-5 0v-2zM3.546 12.25a1 1 0 0 0-.968-1.75A5 5 0 0 0 0 14.875v2a1 1 0 0 0 1 1h15a1 1 0 0 0 1-1v-2a5 5 0 0 0-2.578-4.375 1 1 0 1 0-.969 1.75A3 3 0 0 1 15 14.875v1H2v-1a3 3 0 0 1 1.546-2.625z">
+                      </path>
+                    </svg></div>
+                </div>
+              </div>
+              <div class="contacts__field field">
+                <div class="field__wrap"><input {% if user %}value="{{ user['mail'] }}" disabled{% endif %}
+                    class="field__input" type="email" name="email" placeholder="Email" />
+                  <div class="field__icon"><svg class="icon" id="icon-send" viewBox="0 0 17 17">
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M16.707.668a1 1 0 0 1 .238 1.033l-5 14.5a1 1 0 0 1-1.853.093l-3-6.5a1 1 0 0 1 .2-1.126l3-3a1 1 0 1 1 1.415 1.414L9.2 9.59l1.666 3.608 3.52-10.207L4.178 6.51l2.223 1.025a1 1 0 1 1-.838 1.816L1.081 7.283a1 1 0 0 1 .093-1.853l14.5-5a1 1 0 0 1 1.033.238z">
+                      </path>
+                    </svg></div>
+                </div>
+              </div>
+              <div class="contacts__field field">
+                <div class="field__wrap"><select class="field__select" name="question">
+                    <option value="" selected disabled hidden>¿En que setas trabajando?</option>
+                    <option>Inteligencia artificial</option>
+                    <option>Robots</option>
+                    <option>API</option>
+                    <option>CLI</option>
+                    <option>otro</option>
+                  </select>
+                  <div class="field__icon"><svg class="icon" id="icon-arrows" viewBox="0 0 12 18">
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M6.664 1.128a1 1 0 0 0-1.328 0l-4.5 4a1 1 0 0 0 1.328 1.494L6 3.213l3.836 3.41a1 1 0 1 0 1.328-1.495l-4.5-4zm-4.5 11a1 1 0 0 0-1.328 1.494l4.5 4a1 1 0 0 0 1.328 0l4.5-4a1 1 0 0 0-1.328-1.494L6 15.538l-3.836-3.41z">
+                      </path>
+                    </svg></div>
+                </div>
+              </div>
+              <div class="contacts__field field field_textarea">
+                <div class="field__wrap"><textarea class="field__textarea" name="message"
+                    placeholder="Message"></textarea>
+                  <div class="field__icon"><svg class="icon" id="icon-message" viewBox="0 0 18 18">
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M.5 2.875a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3.532l-2.2 2.64a1 1 0 0 1-1.536 0l-2.2-2.64H2.5a2 2 0 0 1-2-2v-10zm15 0h-13v10h4a1 1 0 0 1 .768.36L9 15.313l1.732-2.078a1 1 0 0 1 .768-.36h4v-10zm-12 3a1 1 0 0 1 1-1h9a1 1 0 1 1 0 2h-9a1 1 0 0 1-1-1zm1 3a1 1 0 1 0 0 2h9a1 1 0 1 0 0-2h-9z">
+                      </path>
+                    </svg></div>
+                </div>
+              </div>
+              <div class="contacts__btn"><button class="btn btn_purple"><span class="btn__text">Vamos a
+                    hablar</span><svg style="width: 20px; color: #fff; fill: #fff;" class="icon" id="icon-arrow-right"
+                    viewBox="0 0 22 16">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M14.707.293a1 1 0 1 0-1.414 1.414L18.586 7H1a1 1 0 0 0 0 2h17.586l-5.293 5.293a1 1 0 0 0 1.414 1.414l7-7A.996.996 0 0 0 22 8m-.076-.383a.997.997 0 0 0-.217-.324l-7-7m7.217 7.324a.996.996 0 0 1 .076.374z">
+                    </path>
+                  </svg></button></div>
+            </form>
+          </div>
+          <div class="contacts__category h5">Vamos a conectar</div>
+          <div class="figures">
+            <div class="figures__preview"><img class="figures__pic" src="/src/web/static/images/figures-1.png" alt="" />
+            </div>
+            <div class="figures__preview"><img class="figures__pic js-parallax" data-scale="1.6" data-orientation="up"
+                src="/src/web/static/images/figures-2.png" alt="" /></div>
+            <div class="figures__preview"><img class="figures__pic js-parallax" data-scale="1.3" data-orientation="up"
+                src="/src/web/static/images/figures-3.png" alt="" /></div>
+            <div class="figures__preview"><img class="figures__pic" src="/src/web/static/images/figures-4.png" alt="" />
+            </div>
+            <div class="figures__preview"><img class="figures__pic js-parallax" data-scale="2.3" data-orientation="down"
+                src="/src/web/static/images/figures-5.png" alt="" /></div>
+            <div class="figures__preview"><img class="figures__pic js-parallax" data-scale="2" data-orientation="up"
+                src="/src/web/static/images/figures-6.png" alt="" /></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="footer__center center">
+        <div class="footer__body">
+          <!-- <a class="footer__logo" href="/"><img class="footer__pic" src="/src/web/static/images/favicon.png" alt="" /></a> -->
+          <div class="footer__wrap">
+            <div class="footer__title h1">Hosting gratis para todo el mundo.</div>
+            <div class="footer__info h4">Create un hosting para mejorar el mundo.</div>
+          </div>
+          <div class="footer__menu">
+            <style>
+              .footer__link:hover {
                 color: #fff;
               }
-          </style>
-          <div class="details__btn" data-aos="animation-translate-y"><button onclick="window.location.replace('/dashboard')" class="btn btn_purple elHoverNoFuncionaAsiqueLeCambioElColorDeTextoABlanco"><span class="btn__text">Comenzar</span><svg style="width: 25px;fill: #fff;" class="icon" id="icon-arrow-right" viewBox="0 0 22 16">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M14.707.293a1 1 0 1 0-1.414 1.414L18.586 7H1a1 1 0 0 0 0 2h17.586l-5.293 5.293a1 1 0 0 0 1.414 1.414l7-7A.996.996 0 0 0 22 8m-.076-.383a.997.997 0 0 0-.217-.324l-7-7m7.217 7.324a.996.996 0 0 1 .076.374z"></path>
-        </svg></button></div>
-          <div class="details__container">
-            <div class="details__slider owl-carousel js-slider-details">
-              <div class="details__item">
-                <div class="details__preview details__preview_cursor" data-aos="animation-scale">
-                  <div class="details__img"><img class="details__pic" src="/src/web/static/images/cursor.png" alt=""></div>
-                </div>
-                <h5 class="details__category h5" data-aos="animation-scale-y">Video tutoriales</h5>
-                <div class="details__text" data-aos="animation-scale-y">Tenemos videos explicativos para que puedas enteder que esta pasando.</div>
-                <div class="details__btn" data-aos="animation-scale-y"><button onclick="window.location.href = '/dashboard'" class="btn btn_dark">Ir a mi cuenta </button></div>
-              </div>
-              <div class="details__item">
-                <div class="details__preview details__preview_hand" data-aos="animation-scale" data-aos-delay="150">
-                  <div class="details__img"><img class="details__pic" src="/src/web/static/images/hand.png" alt=""></div>
-                </div>
-                <h5 class="details__category h5" data-aos="animation-scale-y" data-aos-delay="150">Es tu host</h5>
-                <div class="details__text" data-aos="animation-scale-y" data-aos-delay="150">Puedes hacer lo que quieras con tu host backend asta los limites de tu imaginacion.</div>
-                <div class="details__btn" data-aos="animation-scale-y" data-aos-delay="150"><button onclick="window.location.href = '/host/new'" class="btn btn_dark">Crear nuevo host </button></div>
-              </div>
-              <div class="details__item">
-                <div class="details__preview details__preview_color" data-aos="animation-scale" data-aos-delay="300">
-                  <div class="details__img"><img class="details__pic" src="/src/web/static/images/color-picker.png" alt=""></div>
-                </div>
-                <h5 class="details__category h5" data-aos="animation-scale-y" data-aos-delay="300">Personalizable</h5>
-                <div class="details__text" data-aos="animation-scale-y" data-aos-delay="300">Puedes personalizar totalmente tu host y tomar tus propias decisiones.</div>
-                <div class="details__btn" data-aos="animation-scale-y" data-aos-delay="300"><button onclick="window.location.href = '/dashboard/edit'" class="btn btn_dark">Editar perfil </button></div>
-              </div>
-              <div class="details__item">
-                <div class="details__preview details__preview_cursor" data-aos="animation-scale">
-                  <div class="details__img"><img class="details__pic" src="/src/web/static/images/cursor.png" alt=""></div>
-                </div>
-                <h5 class="details__category h5" data-aos="animation-scale-y">Video tutoriales</h5>
-                <div class="details__text" data-aos="animation-scale-y">Tenemos videos explicativos para que puedas enteder que esta pasando.</div>
-                <div class="details__btn" data-aos="animation-scale-y"><button onclick="window.location.href = '/dashboard'" class="btn btn_dark">Ir a mi cuenta </button></div>
-              </div>
-              <div class="details__item">
-                <div class="details__preview details__preview_hand" data-aos="animation-scale" data-aos-delay="150">
-                  <div class="details__img"><img class="details__pic" src="/src/web/static/images/hand.png" alt=""></div>
-                </div>
-                <h5 class="details__category h5" data-aos="animation-scale-y" data-aos-delay="150">Es tu host</h5>
-                <div class="details__text" data-aos="animation-scale-y" data-aos-delay="150">Puedes hacer lo que quieras con tu host backend asta los limites de tu imaginacion.</div>
-                <div class="details__btn" data-aos="animation-scale-y" data-aos-delay="150"><button onclick="window.location.href = '/host/new'" class="btn btn_dark">Crear nuevo host </button></div>
-              </div>
-              <div class="details__item">
-                <div class="details__preview details__preview_color" data-aos="animation-scale" data-aos-delay="300">
-                  <div class="details__img"><img class="details__pic" src="/src/web/static/images/color-picker.png" alt=""></div>
-                </div>
-                <h5 class="details__category h5" data-aos="animation-scale-y" data-aos-delay="300">Personalizable</h5>
-                <div class="details__text" data-aos="animation-scale-y" data-aos-delay="300">Puedes personalizar totalmente tu host y tomar tus propias decisiones.</div>
-                <div class="details__btn" data-aos="animation-scale-y" data-aos-delay="300"><button onclick="window.location.href = '/dashboard/edit'" class="btn btn_dark">Editar perfil </button></div>
-              </div>
-            </div>
+            </style>
+            <a class="footer__link" href="{{ docs }}">Documentacion</a>
+            {% if user %}
+            <a class="footer__link" href="/dashboard">Cuenta</a>
+            <a class="footer__link" href="#">Contactanos</a>
+            {% else %}
+            <a class="footer__link" href="/login">Entrar</a>
+            <a class="footer__link" href="/register">Registrarse</a>
+            {% endif %}
+            <a class="footer__link" target="_blank" href="https://github.com/HostHome-of">Github</a>
           </div>
         </div>
-        <style>
-            .owl-nav button:focus {
-                outline: none;
-            }
-        </style>
-        <div class="details__figures">
-          <div class="details__figure"><img class="details__pic js-parallax" data-scale="2" data-orientation="down" src="/src/web/static/images/figure-1.png" alt=""></div>
-          <div class="details__figure"><img class="details__pic js-parallax" data-scale="2" data-orientation="up" src="/src/web/static/images/figure-2.png" alt=""></div>
-          <div class="details__figure"><img class="details__pic js-parallax" data-scale="1.2" data-orientation="up" src="/src/web/static/images/figure-3.png" alt=""></div>
-        </div>
-        {% if user %}
-            <a class="details__contact" href="/dashboard">Ve a tu cuenta</a>
-        {% else %}
-            <a class="details__contact" href="/register">Registrarse</a>
-        {% endif %}
-        </div>
-      <div class="work">
-        <div class="work__circles"></div>
-        <div class="work__center center">
-          <div class="work__wrap">
-            <div class="work__stage stage stage_pink" data-aos="animation-scale-y">Que es lo que hacemos</div>
-            <h2 class="work__title title h1" data-aos="animation-scale-y" data-aos-delay="150">Hosting gratis para todos con unos lenguages especificos.</h2>
-            <div class="work__text" data-aos="animation-scale-y" data-aos-delay="300">Los projectos deven estar con un archivo llamado <strong>.hosthome</strong> para que funciones.</div><a class="scroll js-scroll" data-aos="animation-scale-y" href="#review">
-              <div class="scroll__icon"><img class="scroll__pic" src="/src/web/static/images/scroll.svg" alt=""></div>
-              <div class="scroll__text">Hacer scroll</div>
-            </a>
-          </div>
-        </div>
-        <div class="work__preview"><img class="work__pic js-parallax" data-scale="2" data-orientation="down" src="/src/web/static/images/work-cube.png" alt=""></div>
-        <div class="work__figures" data-aos>
-          <div class="work__figure"><img class="work__pic js-parallax" data-scale="1.3" data-orientation="up" src="/src/web/static/images/work-cube-1.png" alt=""></div>
-          <div class="work__figure"><img class="work__pic js-parallax" data-scale="1.5" data-orientation="up left" src="/src/web/static/images/work-cube-2.png" alt=""></div>
-          <div class="work__figure"><img class="work__pic js-parallax" data-scale="1.3" data-orientation="up right" src="/src/web/static/images/work-cube-3.png" alt=""></div>
-          <div class="work__figure"><img class="work__pic" src="/src/web/static/images/work-cube-4.png" alt=""></div>
-          <div class="work__figure"><img class="work__pic js-parallax" data-scale="1.1" data-orientation="left" src="/src/web/static/images/work-cube-5.png" alt=""></div>
-          <div class="work__figure"><img class="work__pic js-parallax" data-scale="1.2" data-orientation="right" src="/src/web/static/images/work-cube-6.png" alt=""></div>
-          <div class="work__figure"><img class="work__pic js-parallax" data-scale="1.2" data-orientation="down" src="/src/web/static/images/work-cube-7.png" alt=""></div>
+        <div class="footer__bottom">
+          <div class="footer__copyright">©
+            <script>document.write(new Date().getFullYear())</script>, hosthome esta bajo licencia de GNU.
+          </div><a class="footer__scroll js-scroll" href="#header">Volver arriba</a>
         </div>
       </div>
-        <div class="review" id="review">
-          <div class="review__center center">
-            <div class="review__stage stage" data-aos="animation-scale-y">Lo que la gente piensa de nosotros</div>
-            <h2 class="review__title title h1" data-aos="animation-scale-y" data-aos-delay="200">Confiados por los <br>clientes.</h2>
-            <div class="review__container" data-aos="animation-translate-y" data-aos-delay="400">
-              <div class="review__slider owl-carousel js-slider-review">
-                <div class="review__item">
-                  <div class="review__text">“ Esta muy bien el servicio con gran rapidez y facil de usar, y me encanta la idea de el <strong>.env</strong> ”</div>
-                  <div class="review__author">
-                    <div class="review__ava"><img class="review__pic" src="https://randomuser.me/api/portraits/men/87.jpg" alt=""></div>
-                    <div class="review__details">
-                      <div class="review__man h5">Roberto z</div>
-                      <div class="review__company">robertoz@hotmail.com</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="review__item">
-                  <div class="review__text">“ Es muy facil crearse una cuenta y el crearse un host. Pero si pusiera una queja, es que no es del todo para mobiles.”</div>
-                  <div class="review__author">
-                    <div class="review__ava"><img class="review__pic" src="https:\/\/tinyfac.es\/data\/avatars\/852EC6E1-347C-4187-9D42-DF264CCF17BF-200w.jpeg" alt=""></div>
-                    <div class="review__details">
-                      <div class="review__man h5">Jeffrey Kam</div>
-                      <div class="review__company">jeffkammer@gmail.com</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="review__item">
-                  <div class="review__text">“ ¡ME ENCANTA! Los CLIs son bastante buenos y sencillos con una buena documentacion. ”</div>
-                  <div class="review__author">
-                    <div class="review__ava"><img class="review__pic" src="https://randomuser.me/api/portraits/women/68.jpg" alt=""></div>
-                    <div class="review__details">
-                      <div class="review__man h5">Marco Sousa</div>
-                      <div class="review__company">hackertyper@gmail.com</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="review__item">
-                  <div class="review__text">“ En mi opinion creo que es una muy buena opcion para hosting ya que es gratis, pero lo que mas me impresiona esque este todo en github. ”</div>
-                  <div class="review__author">
-                    <div class="review__ava"><img class="review__pic" src="https://avatars.githubusercontent.com/u/68229077?s=400&u=6332f6e89ad071a4ac13ebde26ab6b10ef58f9d1&v=4" alt=""></div>
-                    <div class="review__details">
-                      <div class="review__man h5">Maubg</div>
-                      <div class="review__company">maubg2007@gmail.com</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="review__bg">
-            <div class="review__preview"><img class="review__pic js-parallax" data-scale="1.5" data-orientation="down" src="/src/web/static/images/review-cube.png" alt=""></div>
-            <div class="review__preview"><img class="review__pic" src="/src/web/static/images/review-cube.png" alt=""></div>
-          </div>
-        </div>
-        <div class="wrapper wrapper_dark">
-          <div class="contacts">
-            <div class="contacts__center center">
-              <div class="contacts__container">
-                <div class="contacts__wrap">
-                  <div class="contacts__stage stage" data-aos="animation-scale-y">Dinos hola 👋</div>
-                  <h2 class="contacts__title h1" data-aos="animation-scale-y" data-aos-delay="200">Dinos lo que <br>quieras.</h2>
-                  <div class="contacts__info" data-aos="animation-scale-y" data-aos-delay="400">Puedes decirnos tu opinion, errores ¡Lo que quieras!</div>
-                </div>
-                <div class="contacts__row">
-                  <div class="contacts__details" data-aos="animation-translate-y"><a class="contacts__line" href="mailto:host.home.official@gmail.com">
-                      <div class="contacts__icon"><svg class="icon" id="icon-email" viewBox="0 0 18 15">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M2.422.267A2.133 2.133 0 0 0 .29 2.4v9.956c0 1.178.955 2.133 2.133 2.133h12.8a2.133 2.133 0 0 0 2.134-2.133V2.4A2.133 2.133 0 0 0 15.222.267h-12.8zM1.712 2.4c0-.393.318-.711.71-.711h12.8c.393 0 .712.318.712.711v9.956a.711.711 0 0 1-.712.71h-12.8a.711.711 0 0 1-.71-.71V2.4zm2.635.92a.711.711 0 1 0-1.005 1.005l4.977 4.978a.711.711 0 0 0 1.006 0l4.978-4.978a.711.711 0 1 0-1.006-1.006L8.822 7.794 4.347 3.32zM5.77 9.007a.711.711 0 0 1 0 1.006l-1.422 1.422a.711.711 0 0 1-1.005-1.005l1.422-1.423a.711.711 0 0 1 1.005 0zm7.112 0a.711.711 0 1 0-1.006 1.006l1.422 1.422a.711.711 0 0 0 1.006-1.005l-1.422-1.423z"></path>
-                    </svg></div>
-                      <div class="contacts__text">host.home.official@gmail.com</div>
-                    </a>
-                    <div class="contacts__line">
-                      <div class="contacts__icon"><svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm1 18h-2v-8h2v8zm-1-12.25c.69 0 1.25.56 1.25 1.25s-.56 1.25-1.25 1.25-1.25-.56-1.25-1.25.56-1.25 1.25-1.25z"/></svg></div>
-                      <div class="contacts__text">
-                        <p>Una compania de hosts</p>
-                        <p>gratis para todos</p>
-                      </div>
-                    </div><a class="contacts__line" href="tel:+34644920570">
-                      <div class="contacts__icon"><svg class="icon" id="icon-phone" viewBox="0 0 17 18">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M6.689 2.978c0-.393.318-.711.71-.711h7.112c.393 0 .711.318.711.71v4.267a.711.711 0 0 1-.711.712H8.822c-.11 0-.22.025-.318.075l-1.815.907v-5.96zm.71-2.134a2.133 2.133 0 0 0-2.132 2.134v7.11a.711.711 0 0 0 1.029.637L8.99 9.378h5.521a2.133 2.133 0 0 0 2.133-2.134V2.978A2.133 2.133 0 0 0 14.511.844H7.4zM2.423 2.267A2.133 2.133 0 0 0 .29 4.4v11.378c0 1.178.955 2.133 2.133 2.133h7.823a2.133 2.133 0 0 0 2.133-2.133V10.8a.711.711 0 0 0-1.422 0v4.978a.711.711 0 0 1-.711.71H2.422a.711.711 0 0 1-.71-.71V4.4c0-.393.318-.711.71-.711h1.423a.711.711 0 0 0 0-1.422H2.422z"></path>
-                    </svg></div>
-                      <div class="contacts__text">+34 644 92 05 70</div>
-                    </a>
-                  </div>
-                  <style>
-                      .contacts__form .field__input:disabled {
-                        background: #ddd;
-                      }
-
-                      .contacts__form .field__icon .icon {
-                        width: 17px;
-                      }
-                  </style>
-                  <form class="contacts__form" data-aos="animation-translate-y" data-aos-delay="200">
-                    <div class="contacts__field field">
-                      <div class="field__wrap"><input class="field__input" {% if user %}value="{{ user['nombre'] }}" disabled{% endif %} type="text" name="name" placeholder="Nombre " />
-                        <div class="field__icon"><svg class="icon" id="icon-profile" viewBox="0 0 17 18">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M8.5.875a4.5 4.5 0 0 0-4.5 4.5v2a4.5 4.5 0 0 0 9 0v-2a4.5 4.5 0 0 0-4.5-4.5zM6 5.375a2.5 2.5 0 0 1 5 0v2a2.5 2.5 0 0 1-5 0v-2zM3.546 12.25a1 1 0 0 0-.968-1.75A5 5 0 0 0 0 14.875v2a1 1 0 0 0 1 1h15a1 1 0 0 0 1-1v-2a5 5 0 0 0-2.578-4.375 1 1 0 1 0-.969 1.75A3 3 0 0 1 15 14.875v1H2v-1a3 3 0 0 1 1.546-2.625z"></path>
-                        </svg></div>
-                      </div>
-                    </div>
-                    <div class="contacts__field field">
-                      <div class="field__wrap"><input {% if user %}value="{{ user['mail'] }}" disabled{% endif %} class="field__input" type="email" name="email" placeholder="Email" />
-                        <div class="field__icon"><svg class="icon" id="icon-send" viewBox="0 0 17 17">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M16.707.668a1 1 0 0 1 .238 1.033l-5 14.5a1 1 0 0 1-1.853.093l-3-6.5a1 1 0 0 1 .2-1.126l3-3a1 1 0 1 1 1.415 1.414L9.2 9.59l1.666 3.608 3.52-10.207L4.178 6.51l2.223 1.025a1 1 0 1 1-.838 1.816L1.081 7.283a1 1 0 0 1 .093-1.853l14.5-5a1 1 0 0 1 1.033.238z"></path>
-                        </svg></div>
-                      </div>
-                    </div>
-                    <div class="contacts__field field">
-                      <div class="field__wrap"><select class="field__select" name="question">
-                          <option value="" selected disabled hidden>¿En que setas trabajando?</option>
-                          <option>Inteligencia artificial</option>
-                          <option>Robots</option>
-                          <option>API</option>
-                          <option>CLI</option>
-                          <option>otro</option>
-                        </select>
-                        <div class="field__icon"><svg class="icon" id="icon-arrows" viewBox="0 0 12 18">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M6.664 1.128a1 1 0 0 0-1.328 0l-4.5 4a1 1 0 0 0 1.328 1.494L6 3.213l3.836 3.41a1 1 0 1 0 1.328-1.495l-4.5-4zm-4.5 11a1 1 0 0 0-1.328 1.494l4.5 4a1 1 0 0 0 1.328 0l4.5-4a1 1 0 0 0-1.328-1.494L6 15.538l-3.836-3.41z"></path>
-                        </svg></div>
-                      </div>
-                    </div>
-                    <div class="contacts__field field field_textarea">
-                      <div class="field__wrap"><textarea class="field__textarea" name="message" placeholder="Message"></textarea>
-                        <div class="field__icon"><svg class="icon" id="icon-message" viewBox="0 0 18 18">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M.5 2.875a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3.532l-2.2 2.64a1 1 0 0 1-1.536 0l-2.2-2.64H2.5a2 2 0 0 1-2-2v-10zm15 0h-13v10h4a1 1 0 0 1 .768.36L9 15.313l1.732-2.078a1 1 0 0 1 .768-.36h4v-10zm-12 3a1 1 0 0 1 1-1h9a1 1 0 1 1 0 2h-9a1 1 0 0 1-1-1zm1 3a1 1 0 1 0 0 2h9a1 1 0 1 0 0-2h-9z"></path>
-                        </svg></div>
-                      </div>
-                    </div>
-                    <div class="contacts__btn"><button class="btn btn_purple"><span class="btn__text">Vamos a hablar</span><svg style="width: 20px; color: #fff; fill: #fff;" class="icon" id="icon-arrow-right" viewBox="0 0 22 16">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M14.707.293a1 1 0 1 0-1.414 1.414L18.586 7H1a1 1 0 0 0 0 2h17.586l-5.293 5.293a1 1 0 0 0 1.414 1.414l7-7A.996.996 0 0 0 22 8m-.076-.383a.997.997 0 0 0-.217-.324l-7-7m7.217 7.324a.996.996 0 0 1 .076.374z"></path>
-                    </svg></button></div>
-                  </form>
-                </div>
-                <div class="contacts__category h5">Vamos a conectar</div>
-                <div class="figures">
-                  <div class="figures__preview"><img class="figures__pic" src="/src/web/static/images/figures-1.png" alt="" /></div>
-                  <div class="figures__preview"><img class="figures__pic js-parallax" data-scale="1.6" data-orientation="up" src="/src/web/static/images/figures-2.png" alt="" /></div>
-                  <div class="figures__preview"><img class="figures__pic js-parallax" data-scale="1.3" data-orientation="up" src="/src/web/static/images/figures-3.png" alt="" /></div>
-                  <div class="figures__preview"><img class="figures__pic" src="/src/web/static/images/figures-4.png" alt="" /></div>
-                  <div class="figures__preview"><img class="figures__pic js-parallax" data-scale="2.3" data-orientation="down" src="/src/web/static/images/figures-5.png" alt="" /></div>
-                  <div class="figures__preview"><img class="figures__pic js-parallax" data-scale="2" data-orientation="up" src="/src/web/static/images/figures-6.png" alt="" /></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="footer">
-            <div class="footer__center center">
-              <div class="footer__body">
-                <!-- <a class="footer__logo" href="/"><img class="footer__pic" src="/src/web/static/images/favicon.png" alt="" /></a> -->
-                <div class="footer__wrap">
-                  <div class="footer__title h1">Hosting gratis para todo el mundo.</div>
-                  <div class="footer__info h4">Create un hosting para mejorar el mundo.</div>
-                </div>
-                <div class="footer__menu">
-                    <style>
-                        .footer__link:hover {
-                            color: #fff;
-                        }
-                    </style>
-                    <a class="footer__link" href="{{ docs }}">Documentacion</a>
-                    {% if user %}
-                        <a class="footer__link" href="/dashboard">Cuenta</a>
-                        <a class="footer__link" href="#">Contactanos</a>
-                    {% else %}
-                        <a class="footer__link" href="/login">Entrar</a>
-                        <a class="footer__link" href="/register">Registrarse</a>                  
-                    {% endif %}
-                    <a class="footer__link" target="_blank" href="https://github.com/HostHome-of">Github</a>
-                </div>
-              </div>
-              <div class="footer__bottom">
-                <div class="footer__copyright">© <script>document.write(new Date().getFullYear())</script>, hosthome esta bajo licencia de GNU.</div><a class="footer__scroll js-scroll" href="#header">Volver arriba</a>
-              </div>
-            </div>
-            <div class="footer__bg">
-              <div class="footer__preview"><img class="footer__pic js-parallax" data-scale="1.5" data-orientation="down" src="/src/web/static/images/footer-cube-1.png" alt="" /></div>
-              <div class="footer__preview"><img class="footer__pic js-parallax" data-scale="1.8" data-orientation="up" src="/src/web/static/images/footer-cube-1.png" alt="" /></div>
-            </div>
-          </div>
-        </div>
+      <div class="footer__bg">
+        <div class="footer__preview"><img class="footer__pic js-parallax" data-scale="1.5" data-orientation="down"
+            src="/src/web/static/images/footer-cube-1.png" alt="" /></div>
+        <div class="footer__preview"><img class="footer__pic js-parallax" data-scale="1.8" data-orientation="up"
+            src="/src/web/static/images/footer-cube-1.png" alt="" /></div>
       </div>
-      <div class="cursor"></div>
     </div>
+  </div>
+  </div>
+  <div class="cursor"></div>
+  </div>
 
-    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/index.js') }}"></script>
 
-    <script src="{{ url_for('static', filename='js/global.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/common.js') }}"></script>
-  </body>
+  <script src="{{ url_for('static', filename='js/global.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/common.js') }}"></script>
+</body>
+
 </html>

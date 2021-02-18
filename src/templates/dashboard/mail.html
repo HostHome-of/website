@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="es-ES">
 
-<head>
+ <head>
+      <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+  <script src="{{ url_for('static', filename='sw.js') }}"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | {{ user["nombre"] }}</title>
@@ -13,6 +15,7 @@
     <link rel="stylesheet" type="text/css"
         href="{{ url_for('static', filename='vendor/notiflix/notiflix-2.7.0.min.css') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.8/push.min.js" integrity="sha512-eiqtDDb4GUVCSqOSOTz/s/eiU4B31GrdSb17aPAA4Lv/Cjc8o+hnDvuNkgXhSI5yHuDvYkuojMaQmrB5JB31XQ==" crossorigin="anonymous"></script>
 
 </head>
 
@@ -226,7 +229,7 @@
                                 class="fas fa-chevron-right"></i>
                         </a>
                         <a href="/dashboard/edit/mail" class="active">
-                            <div style="display: flex;"><i class="far fa-envelope"></i> Preferencias de email</div> <i
+                            <div style="display: flex;"><i class="fas fa-bell"></i>  Notificaciones</div> <i
                                 class="fas fa-chevron-right"></i>
                         </a>
                         <a href="/dashboard/edit/org">
@@ -541,6 +544,68 @@
                             </div>
                         </div>
                     </div>
+                    <div class="edit__box">
+                        <div class="headder">
+                            <div class="logo">
+                                <i class="fas fa-bell"></i>
+                            </div>
+                            <div class="info">
+                                <div class="title">
+                                    Preferencias de notificaciones
+                                </div>
+                                <div class="desc">
+                                    Activa/Desactiva notificaciones.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wrapper">
+                            <div id="form">
+                                <div style="border-bottom: none;" class="input">
+                                    <div class="info">
+                                        <div class="title">
+                                            Noticias de hosts
+                                        </div>
+                                        <div class="desc">
+                                            Se te enviara una notificacion cuando pase algo en alguno de tus hosts
+                                        </div>
+                                    </div>
+                                    <script>
+                                        function crearNotificaciones() {
+                                            const check = !document.getElementsByName("notificaciones__check")[0].checked;
+                                            if (check) {
+                                                Push.create("Hola!", {
+                                                    body: "Esta es solo una prueba para ver si todo funciona",
+                                                    icon: '/src/web/static/images/favicon.png',
+                                                    timeout: 4000,
+                                                    onClick: function () {
+                                                        window.focus();
+                                                        this.close();
+                                                    }
+                                                });
+                                            }
+                                        }         
+                                        
+                                        function generarBotonDeNotificaciones() {
+                                            if (Push.Permission.has()) {
+                                                document.getElementsByName("notificaciones__check")[0].checked = false;
+                                                return
+                                            }
+
+                                            document.getElementsByName("notificaciones__check")[0].checked = true;
+                                        }
+
+                                        generarBotonDeNotificaciones()
+                                    </script>
+                                    <div class="button radius" id="toggle-button">
+                                        <input type="checkbox"
+                                            class="checkbox" onclick="crearNotificaciones()" id="sec" name="notificaciones__check" checked value="Evet">
+                                        <div class="lump"></div>
+                                        <div class="layer"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -555,7 +620,7 @@
     <script src="{{ url_for('static', filename='vendor/notiflix/notiflix-aio-2.7.0.min.js') }}"></script>
 
     <script>
-new Tippy('.tippy')
+        new Tippy('.tippy')
     </script>
 
 </body>

@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="es-ES">
 
-<head>
+ <head>
+      <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+  <script src="{{ url_for('static', filename='sw.js') }}"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | {{ user["nombre"] }}</title>
@@ -236,7 +238,7 @@
                                 class="fas fa-chevron-right"></i>
                         </a>
                         <a href="/dashboard/edit/mail">
-                            <div style="display: flex;"><i class="far fa-envelope"></i> Preferencias de email</div> <i
+                            <div style="display: flex;"><i class="fas fa-bell"></i>  Notificaciones</div> <i
                                 class="fas fa-chevron-right"></i>
                         </a>
                         <a href="/dashboard/edit/org">
@@ -261,7 +263,7 @@
                                     Cambiar imagen de perfil
                                 </div>
                                 <div class="desc">
-                                    Cambia tu foto de perfil para ser mas lujoso :).
+                                    Cambia tu foto de perfil para ser mas lujoso :)
                                 </div>
                             </div>
                         </div>

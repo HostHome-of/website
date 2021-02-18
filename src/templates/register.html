@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="es-ES">
 
-<head>
+ <head>
+      <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+  <script src="{{ url_for('static', filename='sw.js') }}"></script>
 	<title>HostHome | Entrar</title>
 	<link rel="icon" href="{{ url_for('static', filename='images/favicon.png')}}">
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/auth.css') }}">
@@ -49,6 +51,11 @@
 					}
 
 					async function cambiarARobot() {
+						const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+						if (!re.test(document.getElementById("email").value)) {
+							Notiflix.Notify.Failure("Eso no es un email")
+							return;
+						}
 						if (await enviar() == false) {
 							return false;
 						} else {

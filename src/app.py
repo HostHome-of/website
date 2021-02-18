@@ -4,7 +4,7 @@ load_dotenv()
 from flask import Flask, render_template, request, redirect, url_for, session, abort, send_file, flash
 from os import environ as env
 
-from src.auth import CrearUsuario, HacerLogin, Usuario
+from src.auth import *
 from src.mail import enviarEmail
 
 from werkzeug.utils import secure_filename
@@ -95,15 +95,18 @@ def login_required(function_to_protect):
         user_id = request.cookies.get('user_id')
         if user_id:
             user = Usuario(request.cookies.get('user_id')).cojer()
-            if not user["autorizado"]:
-                Usuario().petar(user["mail"])
+            if not user:
+                flash("Porfavor haz login")
                 return redirect(url_for('login'))
             if user:
+                if not user.get("autorizado"):
+                    Usuario().petar(user["mail"])
+                    return redirect(url_for('login'))
                 return function_to_protect(*args, **kwargs)
             else:
                 return redirect(url_for('login'))
         else:
-            flash("Please log in")
+            flash("Porfavor haz login")
             return redirect(url_for('login'))
     return wrapper 
 
@@ -219,11 +222,11 @@ def login():
         mail = request.args.get("mail")
         psw = request.args.get("psw")
 
-        usr = HacerLogin(mail, psw).ejecutar()
+        usr = HacerLogin(mail, psw).ejecutar(request.cookies.get('user_id'))
         if usr == False:
             return {}
         out = jsonify(state=0, msg=Usuario(usr).cojer())
-        out.set_cookie('user_id', 'usr')
+        out.set_cookie('user_id', usr)
         return out
 
     return render_template("login.html", key=env["CAPTCHA_WEB"])
@@ -246,6 +249,19 @@ def Registrarse():
         return out
 
     return render_template("register.html", key=env["CAPTCHA_WEB"])
+
+@app.route("/psw/check", methods=["GET", "POST"])
+def mirarPsw():
+
+    if request.method == "POST":
+
+        psw = request.headers.get("psw")
+        pswCheck = Password(Usuario(request.cookies.get('user_id')).cojer()["psw"]).check(psw)
+        print(pswCheck)
+        return {"valido": pswCheck}
+
+
+    return redirect("/")
 
 @app.route("/register/activation", methods=["GET", "POST"])
 def activarCuenta():

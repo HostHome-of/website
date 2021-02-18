@@ -4,6 +4,8 @@ import io
 import hashlib
 import os
 
+salt = open("salt.txt", "r").read().encode()
+
 def abrir():
     with open("./src/data/users.json", "r") as f:
         usrs = json.load(f)
@@ -19,17 +21,32 @@ class HacerLogin():
         self.email = email
         self.psw = psw
 
-    def ejecutar(self):
+    def ejecutar(self, tk):
         usuarios = abrir()
 
         if self.email in usuarios:
-            if usuarios[str(self.email)]["psw"] == self.psw:
-                tk = CrearUsuario().tokenizar()
+            if Password(usuarios[str(self.email)]["psw"]).check(self.psw):
                 usuarios[str(self.email)]["cuentas"][str(tk)] = True
                 cerrar(usuarios)
                 return str(tk)
         return False
 
+class Password():
+    def __init__(self, texto: str):
+        self.texto = texto
+
+    def crear(self):
+        pswNueva = hashlib.pbkdf2_hmac('sha256', self.texto.encode('utf-8'), salt, 100000)
+        return pswNueva
+
+    def check(self, psw):
+        psw = hashlib.pbkdf2_hmac('sha256', psw.encode('utf-8'), salt, 100000)
+
+        key = self.texto[2:-1]
+        psw = str(psw)[2:-1]
+        # psw = psw[2:-1]
+        
+        return key == psw
 class Usuario():
 
     def __init__(self, tk: str=None):
@@ -116,28 +133,6 @@ class Usuario():
         usuarios[str(mail)]["emails"]["cuatro"] = cuatro
         cerrar(usuarios)
 
-class Psw():
-    def __init__(self, texto: str, email: str):
-        self.texto: str = texto
-        self.email: str = email
-
-    def insertar(self):
-        usuarios = abrir()
-        usuario = usuarios[self.email]
-
-        salt = os.urandom(32) 
-
-        key = hashlib.pbkdf2_hmac(
-            'sha256', 
-            self.texto.encode('utf-8'), 
-            salt, 
-            100000, 
-            dklen=128 
-        )
-
-        usuario["psw"] = str(key)
-        cerrar(usuarios)
-
 class CrearUsuario():
     def __init__(self, nombre: str=None, psw: str=None, mail: str=None):
         self.nombre = nombre
@@ -173,7 +168,7 @@ class CrearUsuario():
             usuarios[str(self.mail)] = {}
             usuarios[str(self.mail)]["mail"] = self.mail
             usuarios[str(self.mail)]["nombre"] = self.nombre
-            usuarios[str(self.mail)]["psw"] = self.psw
+            usuarios[str(self.mail)]["psw"] = str(Password(self.psw).crear())
             usuarios[str(self.mail)]["cuentas"] = {}
             tkN = self.tokenizar()
             usuarios[str(self.mail)]["cuentas"][str(tkN)] = True 

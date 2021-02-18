@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 
-<head>
+ <head>
+      <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+  <script src="{{ url_for('static', filename='sw.js') }}"></script>
     <title>Codigo de verificacion</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -102,10 +104,10 @@
         Estamos encantados de tenerte aqui en HostHome. </div>
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
         <tr>
-            <td bgcolor="#fff" align="center">
+            <td bgcolor="#fff" align="left">
                 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;">
                     <tr>
-                        <td align="left" valign="top" style="padding: 40px 10px 40px 10px;">
+                        <td align="left" valign="top" style="font-size: 20px;padding: 40px 10px 40px 10px;">
                             Hola {{ nombre }}!
                             <br />
                             To codigo de verificacion es : <strong>{{ codigo }}</strong> 

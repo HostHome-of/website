@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="es-ES">
 
-<head>
+ <head>
+      <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+  <script src="{{ url_for('static', filename='sw.js') }}"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | {{ user["nombre"] }}</title>
@@ -32,15 +34,18 @@
             </a>
         </div>
         <ul>
-            <a href="/dashboard/host" class="tippy" data-theme="light" title="Mira tus hosts" data-duration="300" data-arrow="true"
-                data-animation="shift" data-position="right" id="HostUsuario"><i
+            <a href="/dashboard/host" class="tippy" data-theme="light" title="Mira tus hosts" data-duration="300"
+                data-arrow="true" data-animation="shift" data-position="right" id="HostUsuario"><i
                     style="color: rgb(255, 173, 40); margin-right: 10px;" class="fas fa-cloud-upload-alt"></i> 0 </a>
-                        <a href="{{ docs }}" target="_blank" class="tippy" data-theme="light" title="Recibir ayuda" data-duration="300" data-arrow="true"
-                data-animation="shift" data-position="right" id="help"><i class="far fa-life-ring"></i></a>
-            <a href="/dashboard/edit" class="tippy" data-theme="light" style="background: rgb(244, 247, 255) !important;    transition: all 0.55s cubic-bezier(0.25, 0.8, 0.25, 1) 0s; -webkit-box-align: center; -items: center; -webkit-box-pack: center; justify-content: center; height: 60px; /* background: rgb(244, 247, 255) !important; */ box-shadow: rgb(34 92 255) -2px 0px 0px inset !important; border-top: 1px solid rgb(215, 219, 224) !important; color: rgb(34, 92, 255) !important;" title="Editar perfil" data-duration="300" data-arrow="true"
-                data-animation="shift" data-position="right" id="edit"><i class="fas fa-cog"></i></a>
-            <a href="/dashboard" class="tippy" data-theme="light" title="Pagina principal" data-duration="300" data-arrow="true"
-                data-animation="shift" data-position="right" id="edit"><i class="fas fa-home"></i></a>
+            <a href="{{ docs }}" target="_blank" class="tippy" data-theme="light" title="Recibir ayuda"
+                data-duration="300" data-arrow="true" data-animation="shift" data-position="right" id="help"><i
+                    class="far fa-life-ring"></i></a>
+            <a href="/dashboard/edit" class="tippy" data-theme="light"
+                style="background: rgb(244, 247, 255) !important;    transition: all 0.55s cubic-bezier(0.25, 0.8, 0.25, 1) 0s; -webkit-box-align: center; -items: center; -webkit-box-pack: center; justify-content: center; height: 60px; /* background: rgb(244, 247, 255) !important; */ box-shadow: rgb(34 92 255) -2px 0px 0px inset !important; border-top: 1px solid rgb(215, 219, 224) !important; color: rgb(34, 92, 255) !important;"
+                title="Editar perfil" data-duration="300" data-arrow="true" data-animation="shift" data-position="right"
+                id="edit"><i class="fas fa-cog"></i></a>
+            <a href="/dashboard" class="tippy" data-theme="light" title="Pagina principal" data-duration="300"
+                data-arrow="true" data-animation="shift" data-position="right" id="edit"><i class="fas fa-home"></i></a>
         </ul>
     </div>
     <div class="wrapper__navy">
@@ -166,6 +171,7 @@
                 left: 13%;
                 top: 20%;
             }
+
             .pagina .edit__uno .nav ul a .fa-chevron-right {
                 margin-left: 10px;
                 color: rgb(54, 73, 98);
@@ -207,18 +213,156 @@
         <style>
             #popup {
                 position: absolute;
-                top: 5%;
-                left: 40%;
-                background: #fff;
-                border-radius: 5px;
-                border: 1px solid #ddd;
-                padding: 20px;
-                z-index: 99999;
+                top: 0;
+                left: 0;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background: transparent;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 999;
                 display: none;
+            }
+
+            #popup .bg {
+                width: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                background: #000;
+                opacity: .5;
+                height: 100%;
+            }
+
+            #popup .wrapper {
+                background: #fff;
+                width: 25%;
+                border-radius: 10px;
+                position: relative;
+                /* height: 300px; */
+                z-index: 999;
+                padding: 35px;
+            }
+
+            #popup .wrapper .input {
+                margin-bottom: 20px;
+            }
+
+            #popup .wrapper .input label p {
+                font-size: 16px;
+                font-weight: 600;
+                color: rgb(54, 73, 98);
+                text-align: left;
+                line-height: 1.5;
+                text-transform: none;
+                overflow: unset;
+                white-space: unset;
+                text-overflow: unset;
+                margin: 0;
+            }
+
+            #popup .wrapper .input input {
+                background-color: transparent;
+                position: relative;
+                display: block;
+                transition: border 0.2s ease-in-out 0s;
+                box-sizing: border-box;
+                cursor: text;
+                padding: 10px 18px;
+                font-family: "Avenir Next", "Helvetica Neue", sans-serif;
+                font-size: 16px;
+                font-weight: 500;
+                line-height: 26px;
+                border: 1px solid rgb(215, 219, 224);
+                width: 100%;
+                color: rgb(54, 73, 98);
+                border-radius: 4px;
+                outline: none;
+                transition: .4s;
+            }
+
+            #popup .wrapper .input input:focus {
+                border: 1px solid #999;
+            }
+
+            #popup .wrapper .input input.error {
+                border: 1px solid #e74c3c;
+            }
+
+            #popup .wrapper .cancelarEliminacion {
+                position: relative;
+                display: inline-flex;
+                font-family: "Avenir Next", "Helvetica Neue", sans-serif;
+                -webkit-box-align: center;
+                align-items: center;
+                font-weight: 700;
+                white-space: nowrap;
+                font-size: 13px;
+                -webkit-box-pack: center;
+                justify-content: center;
+                text-decoration: none;
+                cursor: pointer;
+                appearance: none;
+                padding: 9px 18px;
+                line-height: 28px;
+                border-radius: 4px;
+                box-sizing: border-box;
+                transition: all 0.55s cubic-bezier(0.25, 0.8, 0.25, 1) 0s;
+                background-color: rgb(244, 247, 255);
+                color: rgb(34, 92, 255);
+                box-shadow: none;
+                border: 1px solid rgb(26, 26, 27);
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+                margin-right: 30px;
+                border: none;
+                outline: none;
+                margin: 0;
+                margin-top: 30px;
             }
         </style>
         <div id="popup">
-            <div class="g-recaptcha" data-callback="noEsRobotito" data-sitekey="{{ key }}"></div>
+            <div class="wrapper">
+                <div class="input">
+                    <label for="contraseñaDestruir">
+                        <p>Contraseña</p>
+                    </label>
+                    <input oninput="checkPasswordForDestruction(this)" type="password" name="psw" id="contraseñaDestruir">
+                </div>
+                <div class="g-recaptcha" data-callback="noEsRobotito" data-sitekey="{{ key }}"></div>
+                <script>
+                    var pswIncorrecta = true;
+                    function checkPasswordForDestruction(input) {
+                        fetch("/psw/check", {
+                            method: "POST",
+                            headers: {
+                                "psw": input.value
+                            }
+                        }).then(response => response.json()).then(data => {
+                            if (data["valido"] == false) {
+                                input.classList.add("error")
+                                pswIncorrecta = true;
+                            } else {
+                                input.classList.remove("error");
+                                pswIncorrecta = false;
+                            }
+                        })
+                    }
+
+                    function cancelarEliminacion() {
+                        Notiflix.Loading.Init({ svgColor: "#6493c6", });
+                        Notiflix.Loading.Circle();
+
+                        setTimeout(function () {
+                            window.location.replace("/dashboard/edit/avanzado")
+                        }, 1000)
+                    }
+                </script>
+                <p class="cancelarEliminacion" onclick="cancelarEliminacion()">Cancelar</p>
+            </div>
+            <div class="bg"></div>
         </div>
         <div class="pagina">
             <div class="edit__uno">
@@ -249,7 +393,7 @@
                                 class="fas fa-chevron-right"></i>
                         </a>
                         <a href="/dashboard/edit/mail">
-                            <div style="display: flex;"><i class="far fa-envelope"></i> Preferencias de email</div> <i
+                            <div style="display: flex;"><i class="fas fa-bell"></i>  Notificaciones</div> <i
                                 class="fas fa-chevron-right"></i>
                         </a>
                         <a href="/dashboard/edit/org">
@@ -303,26 +447,29 @@
 
                                     function destruir() {
                                         if (confirm("¿Estas seguro? No recuperaras tu cuenta.")) {
-                                            document.getElementById("popup").style.display = "block"
+                                            document.getElementById("popup").style.display = "flex"
                                         }
                                     }
 
                                     function noEsRobotito() {
-                                        document.getElementById("popup").style.display = "none"
-                                        Notiflix.Loading.Init({ svgColor: "#6493c6", });
+                                        if (!pswIncorrecta) {
+                                            document.getElementById("popup").style.display = "none"
+                                            Notiflix.Loading.Init({ svgColor: "#6493c6",});
 
-                                        Notiflix.Loading.Circle();
-                                        setTimeout(function () {
-                                            window.location.replace("/dashboard/account/destroy");
-                                        }, 5000);
+                                            Notiflix.Loading.Circle();
+                                            setTimeout(function () {
+                                                window.location.replace("/dashboard/account/destroy");
+                                            }, 5000);
+                                        } else {
+                                            
+                                        }
                                     }
                                 </script>
-                                <div onclick="eliminar()"
-                                    class="submit">
+                                <div onclick="eliminar()" class="submit">
                                     Cerrar sesion
                                 </div>
-                                <div onclick="destruir()"
-                                    class="submit" style="background: #e74c3c; border: 1px solid #e74c3c;">
+                                <div onclick="destruir()" class="submit"
+                                    style="background: #e74c3c; border: 1px solid #e74c3c;">
                                     Eliminar cuenta
                                 </div>
                             </div>

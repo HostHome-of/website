@@ -2,20 +2,20 @@
     "maubg2007@gmail.com": {
         "mail": "maubg2007@gmail.com",
         "nombre": "Maubg",
-        "psw": "73dvIdwqNd0u",
+        "psw": "b'\\xb4\\xae\\x07\\x9f\\xbb\\n\\xd7L\\xe2;_\\xf4h\\xe0\\x84\\xa2<#L\\xdd\\xd8\\t\\xa3\\x10\\xb8\\x18\"4\\xb4\\xb9R;'",
         "cuentas": {
-            "72395305": true
+            "56854895": true
         },
-        "pfp": "/src/web/static/pfp/default_hosthome.png",
+        "pfp": "/src/web/static/pfp/google.jpg",
         "entrada": "18/2/2021",
-        "segundoNombre": "",
-        "edad": "",
+        "segundoNombre": "Balad\u00e8s",
+        "edad": "34",
         "autorizado": true,
         "emails": {
-            "uno": true,
+            "uno": false,
             "dos": false,
             "tres": false,
-            "cuatro": true
+            "cuatro": false
         }
     }
 }
