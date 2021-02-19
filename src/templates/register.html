@@ -23,15 +23,21 @@
 		<div class="left">
 			<div class="logo">
 				<a href="/" class="logete">
-					<img src="{{ url_for('static', filename='images/favicon.png') }}" alt="" srcset="">
-					<h3 class="texto">
-						HostHome
-					</h3>
+					<img src="{{ url_for('static', filename='images/logo.png') }}" alt="" srcset="">
 				</a>
 			</div>
+			<script>
+				window.addEventListener('load', function () {
+					const divs = document.getElementsByClassName("animacion");
+	
+					for (i=0;i<divs.length;i++) {
+						divs[i].classList.add("active")
+					}
+				})
+			</script>
 			<div class="form" id="formy">
-				<h1 style="font-size: 55px;">¡Hola!</h1>
-				<h2 style="font-size: 30px;">¿Nos conocemos?</h2>
+				<h1 style="font-size: 55px;" class="animacion">¡Hola!</h1>
+				<h2 style="font-size: 30px;" class="animacion">¿Nos conocemos?</h2>
 				<div style="height: 50px; width: 100%;"></div>
 				<script>
 					var codigo = 0000;
@@ -87,24 +93,24 @@
 						recaptcha.style.display = "none";
 					}
 				</script>
-				<div class="input">
+				<div class="input animacion">
 					<label for="email">Email</label>
 					<input oninput="mirarSiEsValido()" placeholder="nombre@email.com" type="email" name="email" id="email" autocomplete="off">
 				</div>
-				<div class="input">
+				<div class="input animacion">
 					<label for="nombre">Nombre</label>
 					<input oninput="mirarSiEsValido()" placeholder="Nombre" type="text" name="nombre" id="nombre" autocomplete="off">
 				</div>
-				<div class="input">
+				<div class="input animacion">
 					<label for="psw">Contraseña</label>
 					<input oninput="mirarSiEsValido()" type="password" placeholder="********" name="psw" id="psw" autocomplete="off">
 				</div>
-				<div class="input">
+				<div class="input animacion">
 					<label for="rpsw">Repetir contraseña</label>
 					<input style="-webkit-text-security:disc;" oninput="mirarSiEsValido()" type="password" placeholder="********" name="rpsw" id="rpsw" autocomplete="off">
 				</div>
-				<button disabled onclick="cambiarARobot()" class="subBtn" id="btnLogin">Registrarse</button>
-				<div class="extra">
+				<button disabled onclick="cambiarARobot()" class="subBtn animacion" id="btnLogin">Registrarse</button>
+				<div class="extra animacion">
 					<p>Tienes una cuenta? <a href="/login">Entrar</a></p>
 				</div>
 			</div>
@@ -169,7 +175,7 @@
 		<div class="right">
 			<div style="height: 10vh; width: 100%;"></div>
 			<div style="width: 100%;">
-				<img src="{{ url_for('static', filename='images/login.png') }}">
+				<img style="transform: rotate(45deg);" src="https://www.iconshock.com/img/landing-assets/tresde-icons/icon3d__73.png">
 			</div>
 		</div>
 	</div>

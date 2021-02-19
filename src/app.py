@@ -4,7 +4,7 @@ load_dotenv()
 from flask import Flask, render_template, request, redirect, url_for, session, abort, send_file, flash
 from os import environ as env
 
-from src.auth import *
+from src.auth import CrearUsuario, HacerLogin, Password, Usuario 
 from src.mail import enviarEmail
 
 from werkzeug.utils import secure_filename
@@ -14,6 +14,7 @@ import requests
 from flask_dance.contrib.github import make_github_blueprint, github
 from functools import wraps
 from flask.json import jsonify
+import datetime
 
 app = Flask(__name__, static_url_path="/src/web/static")
 app.secret_key = "myllavecitasecretita123"
@@ -226,7 +227,8 @@ def login():
         if usr == False:
             return {}
         out = jsonify(state=0, msg=Usuario(usr).cojer())
-        out.set_cookie('user_id', usr)
+        print(usr)
+        out.set_cookie('user_id', usr, expires=datetime.datetime.now() + datetime.timedelta(days=60))
         return out
 
     return render_template("login.html", key=env["CAPTCHA_WEB"])
@@ -245,7 +247,7 @@ def Registrarse():
         if usr == False:
             return {}
         out = jsonify(state=0, msg={"estado": 200})
-        out.set_cookie('user_id', usr)
+        out.set_cookie('user_id', usr, expires=datetime.datetime.now() + datetime.timedelta(days=60))
         return out
 
     return render_template("register.html", key=env["CAPTCHA_WEB"])

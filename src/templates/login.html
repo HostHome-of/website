@@ -23,18 +23,24 @@
 <body>
 
 	<div class="wrapper">
+		<script>
+			window.addEventListener('load', function () {
+				const divs = document.getElementsByClassName("animacion")
+
+				for (i=0;i<divs.length;i++) {
+					divs[i].classList.add("active")
+				}
+			})
+		</script>
 		<div class="left">
 			<div class="logo">
 				<a href="/" class="logete">
-					<img src="{{ url_for('static', filename='images/favicon.png') }}" alt="" srcset="">
-					<h3 class="texto">
-						HostHome
-					</h3>
+					<img src="{{ url_for('static', filename='images/logo.png') }}" alt="" srcset="">
 				</a>
 			</div>
 			<div class="form" id="formy">
-				<h1 style="font-size: 55px;">¡Hola!</h1>
-				<h2 style="font-size: 30px;">¿Nos conocemos?</h2>
+				<h1 style="font-size: 55px;" class="animacion">¡Hola!</h1>
+				<h2 style="font-size: 30px;" class="animacion">¿Nos conocemos?</h2>
 				<div style="height: 50px; width: 100%;"></div>
 				<script>
 					function mirarSiEsValido() {
@@ -58,18 +64,18 @@
 					}
 
 				</script>
-				<div class="input">
+				<div class="input animacion">
 					<label for="email">Email</label>
 					<input oninput="mirarSiEsValido()" placeholder="nombre@email.com" type="email" name="email"
 						id="email" autocomplete="off">
 				</div>
-				<div class="input">
+				<div class="input animacion">
 					<label for="psw">Contraseña</label>
 					<input oninput="mirarSiEsValido()" style="-webkit-text-security:disc;" type="password" placeholder="********" name="psw" id="psw"
 						autocomplete="off">
 				</div>
-				<button disabled onclick="cambiarARobot()" class="subBtn" id="btnLogin">Entrar</button>
-				<div class="extra">
+				<button disabled onclick="cambiarARobot()" class="subBtn  animacion" id="btnLogin">Entrar</button>
+				<div class="extra animacion">
 					<a href="/forgot">Olvide mi contraseña</a>
 					<p>¿No tienes una cuenta? <a href="/register">Registrate</a></p>
 				</div>
@@ -89,7 +95,7 @@
 		<div class="right">
 			<div style="height: 10vh; width: 100%;"></div>
 			<div style="width: 100%;">
-				<img src="{{ url_for('static', filename='images/login.png') }}">
+				<img style="padding: 0 0 0 200px;" src="https://www.iconshock.com/img/landing-assets/tresde-icons/icon3d__87.png">
 			</div>
 		</div>
 	</div>

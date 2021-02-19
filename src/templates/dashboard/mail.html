@@ -21,24 +21,7 @@
 
 <body
     style="display: flex; font-family: Avenir Next,Helvetica Neue,Arial,sans-serif!important; font-feature-settings: 'kern','liga','pnum'; -webkit-font-smoothing: antialiased;">
-    <div style="position: relative;" class="sideNav">
-        <div class="logo">
-            <a href="/?r=true">
-                <img src="{{ url_for('static', filename='images/favicon.png') }}" alt="LOGO">
-            </a>
-        </div>
-        <ul>
-            <a href="/dashboard/host" class="tippy" data-theme="light" title="Mira tus hosts" data-duration="300" data-arrow="true"
-                data-animation="shift" data-position="right" id="HostUsuario"><i
-                    style="color: rgb(255, 173, 40); margin-right: 10px;" class="fas fa-cloud-upload-alt"></i> 0 </a>
-                        <a href="{{ docs }}" target="_blank" class="tippy" data-theme="light" title="Recibir ayuda" data-duration="300" data-arrow="true"
-                data-animation="shift" data-position="right" id="help"><i class="far fa-life-ring"></i></a>
-            <a href="/dashboard/edit" class="tippy" data-theme="light" style="background: rgb(244, 247, 255) !important;    transition: all 0.55s cubic-bezier(0.25, 0.8, 0.25, 1) 0s; -webkit-box-align: center; -items: center; -webkit-box-pack: center; justify-content: center; height: 60px; /* background: rgb(244, 247, 255) !important; */ box-shadow: rgb(34 92 255) -2px 0px 0px inset !important; border-top: 1px solid rgb(215, 219, 224) !important; color: rgb(34, 92, 255) !important;" title="Editar perfil" data-duration="300" data-arrow="true"
-                data-animation="shift" data-position="right" id="edit"><i class="fas fa-cog"></i></a>
-            <a href="/dashboard" class="tippy" data-theme="light" title="Pagina principal" data-duration="300" data-arrow="true"
-                data-animation="shift" data-position="right" id="edit"><i class="fas fa-home"></i></a>
-        </ul>
-    </div>
+    {% include "/sideNav.html" %}
     <div class="wrapper__navy">
         <style>
             .navy {
@@ -571,7 +554,7 @@
                                     </div>
                                     <script>
                                         function crearNotificaciones() {
-                                            const check = !document.getElementsByName("notificaciones__check")[0].checked;
+                                            const check = !document.getElementsByClassName("notificaciones__check")[0].checked;
                                             if (check) {
                                                 Push.create("Hola!", {
                                                     body: "Esta es solo una prueba para ver si todo funciona",
@@ -587,18 +570,18 @@
                                         
                                         function generarBotonDeNotificaciones() {
                                             if (Push.Permission.has()) {
-                                                document.getElementsByName("notificaciones__check")[0].checked = false;
+                                                document.getElementsByClassName("notificaciones__check")[0].checked = false;
                                                 return
                                             }
 
-                                            document.getElementsByName("notificaciones__check")[0].checked = true;
+                                            document.getElementsByClassName("notificaciones__check")[0].checked = true;
                                         }
 
                                         generarBotonDeNotificaciones()
                                     </script>
                                     <div class="button radius" id="toggle-button">
                                         <input type="checkbox"
-                                            class="checkbox" onclick="crearNotificaciones()" id="sec" name="notificaciones__check" checked value="Evet">
+                                            class="checkbox notificaciones__check" onclick="crearNotificaciones()" id="sec" name="notificaciones__check" value="Evet">
                                         <div class="lump"></div>
                                         <div class="layer"></div>
                                     </div>

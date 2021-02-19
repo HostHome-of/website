@@ -27,24 +27,7 @@
             text-decoration: none;
         }
     </style>
-    <div style="position: relative;" class="sideNav">
-        <div class="logo">
-            <a href="/?r=true">
-                <img src="{{ url_for('static', filename='images/favicon.png') }}" alt="LOGO">
-            </a>
-        </div>
-        <ul>
-            <a href="/dashboard/host" class="tippy" data-theme="light" style="background: rgb(244, 247, 255) !important;    transition: all 0.55s cubic-bezier(0.25, 0.8, 0.25, 1) 0s; -webkit-box-align: center; -items: center; -webkit-box-pack: center; justify-content: center; height: 60px; /* background: rgb(244, 247, 255) !important; */ box-shadow: rgb(34 92 255) -2px 0px 0px inset !important; border-top: 1px solid rgb(215, 219, 224) !important; color: rgb(34, 92, 255) !important;" title="Mira tus hosts" data-duration="300" data-arrow="true"
-                data-animation="shift" data-position="right" id="HostUsuario"><i
-                    style="color: rgb(255, 173, 40); margin-right: 10px;" class="fas fa-cloud-upload-alt"></i> 0 </a>
-                        <a href="{{ docs }}" target="_blank" class="tippy" data-theme="light" title="Recibir ayuda" data-duration="300" data-arrow="true"
-                data-animation="shift" data-position="right" id="help"><i class="far fa-life-ring"></i></a>
-            <a href="/dashboard/edit" class="tippy" data-theme="light" data-theme="light" title="Editar perfil" data-duration="300" data-arrow="true"
-                data-animation="shift" data-position="right" id="edit"><i class="fas fa-cog"></i></a>
-            <a href="/dashboard" class="tippy" data-theme="light" title="Pagina principal" data-duration="300" data-arrow="true"
-                data-animation="shift" data-position="right" id="edit"><i class="fas fa-home"></i></a>
-        </ul>
-    </div>
+    {% include "/sideNav.html" %}
     <div class="wrapper__navy">
         <div class="navy">
             <a href="/dashboard/edit" class="acc">
