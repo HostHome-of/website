@@ -1067,7 +1067,7 @@ textarea.form-control {
     margin: 0px;
     min-width: 0px;
     padding: 40px 60px;
-    background-color: rgb(249, 249, 255);
+    /* background-color: rgb(249, 249, 255); */
     position: relative;
     border-radius: 0px;
     display: flex;

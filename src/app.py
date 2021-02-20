@@ -165,7 +165,6 @@ def Imagen():
     if request.method == "POST":
         
         image = request.files["imgInp"]
-        print(request.files)
 
         if image.filename == "":
             return redirect("/dashboard/edit/imagen")
@@ -223,11 +222,20 @@ def login():
         mail = request.args.get("mail")
         psw = request.args.get("psw")
 
+        consola = request.args.get("consola", None)
+
+        if consola is not None:
+            usr = HacerLogin(mail, psw).ejecutar()
+            if usr == False:
+                return {}
+            
+            return usr
+
         usr = HacerLogin(mail, psw).ejecutar(request.cookies.get('user_id'))
         if usr == False:
             return {}
         out = jsonify(state=0, msg=Usuario(usr).cojer())
-        print(usr)
+        
         out.set_cookie('user_id', usr, expires=datetime.datetime.now() + datetime.timedelta(days=60))
         return out
 
@@ -259,7 +267,6 @@ def mirarPsw():
 
         psw = request.headers.get("psw")
         pswCheck = Password(Usuario(request.cookies.get('user_id')).cojer()["psw"]).check(psw)
-        print(pswCheck)
         return {"valido": pswCheck}
 
 
@@ -272,12 +279,11 @@ def activarCuenta():
         usuario = Usuario(request.cookies.get('user_id')).cojer()
         codigo = str(usuario["tokenEntrada"])
         nombre = usuario["nombre"]
-        print(codigo)
+        
         email = render_template("mails/codigo.html", codigo=codigo, nombre=nombre)
         try:
             enviarEmail(Usuario(request.cookies.get('user_id')).cojer(), email, "Codigo de verificacion", True)
         except Exception as e:
-            print(e)
             return {"codigo": 500}
         return {"codigo": Usuario(request.cookies.get('user_id')).cojer()['tokenEntrada']}
     return "tu que haces aqui?"
@@ -294,7 +300,6 @@ def activarCuentaCodigo(codigo):
             email = render_template("mails/recien.html", url=url_main)
             enviarEmail(Usuario(request.cookies.get('user_id')).cojer(), email, "Gracias por unirte", True)
         except Exception as e:
-            print(e)
             return {"codigo": 500}
 
         return {"codigo": 200}

@@ -4,7 +4,8 @@
         "nombre": "Maubg",
         "psw": "b'\\xb4\\xae\\x07\\x9f\\xbb\\n\\xd7L\\xe2;_\\xf4h\\xe0\\x84\\xa2<#L\\xdd\\xd8\\t\\xa3\\x10\\xb8\\x18\"4\\xb4\\xb9R;'",
         "cuentas": {
-            "28119273": true
+            "28119273": false,
+            "None": true
         },
         "pfp": "/src/web/static/pfp/google.jpg",
         "entrada": "19/2/2021",
@@ -16,6 +17,26 @@
             "dos": false,
             "tres": false,
             "cuatro": false
+        }
+    },
+    "test@email.com": {
+        "mail": "test@email.com",
+        "nombre": "Test",
+        "psw": "b'\\xb4\\xae\\x07\\x9f\\xbb\\n\\xd7L\\xe2;_\\xf4h\\xe0\\x84\\xa2<#L\\xdd\\xd8\\t\\xa3\\x10\\xb8\\x18\"4\\xb4\\xb9R;'",
+        "cuentas": {
+            "14081387": true,
+            "None": true
+        },
+        "pfp": "/src/web/static/pfp/default_hosthome.png",
+        "entrada": "20/2/2021",
+        "segundoNombre": "",
+        "edad": "",
+        "autorizado": true,
+        "emails": {
+            "uno": true,
+            "dos": false,
+            "tres": false,
+            "cuatro": true
         }
     }
 }

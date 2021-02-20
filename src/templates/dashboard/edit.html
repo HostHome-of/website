@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="es-ES">
 
- <head>
-      <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
-  <script src="{{ url_for('static', filename='sw.js') }}"></script>
+<head>
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    <script src="{{ url_for('static', filename='sw.js') }}"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | {{ user["nombre"] }}</title>
@@ -153,7 +153,20 @@
                 height: 70vh;
                 position: relative;
                 margin-right: 150px;
+            }
 
+            @media only screen and (min-width: 1800px) {
+                .main {
+                    width: 55%;
+                    height: auto;
+                    position: relative;
+                    margin-right: 150px;
+                    padding-top: 100px;
+                }
+
+                .pagina .edit__uno {
+                    padding-top: 1000px;
+                }
             }
 
             @media only screen and (max-width: 1400px) {
@@ -208,7 +221,7 @@
                             <div style="display: flex;"><i class="far fa-images"></i> Cambiar img de perfil</div> <i
                                 class="fas fa-chevron-right"></i>
                             <a href="/dashboard/edit/mail">
-                                <div style="display: flex;"><i class="fas fa-bell"></i>  Notificaciones</div>
+                                <div style="display: flex;"><i class="fas fa-bell"></i> Notificaciones</div>
                                 <i class="fas fa-chevron-right"></i>
                             </a>
                             <a href="/dashboard/edit/org">
@@ -338,12 +351,12 @@
                                             fetch("/dashboard/logout/github", {
                                                 method: "POST"
                                             })
-                                            Notiflix.Loading.Init({svgColor:"#6493c6",});
+                                            Notiflix.Loading.Init({ svgColor: "#6493c6", });
 
                                             Notiflix.Notify.Success('Se ha hecho logout en GitHub!');
                                             Notiflix.Notify.Info('Espera 3 segundos porfavor');
 
-                                            setTimeout(function() {
+                                            setTimeout(function () {
                                                 window.location.reload();
                                             }, 4000)
 
@@ -360,24 +373,26 @@
                                         }
                                     </script>
                                     {% if github %}
-                                        <div id="githubApp">
-                                            <i style="font-size: 30px; border-right: 1px solid #ddd; padding-right: 15px;"
-                                                class="fab fa-github"></i>
-                                            <a href="https://github.com/{{ github['login'] }}" target="_blank" style="margin: 0 0 0 10px; color: #000;">
-                                                github.com/{{ github['login'] }}
-                                            </a>
-                                        </div>
-                                        <button class="GithubBotonOAlgo" onclick="cerrarSesionEnGithub()"
-                                            style="transition: .3s; opacity: .7; border: none; outline: none; border-radius: 5px; color: #fff; background: rgb(255,64,129); padding: 0 40px; margin: 0 10px; cursor: pointer;">Eliminar</button>
+                                    <div id="githubApp">
+                                        <i style="font-size: 30px; border-right: 1px solid #ddd; padding-right: 15px;"
+                                            class="fab fa-github"></i>
+                                        <a href="https://github.com/{{ github['login'] }}" target="_blank"
+                                            style="margin: 0 0 0 10px; color: #000;">
+                                            github.com/{{ github['login'] }}
+                                        </a>
+                                    </div>
+                                    <button class="GithubBotonOAlgo" onclick="cerrarSesionEnGithub()"
+                                        style="transition: .3s; opacity: .7; border: none; outline: none; border-radius: 5px; color: #fff; background: rgb(255,64,129); padding: 0 40px; margin: 0 10px; cursor: pointer;">Eliminar</button>
                                     {% else %}
-                                        <div id="githubApp">
-                                            <i style="font-size: 30px; border-right: 1px solid #ddd; padding-right: 15px;" class="fab fa-github"></i>
-                                            <h4 style="margin: 0 0 0 10px;">
-                                                No tienes ninguna cuenta vinculada
-                                            </h4>
-                                        </div>
-                                        <button class="GithubBotonOAlgo" onclick="abrirAuthGithub()"
-                                            style="transition: .3s; opacity: .7; border: none; outline: none; border-radius: 5px; color: #fff; background: rgb(34, 92, 255); padding: 0 40px; margin: 0 10px; cursor: pointer;">Login</button>
+                                    <div id="githubApp">
+                                        <i style="font-size: 30px; border-right: 1px solid #ddd; padding-right: 15px;"
+                                            class="fab fa-github"></i>
+                                        <h4 style="margin: 0 0 0 10px;">
+                                            No tienes ninguna cuenta vinculada
+                                        </h4>
+                                    </div>
+                                    <button class="GithubBotonOAlgo" onclick="abrirAuthGithub()"
+                                        style="transition: .3s; opacity: .7; border: none; outline: none; border-radius: 5px; color: #fff; background: rgb(34, 92, 255); padding: 0 40px; margin: 0 10px; cursor: pointer;">Login</button>
                                     {% endif %}
                                 </div>
                             </div>
@@ -442,7 +457,7 @@
     <script src="https://unpkg.com/tippy.js@0.11.3/dist/tippy.js"></script>
 
     <script>
-new Tippy('.tippy')
+        new Tippy('.tippy')
     </script>
 
     <script src="{{ url_for('static', filename='vendor/notiflix/notiflix-aio-2.7.0.min.js') }}"></script>

@@ -21,7 +21,7 @@
                         Nombre del hosting
                     </p>
                 </label>
-                <input autocomplete="off" id="nombre" type="text" name="" id="">
+                <input autocomplete="off" id="nombre" type="text">
             </div>
             <div style="padding: 30px 0 10px;" class="input">
                 <label>
@@ -211,6 +211,23 @@
                                     if (!re.test(value)) {
                                         swal("No es valido!", "Mete una url de .git valido.", "error");
                                         return
+                                    }
+
+                                    var estado;
+
+                                    try {
+                                        fetch(value.replace(".git", "")).then(function (response) {
+                                            estado = response.status
+                                        })
+                                    } catch {
+                                        estado = 404
+                                    }
+
+                                    console.log(estado)
+
+                                    if (!estado == 200) {
+                                        swal("No es valido!", "Al intentar ver el repositorio nos han dado una respuesta que no es 200, intenta meter un repositorio valido", "error");
+                                        return;
                                     }
 
                                     for (i = 0; i < document.getElementsByClassName("repoEnLista").length; i++) {

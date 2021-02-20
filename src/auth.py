@@ -21,14 +21,19 @@ class HacerLogin():
         self.email = email
         self.psw = psw
 
-    def ejecutar(self, tk):
+    def ejecutar(self, tk=None):
         usuarios = abrir()
 
-        if self.email in usuarios:
-            if Password(usuarios[str(self.email)]["psw"]).check(self.psw):
-                usuarios[str(self.email)]["cuentas"][str(tk)] = True
-                cerrar(usuarios)
-                return str(tk)
+        if tk is None:
+            if self.email in usuarios:
+                if Password(usuarios[str(self.email)]["psw"]).check(self.psw):
+                    return usuarios[str(self.email)]
+        else:          
+            if self.email in usuarios:
+                if Password(usuarios[str(self.email)]["psw"]).check(self.psw):
+                    usuarios[str(self.email)]["cuentas"][str(tk)] = True
+                    cerrar(usuarios)
+                    return str(tk)
         return False
 
 class Password():
