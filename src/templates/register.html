@@ -16,6 +16,9 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
 	<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.css" integrity="sha512-NXUhxhkDgZYOMjaIgd89zF2w51Mub53Ru3zCNp5LTlEzMbNNAjTjDbpURYGS5Mop2cU4b7re1nOIucsVlrx9fA==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.js" integrity="sha512-mgZL3SZ/vIooDg2mU2amX6NysMlthFl/jDbscSRgF/k3zmICLe6muAs7YbITZ+61FeUoo1plofYAocoR5Sa1rQ==" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -59,7 +62,7 @@
 					async function cambiarARobot() {
 						const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 						if (!re.test(document.getElementById("email").value)) {
-							Notiflix.Notify.Failure("Eso no es un email")
+							alertNoty('Eso no es un email', 'error', '#c0392b');
 							return;
 						}
 						if (await enviar() == false) {
@@ -151,7 +154,7 @@
 									window.location.replace("/");
 								}, 5000);
 							} else {
-								Notiflix.Notify.Failure('Es posible que el codigo este incorrecto');
+								alertNoty('Es posible que el codigo este incorrecto', 'error', '#c0392b');
 							}
 						}
 					)
@@ -183,6 +186,7 @@
 	<script src="{{ url_for('static', filename='vendor/notiflix/notiflix-aio-2.7.0.min.js') }}"></script>
 	<script src="{{ url_for('static', filename='js/register.js') }}"></script>
     <script src="{{ url_for('static', filename='js/global.js') }}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@mojs/core"></script>
 
 </body>
 

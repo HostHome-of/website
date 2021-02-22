@@ -352,6 +352,15 @@ def mirarHosts():
 
     return render_template("projectos/hosts.html", hostsLen=len(hosts), user=usr, docs=docs, hosts=hosts)
 
+@app.route("/dashboard/friends")
+@login_required
+def amigos():
+
+    usr    = check_usuario()
+    invite = Usuario().cojerInvite(usr["mail"])
+
+    return render_template("dashboard/amigos.html", user=usr, invites=invite, url=url_main)
+
 @app.route("/host/new", methods=["GET", "POST"])
 @login_required
 def crearHost():
@@ -398,7 +407,7 @@ def EliminarCuenta():
     if usr is not None:
         Usuario(request.cookies.get('user_id')).eliminar()
 
-    return redirect(url_for('PaginaPrincipal'))
+    return redirect(url_for('Cuenta'))
 
 @app.route("/dashboard/account/destroy")
 @login_required

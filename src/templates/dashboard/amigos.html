@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+
+<head>
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    <script src="{{ url_for('static', filename='sw.js') }}"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | {{ user["nombre"] }}</title>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cuenta.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@0.11.3/dist/tippy.css">
+    <link rel="stylesheet" type="text/css"
+        href="{{ url_for('static', filename='vendor/notiflix/notiflix-2.7.0.min.css') }}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.css"
+        integrity="sha512-NXUhxhkDgZYOMjaIgd89zF2w51Mub53Ru3zCNp5LTlEzMbNNAjTjDbpURYGS5Mop2cU4b7re1nOIucsVlrx9fA=="
+        crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.js"
+        integrity="sha512-mgZL3SZ/vIooDg2mU2amX6NysMlthFl/jDbscSRgF/k3zmICLe6muAs7YbITZ+61FeUoo1plofYAocoR5Sa1rQ=="
+        crossorigin="anonymous"></script>
+
+</head>
+
+<body
+    style="display: flex; font-family: Avenir Next,Helvetica Neue,Arial,sans-serif!important; font-feature-settings: 'kern','liga','pnum'; -webkit-font-smoothing: antialiased;">
+    {% include "/sideNav.html" %}
+    <div class="wrapper__navy">
+        <style>
+            .navy {
+                display: flex;
+                justify-content: flex-start;
+            }
+
+            .navy p {
+                margin: 0;
+                font-size: 24px;
+                font-weight: 500;
+                color: rgb(54, 73, 98);
+                text-align: left;
+                line-height: 1.5;
+                text-transform: none;
+                overflow: unset;
+                white-space: unset;
+                text-overflow: unset;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+                flex: 0 1 auto;
+            }
+
+            .navy a {
+                font-size: 24px;
+                font-weight: 500;
+                color: rgb(154, 164, 176);
+                text-align: left;
+                line-height: 1.5;
+                text-transform: none;
+                overflow: unset;
+                white-space: unset;
+                text-overflow: unset;
+                border-bottom: none;
+                text-decoration: none;
+                cursor: pointer;
+                margin-left: 100px;
+            }
+
+
+            .pagina .edit__uno .nav ul {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                /* align-items: center; */
+                margin: 0;
+                padding: 35px 0;
+                background-color: transparent;
+                border-radius: 4px;
+                position: relative;
+                transition: all 0.55s cubic-bezier(0.25, 0.8, 0.25, 1) 0s;
+                cursor: pointer;
+                box-sizing: border-box;
+                margin: 0px;
+                min-width: 0px;
+                -webkit-box-pack: justify;
+                justify-content: space-between;
+                -webkit-box-align: center;
+                /* align-items: center; */
+                display: flex;
+                background: transparent;
+            }
+
+            .pagina .edit__uno .nav ul a {
+                box-sizing: border-box;
+                margin: 3px 0;
+                min-width: 0px;
+                padding: 15px 30px;
+                background-color: transparent;
+                font-size: 16px;
+                font-weight: 600;
+                color: rgb(154, 164, 176);
+                text-align: left;
+                line-height: 1.5;
+                text-transform: none;
+                overflow: unset;
+                white-space: unset;
+                text-overflow: unset;
+                display: flex;
+                align-items: center;
+                justify-content: inherit;
+                transition: .2s;
+                width: 350px;
+            }
+
+            .pagina .edit__uno .nav ul a:hover {
+                box-shadow: rgba(20, 26, 40, 0.15) 0px 7px 42px;
+                transform: scale(1.01);
+            }
+
+            .pagina .edit__uno .nav ul .active {
+                box-sizing: border-box;
+                min-width: 0px;
+                padding: 15px 30px;
+                background-color: rgb(255, 255, 255);
+                font-size: 16px;
+                font-weight: 600;
+                color: rgb(154, 164, 176);
+                text-align: left;
+                line-height: 1.5;
+                text-transform: none;
+                overflow: unset;
+                white-space: unset;
+                text-overflow: unset;
+                display: flex;
+                align-items: center;
+                box-shadow: rgb(235, 241, 255) 0px 16px 20px 0px;
+            }
+
+            .pagina .edit__uno .nav ul a i {
+                color: rgb(54, 73, 98);
+                font-size: 24px;
+                display: flex;
+                margin: 0px 15px 0px 0px;
+            }
+
+            .pagina .edit__uno .nav {
+                width: 300px;
+                position: fixed;
+                left: 13%;
+                top: 20%;
+            }
+
+            .pagina .edit__uno .nav ul a .fa-chevron-right {
+                margin-left: 10px;
+                color: rgb(54, 73, 98) !important;
+                font-size: 20px;
+            }
+
+            .main {
+                width: 55%;
+                height: 70vh;
+                position: relative;
+                margin-right: 150px;
+            }
+
+            @media only screen and (max-width: 1400px) {
+                .main {
+                    width: 55%;
+                    height: 70vh;
+                    position: relative;
+                    margin-right: 50px;
+                }
+            }
+
+            .pagina {
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+            }
+        </style>
+        <div class="navy" style="justify-content: space-between;">
+            <div style="display: flex; align-items: center;">
+                <a href="/dashboard">
+                    Cuenta
+                </a>
+                <i style="font-size: 15px; color: rgb(34, 92, 255); display: flex; box-sizing: border-box; margin: 0px 15px; min-width: 0px;"
+                    class="fas fa-chevron-right"></i>
+                <p>
+                    Añadir amigos
+                </p>
+            </div>
+            <a class="buttonSingOff"
+                style="position: relative; display: inline-flex; font-family: 'Public Sans', sans-serif; -webkit-box-align: center; align-items: center; font-weight: 600; white-space: nowrap; font-size: 12px; -webkit-box-pack: center; justify-content: center; text-decoration: none; cursor: pointer; appearance: none; padding: 10px 16px; line-height: 16px; border-radius: 36px; box-sizing: border-box; transition: all 0.2s ease-in-out 0s; background-color: transparent; color: rgb(0, 0, 0); box-shadow: none; border: 2px solid rgb(0, 0, 0); height: 36px;  margin-right: 50px;"
+                href="/dashboard/account/delete">Cerrar sesion</a>
+        </div>
+        <div class="pagina">
+            <div class="edit__uno">
+                <div class="nav">
+                    <div style="display: flex;" class="info">
+                        <style>
+                            #pfpHolderNavy {
+                                background-image: url("{{ user['pfp'] }}");
+                                background-size: cover;
+                                background-position: center;
+                                width: 44px;
+                                height: 44px;
+                                border-radius: 50%;
+                            }
+                        </style>
+                        <div id="pfpHolderNavy"></div>
+                        <p
+                            style="display: flex; justify-content: center; align-items: center; margin: 0 0 0 10px; font-size: 16px; font-weight: 600; color: rgb(54, 73, 98); text-align: left; line-height: 1.5; text-transform: none; overflow: unset; white-space: unset; text-overflow: unset;">
+                            {{ user["nombre"] }}</p>
+                    </div>
+                    <ul>
+                        <a href="/dashboard/edit">
+                            <div style="display: flex;"><i class="far fa-user"></i> Mi cuenta</div> <i
+                                class="fas fa-chevron-right"></i>
+                        </a>
+                        <a href="/dashboard/edit/imagen">
+                            <div style="display: flex;"><i class="far fa-images"></i> Cambiar img de perfil</div> <i
+                                class="fas fa-chevron-right"></i>
+                            <a href="/dashboard/edit/mail">
+                                <div style="display: flex;"><i class="fas fa-bell"></i> Notificaciones</div>
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                            <a href="{{ url_for('amigos') }}" class="active">
+                                <div style="display: flex;"><i class="fas fa-sitemap"></i> Amigos</div> <i
+                                    class="fas fa-chevron-right"></i>
+                            </a>
+                            <a href="/dashboard/edit/avanzado">
+                                <div style="display: flex;"><i class="fas fa-exclamation-circle"></i> Avanzado</div> <i
+                                    class="fas fa-chevron-right"></i>
+                            </a>
+                    </ul>
+                </div>
+
+                <div class="main">
+                    <div class="edit__box">
+                        <div class="headder">
+                            <div class="logo">
+                                <i class="fas fa-sitemap"></i>
+                            </div>
+                            <div class="info">
+                                <div class="title">
+                                    Añadir amigos
+                                </div>
+                                <div class="desc">
+                                    Puedes añadir amigos y contribuir con los hostings
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wrapper">
+                            <div id="form">
+                                <style>
+                                    #form p {
+                                        margin: 0;
+                                        font-family: 'Poppins', sans-serif;
+                                    }
+
+                                    #form p strong {
+                                        font-size: 16px;
+                                        font-weight: 700;
+                                        color: rgb(0, 0, 0);
+                                        text-align: left;
+                                        line-height: 1.5;
+                                        text-transform: none;
+                                        overflow: unset;
+                                        white-space: unset;
+                                        text-overflow: unset;
+                                    }
+
+                                    #form .compartir {
+                                        display: flex;
+                                        position: relative;
+                                        width: 100%;
+                                    }
+
+                                    #form .compartir .links .input .inputText {
+                                        background-color: transparent !important;
+                                        position: relative !important;
+                                        display: block !important;
+                                        transition: border 0.2s ease-in-out 0s !important;
+                                        box-sizing: border-box !important;
+                                        cursor: text !important;
+                                        padding: 12px 24px !important;
+                                        font-family: "Public Sans", sans-serif !important;
+                                        font-size: 16px !important;
+                                        font-weight: 500 !important;
+                                        line-height: 34px !important;
+                                        height: 56px !important;
+                                        border: 1px solid transparent !important;
+                                        width: 100% !important;
+                                        color: rgb(0, 0, 0);
+                                        border-radius: 5px !important;
+                                        outline: none !important;
+                                        border: 1px solid rgb(225, 232, 240) !important;
+                                        border-radius: 4px 0px 0px 4px !important;
+                                        padding-left: 10px !important;
+                                        font-weight: 600 !important;
+                                        cursor: auto !important;
+                                        -webkit-user-select: all;
+                                        -moz-user-select: all;
+                                        -ms-user-select: all;
+                                        user-select: all;
+                                    }
+
+                                    #form .compartir .links .input .coppy {
+                                        position: relative;
+                                        display: inline-flex;
+                                        -webkit-box-align: center;
+                                        align-items: center;
+                                        font-weight: 600;
+                                        white-space: nowrap;
+                                        font-size: 16px;
+                                        -webkit-box-pack: center;
+                                        justify-content: center;
+                                        text-decoration: none;
+                                        cursor: pointer;
+                                        appearance: none;
+                                        padding: 16px 28px;
+                                        line-height: 24px;
+                                        border-radius: 5px;
+                                        box-sizing: border-box;
+                                        transition: all 0.2s ease-in-out 0s;
+                                        background-color: rgb(5, 104, 253);
+                                        color: rgb(255, 255, 255);
+                                        box-shadow: none;
+                                        border: 2px solid rgb(5, 104, 253);
+                                        height: 56px;
+                                        border-top-left-radius: 0px;
+                                        border-bottom-left-radius: 0px;
+                                    }
+
+                                    #form .compartir .links .input .coppy:hover {
+                                        background: rgb(67, 149, 253);
+                                        border-color: rgb(67, 149, 253);
+                                    }
+
+                                    .compartir .links .input .coppy:active {
+                                        transform: scale(0.95);
+                                        outline: none;
+                                    }
+
+                                    .compartir .links .input .coppy:focus {
+                                        outline: none;
+                                    }
+
+                                    .compartir .links .input label {
+                                        font-size: 16px;
+                                        font-weight: 600;
+                                        color: rgb(54, 73, 98);
+                                        text-align: left;
+                                        line-height: 1.5;
+                                        text-transform: none;
+                                        overflow: unset;
+                                        white-space: unset;
+                                        text-overflow: unset;
+                                        /* width: 100%; */
+                                    }
+                                </style>
+                                <p><strong>Invita a tus amigos por estos medios</strong></p>
+                                <p>Los amigos seran capazes de ver los hosts que tu has compartido con ellos</p>
+                                <div style="margin-top: 50px;" class="compartir">
+                                    <div class="links" style="width: 70%;">
+                                        <div class="input">
+                                            <label for="">
+                                                Tu link para invitar
+                                            </label>
+                                            <div style="display: flex;">
+                                                <div style="border-top-right-radius: 0; border-bottom-right-radius: 0;"
+                                                    class="inputText">
+                                                    <p id="copyTextBlock" style="cursor: auto">{{ invites['link'] }}</p>
+                                                </div>
+                                                <script>
+                                                    function copyText(containerid) {
+                                                        var range = document.createRange();
+                                                        range.selectNode(containerid);
+                                                        window.getSelection().removeAllRanges();
+                                                        window.getSelection().addRange(range);
+                                                        document.execCommand("copy");
+                                                        window.getSelection().removeAllRanges();
+                                                        alertNotyAmigos('Copiado al porta papeles', 'success', '#27ae60')
+                                                    }
+                                                </script>
+                                                <button style="width: 20%;" class="coppy"
+                                                    onclick="copyText(copyTextBlock)">Copiar link</button>
+                                            </div>
+                                        </div>
+                                        <div class="input">
+                                            <label data-theme="light"
+                                                title="Tiene que estar de la manera en la que pone en el input"
+                                                data-duration="300" data-arrow="true" data-animation="shift"
+                                                class="tippy" data-position="top" for="inputByEmail">
+                                                Enviar invitaciones
+                                            </label>
+                                            <script>
+                                                async function enviarInput() {
+                                                    const input = document.getElementById("inputByEmail")
+                                                    const texto = input.value.replace(" ", "")
+                                                    const texto_separado = texto.split(",")
+
+                                                    if (input.value == "") return;
+
+
+                                                    for (i = 0; i < texto_separado.length; i++) {
+                                                        if (!texto_separado[i].match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)) {
+                                                            alertNotyAmigos(`(${texto_separado[i]}) no es un email valido`, 'error', '#c0392b')
+                                                            return;
+                                                        } else if (texto_separado[i] == "{{ user['mail'] }}") {
+                                                            alertNotyAmigos(`En la lista esto tu email, eliminalo`, 'error', '#c0392b')
+                                                            return;        
+                                                        }
+                                                    }
+
+                                                    fetch("/friends/add?config=frendsAdd&key=headers", {
+                                                        method: "POST",
+                                                        header: {
+                                                            "mails": JSON.stringify(texto),
+                                                            "key": Math.floor(Math.random() * 10)
+                                                        }
+                                                    })
+                                                }
+                                            </script>
+                                            <div style="display: flex;">
+                                                <input
+                                                    style="border-top-right-radius: 0; border-bottom-right-radius: 0;"
+                                                    class="inputText" placeholder="prueba@email.com, prueba2@email.com"
+                                                    id="inputByEmail">
+                                                <button style="width: 30% "
+                                                    title="Tiene que estar de la manera en la que pone en el input"
+                                                    onclick="enviarInput()" class="coppy"><i class="fas fa-plus"></i>
+                                                    <span style="margin-left: 10px;">Enviar invitacion</span></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="social">
+                                        <style>
+                                            .social {
+                                                width: 30%;
+                                                position: relative;
+                                                padding: 0 60px;
+                                            }
+
+                                            .social .title {
+                                                font-size: 16px;
+                                                font-weight: 600;
+                                                color: rgb(54, 73, 98);
+                                                text-align: left;
+                                                line-height: 1.5;
+                                                text-transform: none;
+                                                overflow: unset;
+                                                white-space: unset;
+                                                text-overflow: unset;
+                                            }
+
+                                            .social .social__link {
+                                                display: flex;
+                                                width: 100%;
+                                                align-items: center;
+                                                flex-direction: column;
+                                            }
+
+                                            .social .social__link .social__link__item {
+                                                width: 100%;
+                                                position: relative;
+                                                display: inline-flex;
+                                                font-family: "Public Sans", sans-serif;
+                                                -webkit-box-align: center;
+                                                align-items: center;
+                                                font-weight: 600;
+                                                white-space: nowrap;
+                                                font-size: 16px;
+                                                -webkit-box-pack: center;
+                                                justify-content: center;
+                                                text-decoration: none;
+                                                cursor: pointer;
+                                                appearance: none;
+                                                padding: 12px 24px;
+                                                line-height: 24px;
+                                                border-radius: 36px;
+                                                box-sizing: border-box;
+                                                transition: all 0.2s ease-in-out 0s;
+                                                background-color: rgb(255, 255, 255);
+                                                color: rgb(5, 104, 253);
+                                                box-shadow: none;
+                                                border: 2px solid rgb(255, 255, 255);
+                                                height: 48px;
+                                                margin: 15px 0 0;
+                                            }
+
+                                            .social .social__link .social__link__item:hover {
+                                                border-color: rgb(5, 104, 253);
+                                            }
+
+                                            .social .social__link .social__link__item:active {
+                                                transform: scale(0.95);
+                                            }
+                                        </style>
+                                        <div class="title">
+                                            Compartir en social
+                                        </div>
+                                        <div class="social__link">
+                                            <script>
+                                                function abrirFacebook() {
+                                                    window.open('https://www.facebook.com/sharer/sharer.php?u={{ url }}', '_blank', 'height=600,width=1200,top=400,left=400')
+                                                }
+
+                                                function abrirTwitter() {
+                                                    window.open('https://twitter.com/intent/tweet?text=%C2%A1Ve%20a%20HostHome!%20podras%20hacer%20hostings%20gratis%20seas%20de%20donde%20seas.%20Muy%20facil%20crearse%20una%20cuenta%20muy%20facil%20mente%20y%20en%20menos%20de%201%20hora%20podras%20crearte%20un%20host%20%20{{ url }}', '_blank', 'height=600,width=1200,top=400,left=400')
+                                                }
+
+                                                function abrirLinkedIn() {
+                                                    window.open('https://www.linkedin.com/shareArticle?mini=true&url={{ url }}&summary=%C2%A1Ve%20a%20HostHome!%20podras%20hacer%20hostings%20gratis%20seas%20de%20donde%20seas.%20Muy%20facil%20crearse%20una%20cuenta%20muy%20facil%20mente%20y%20en%20menos%20de%201%20hora%20podras%20crearte%20un%20host%20%20{{ url }}', '_blank', 'height=600,width=1200,top=400,left=400')
+                                                }
+                                            </script>
+                                            <div class="social__link__item" onclick="abrirTwitter()">
+                                                <i class="fab fa-twitter"></i> <span style="margin-left: 10px;">Twitter</span>
+                                            </div>
+                                            <div class="social__link__item" onclick="abrirFacebook()">
+                                                <i class="fab fa-facebook"></i> <span style="margin-left: 10px;">Facebook</span>
+                                            </div>
+                                            <div class="social__link__item" onclick="abrirLinkedIn()">
+                                                <i class="fab fa-linkedin"></i> <span style="margin-left: 10px;">LinkedIn</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/tippy.js@0.11.3/dist/tippy.min.js"></script>
+    <script src="https://unpkg.com/tippy.js@0.11.3/dist/tippy.standalone.js"></script>
+    <script src="https://unpkg.com/tippy.js@0.11.3/dist/tippy.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@mojs/core"></script>
+
+    <script>
+        new Tippy('.tippy')
+
+        function alertNotyAmigos(text, typeAlert, fill) { // fil :: #EBD761
+            new Noty({
+                text: text,
+                theme: 'nest',
+                type: typeAlert,
+                timeout: 4000,
+                layout: 'bottomRight',
+                animation: {
+                    open: function (promise) {
+                        var n = this;
+                        var Timeline = new mojs.Timeline();
+                        var body = new mojs.Html({
+                            el: n.barDom,
+                            x: { 500: 0, delay: 0, duration: 500, easing: 'elastic.out' },
+                            isForce3d: true,
+                            onComplete: function () {
+                                promise(function (resolve) {
+                                    resolve();
+                                })
+                            }
+                        });
+
+                        var parent = new mojs.Shape({
+                            parent: n.barDom,
+                            width: 200,
+                            height: n.barDom.getBoundingClientRect().height,
+                            radius: 0,
+                            x: { [150]: -150 },
+                            duration: 1.2 * 500,
+                            isShowStart: true
+                        });
+
+                        n.barDom.style['overflow'] = 'visible';
+                        parent.el.style['overflow'] = 'hidden';
+
+                        var burst = new mojs.Burst({
+                            parent: parent.el,
+                            count: 10,
+                            top: n.barDom.getBoundingClientRect().height + 75,
+                            degree: 90,
+                            radius: 75,
+                            angle: { [-90]: 40 },
+                            children: {
+                                fill: fill,
+                                delay: 'stagger(500, -50)',
+                                radius: 'rand(8, 25)',
+                                direction: -1,
+                                isSwirl: true
+                            }
+                        });
+
+                        var fadeBurst = new mojs.Burst({
+                            parent: parent.el,
+                            count: 2,
+                            degree: 0,
+                            angle: 75,
+                            radius: { 0: 100 },
+                            top: '90%',
+                            children: {
+                                fill: fill,
+                                pathScale: [.65, 1],
+                                radius: 'rand(12, 15)',
+                                direction: [-1, 1],
+                                delay: .8 * 500,
+                                isSwirl: true
+                            }
+                        });
+
+                        Timeline.add(body, burst, fadeBurst, parent);
+                        Timeline.play();
+                    },
+                    close: function (promise) {
+                        var n = this;
+                        new mojs.Html({
+                            el: n.barDom,
+                            x: { 0: 500, delay: 10, duration: 500, easing: 'cubic.out' },
+                            skewY: { 0: 10, delay: 10, duration: 500, easing: 'cubic.out' },
+                            isForce3d: true,
+                            onComplete: function () {
+                                promise(function (resolve) {
+                                    resolve();
+                                })
+                            }
+                        }).play();
+                    }
+                }
+            }).show();
+        }
+    </script>
+
+    <script src="{{ url_for('static', filename='vendor/notiflix/notiflix-aio-2.7.0.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='/js/account.js') }}"></script>
+
+</body>
+
+</html>

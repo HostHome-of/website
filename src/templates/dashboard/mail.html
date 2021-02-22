@@ -16,6 +16,8 @@
         href="{{ url_for('static', filename='vendor/notiflix/notiflix-2.7.0.min.css') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.8/push.min.js" integrity="sha512-eiqtDDb4GUVCSqOSOTz/s/eiU4B31GrdSb17aPAA4Lv/Cjc8o+hnDvuNkgXhSI5yHuDvYkuojMaQmrB5JB31XQ==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.css" integrity="sha512-NXUhxhkDgZYOMjaIgd89zF2w51Mub53Ru3zCNp5LTlEzMbNNAjTjDbpURYGS5Mop2cU4b7re1nOIucsVlrx9fA==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.js" integrity="sha512-mgZL3SZ/vIooDg2mU2amX6NysMlthFl/jDbscSRgF/k3zmICLe6muAs7YbITZ+61FeUoo1plofYAocoR5Sa1rQ==" crossorigin="anonymous"></script>
 
 </head>
 
@@ -173,15 +175,18 @@
                 padding-right: 0 !important;
             }
         </style>
-        <div class="navy">
-            <a href="/dashboard">
-                Cuenta
-            </a>
-            <i style="font-size: 15px; color: rgb(34, 92, 255); display: flex; box-sizing: border-box; margin: 0px 15px; min-width: 0px;"
-                class="fas fa-chevron-right"></i>
-            <p>
-                Preferencias de email
-            </p>
+        <div class="navy" style="justify-content: space-between;">
+            <div style="display: flex; align-items: center;">
+                <a href="/dashboard">
+                    Cuenta
+                </a>
+                <i style="font-size: 15px; color: rgb(34, 92, 255); display: flex; box-sizing: border-box; margin: 0px 15px; min-width: 0px;"
+                    class="fas fa-chevron-right"></i>
+                <p>
+                    Preferencias de email
+                </p>
+            </div>
+            <a class="buttonSingOff"  style="position: relative; display: inline-flex; font-family: 'Public Sans', sans-serif; -webkit-box-align: center; align-items: center; font-weight: 600; white-space: nowrap; font-size: 12px; -webkit-box-pack: center; justify-content: center; text-decoration: none; cursor: pointer; appearance: none; padding: 10px 16px; line-height: 16px; border-radius: 36px; box-sizing: border-box; transition: all 0.2s ease-in-out 0s; background-color: transparent; color: rgb(0, 0, 0); box-shadow: none; border: 2px solid rgb(0, 0, 0); height: 36px;  margin-right: 50px;" href="/dashboard/account/delete">Cerrar sesion</a>
         </div>
         <div class="pagina">
             <div class="edit__uno">
@@ -215,8 +220,8 @@
                             <div style="display: flex;"><i class="fas fa-bell"></i>  Notificaciones</div> <i
                                 class="fas fa-chevron-right"></i>
                         </a>
-                        <a href="/dashboard/edit/org">
-                            <div style="display: flex;"><i class="fas fa-sitemap"></i> Organizacion</div> <i
+                        <a href="{{ url_for('amigos') }}">
+                            <div style="display: flex;"><i class="fas fa-sitemap"></i> Amigos</div> <i
                                 class="fas fa-chevron-right"></i>
                         </a>
                         <a href="/dashboard/edit/avanzado">
@@ -598,8 +603,9 @@
     <script src="https://unpkg.com/tippy.js@0.11.3/dist/tippy.standalone.js"></script>
     <script src="https://unpkg.com/tippy.js@0.11.3/dist/tippy.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/@mojs/core"></script>
 
-    <script src="{{ url_for('static', filename='/js/account.js') }}"></script>
+    <script   src="{{ url_for('static', filename='/js/account.js') }}"></script>
     <script src="{{ url_for('static', filename='vendor/notiflix/notiflix-aio-2.7.0.min.js') }}"></script>
 
     <script>

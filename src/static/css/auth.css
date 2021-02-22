@@ -336,16 +336,16 @@ body {
 	transform: translateX(-1000px);
 }
 
-#formy .animacion.active:nth-child(1)  {animation-delay:   0s; transform: translateX(0);}
-#formy .animacion.active:nth-child(2)  {animation-delay: .05s; transform: translateX(0);}
-#formy .animacion.active:nth-child(3)  {animation-delay: .10s; transform: translateX(0);}
-#formy .animacion.active:nth-child(4)  {animation-delay: .15s; transform: translateX(0);}
-#formy .animacion.active:nth-child(5)  {animation-delay: .20s; transform: translateX(0);}
-#formy .animacion.active:nth-child(6)  {animation-delay: .25s; transform: translateX(0);}
-#formy .animacion.active:nth-child(7)  {animation-delay: .30s; transform: translateX(0);}
-#formy .animacion.active:nth-child(8)  {animation-delay: .35s; transform: translateX(0);}
-#formy .animacion.active:nth-child(9)  {animation-delay: .40s; transform: translateX(0);}
-#formy .animacion.active:nth-child(10) {animation-delay: .45s; transform: translateX(0);}
+#formy .animacion.active:nth-child(1)  {animation-delay:   0s; transform: translateX(-1000px); animation-fill-mode: forwards;}
+#formy .animacion.active:nth-child(2)  {animation-delay: .05s; transform: translateX(-1000px); animation-fill-mode: forwards;}
+#formy .animacion.active:nth-child(3)  {animation-delay: .10s; transform: translateX(-1000px); animation-fill-mode: forwards;}
+#formy .animacion.active:nth-child(4)  {animation-delay: .15s; transform: translateX(-1000px); animation-fill-mode: forwards;}
+#formy .animacion.active:nth-child(5)  {animation-delay: .20s; transform: translateX(-1000px); animation-fill-mode: forwards;}
+#formy .animacion.active:nth-child(6)  {animation-delay: .25s; transform: translateX(-1000px); animation-fill-mode: forwards;}
+#formy .animacion.active:nth-child(7)  {animation-delay: .30s; transform: translateX(-1000px); animation-fill-mode: forwards;}
+#formy .animacion.active:nth-child(8)  {animation-delay: .35s; transform: translateX(-1000px); animation-fill-mode: forwards;}
+#formy .animacion.active:nth-child(9)  {animation-delay: .40s; transform: translateX(-1000px); animation-fill-mode: forwards;}
+#formy .animacion.active:nth-child(10) {animation-delay: .45s; transform: translateX(-1000px); animation-fill-mode: forwards;}
 
 @keyframes movimientoDeOla {
 	0% {

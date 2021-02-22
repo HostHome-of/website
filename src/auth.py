@@ -16,6 +16,16 @@ def cerrar(usrs):
     with open("./src/data/users.json", "w") as f:
         json.dump(usrs, f, indent=4)
 
+def abrirInvites():
+    with open("./src/data/invites.json", "r") as f:
+        links = json.load(f)
+
+    return links
+
+def cerrarInvites(invites):
+    with open("./src/data/invites.json", "w") as f:
+        json.dump(invites, f, indent=4)
+
 class HacerLogin():
     def __init__(self, email, psw):
         self.email = email
@@ -57,12 +67,39 @@ class Usuario():
     def __init__(self, tk: str=None):
         self.tk = tk
 
+    def cojerInvite(self, mail):
+        return abrirInvites()[mail]
+
+    def crearInviteLink(self):
+        codigoInicial = ""
+        for i in range(16):
+            codigoInicial += random.choice("q,w,e,r,t,y,u,i,o,p,a,s,d,f,g,h,j,k,l,z,x,c,v,b,n,m,1,2,3,4,5,6,7,8,9,0".split(","))
+        return codigoInicial
+
     def activar(self, mail, codigo):
         usuarios = abrir()
         if int(usuarios[mail]["tokenEntrada"]) == int(codigo): # Bien
             del usuarios[mail]["tokenEntrada"]
             usuarios[mail]["autorizado"] = True
+
             cerrar(usuarios)
+            invites = abrirInvites()
+
+            while True:
+                codigoDeInvite = self.crearInviteLink()
+                for codigo_mail in invites:
+                    if codigoDeInvite == invites[codigo_mail]["codigo"]:
+                        continue
+                break
+
+            invites[mail] = {}
+            invites[mail]["codigo"] =  codigoDeInvite
+
+            url_main = requests.get("https://raw.githubusercontent.com/HostHome-of/config/main/config.json").json()["url"]
+
+            invites[mail]["link"]   =  f"{url_main}invites/{codigoDeInvite}"
+
+            cerrarInvites(invites)
             return True
         else: # Mal
             return False
@@ -164,7 +201,6 @@ class CrearUsuario():
 
         return token
 
-
     def crear(self):
         usuarios = abrir()
 
@@ -194,7 +230,7 @@ class CrearUsuario():
             usuarios[str(self.mail)]["emails"]["cuatro"] = True
 
             cerrar(usuarios)
-            # Psw(self.psw, str(self.mail)).insertar() 
+
             return str(tkN)
         
         return False

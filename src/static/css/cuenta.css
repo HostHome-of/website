@@ -50,6 +50,7 @@ html {
     -ms-text-size-adjust: 100%;
     -ms-overflow-style: scrollbar;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    font-family: "Public Sans", sans-serif;
 }
 
 @-ms-viewport {
@@ -329,6 +330,11 @@ a>code {
     .container {
         max-width: 1140px;
     }
+}
+
+.buttonSingOff:hover {
+    background: #000 !important;
+    color: #FFF !important;
 }
 
 .container-fluid {
@@ -1084,7 +1090,7 @@ textarea.form-control {
     display: flex;
     height: 100%;
     width: 60px;
-    background-color: rgb(54, 73, 98);
+    background-color: #000;
     position: relative;
     height: 60px;
     border-radius: 4px;
@@ -1251,7 +1257,7 @@ textarea.form-control {
     background: #fff;
     position: fixed !important;
     z-index: 999;
-    background: rgba(237, 242, 247, 1);
+    background: #fff;
 }
 
 .sideNav .logo {
@@ -1349,7 +1355,7 @@ textarea.form-control {
 }
 
 .navy {
-    background-color: rgb(255, 255, 255);
+    background-color: #fff;
     position: relative;
     z-index: 4;
     border-radius: 0px;

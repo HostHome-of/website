@@ -182,15 +182,18 @@
                 padding-right: 0 !important;
             }
         </style>
-        <div class="navy">
-            <a href="/dashboard">
-                Cuenta
-            </a>
-            <i style="font-size: 15px; color: rgb(34, 92, 255); display: flex; box-sizing: border-box; margin: 0px 15px; min-width: 0px;"
-                class="fas fa-chevron-right"></i>
-            <p>
-                Cambiar foto de perfil
-            </p>
+        <div class="navy" style="justify-content: space-between;">
+            <div style="display: flex; align-items: center;">
+                <a href="/dashboard">
+                    Cuenta
+                </a>
+                <i style="font-size: 15px; color: rgb(34, 92, 255); display: flex; box-sizing: border-box; margin: 0px 15px; min-width: 0px;"
+                    class="fas fa-chevron-right"></i>
+                <p>
+                    Avanzado
+                </p>
+            </div>
+            <a class="buttonSingOff"  style="position: relative; display: inline-flex; font-family: 'Public Sans', sans-serif; -webkit-box-align: center; align-items: center; font-weight: 600; white-space: nowrap; font-size: 12px; -webkit-box-pack: center; justify-content: center; text-decoration: none; cursor: pointer; appearance: none; padding: 10px 16px; line-height: 16px; border-radius: 36px; box-sizing: border-box; transition: all 0.2s ease-in-out 0s; background-color: transparent; color: rgb(0, 0, 0); box-shadow: none; border: 2px solid rgb(0, 0, 0); height: 36px;  margin-right: 50px;" href="/dashboard/account/delete">Cerrar sesion</a>
         </div>
         <div class="pagina">
             <div class="edit__uno">
@@ -224,8 +227,8 @@
                             <div style="display: flex;"><i class="fas fa-bell"></i>  Notificaciones</div> <i
                                 class="fas fa-chevron-right"></i>
                         </a>
-                        <a href="/dashboard/edit/org">
-                            <div style="display: flex;"><i class="fas fa-sitemap"></i> Organizacion</div> <i
+                        <a href="{{ url_for('amigos') }}">
+                            <div style="display: flex;"><i class="fas fa-sitemap"></i> Amigos</div> <i
                                 class="fas fa-chevron-right"></i>
                         </a>
                         <a href="/dashboard/edit/avanzado">
