@@ -15,6 +15,10 @@ from flask_dance.contrib.github import make_github_blueprint, github
 from functools import wraps
 from flask.json import jsonify
 import datetime
+import json
+
+from oauthlib.oauth2 import WebApplicationClient
+from requests_oauthlib import OAuth2Session
 
 app = Flask(__name__, static_url_path="/src/web/static")
 app.secret_key = "myllavecitasecretita123"
@@ -29,21 +33,14 @@ github_blueprint = make_github_blueprint(client_id=str(env["GITHUB_ID"]),
 
 app.register_blueprint(github_blueprint, url_prefix="/github_login")
 
+# Google login
+GOOGLE_CLIENT_ID     = env["GOOGLE_ID"]
+GOOGLE_CLIENT_SECRET = env["GOOGLE_SECRETE"]
+
 # Esto es un mal gasto
 @app.route("/quitar/window")
 def quitarWindow():
-    return """
-        <html>
-            <body onload="cerrar()">
-                <script>
-                    function cerrar() {
-                        opener.location.reload(1);
-                        window.close();
-                    }
-                </script>
-            </body>
-        </html>
-    """
+    return """<html><body onload="cerrar()"><script>function cerrar() {opener.location.reload(1);window.close();}</script></body></html>"""
 
 # Repos
 def get_repositories(url, usr):
@@ -66,8 +63,14 @@ def get_repositories(url, usr):
     return result
 
 # Docs / Url
-docs = requests.get("https://raw.githubusercontent.com/HostHome-of/config/main/config.json").json()["docs"]
+docs     = requests.get("https://raw.githubusercontent.com/HostHome-of/config/main/config.json").json()["docs"]
 url_main = requests.get("https://raw.githubusercontent.com/HostHome-of/config/main/config.json").json()["url"]
+
+# Google url
+google_url_login = f"{url_main}authorize/google/login"
+google_url_register = f"{url_main}authorize/google/register"
+
+client_google = WebApplicationClient(GOOGLE_CLIENT_ID)
 
 # Aplicacion instalable
 @app.route('/service-worker.js')
@@ -217,6 +220,15 @@ def Actualizar():
 @already_logedin
 def login():
     
+    if request.args.get("google", None):
+        authorization_endpoint = requests.get(("https://accounts.google.com/.well-known/openid-configuration")).json()["authorization_endpoint"]
+        request_uri = client_google.prepare_request_uri(
+            authorization_endpoint,
+            redirect_uri=url_main + "authorize/google/login",
+            scope=["openid", "email", "profile"]
+        )
+        return redirect(request_uri)
+    
     if request.method == "POST":
         
         mail = request.args.get("mail")
@@ -240,6 +252,53 @@ def login():
         return out
 
     return render_template("login.html", key=env["CAPTCHA_WEB"])
+
+@app.route("/authorize/google/login")
+def google_login():
+    r = requests.post("https://oauth2.googleapis.com/token", data={
+        "client_id": GOOGLE_CLIENT_ID,
+        "client_secret": GOOGLE_CLIENT_SECRET,
+        "code": request.args.get("code"),
+        "grant_type": "authorization_code",
+        "redirect_uri": google_url_login
+    })
+
+    code = request.args.get("code")
+    google_provider_cfg = requests.get(("https://accounts.google.com/.well-known/openid-configuration")).json()
+    token_endpoint = google_provider_cfg["token_endpoint"]
+
+    token_url, headers, body = client_google.prepare_token_request(
+        token_endpoint,
+        authorization_response=request.url,
+        redirect_url=request.base_url,
+        code=code
+    )
+
+    token_response = requests.post(
+        token_url,
+        headers=headers,
+        data=body,
+        auth=(GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET),
+    )
+
+    print(token_response.json())
+    # client_google.parse_request_body_response(json.dumps(token_response.json()))
+
+    userinfo_endpoint = google_provider_cfg["userinfo_endpoint"]
+    # print(userinfo_endpoint)
+    # uri, headers, body = client.add_token(userinfo_endpoint)
+    userinfo_response = requests.get(token_url, headers=headers, data=body)
+
+    mail = userinfo_response.json()["email"]
+    print(mail)
+
+    # r_mail = requests.get('https://www.googleapis.com/oauth/email?access_token=' + r.json()['access_token'], data={"scope":["https://www.googleapis.com/auth/userinfo.email"]})
+    # mail   = json.loads(r.text)
+    # data   = HacerLogin().google(mail, request.cookies.get('user_id'))
+
+    # if not data:
+    #     return redirect("/login?err=google")
+    return redirect("/")
 
 @app.route("/register", methods=["GET", "POST"])
 @already_logedin

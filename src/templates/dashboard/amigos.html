@@ -394,34 +394,6 @@
                                                 class="tippy" data-position="top" for="inputByEmail">
                                                 Enviar invitaciones
                                             </label>
-                                            <script>
-                                                async function enviarInput() {
-                                                    const input = document.getElementById("inputByEmail")
-                                                    const texto = input.value.replace(" ", "")
-                                                    const texto_separado = texto.split(",")
-
-                                                    if (input.value == "") return;
-
-
-                                                    for (i = 0; i < texto_separado.length; i++) {
-                                                        if (!texto_separado[i].match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)) {
-                                                            alertNotyAmigos(`(${texto_separado[i]}) no es un email valido`, 'error', '#c0392b')
-                                                            return;
-                                                        } else if (texto_separado[i] == "{{ user['mail'] }}") {
-                                                            alertNotyAmigos(`En la lista esto tu email, eliminalo`, 'error', '#c0392b')
-                                                            return;        
-                                                        }
-                                                    }
-
-                                                    fetch("/friends/add?config=frendsAdd&key=headers", {
-                                                        method: "POST",
-                                                        header: {
-                                                            "mails": JSON.stringify(texto),
-                                                            "key": Math.floor(Math.random() * 10)
-                                                        }
-                                                    })
-                                                }
-                                            </script>
                                             <div style="display: flex;">
                                                 <input
                                                     style="border-top-right-radius: 0; border-bottom-right-radius: 0;"

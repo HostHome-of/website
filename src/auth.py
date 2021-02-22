@@ -27,9 +27,22 @@ def cerrarInvites(invites):
         json.dump(invites, f, indent=4)
 
 class HacerLogin():
-    def __init__(self, email, psw):
+    def __init__(self, email=None, psw=None):
         self.email = email
         self.psw = psw
+
+    def google(self, mail, tk):
+        # mail = requests.get(f"https://gmail.googleapis.com/gmail/v1/users/{data['id']}/profile?access_token={access_token}&scope=https://www.googleapis.com/auth/userinfo.profile&client_id={GOOGLE_CLIENT_ID}&access_type=offline&include_granted_scopes=true&response_type=code").json()
+
+        print(mail)
+        usuarios = abrir()
+
+        if mail in usuarios:
+            usuarios["mail"]["google"] = True
+            cerrar(usuarios)
+            return tk
+
+        return False
 
     def ejecutar(self, tk=None):
         usuarios = abrir()

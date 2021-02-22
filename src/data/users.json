@@ -4,7 +4,7 @@
         "nombre": "Maubg",
         "psw": "b'\\xb4\\xae\\x07\\x9f\\xbb\\n\\xd7L\\xe2;_\\xf4h\\xe0\\x84\\xa2<#L\\xdd\\xd8\\t\\xa3\\x10\\xb8\\x18\"4\\xb4\\xb9R;'",
         "cuentas": {
-            "21681220": true
+            "21681220": false
         },
         "pfp": "/src/web/static/pfp/default_hosthome.png",
         "entrada": "21/2/2021",
