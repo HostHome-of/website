@@ -70,8 +70,6 @@ url_main = requests.get("https://raw.githubusercontent.com/HostHome-of/config/ma
 google_url_login = f"{url_main}authorize/google/login"
 google_url_register = f"{url_main}authorize/google/register"
 
-client_google = WebApplicationClient(GOOGLE_CLIENT_ID)
-
 # Aplicacion instalable
 @app.route('/service-worker.js')
 @app.route('/sw.js')
@@ -221,13 +219,8 @@ def Actualizar():
 def login():
     
     if request.args.get("google", None):
-        authorization_endpoint = requests.get(("https://accounts.google.com/.well-known/openid-configuration")).json()["authorization_endpoint"]
-        request_uri = client_google.prepare_request_uri(
-            authorization_endpoint,
-            redirect_uri=url_main + "authorize/google/login",
-            scope=["openid", "email", "profile"]
-        )
-        return redirect(request_uri)
+        return redirect(f"https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.mail&access_type=offline&include_granted_scopes=true&response_type=code&redirect_uri={google_url_login}&client_id={GOOGLE_CLIENT_ID}")
+    
     
     if request.method == "POST":
         
@@ -263,34 +256,9 @@ def google_login():
         "redirect_uri": google_url_login
     })
 
-    code = request.args.get("code")
-    google_provider_cfg = requests.get(("https://accounts.google.com/.well-known/openid-configuration")).json()
-    token_endpoint = google_provider_cfg["token_endpoint"]
-
-    token_url, headers, body = client_google.prepare_token_request(
-        token_endpoint,
-        authorization_response=request.url,
-        redirect_url=request.base_url,
-        code=code
-    )
-
-    token_response = requests.post(
-        token_url,
-        headers=headers,
-        data=body,
-        auth=(GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET),
-    )
-
-    print(token_response.json())
-    # client_google.parse_request_body_response(json.dumps(token_response.json()))
-
-    userinfo_endpoint = google_provider_cfg["userinfo_endpoint"]
-    # print(userinfo_endpoint)
-    # uri, headers, body = client.add_token(userinfo_endpoint)
-    userinfo_response = requests.get(token_url, headers=headers, data=body)
-
-    mail = userinfo_response.json()["email"]
-    print(mail)
+    user = requests.get(f'https://www.googleapis.com/oauth2/v2/userinfo?access_token={r.json()["access_token"]}').json()
+    
+    print(user)
 
     # r_mail = requests.get('https://www.googleapis.com/oauth/email?access_token=' + r.json()['access_token'], data={"scope":["https://www.googleapis.com/auth/userinfo.email"]})
     # mail   = json.loads(r.text)
