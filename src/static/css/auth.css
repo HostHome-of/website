@@ -346,6 +346,12 @@ body {
 #formy .animacion.active:nth-child(8)  {animation-delay: .35s; transform: translateX(-1000px); animation-fill-mode: forwards;}
 #formy .animacion.active:nth-child(9)  {animation-delay: .40s; transform: translateX(-1000px); animation-fill-mode: forwards;}
 #formy .animacion.active:nth-child(10) {animation-delay: .45s; transform: translateX(-1000px); animation-fill-mode: forwards;}
+#formy .animacion.active:nth-child(11) {animation-delay: .50s; transform: translateX(-1000px); animation-fill-mode: forwards;}
+#formy .animacion.active:nth-child(12) {animation-delay: .55s; transform: translateX(-1000px); animation-fill-mode: forwards;}
+#formy .animacion.active:nth-child(13) {animation-delay: .60s; transform: translateX(-1000px); animation-fill-mode: forwards;}
+#formy .animacion.active:nth-child(14) {animation-delay: .65s; transform: translateX(-1000px); animation-fill-mode: forwards;}
+#formy .animacion.active:nth-child(15) {animation-delay: .70s; transform: translateX(-1000px); animation-fill-mode: forwards;}
+#formy .animacion.active:nth-child(16) {animation-delay: .75s; transform: translateX(-1000px); animation-fill-mode: forwards;}
 
 @keyframes movimientoDeOla {
 	0% {
