@@ -219,7 +219,7 @@ def Actualizar():
 def login():
     
     if request.args.get("google", None):
-        return redirect(f"https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.mail&access_type=offline&include_granted_scopes=true&response_type=code&redirect_uri={google_url_login}&client_id={GOOGLE_CLIENT_ID}")
+        return redirect(f"https://accounts.google.com/o/oauth2/v2/auth?scope=email&access_type=offline&include_granted_scopes=true&response_type=code&redirect_uri={google_url_login}&client_id={GOOGLE_CLIENT_ID}")
     
     
     if request.method == "POST":
@@ -256,16 +256,11 @@ def google_login():
         "redirect_uri": google_url_login
     })
 
-    user = requests.get(f'https://www.googleapis.com/oauth2/v2/userinfo?access_token={r.json()["access_token"]}').json()
-    
-    print(user)
+    user   = requests.get(f'https://www.googleapis.com/oauth2/v2/userinfo?access_token={r.json()["access_token"]}').json()
+    data   = HacerLogin().google(user["email"], request.cookies.get('user_id'))
 
-    # r_mail = requests.get('https://www.googleapis.com/oauth/email?access_token=' + r.json()['access_token'], data={"scope":["https://www.googleapis.com/auth/userinfo.email"]})
-    # mail   = json.loads(r.text)
-    # data   = HacerLogin().google(mail, request.cookies.get('user_id'))
-
-    # if not data:
-    #     return redirect("/login?err=google")
+    if not data:
+        return redirect("/login?err=google")
     return redirect("/")
 
 @app.route("/register", methods=["GET", "POST"])
