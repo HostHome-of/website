@@ -192,6 +192,56 @@ class CrearUsuario():
         self.psw = psw
         self.mail = mail
 
+    def google(self, usuario, id, psw: bool=False, tk: str=None): 
+        """Si psw es True usuario se cambiara a psw e id a el email del usuario"""
+        usuarios = abrir()
+
+        if psw:
+            usuarios[id]["psw"]         = str(Password(usuario).crear())
+            usuarios[id]["autorizado"]  = True
+            usuarios[id]["cuentas"][tk] = True
+            cerrar(usuarios)
+            return 
+
+        if not usuario["email"] in usuarios:
+            email     = usuario["email"]
+            pfp       = usuario["picture"]
+            nombre    = usuario["given_name"]
+            sn        = usuario["family_name"]
+
+
+            usuarios[email] = {}
+            usuarios[email]["mail"] = email
+            usuarios[email]["nombre"] = nombre
+
+            usuarios[email]["cuentas"] = {}
+            tkN = self.tokenizar()
+
+            usuarios[email]["cuentas"][str(tkN)] = True 
+            usuarios[email]["pfp"] = pfp
+
+            now = datetime.datetime.now()
+            usuarios[email]["entrada"] = f"{now.day}/{now.month}/{now.year}"
+
+            usuarios[email]["segundoNombre"] = sn
+            usuarios[email]["edad"] = ""
+
+            usuarios[email]["autorizado"] = False
+
+            usuarios[email]["emails"]           = {}
+            usuarios[email]["emails"]["uno"]    = True
+            usuarios[email]["emails"]["dos"]    = False
+            usuarios[email]["emails"]["tres"]   = False
+            usuarios[email]["emails"]["cuatro"] = True
+
+            usuarios[email]["google"] = True
+
+            cerrar(usuarios)
+
+            return str(tkN)
+        else:
+            return None
+
     def check(self, usuarios, token: str):
         for tk in usuarios["cuentas"]:
             if token == tk:

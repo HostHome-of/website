@@ -25,6 +25,7 @@ body {
 .wrapper .left {
 	width: 920px;
 	position: relative;
+	overflow-y: auto;
 }
 
 .wrapper .left::-webkit-scrollbar {
@@ -93,7 +94,7 @@ body {
 .wrapper .left .form .input input {
 	width: 100%;
 	outline: none;
-	border-radius: 5px;
+	border-radius: 100px;
 	border: 1px solid rgb(215, 219, 224);
 	/* height: 50px; */
 	padding: 10px 18px;
@@ -151,6 +152,8 @@ body {
 	border: 1px solid rgb(34, 92, 255);
 	text-transform: uppercase;
 	letter-spacing: 0.1em;
+	border-radius: 100px;
+	margin-top: 16px;
 }
 
 .wrapper .left .form .subBtn:focus {
@@ -364,12 +367,6 @@ body {
 #recaptcha {
 	display: none;
 	margin: 70px 100px;
-}
-
-@media only screen and (max-width: 1460px) {
-	.wrapper .left {
-		overflow-y: auto;
-	}
 }
 
 @media only screen and (max-width: 1030px) {

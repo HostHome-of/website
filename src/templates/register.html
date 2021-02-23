@@ -120,15 +120,17 @@
 	</script>
 	<div class="wrapper">
 		<div class="left">
-			<div class="logo">
+			<div style="padding: 30px 50px;" class="logo">
 				<a href="/" class="logete">
-					<img src="{{ url_for('static', filename='images/logo.png') }}" alt="" srcset="">
+					<img style="width: 200px;" src="{{ url_for('static', filename='images/logo.png') }}" alt=""
+						srcset="">
 				</a>
 			</div>
 			<div class="form" id="formy">
-				<h1 style="font-size: 55px;" class="animacion">¡Hola!</h1>
-				<h2 style="font-size: 30px;" class="animacion">¿Nos conocemos?</h2>
-				<div style="height: 50px; width: 100%;"></div>
+				<h1 style="font-weight: 700; color: rgb(0, 0, 0); text-align: left; line-height: 1.5; font-family: Roobert, sans-serif; text-transform: none; overflow: unset; white-space: unset; text-overflow: unset; font-size: 42px;"
+					class="animacion">¡Hola!</h1>
+				<h2 style="margin: 0px 0px 32px; font-size: 20px; font-weight: 700; color: rgb(0, 0, 0); text-align: left; line-height: 1.5; font-family: Roobert, sans-serif; text-transform: none; overflow: unset; white-space: unset; text-overflow: unset;"
+					class="animacion">¿Nos conocemos?</h2>
 				<div class="input animacion">
 					<label for="email">Email</label>
 					<input oninput="mirarSiEsValido()" placeholder="nombre@email.com" type="email" name="email"
@@ -150,6 +152,73 @@
 						placeholder="********" name="rpsw" id="rpsw" autocomplete="off">
 				</div>
 				<button disabled onclick="cambiarARobot()" class="subBtn animacion" id="btnLogin">Registrarse</button>
+				<style>
+					.or {
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						margin: 20px 0;
+					}
+
+					.or .linea {
+						color: rgb(203, 213, 225);
+						position: relative;
+						flex: 1 1 auto;
+						background: rgb(203, 213, 225);
+						height: 1px;
+					}
+				</style>
+				<div class="animacion or">
+					<div class="linea"></div>
+					<div style="margin: 0 10px;">O con redes sociales</div>
+					<div class="linea"></div>
+				</div>
+				<style>
+					.formyButtonGoogle {
+						width: 100%;
+						position: relative;
+						display: inline-flex;
+						font-family: "Public Sans", sans-serif;
+						-webkit-box-align: center;
+						align-items: center;
+						font-weight: 600;
+						white-space: nowrap;
+						font-size: 16px;
+						-webkit-box-pack: center;
+						justify-content: center;
+						text-decoration: none;
+						cursor: pointer;
+						appearance: none;
+						padding: 8px 28px;
+						line-height: 24px;
+						border-radius: 36px;
+						box-sizing: border-box;
+						transition: all 0.2s ease-in-out 0s;
+						background-color: transparent;
+						color: rgb(0, 0, 0);
+						box-shadow: none;
+						border: 2px solid rgb(0, 0, 0);
+						height: 56px;
+					}
+
+					.formyButtonGoogle:hover {
+						background-color: rgb(0, 0, 0);
+						color: white;
+						opacity: 0.9;
+					}
+
+					.formyButtonGoogle:active {
+						transform: scale(0.95) !important;
+					}
+
+					.formyButtonGoogle:focus {
+						outline: none;
+					}
+				</style>
+				<button onclick="window.location.replace('/register?google=si')" class="formyButtonGoogle animacion">
+					<i style="font-size: 14px;" class="fab fa-google"></i> <span style="margin-left: 20px;">Registrarse
+						con google</span>
+				</button>
 				<div class="extra animacion">
 					<p>Tienes una cuenta? <a href="/login">Entrar</a></p>
 				</div>
@@ -180,11 +249,26 @@
 				</div>
 			</div>
 		</div>
+		<style>
+			.right {
+				background: url(/src/web/static/images/login-bg.png) no-repeat center !important;
+				background-size: cover !important;
+				justify-content: center !important;
+				align-items: center !important;
+				display: flex;
+			}
+
+			.right div h1 {
+				color: #F5F7FF;
+				font: 900 normal 4.1875rem/3.75rem "Circular", "system", sans-serif;
+				letter-spacing: -1px;
+				margin-bottom: 24px;
+				text-align: center;
+			}
+		</style>
 		<div class="right">
-			<div style="height: 10vh; width: 100%;"></div>
 			<div style="width: 100%;">
-				<img style="transform: rotate(45deg);"
-					src="https://www.iconshock.com/img/landing-assets/tresde-icons/icon3d__73.png">
+				<h1>Crearse una cuenta</h1>
 			</div>
 		</div>
 	</div>
