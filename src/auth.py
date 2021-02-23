@@ -207,7 +207,11 @@ class CrearUsuario():
             email     = usuario["email"]
             pfp       = usuario["picture"]
             nombre    = usuario["given_name"]
-            sn        = usuario["family_name"]
+            
+            try:
+                sn    = usuario["family_name"]
+            except KeyError:
+                sn    = ""
 
 
             usuarios[email] = {}
