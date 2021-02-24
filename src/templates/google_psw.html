@@ -48,12 +48,12 @@
             }
         }
 
-        function enviarPsw() {
-            fetch("/authorize/google/register?psw="+document.getElementById("psw").value, {
+        async function enviarPsw() {
+            await fetch("/authorize/google/register?psw="+document.getElementById("psw").value, {
                 method: "POST"
-            })
-
-            window.location.reload()
+            }).then(response => {
+				window.location.href = "/dashboard"
+			})
         }
 	</script>
 	<div class="wrapper">

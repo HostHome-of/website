@@ -42,7 +42,8 @@
 		<div class="left">
 			<div style="padding: 30px 50px;" class="logo">
 				<a href="/" class="logete">
-					<img style="width: 200px;" src="{{ url_for('static', filename='images/logo.png') }}" alt="" srcset="">
+					<img style="width: 200px;" src="{{ url_for('static', filename='images/logo.png') }}" alt=""
+						srcset="">
 				</a>
 			</div>
 			<div class="form" id="formy">
@@ -150,7 +151,8 @@
 					}
 				</style>
 				<button onclick="window.location.replace('/login?google=si')" class="formyButtonGoogle animacion">
-					<i style="font-size: 14px;" class="fab fa-google"></i> <span style="margin-left: 20px;">Entrar con google</span>
+					<i style="font-size: 14px;" class="fab fa-google"></i> <span style="margin-left: 20px;">Entrar con
+						google</span>
 				</button>
 				<div class="extra animacion">
 					<a href="/forgot">Olvide mi contraseña</a>
@@ -172,7 +174,7 @@
 		<style>
 			.right {
 				background: url(/src/web/static/images/login-bg.png) no-repeat center !important;
-    			background-size: cover !important;
+				background-size: cover !important;
 				justify-content: center !important;
 				align-items: center !important;
 				display: flex;
@@ -180,12 +182,11 @@
 
 			.right div h1 {
 				color: #F5F7FF;
-    font: 900 normal 4.1875rem/3.75rem "Circular","system",sans-serif;
-    letter-spacing: -1px;
-    margin-bottom: 24px;
-	text-align: center;
+				font: 900 normal 4.1875rem/3.75rem "Circular", "system", sans-serif;
+				letter-spacing: -1px;
+				margin-bottom: 24px;
+				text-align: center;
 			}
-
 		</style>
 		<div class="right">
 			<div style="width: 100%;">
@@ -193,6 +194,100 @@
 			</div>
 		</div>
 	</div>
+
+	{% if error == "google" %}
+	<script>
+		function errorGoogle() {
+			new Noty({
+				text: 'No tienes una cuenta con ese gmail o registrada',
+				theme: 'nest',
+				timeout: 4000,
+				type: 'error',
+				animation: {
+					open: function (promise) {
+						var n = this;
+						var Timeline = new mojs.Timeline();
+						var body = new mojs.Html({
+							el: n.barDom,
+							x: { 500: 0, delay: 0, duration: 500, easing: 'elastic.out' },
+							isForce3d: true,
+							onComplete: function () {
+								promise(function (resolve) {
+									resolve();
+								})
+							}
+						});
+
+						var parent = new mojs.Shape({
+							parent: n.barDom,
+							width: 200,
+							height: n.barDom.getBoundingClientRect().height,
+							radius: 0,
+							x: { [150]: -150 },
+							duration: 1.2 * 500,
+							isShowStart: true
+						});
+
+						n.barDom.style['overflow'] = 'visible';
+						parent.el.style['overflow'] = 'hidden';
+
+						var burst = new mojs.Burst({
+							parent: parent.el,
+							count: 10,
+							top: n.barDom.getBoundingClientRect().height + 75,
+							degree: 90,
+							radius: 75,
+							angle: { [-90]: 40 },
+							children: {
+								fill: '#c0392b',
+								delay: 'stagger(500, -50)',
+								radius: 'rand(8, 25)',
+								direction: -1,
+								isSwirl: true
+							}
+						});
+
+						var fadeBurst = new mojs.Burst({
+							parent: parent.el,
+							count: 2,
+							degree: 0,
+							angle: 75,
+							radius: { 0: 100 },
+							top: '90%',
+							children: {
+								fill: '#c0392b',
+								pathScale: [.65, 1],
+								radius: 'rand(12, 15)',
+								direction: [-1, 1],
+								delay: .8 * 500,
+								isSwirl: true
+							}
+						});
+
+						Timeline.add(body, burst, fadeBurst, parent);
+						Timeline.play();
+					},
+					close: function (promise) {
+						var n = this;
+						new mojs.Html({
+							el: n.barDom,
+							x: { 0: 500, delay: 10, duration: 500, easing: 'cubic.out' },
+							skewY: { 0: 10, delay: 10, duration: 500, easing: 'cubic.out' },
+							isForce3d: true,
+							onComplete: function () {
+								promise(function (resolve) {
+									resolve();
+								})
+							}
+						}).play();
+					}
+				}
+			}).show();
+		}
+
+		window.onload = errorGoogle()
+	</script>
+	{% endif %}
 
 	<script src="{{ url_for('static', filename='vendor/notiflix/notiflix-aio-2.7.0.min.js') }}"></script>
 	<script src="{{ url_for('static', filename='js/login.js') }}"></script>

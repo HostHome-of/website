@@ -97,7 +97,7 @@ class Usuario():
             invites = abrirInvites()
 
             while True:
-                codigoDeInvite = self.crearInviteLink()
+                codigoDeInvite = Usuario().crearInviteLink()
                 for codigo_mail in invites:
                     if codigoDeInvite == invites[codigo_mail]["codigo"]:
                         continue
@@ -200,6 +200,25 @@ class CrearUsuario():
             usuarios[id]["psw"]         = str(Password(usuario).crear())
             usuarios[id]["autorizado"]  = True
             usuarios[id]["cuentas"][tk] = True
+
+            invites = abrirInvites()
+
+            while True:
+                codigoDeInvite = Usuario().crearInviteLink()
+                for codigo_mail in invites:
+                    if codigoDeInvite == invites[codigo_mail]["codigo"]:
+                        continue
+                break
+
+            invites[id] = {}
+            invites[id]["codigo"] =  codigoDeInvite
+
+            url_main = requests.get("https://raw.githubusercontent.com/HostHome-of/config/main/config.json").json()["url"]
+
+            invites[id]["link"]   =  f"{url_main}invites/{codigoDeInvite}"
+
+            cerrarInvites(invites)
+
             cerrar(usuarios)
             return 
 

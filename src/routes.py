@@ -147,7 +147,11 @@ def login():
         out.set_cookie('user_id', usr, expires=datetime.datetime.now() + datetime.timedelta(days=60))
         return out
 
-    return render_template("login.html", key=env["CAPTCHA_WEB"])
+    error = None
+    if request.args.get("err") == "google":
+        error = "google"
+
+    return render_template("login.html", key=env["CAPTCHA_WEB"], error=error)
 
 @main_page.route("/authorize/google/login")
 @already_logedin
@@ -190,7 +194,6 @@ def Registrarse():
     return render_template("register.html", key=env["CAPTCHA_WEB"])
 
 @main_page.route("/psw")
-@already_logedin
 def psw_for_google():
     if request.args.get("ctx") == "polkwfawf.-awd.ljpu.2323.daklglgol.dnxdcxcxc.dwad.dfef":
         return render_template("google_psw.html")
