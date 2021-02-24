@@ -69,12 +69,10 @@ class Utils():
     def check_usuario(self):
         if request.cookies.get('user_id'):
             usr = Usuario(request.cookies.get('user_id')).cojer()
-            if usr is None:
+            if usr is None or not usr["cuentas"][str(request.cookies.get('user_id'))]:
                 return None
             if not usr["autorizado"]:
                 Usuario().petar(Usuario(request.cookies.get('user_id')).cojer()["mail"])
-                return None
-            if not usr["cuentas"][str(request.cookies.get('user_id'))]: 
                 return None
             return usr
         return None

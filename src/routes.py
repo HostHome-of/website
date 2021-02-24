@@ -6,7 +6,7 @@ from os import environ as env
 
 from src.utilities import Utils
 from src.auth import Usuario, CrearUsuario, HacerLogin, Password
-from src.app import GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, app, github, github_blueprint
+from src.app import GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, app, github, github_blueprint, api_key
 
 import requests
 import os
@@ -195,17 +195,18 @@ def Registrarse():
 
 @main_page.route("/psw")
 def psw_for_google():
-    if request.args.get("ctx") == "polkwfawf.-awd.ljpu.2323.daklglgol.dnxdcxcxc.dwad.dfef":
+    if request.args.get("ctx") == "253681d6-48f8-421d-a393-2f7c26a01313":
         return render_template("google_psw.html")
+    abort(404)
 
 @main_page.route("/authorize/google/register", methods=["POST", "GET"])
 def google_register():
     if request.method == "POST":
         psw = request.args.get("psw")
         if psw:
-            CrearUsuario().google(psw, Usuario(request.cookies.get('user_id')).cojer()["mail"], True, request.cookies.get('user_id'))
-            res = redirect("/psw?ctx=polkwfawf.-awd.ljpu.2323.daklglgol.dnxdcxcxc.dwad.dfef")
-            res.set_cookie('user_id', request.cookies.get('user_id'))
+            cookie = CrearUsuario().google(psw, request.cookies.get('user_id'), True, request.cookies.get('user_id'))
+            res = redirect("/psw?ctx=253681d6-48f8-421d-a393-2f7c26a01313")
+            res.set_cookie('user_id', cookie)
             return res
         return redirect("/")
 
@@ -223,7 +224,7 @@ def google_register():
     if not data:
         return redirect("/register?err=google")
 
-    res = redirect("/psw?ctx=polkwfawf.-awd.ljpu.2323.daklglgol.dnxdcxcxc.dwad.dfef")
+    res = redirect("/psw?ctx=253681d6-48f8-421d-a393-2f7c26a01313")
     res.set_cookie('user_id', data)
     return res
 

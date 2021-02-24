@@ -264,7 +264,7 @@
                 color: rgb(54, 73, 98);
                 border-radius: 4px;
                 outline: none;
-                transition: .4s;
+                transition: 0s;
             }
 
             #popup .wrapper .input input:focus {
@@ -327,9 +327,11 @@
                         }).then(response => response.json()).then(data => {
                             if (data["valido"] == false) {
                                 input.classList.add("error")
+                                document.getElementById("btnEliminarDestruirCuenta").classList.add("error")
                                 pswIncorrecta = true;
                             } else {
                                 input.classList.remove("error");
+                                document.getElementById("btnEliminarDestruirCuenta").classList.remove("error")
                                 pswIncorrecta = false;
                             }
                         })
@@ -343,8 +345,17 @@
                             window.location.replace("/dashboard/edit/avanzado")
                         }, 1000)
                     }
+
+                    function eliminarCuenta_destruir(div) {
+                        if (!div.classList.contains("error")) {
+                            window.location.replace("/dashboard/account/destroy")
+                        }
+                    }
                 </script>
-                <p class="cancelarEliminacion" onclick="cancelarEliminacion()">Cancelar</p>
+                <div style="width: 100%; display:flex; justify-content: space-between;">
+                    <p class="cancelarEliminacion" id="btnEliminarDestruirCuenta" onclick="eliminarCuenta_destruir(this)">Eliminar</p>
+                    <p class="cancelarEliminacion" onclick="cancelarEliminacion()">Cancelar</p>
+                </div>
             </div>
             <div class="bg"></div>
         </div>
@@ -436,17 +447,7 @@
                                     }
 
                                     function noEsRobotito() {
-                                        if (!pswIncorrecta) {
-                                            document.getElementById("popup").style.display = "none"
-                                            Notiflix.Loading.Init({ svgColor: "#6493c6",});
-
-                                            Notiflix.Loading.Circle();
-                                            setTimeout(function () {
-                                                window.location.replace("/dashboard/account/destroy");
-                                            }, 5000);
-                                        } else {
-                                            
-                                        }
+                                        document.getElementById("btnEliminarDestruirCuenta").classList.remove("error")
                                     }
                                 </script>
                                 <div onclick="eliminar()" class="submit">

@@ -73,6 +73,7 @@ class Password():
         # psw = psw[2:-1]
         
         return key == psw
+
 class Usuario():
 
     def __init__(self, tk: str=None):
@@ -117,10 +118,9 @@ class Usuario():
 
     def cojer(self):
         usuarios = abrir()
-
         for usr in usuarios:
             for token in usuarios[usr]["cuentas"]:
-                if self.tk == token:
+                if str(self.tk) == str(token):
                     if usuarios[usr]["cuentas"][token] == True:
                         return usuarios[usr]
         return None
@@ -146,6 +146,9 @@ class Usuario():
             for token in usuarios[usr]["cuentas"]:
                 if self.tk == token:
                     del usuarios[usr]
+                    invites = abrirInvites()
+                    del invites[usr]
+                    cerrarInvites(invites)
                     cerrar(usuarios) 
                     return
 
@@ -197,6 +200,8 @@ class CrearUsuario():
         usuarios = abrir()
 
         if psw:
+            id2 = id
+            id  = Usuario(id).cojer()["mail"]
             usuarios[id]["psw"]         = str(Password(usuario).crear())
             usuarios[id]["autorizado"]  = True
             usuarios[id]["cuentas"][tk] = True
@@ -220,7 +225,7 @@ class CrearUsuario():
             cerrarInvites(invites)
 
             cerrar(usuarios)
-            return 
+            return id2
 
         if not usuario["email"] in usuarios:
             email     = usuario["email"]
