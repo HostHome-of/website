@@ -7,11 +7,11 @@ from os import environ as env
 from src.utilities import Utils
 from src.auth import Usuario, CrearUsuario, HacerLogin, Password
 from src.app import GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, app, github, github_blueprint, api_key
+from src.mail import enviarEmail
 
 import requests
 import os
 import datetime
-from src.mail import enviarEmail
 
 main_page           = Blueprint('main_page', __name__)
 utils               = Utils()
@@ -95,9 +95,9 @@ def Actualizar():
             abort(404)
 
         if email is not None:
-            uno = request.args.get("uno", "false")
-            dos = request.args.get("dos", "false")
-            tres = request.args.get("tres", "false")
+            uno    = request.args.get("uno", "false")
+            dos    = request.args.get("dos", "false")
+            tres   = request.args.get("tres", "false")
             cuatro = request.args.get("cuatro", "false")
             
             uno    = uno    if uno    != "false" else ""
@@ -127,24 +127,18 @@ def login():
     
     if request.method == "POST":
         
-        mail = request.args.get("mail")
-        psw = request.args.get("psw")
-
+        mail    = request.args.get("mail")
+        psw     = request.args.get("psw")
         consola = request.args.get("consola", None)
+        usr     = HacerLogin(mail, psw).ejecutar()
 
-        if consola is not None:
-            usr = HacerLogin(mail, psw).ejecutar()
-            if usr == False:
-                return {}
-            
-            return usr
-
-        usr = HacerLogin(mail, psw).ejecutar(request.cookies.get('user_id'))
-        if usr == False:
+        if not usr:
             return {}
+
         out = jsonify(state=0, msg=Usuario(usr).cojer())
         
-        out.set_cookie('user_id', usr, expires=datetime.datetime.now() + datetime.timedelta(days=60))
+        if not consola:
+            out.set_cookie('user_id', usr, expires=datetime.datetime.now() + datetime.timedelta(days=60))
         return out
 
     error = None
@@ -165,11 +159,13 @@ def google_login():
     })
 
     user   = requests.get(f'https://www.googleapis.com/oauth2/v2/userinfo?access_token={r.json()["access_token"]}').json()
-    data   = HacerLogin().google(user["email"], request.cookies.get('user_id'))
+    data   = HacerLogin().google(user["email"])
 
     if not data:
         return redirect("/login?err=google")
-    return redirect("/")
+    res = redirect("/")
+    res.set_cookie('user_id', data, expires=datetime.datetime.now() + datetime.timedelta(days=60))
+    return res
 
 @main_page.route("/register", methods=["GET", "POST"])
 @already_logedin
@@ -185,7 +181,7 @@ def Registrarse():
         nombre = request.args.get("nm")
 
         usr = CrearUsuario(nombre, psw, mail).crear()
-        if usr == False:
+        if not usr:
             return {}
         out = jsonify(state=0, msg={"estado": 200})
         out.set_cookie('user_id', usr, expires=datetime.datetime.now() + datetime.timedelta(days=60))
@@ -204,9 +200,9 @@ def google_register():
     if request.method == "POST":
         psw = request.args.get("psw")
         if psw:
-            cookie = CrearUsuario().google(psw, request.cookies.get('user_id'), True, request.cookies.get('user_id'))
+            cookie = CrearUsuario().google(psw, request.cookies.get('user_id'), psw=True)
             res = redirect("/psw?ctx=253681d6-48f8-421d-a393-2f7c26a01313")
-            res.set_cookie('user_id', cookie)
+            res.set_cookie('user_id', cookie, expires=datetime.datetime.now() + datetime.timedelta(days=60))
             return res
         return redirect("/")
 
@@ -225,7 +221,7 @@ def google_register():
         return redirect("/register?err=google")
 
     res = redirect("/psw?ctx=253681d6-48f8-421d-a393-2f7c26a01313")
-    res.set_cookie('user_id', data)
+    res.set_cookie('user_id', data, expires=datetime.datetime.now() + datetime.timedelta(days=60))
     return res
 
 @main_page.route("/psw/check", methods=["GET", "POST"])
@@ -260,7 +256,7 @@ def activarCuenta():
 def activarCuentaCodigo(codigo):
 
     if request.method == "POST":
-        data = Usuario().activar(Usuario(request.cookies.get('user_id')).cojer()["mail"], codigo)
+        data = Usuario().activar(request.cookies.get('user_id'), codigo)
         if data == False:
             return {"codigo": 500}
 
@@ -325,7 +321,7 @@ def mirarHosts():
 def amigos():
 
     usr    = check_usuario()
-    invite = Usuario().cojerInvite(usr["mail"])
+    invite = Usuario().cojerInvite(request.cookies.get("user_id"))
 
     return render_template("dashboard/amigos.html", user=usr, invites=invite, url=url_main)
 
@@ -373,7 +369,9 @@ def EliminarCuenta():
     usr = check_usuario()
 
     if usr is not None:
-        Usuario(request.cookies.get('user_id')).eliminar()
+        res = redirect(url_for('main_page.Cuenta'))
+        res.set_cookie('user_id', '', expires=0)
+        return res
 
     return redirect(url_for('main_page.Cuenta'))
 
@@ -399,5 +397,3 @@ def quitarTerceros(field):
         return "ok"
 
     return redirect(url_for("main_page.Cuenta"))
-
-# ============================================== FIN Dashboard

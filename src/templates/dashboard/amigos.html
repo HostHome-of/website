@@ -6,7 +6,7 @@
     <script src="{{ url_for('static', filename='sw.js') }}"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | {{ user["nombre"] }}</title>
+    <title>Dashboard | {{ user["nombre"] }} - editar amigos</title>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <link rel="stylesheet" href="{{ url_for('static', filename='css/cuenta.css') }}">
@@ -290,7 +290,7 @@
                                         line-height: 34px !important;
                                         height: 56px !important;
                                         border: 1px solid transparent !important;
-                                        width: 100% !important;
+                                        /* width: 100% !important; */
                                         color: rgb(0, 0, 0);
                                         border-radius: 5px !important;
                                         outline: none !important;
@@ -303,6 +303,7 @@
                                         -moz-user-select: all;
                                         -ms-user-select: all;
                                         user-select: all;
+                                        overflow: hidden;
                                     }
 
                                     #form .compartir .links .input .coppy {
@@ -368,7 +369,7 @@
                                                 Tu link para invitar
                                             </label>
                                             <div style="display: flex;">
-                                                <div style="border-top-right-radius: 0; border-bottom-right-radius: 0;"
+                                                <div style="width: 100%; border-top-right-radius: 0; border-bottom-right-radius: 0;"
                                                     class="inputText">
                                                     <p id="copyTextBlock" style="cursor: auto">{{ invites['link'] }}</p>
                                                 </div>
@@ -383,7 +384,7 @@
                                                         alertNotyAmigos('Copiado al porta papeles', 'success', '#27ae60')
                                                     }
                                                 </script>
-                                                <button style="width: 20%;" class="coppy"
+                                                <button style="width: auto;" class="coppy"
                                                     onclick="copyText(copyTextBlock)">Copiar link</button>
                                             </div>
                                         </div>
@@ -396,10 +397,10 @@
                                             </label>
                                             <div style="display: flex;">
                                                 <input
-                                                    style="border-top-right-radius: 0; border-bottom-right-radius: 0;"
+                                                    style="width: 100%; border-top-right-radius: 0; border-bottom-right-radius: 0;"
                                                     class="inputText" placeholder="prueba@email.com, prueba2@email.com"
                                                     id="inputByEmail">
-                                                <button style="width: 30% "
+                                                <button style="width: auto "
                                                     title="Tiene que estar de la manera en la que pone en el input"
                                                     onclick="enviarInput()" class="coppy"><i class="fas fa-plus"></i>
                                                     <span style="margin-left: 10px;">Enviar invitacion</span></button>
@@ -411,7 +412,7 @@
                                             .social {
                                                 width: 30%;
                                                 position: relative;
-                                                padding: 0 60px;
+                                                padding: 0 5%;
                                             }
 
                                             .social .title {

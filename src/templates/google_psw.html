@@ -52,7 +52,7 @@
             await fetch("/authorize/google/register?psw="+document.getElementById("psw").value, {
                 method: "POST"
             }).then(response => {
-				window.location.href = "/dashboard"
+				window.location.replace("/dashboard")
 			})
         }
 	</script>

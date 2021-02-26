@@ -6,6 +6,9 @@ from flask_dance.contrib.github import make_github_blueprint, github
 
 import os
 
+# Environ
+load_dotenv()
+
 # API | Key
 api_key = env["API_KEY"]
 
@@ -14,7 +17,6 @@ app = Flask(__name__, static_url_path="/src/web/static")
 app.secret_key = api_key
 
 # Config
-load_dotenv()
 app.config["ALLOWED_IMAGE_EXTENSIONS"] = ["JPEG", "JPG", "PNG", "GIF"]
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 

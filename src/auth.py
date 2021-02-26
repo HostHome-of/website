@@ -31,31 +31,46 @@ class HacerLogin():
         self.email = email
         self.psw = psw
 
-    def google(self, mail, tk):
+    def google(self, mail):
         usuarios = abrir()
 
-        if mail in usuarios:
-            usuarios[mail]["cuentas"][str(tk)] = True
-            usuarios[mail]["google"] = True
-            cerrar(usuarios)
-            return tk
+        for usr in usuarios:
+            usr_mail = usuarios[usr]["mail"]
+
+            if mail == usr_mail:
+                usuarios[usr]["google"] = True
+                cerrar(usuarios)
+                return usr
 
         return False
 
     def ejecutar(self, tk=None):
         usuarios = abrir()
 
-        if tk is None:
-            if self.email in usuarios:
-                if Password(usuarios[str(self.email)]["psw"]).check(self.psw):
-                    return usuarios[str(self.email)]
-        else:          
-            if self.email in usuarios:
-                if Password(usuarios[str(self.email)]["psw"]).check(self.psw):
-                    usuarios[str(self.email)]["cuentas"][str(tk)] = True
-                    cerrar(usuarios)
-                    return str(tk)
+        for usr in usuarios:
+            if usuarios[usr]["mail"] == self.email:
+                self.email = usr
+   
+        if self.email in usuarios:
+            if Password(usuarios[str(self.email)]["psw"]).check(self.psw):
+                return str(self.email)
+
         return False
+
+    def tokenizar(self):
+        usuarios = abrir()
+        token_valido = False
+        token = ""
+
+        while not token_valido:
+            token = str(random.randint(10000000, 90000000))
+            for usr in usuarios:
+                valido = CrearUsuario().check(usuarios[usr], token)
+                if not valido:
+                    break
+            token_valido = True
+
+        return token
 
 class Password():
     def __init__(self, texto: str):
@@ -79,8 +94,8 @@ class Usuario():
     def __init__(self, tk: str=None):
         self.tk = tk
 
-    def cojerInvite(self, mail):
-        return abrirInvites()[mail]
+    def cojerInvite(self, tk):
+        return abrirInvites()[tk]
 
     def crearInviteLink(self):
         codigoInicial = ""
@@ -88,11 +103,11 @@ class Usuario():
             codigoInicial += random.choice("q,w,e,r,t,y,u,i,o,p,a,s,d,f,g,h,j,k,l,z,x,c,v,b,n,m,1,2,3,4,5,6,7,8,9,0".split(","))
         return codigoInicial
 
-    def activar(self, mail, codigo):
+    def activar(self, tk, codigo):
         usuarios = abrir()
-        if int(usuarios[mail]["tokenEntrada"]) == int(codigo): # Bien
-            del usuarios[mail]["tokenEntrada"]
-            usuarios[mail]["autorizado"] = True
+        if int(usuarios[tk]["tokenEntrada"]) == int(codigo): # Bien
+            del usuarios[tk]["tokenEntrada"]
+            usuarios[tk]["autorizado"] = True
 
             cerrar(usuarios)
             invites = abrirInvites()
@@ -104,12 +119,12 @@ class Usuario():
                         continue
                 break
 
-            invites[mail] = {}
-            invites[mail]["codigo"] =  codigoDeInvite
+            invites[tk] = {}
+            invites[tk]["codigo"] =  codigoDeInvite
 
             url_main = requests.get("https://raw.githubusercontent.com/HostHome-of/config/main/config.json").json()["url"]
 
-            invites[mail]["link"]   =  f"{url_main}invites/{codigoDeInvite}"
+            invites[tk]["link"]   =  f"{url_main}invites/{codigoDeInvite}"
 
             cerrarInvites(invites)
             return True
@@ -118,39 +133,25 @@ class Usuario():
 
     def cojer(self):
         usuarios = abrir()
-        for usr in usuarios:
-            for token in usuarios[usr]["cuentas"]:
-                if str(self.tk) == str(token):
-                    if usuarios[usr]["cuentas"][token] == True:
-                        return usuarios[usr]
+        if self.tk in usuarios:
+            return usuarios[str(self.tk)]
         return None
 
-    def eliminar(self):
-        usuarios = abrir()
-
-        for usr in usuarios:
-            for token in usuarios[usr]["cuentas"]:
-                if self.tk == token:
-                    usuarios[usr]["cuentas"][self.tk] = False
-                    cerrar(usuarios)
-
-    def petar(self, mail):
+    def petar(self, tk):
         usrs = abrir()
-        del usrs[mail]
+        del usrs[tk]
         cerrar(usrs)
 
     def destruir(self):
         usuarios = abrir()
+        invites = abrirInvites()
 
-        for usr in usuarios:
-            for token in usuarios[usr]["cuentas"]:
-                if self.tk == token:
-                    del usuarios[usr]
-                    invites = abrirInvites()
-                    del invites[usr]
-                    cerrarInvites(invites)
-                    cerrar(usuarios) 
-                    return
+        if self.tk in usuarios:
+            del usuarios[self.tk]
+            del invites[self.tk]
+
+        cerrarInvites(invites)
+        cerrar(usuarios) 
 
     def cojer_admins(self):
         data = requests.get("https://raw.githubusercontent.com/HostHome-of/config/main/config.json").json()
@@ -161,7 +162,7 @@ class Usuario():
         return abrir()
 
     def imagen(self, usr, nm):
-        mail = Usuario(usr).cojer()["mail"]
+        mail = Usuario(usr).cojer()
         usrs = abrir()
         usrs[mail]["pfp"] = f"/src/web/static/pfp/{nm}"
         cerrar(usrs)
@@ -195,16 +196,14 @@ class CrearUsuario():
         self.psw = psw
         self.mail = mail
 
-    def google(self, usuario, id, psw: bool=False, tk: str=None): 
+    def google(self, usuario, id, psw: bool=False): 
         """Si psw es True usuario se cambiara a psw e id a el email del usuario"""
         usuarios = abrir()
 
         if psw:
-            id2 = id
-            id  = Usuario(id).cojer()["mail"]
+
             usuarios[id]["psw"]         = str(Password(usuario).crear())
             usuarios[id]["autorizado"]  = True
-            usuarios[id]["cuentas"][tk] = True
 
             invites = abrirInvites()
 
@@ -225,7 +224,7 @@ class CrearUsuario():
             cerrarInvites(invites)
 
             cerrar(usuarios)
-            return id2
+            return tk
 
         if not usuario["email"] in usuarios:
             email     = usuario["email"]
@@ -238,31 +237,29 @@ class CrearUsuario():
                 sn    = ""
 
 
-            usuarios[email] = {}
-            usuarios[email]["mail"] = email
-            usuarios[email]["nombre"] = nombre
-
-            usuarios[email]["cuentas"] = {}
             tkN = self.tokenizar()
 
-            usuarios[email]["cuentas"][str(tkN)] = True 
-            usuarios[email]["pfp"] = pfp
+            usuarios[tkN] = {}
+            usuarios[tkN]["mail"] = email
+            usuarios[tkN]["nombre"] = nombre
+
+            usuarios[tkN]["pfp"] = pfp
 
             now = datetime.datetime.now()
-            usuarios[email]["entrada"] = f"{now.day}/{now.month}/{now.year}"
+            usuarios[tkN]["entrada"] = f"{now.day}/{now.month}/{now.year}"
 
-            usuarios[email]["segundoNombre"] = sn
-            usuarios[email]["edad"] = ""
+            usuarios[tkN]["segundoNombre"] = sn
+            usuarios[tkN]["edad"] = ""
 
-            usuarios[email]["autorizado"] = False
+            usuarios[tkN]["autorizado"] = False
 
-            usuarios[email]["emails"]           = {}
-            usuarios[email]["emails"]["uno"]    = True
-            usuarios[email]["emails"]["dos"]    = False
-            usuarios[email]["emails"]["tres"]   = False
-            usuarios[email]["emails"]["cuatro"] = True
+            usuarios[tkN]["emails"]           = {}
+            usuarios[tkN]["emails"]["uno"]    = True
+            usuarios[tkN]["emails"]["dos"]    = False
+            usuarios[tkN]["emails"]["tres"]   = False
+            usuarios[tkN]["emails"]["cuatro"] = True
 
-            usuarios[email]["google"] = True
+            usuarios[tkN]["google"] = True
 
             cerrar(usuarios)
 
@@ -271,9 +268,8 @@ class CrearUsuario():
             return None
 
     def check(self, usuarios, token: str):
-        for tk in usuarios["cuentas"]:
-            if token == tk:
-                return False
+        if token in abrir():
+            return False
 
     def tokenizar(self):
         usuarios = abrir()
@@ -295,28 +291,27 @@ class CrearUsuario():
 
         if not self.mail in usuarios:
 
-            usuarios[str(self.mail)] = {}
-            usuarios[str(self.mail)]["mail"] = self.mail
-            usuarios[str(self.mail)]["nombre"] = self.nombre
-            usuarios[str(self.mail)]["psw"] = str(Password(self.psw).crear())
-            usuarios[str(self.mail)]["cuentas"] = {}
             tkN = self.tokenizar()
-            usuarios[str(self.mail)]["cuentas"][str(tkN)] = True 
-            usuarios[str(self.mail)]["pfp"] = f"/src/web/static/pfp/default_hosthome.png" 
+            usuarios[str(tkN)] = {}
+            usuarios[str(tkN)]["mail"] = self.mail
+            usuarios[str(tkN)]["nombre"] = self.nombre
+            usuarios[str(tkN)]["psw"] = str(Password(self.psw).crear())
+            
+            usuarios[str(tkN)]["pfp"] = f"/src/web/static/pfp/default_hosthome.png" 
             now = datetime.datetime.now()
-            usuarios[str(self.mail)]["entrada"] = f"{now.day}/{now.month}/{now.year}"
+            usuarios[str(tkN)]["entrada"] = f"{now.day}/{now.month}/{now.year}"
 
-            usuarios[str(self.mail)]["segundoNombre"] = "" 
-            usuarios[str(self.mail)]["edad"] = "" 
+            usuarios[str(tkN)]["segundoNombre"] = "" 
+            usuarios[str(tkN)]["edad"] = "" 
 
-            usuarios[str(self.mail)]["autorizado"] = False
-            usuarios[str(self.mail)]["tokenEntrada"] = random.randint(1000, 9000)
+            usuarios[str(tkN)]["autorizado"] = False
+            usuarios[str(tkN)]["tokenEntrada"] = random.randint(1000, 9000)
 
-            usuarios[str(self.mail)]["emails"]           = {}
-            usuarios[str(self.mail)]["emails"]["uno"]    = True
-            usuarios[str(self.mail)]["emails"]["dos"]    = False
-            usuarios[str(self.mail)]["emails"]["tres"]   = False
-            usuarios[str(self.mail)]["emails"]["cuatro"] = True
+            usuarios[str(tkN)]["emails"]           = {}
+            usuarios[str(tkN)]["emails"]["uno"]    = True
+            usuarios[str(tkN)]["emails"]["dos"]    = False
+            usuarios[str(tkN)]["emails"]["tres"]   = False
+            usuarios[str(tkN)]["emails"]["cuatro"] = True
 
             cerrar(usuarios)
 

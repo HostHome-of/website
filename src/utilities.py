@@ -39,13 +39,13 @@ class Utils():
         def wrapper(*args, **kwargs):
             user_id = request.cookies.get('user_id')
             if user_id:
-                user = Usuario(request.cookies.get('user_id')).cojer()
+                user = Usuario(user_id).cojer()
                 if not user:
                     flash("Porfavor haz login")
                     return redirect(url_for('main_page.login'))
                 if user:
                     if not user.get("autorizado"):
-                        Usuario().petar(user["mail"])
+                        Usuario().petar(user_id)
                         return redirect(url_for('main_page.login'))
                     return function_to_protect(*args, **kwargs)
                 else:
@@ -69,10 +69,10 @@ class Utils():
     def check_usuario(self):
         if request.cookies.get('user_id'):
             usr = Usuario(request.cookies.get('user_id')).cojer()
-            if usr is None or not usr["cuentas"][str(request.cookies.get('user_id'))]:
+            if usr is None:
                 return None
             if not usr["autorizado"]:
-                Usuario().petar(Usuario(request.cookies.get('user_id')).cojer()["mail"])
+                Usuario().petar(request.cookies.get('user_id'))
                 return None
             return usr
         return None
