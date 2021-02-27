@@ -7,6 +7,7 @@
 	<title>HostHome | Crear contraseña</title>
 	<link rel="icon" href="{{ url_for('static', filename='images/favicon.png')}}">
 	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/auth.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
 	<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -81,7 +82,7 @@
 		</div>
 		<style>
 			.right {
-				background: url(/src/web/static/images/login-bg.png) no-repeat center !important;
+				/* background: url(/src/web/static/images/login-bg.png) no-repeat center !important; */
 				background-size: cover !important;
 				justify-content: center !important;
 				align-items: center !important;
@@ -95,11 +96,37 @@
 				margin-bottom: 24px;
 				text-align: center;
 			}
+
+			.right * {
+				opacity: 1 !important;
+				z-index: 9 !important;
+			}
 		</style>
 		<div class="right">
-			<div style="width: 100%;">
-				<h1>Crearse una contraseña</h1>
-			</div>
+			<!-- <div style="width: 100%;">
+				<h1>Entra en tu cuenta</h1>
+			</div> -->
+			<div style="top: 25%;" class="main__view" data-aos>
+				<div class="main__preview"><img class="main__pic" src="/src/web/static/images/main-pic-6.png" alt=""></div>
+				<div style="z-index: 99 !important;" class="main__preview"><img class="main__pic js-parallax" data-scale="2.5" data-orientation="up"
+					src="/src/web/static/images/main-pic-1.png" alt=""></div>
+				<div class="main__preview"><img class="main__pic js-parallax" data-scale="1.5" data-orientation="up"
+					src="/src/web/static/images/main-pic-2.png" alt=""></div>
+				<div class="main__preview"><img class="main__pic" src="/src/web/static/images/main-pic-3.png" alt=""></div>
+				<div class="main__preview"><img class="main__pic" src="/src/web/static/images/main-pic-4.png" alt=""></div>
+				<div class="main__preview"><img class="main__pic js-parallax" data-scale="4.5" data-orientation="up"
+					src="/src/web/static/images/main-pic-5.png" alt=""></div>
+				<div class="main__preview"><img class="main__pic js-parallax" data-scale="1.5" data-orientation="down"
+					src="/src/web/static/images/main-pic-7.png" alt=""></div>
+			  </div>
+			  <div class="main__figures">
+				<div class="main__figure" data-aos="animation-translate-y"><img class="main__pic js-parallax" data-scale="2.2"
+					data-orientation="down" src="/src/web/static/images/figure-1.png" alt=""></div>
+				<div class="main__figure" data-aos="animation-translate-y" data-aos-delay="200"><img class="main__pic js-parallax"
+					data-scale="2.2" data-orientation="up" src="/src/web/static/images/figure-2.png" alt=""></div>
+				<div class="main__figure" data-aos="animation-translate-y" data-aos-delay="400"><img class="main__pic"
+					src="/src/web/static/images/figure-3.png" alt=""></div>
+			  </div>
 		</div>
 	</div>
 
