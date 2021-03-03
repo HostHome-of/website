@@ -2248,11 +2248,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     return a.$ === r && (a.$ = Ub), b && a.jQuery === r && (a.jQuery = Tb), r;
   }, b || (a.jQuery = a.$ = r), r;
 });
-/**
- * Owl Carousel v2.3.4
- * Copyright 2013-2018 David Deutsch
- * Licensed under: SEE LICENSE IN https://github.com/OwlCarousel2/OwlCarousel2/blob/master/LICENSE
- */
+
 !function (a, b, c, d) {
   function e(b, c) {
     this.settings = null, this.options = a.extend({}, e.Defaults, c), this.$element = a(b), this._handlers = {}, this._plugins = {}, this._supress = {}, this._current = null, this._speed = null, this._coordinates = [], this._breakpoint = null, this._width = null, this._items = [], this._clones = [], this._mergers = [], this._widths = [], this._invalidated = {}, this._pipe = [], this._drag = { time: null, target: null, pointer: null, stage: { start: null, current: null }, direction: null }, this._states = { current: {}, tags: { initializing: ["busy"], animating: ["busy"], dragging: ["interacting"] } }, a.each(["onResize", "onThrottledResize"], a.proxy(function (b, c) {
@@ -3203,12 +3199,7 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     }, refresh: ce, refreshHard: se };
 });
 
-/*!
- * simpleParallax.min - simpleParallax is a simple JavaScript library that gives your website parallax animations on any images or videos, 
- * @date: 21-06-2020 13:22:47, 
- * @version: 5.5.1,
- * @link: https://simpleparallax.com/
- */
+
 !function (t, e) {
   "object" == (typeof exports === "undefined" ? "undefined" : _typeof(exports)) && "object" == (typeof module === "undefined" ? "undefined" : _typeof(module)) ? module.exports = e() : "function" == typeof define && define.amd ? define("simpleParallax", [], e) : "object" == (typeof exports === "undefined" ? "undefined" : _typeof(exports)) ? exports.simpleParallax = e() : t.simpleParallax = e();
 }(window, function () {

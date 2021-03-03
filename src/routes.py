@@ -217,7 +217,7 @@ def google_register():
     user   = requests.get(f'https://www.googleapis.com/oauth2/v2/userinfo?access_token={r.json()["access_token"]}').json()
     data   = CrearUsuario().google(user, request.cookies.get('user_id'))
 
-    if not data:
+    if data is None:
         return redirect("/register?err=google")
 
     res = redirect("/psw?ctx=253681d6-48f8-421d-a393-2f7c26a01313")

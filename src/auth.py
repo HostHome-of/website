@@ -224,9 +224,15 @@ class CrearUsuario():
             cerrarInvites(invites)
 
             cerrar(usuarios)
-            return tk
+            return id
 
-        if not usuario["email"] in usuarios:
+        USUARIO_EXISTENTE = False
+
+        for usr in usuarios:
+            if usuario["email"] == usuarios[usr]["mail"]:
+                USUARIO_EXISTENTE = True
+
+        if not USUARIO_EXISTENTE:
             email     = usuario["email"]
             pfp       = usuario["picture"]
             nombre    = usuario["given_name"]

@@ -267,18 +267,31 @@
 				text-align: center;
 			}
 
-			.right * {
+			/* .right * {
 				opacity: 1 !important;
 				z-index: 9 !important;
+			} */
+
+			.main__view {
+				right: 100px;
+			}
+
+			.main__figures {
+				z-index: 9;
+			}
+
+			@media only screen and (max-width: 1489px) {
+				.main__view {right: 0 !important;}
+				.main__figures {display: none}
 			}
 		</style>
 		<div class="right">
 			<!-- <div style="width: 100%;">
 				<h1>Entra en tu cuenta</h1>
 			</div> -->
-			<div style="top: 25%;" class="main__view" data-aos>
+			<div style="top: 25%; z-index: 9;" class="main__view" data-aos>
 				<div class="main__preview"><img class="main__pic" src="/src/web/static/images/main-pic-6.png" alt=""></div>
-				<div style="z-index: 99 !important;" class="main__preview"><img class="main__pic js-parallax" data-scale="2.5" data-orientation="up"
+				<div class="main__preview"><img class="main__pic js-parallax" data-scale="2.5" data-orientation="up"
 					src="/src/web/static/images/main-pic-1.png" alt=""></div>
 				<div class="main__preview"><img class="main__pic js-parallax" data-scale="1.5" data-orientation="up"
 					src="/src/web/static/images/main-pic-2.png" alt=""></div>
@@ -290,11 +303,11 @@
 					src="/src/web/static/images/main-pic-7.png" alt=""></div>
 			  </div>
 			  <div class="main__figures">
-				<div class="main__figure" data-aos="animation-translate-y"><img class="main__pic js-parallax" data-scale="2.2"
+				<div style="right: 650px;" class="main__figure" data-aos="animation-translate-y"><img class="main__pic js-parallax" data-scale="2.2"
 					data-orientation="down" src="/src/web/static/images/figure-1.png" alt=""></div>
-				<div class="main__figure" data-aos="animation-translate-y" data-aos-delay="200"><img class="main__pic js-parallax"
+				<div style="right: 850px;" class="main__figure" data-aos="animation-translate-y" data-aos-delay="200"><img class="main__pic js-parallax"
 					data-scale="2.2" data-orientation="up" src="/src/web/static/images/figure-2.png" alt=""></div>
-				<div class="main__figure" data-aos="animation-translate-y" data-aos-delay="400"><img class="main__pic"
+				<div style="right: 655px; bottom: -2%;" class="main__figure" data-aos="animation-translate-y" data-aos-delay="400"><img class="main__pic"
 					src="/src/web/static/images/figure-3.png" alt=""></div>
 			  </div>
 		</div>
@@ -302,6 +315,8 @@
 
 	<script src="{{ url_for('static', filename='vendor/notiflix/notiflix-aio-2.7.0.min.js') }}"></script>
 	<script src="{{ url_for('static', filename='js/register.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/common.js') }}"></script>
 	<script src="{{ url_for('static', filename='js/global.js') }}"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@mojs/core"></script>
 
