@@ -20,10 +20,23 @@
         integrity="sha512-mgZL3SZ/vIooDg2mU2amX6NysMlthFl/jDbscSRgF/k3zmICLe6muAs7YbITZ+61FeUoo1plofYAocoR5Sa1rQ=="
         crossorigin="anonymous"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/@mojs/core"></script> -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
 
 <body
     style="display: flex; font-family: Avenir Next,Helvetica Neue,Arial,sans-serif!important; font-feature-settings: 'kern','liga','pnum'; -webkit-font-smoothing: antialiased;">
+    <script>
+        window.onload = function() {
+            
+            var urlParams  = new URLSearchParams(window.location.search);
+            var gitParam   = urlParams.has("ctx")
+
+            if (gitParam) {
+                alertNoty("Haz login en GitHub y luego ve a crearte un hosting", 'error', '#c0392b')
+            }
+        }
+    </script>
     {% include "/sideNav.html" %}
     <div class="wrapper__navy">
         <style>
@@ -229,21 +242,19 @@
                             <div style="display: flex;"><i class="far fa-user"></i> Mi cuenta</div> <i
                                 class="fas fa-chevron-right"></i>
                         </a>
-                        <a href="/dashboard/edit/imagen">
-                            <div style="display: flex;"><i class="far fa-images"></i> Cambiar img de perfil</div> <i
+
+                        <a href="/dashboard/edit/mail">
+                            <div style="display: flex;"><i class="fas fa-bell"></i> Notificaciones</div>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        <a href="{{ url_for('main_page.amigos') }}">
+                            <div style="display: flex;"><i class="fas fa-sitemap"></i> Amigos</div> <i
                                 class="fas fa-chevron-right"></i>
-                            <a href="/dashboard/edit/mail">
-                                <div style="display: flex;"><i class="fas fa-bell"></i> Notificaciones</div>
-                                <i class="fas fa-chevron-right"></i>
-                            </a>
-                            <a href="{{ url_for('main_page.amigos') }}">
-                                <div style="display: flex;"><i class="fas fa-sitemap"></i> Amigos</div> <i
-                                    class="fas fa-chevron-right"></i>
-                            </a>
-                            <a href="/dashboard/edit/avanzado">
-                                <div style="display: flex;"><i class="fas fa-exclamation-circle"></i> Avanzado</div> <i
-                                    class="fas fa-chevron-right"></i>
-                            </a>
+                        </a>
+                        <a href="/dashboard/edit/avanzado">
+                            <div style="display: flex;"><i class="fas fa-exclamation-circle"></i> Avanzado</div> <i
+                                class="fas fa-chevron-right"></i>
+                        </a>
                     </ul>
                 </div>
 
@@ -305,6 +316,94 @@
                                 <button disabled id="btnSubmity" onclick="guardar()" class="submit">
                                     Actualizar perfil
                                 </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="edit__box">
+                        <div class="headder">
+                            <div class="logo">
+                                <i class="far fa-images"></i>
+                            </div>
+                            <div class="info">
+                                <div class="title">
+                                    Cambiar imagen de perfil
+                                </div>
+                                <div class="desc">
+                                    Cambia tu foto de perfil para ser mas lujoso :)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wrapper">
+                            <style>
+                                #formularioConImg label {
+                                    text-align: center;
+                                    width: 100%;
+                                    height: 100%;
+                                    display: -webkit-box;
+                                    display: -ms-flexbox;
+                                    display: flex;
+                                    -webkit-box-align: center;
+                                    -ms-flex-align: center;
+                                    align-items: center;
+                                    -webkit-box-pack: center;
+                                    -ms-flex-pack: center;
+                                    justify-content: center;
+                                    cursor: pointer;
+                                    font-weight: 700;
+                                    color: #002c7b;
+                                    padding: 15px;
+                                    width: auto;
+                                    background: #fff;
+                                    display: block;
+                                    margin: 0 auto;
+                                    height: auto;
+                                    font-size: 16px;
+                                    line-height: normal;
+                                    border-radius: 6px;
+                                    -webkit-box-shadow: 0 0 47px #00000012;
+                                    box-shadow: 0 0 47px #00000012;
+                                    position: relative;
+                                    z-index: 1;
+                                    border: 2px #fff dashed;
+                                    /* margin: 30px; */
+                                }
+                            </style>
+                            <div id="form">
+                                <div class="container">
+                                    <div class="avatar-upload">
+                                        <form method="POST" action="/img" enctype="multipart/form-data"
+                                            id="formularioConImg" class="avatar-edit">
+
+                                            <input type='file' accept="image/*" id="imgInp" name="imgInp" />
+
+                                            <label for="imgInp">
+                                                Buscar imagen
+                                            </label>
+
+                                        </form>
+                                    </div>
+                                    <script>
+                                        function readURL(input) {
+                                            if (input.files && input.files[0]) {
+                                                var reader = new FileReader();
+                                                reader.onload = function (e) {
+                                                    Notiflix.Loading.Init({ svgColor: "#6493c6", });
+                                                    $('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+                                                    $('#imagePreview').hide();
+                                                    $('#imagePreview').fadeIn(650);
+                                                    Notiflix.Loading.Circle();
+                                                    setTimeout(function () {
+                                                        $("#formularioConImg").submit();
+                                                    }, 1500);
+                                                }
+                                                reader.readAsDataURL(input.files[0]);
+                                            }
+                                        }
+                                        $("#imgInp").change(function () {
+                                            readURL(this);
+                                        });
+                                    </script>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -427,12 +526,14 @@
                                         const github_uri = "{{ url_for('github.login') }}"
 
                                         function cerrarSesionEnGithub() {
+                                            document.getElementById("loadOnGitHubSignOutIcon").style.display = "block"
+                                            document.getElementsByClassName("GithubBotonOAlgo")[0].disabled = true;
+
                                             fetch("/dashboard/logout/github", {
                                                 method: "POST"
                                             })
-                                            
-                                            document.getElementsByClassName("GithubBotonOAlgo")[0].disabled = true;
-                                            alertNoty("Se hizo logout en github (espera 5 segundos)", 'success', '#27ae60')
+
+                                            alertNoty("Se hizo logout en github (espera...)", 'success', '#27ae60')
 
                                             setTimeout(function () {
                                                 document.getElementsByClassName("GithubBotonOAlgo")[0].disabled = false;
@@ -442,42 +543,48 @@
                                         }
                                     </script>
                                     {% if github %}
-                                        <div id="githubApp">
-                                            <div style="display: flex; margin-left: 30px;">
-                                                <i style="font-size: 40px; padding-right: 15px; display: flex; justify-content: center; align-items: center;"
-                                                    class="fab fa-github"></i>
-                                                <div
-                                                    style="display: flex; flex-direction: column; justify-content: center;">
-                                                    <p class="title" style="margin: 0;">
-                                                        GitHub
-                                                    </p>
-                                                    <p class="desc" style="margin: 0;">
-                                                        Tu cuenta de GitHub es
-                                                        <a href="https://github.com/{{ github['login'] }}" style="color: #000;" target="_blank">
-                                                            github.com/{{ github['login'] }}</a>
-                                                        . Si no es asi haz logout y buelve a hacer login.
-                                                    </p>
-                                                </div>
+                                    <div id="githubApp">
+                                        <div style="display: flex; margin-left: 30px;">
+                                            <i style="font-size: 40px; padding-right: 15px; display: flex; justify-content: center; align-items: center;"
+                                                class="fab fa-github"></i>
+                                            <div
+                                                style="display: flex; flex-direction: column; justify-content: center;">
+                                                <p class="title" style="margin: 0;">
+                                                    GitHub
+                                                </p>
+                                                <p class="desc" style="margin: 0;">
+                                                    Tu cuenta de GitHub es
+                                                    <a href="https://github.com/{{ github['login'] }}"
+                                                        style="color: #000;" target="_blank">
+                                                        github.com/{{ github['login'] }}</a>
+                                                    . Si no es asi haz logout y buelve a hacer login.
+                                                </p>
                                             </div>
-                                            <button class="GithubBotonOAlgo" onclick="cerrarSesionEnGithub()">Cerrar sesion</button>
                                         </div>
+                                        <button class="GithubBotonOAlgo" onclick="cerrarSesionEnGithub()"> <i
+                                                id="loadOnGitHubSignOutIcon" class="fas fa-sync fa-spin"
+                                                style="display: none; margin-right: 10px;"></i> Cerrar sesion</button>
+                                    </div>
                                     {% else %}
-                                        <div id="githubApp">
-                                            <div style="display: flex; margin-left: 30px;">
-                                                <i style="font-size: 40px; padding-right: 15px; display: flex; justify-content: center; align-items: center;"
-                                                    class="fab fa-github"></i>
-                                                <div
-                                                    style="display: flex; flex-direction: column; justify-content: center;">
-                                                    <p class="title" style="margin: 0;">
-                                                        GitHub
-                                                    </p>
-                                                    <p class="desc" style="margin: 0;">
-                                                        Haz login con tu cuenta de GitHub.com para crear hostings. Si no no podras hacer login.
-                                                    </p>
-                                                </div>
+                                    <div id="githubApp">
+                                        <div style="display: flex; margin-left: 30px;">
+                                            <i style="font-size: 40px; padding-right: 15px; display: flex; justify-content: center; align-items: center;"
+                                                class="fab fa-github"></i>
+                                            <div
+                                                style="display: flex; flex-direction: column; justify-content: center;">
+                                                <p class="title" style="margin: 0;">
+                                                    GitHub
+                                                </p>
+                                                <p class="desc" style="margin: 0;">
+                                                    Haz login con tu cuenta de GitHub.com para crear hostings. Si no no
+                                                    podras hacer login.
+                                                </p>
                                             </div>
-                                            <button class="GithubBotonOAlgo" onclick='window.open(github_uri, "_blank", "height=600,width=1200,top=400,left=400")'>Hacer login</button>
                                         </div>
+                                        <button class="GithubBotonOAlgo"
+                                            onclick='window.open(github_uri, "_blank", "height=600,width=1200,top=200,left=200")'>Hacer
+                                            login</button>
+                                    </div>
                                     {% endif %}
                                 </div>
                             </div>

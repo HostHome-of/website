@@ -72,14 +72,14 @@ def Imagen():
         image = request.files["imgInp"]
 
         if image.filename == "":
-            return redirect("/dashboard/edit/imagen")
+            return redirect("/dashboard/edit")
 
         if allowed_image(image.filename):
             filename = secure_filename(image.filename)
             image.save(os.path.join("./src/static/pfp/", filename))
             Usuario().imagen(request.cookies.get('user_id'), filename)
 
-    return redirect("/dashboard/edit/imagen")
+    return redirect("/dashboard/edit")
 
 @main_page.route("/update", methods=["GET", "POST"])
 def Actualizar():
@@ -335,7 +335,7 @@ def crearHost():
         return redirect(url_for('main_page.Registrarse'))
 
     if not github.authorized:
-        return redirect("/dashboard/edit#apps")
+        return redirect("/dashboard/edit#apps?ctx=b1c923ca-66d7-4488-976c-d6b7f9794dfc")
 
     info_github = github.get("/user")
 

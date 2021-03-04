@@ -162,7 +162,7 @@ class Usuario():
         return abrir()
 
     def imagen(self, usr, nm):
-        mail = Usuario(usr).cojer()
+        mail = usr
         usrs = abrir()
         usrs[mail]["pfp"] = f"/src/web/static/pfp/{nm}"
         cerrar(usrs)

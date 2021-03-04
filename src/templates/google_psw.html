@@ -70,12 +70,15 @@
 					class="animacion">Un hombre social!</h1>
 				<h2 style="margin: 0px 0px 32px; font-size: 20px; font-weight: 700; color: rgb(0, 0, 0); text-align: left; line-height: 1.5; font-family: Roobert, sans-serif; text-transform: none; overflow: unset; white-space: unset; text-overflow: unset;"
 					class="animacion">Create una contraseña</h2>
-				<div class="input animacion">
-					<label for="psw">Contraseña</label>
-					<input oninput="activarBoton()" class="tippy" data-theme="light"
-                    title="Tiene que tener mas de 6 caracteres" data-duration="300"
-                    data-arrow="true" data-animation="shift" data-position="left" type="password" placeholder="Contraseña" name="psw" id="psw"
-						autocomplete="off">
+				
+				<div data-theme="light"
+				title="Tiene que tener mas de 6 caracteres" data-duration="300"
+				data-arrow="true" data-animation="shift" data-position="left" class="tippy">
+					<div class="input animacion">
+						<label for="psw">Contraseña</label>
+						<input oninput="activarBoton()" type="password" placeholder="Contraseña" name="psw" id="psw"
+							autocomplete="off">
+					</div>
 				</div>
 				<button disabled class="subBtn animacion" onclick="enviarPsw()" id="btnPsw">Crear contraseña</button>
 			</div>
@@ -102,7 +105,7 @@
 				z-index: 9 !important;
 			}
 		</style>
-		<div class="right" style="background: url(/src/web/static/images/bg-main.jpg); background-size: cover !important; background-position: 0 11px; transform: scale(1.1);">
+		<div class="right" style="/* background: url(/src/web/static/images/bg-main.jpg); background-size: cover !important; background-position: 0 11px; transform: scale(1.1); */">
 			<!-- <div style="width: 100%;">
 				<h1>Entra en tu cuenta</h1>
 			</div> -->
