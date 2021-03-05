@@ -44,33 +44,17 @@ class HacerLogin():
 
         return False
 
-    def ejecutar(self, tk=None):
+    def ejecutar(self):
         usuarios = abrir()
 
         for usr in usuarios:
             if usuarios[usr]["mail"] == self.email:
                 self.email = usr
-   
-        if self.email in usuarios:
-            if Password(usuarios[str(self.email)]["psw"]).check(self.psw):
-                return str(self.email)
+
+        if Password(usuarios[str(self.email)]["psw"]).check(self.psw):
+            return str(self.email)
 
         return False
-
-    def tokenizar(self):
-        usuarios = abrir()
-        token_valido = False
-        token = ""
-
-        while not token_valido:
-            token = str(random.randint(10000000, 90000000))
-            for usr in usuarios:
-                valido = CrearUsuario().check(usuarios[usr], token)
-                if not valido:
-                    break
-            token_valido = True
-
-        return token
 
 class Password():
     def __init__(self, texto: str):
