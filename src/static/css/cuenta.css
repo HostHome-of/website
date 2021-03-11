@@ -864,7 +864,8 @@ textarea.form-control {
 .pagina .index .titulo {
     font-size: 48px;
     font-weight: 700;
-    color: rgb(54, 73, 98);
+    /* color: rgb(54, 73, 98); */
+    color: #000;
     text-align: left;
     line-height: 1.5;
     text-transform: none;
@@ -876,7 +877,8 @@ textarea.form-control {
 .pagina .index .desc {
     font-size: 24px;
     font-weight: 700;
-    color: rgb(54, 73, 98);
+    /* color: rgb(54, 73, 98); */
+    color: #000;
     text-align: left;
     line-height: 1.5;
     text-transform: none;
@@ -917,6 +919,7 @@ textarea.form-control {
     margin: 0px 0px 30px;
     display: flex;
     width: 700px;
+    z-index: 1;
 }
 
 .pagina .index ul .carta.uno i {

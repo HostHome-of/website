@@ -26,17 +26,11 @@
 
 <body
     style="display: flex; font-family: Avenir Next,Helvetica Neue,Arial,sans-serif!important; font-feature-settings: 'kern','liga','pnum'; -webkit-font-smoothing: antialiased;">
-    <script>
-        window.onload = function() {
-            
-            var urlParams  = new URLSearchParams(window.location.search);
-            var gitParam   = urlParams.has("ctx")
-
-            if (gitParam) {
-                alertNoty("Haz login en GitHub y luego ve a crearte un hosting", 'error', '#c0392b')
-            }
-        }
-    </script>
+    {% if gitReq %}
+        <script>
+            window.onload = function () {alertNoty("Haz login en GitHub y luego ve a crearte un hosting", 'warning', '#EBD761')}
+        </script>
+    {% endif %}
     {% include "/sideNav.html" %}
     <div class="wrapper__navy">
         <style>
@@ -181,7 +175,7 @@
                     height: auto;
                     position: relative;
                     margin-right: 150px;
-                    padding-top: 100px;
+                    padding-top: 20%;
                 }
 
                 .pagina .edit__uno {

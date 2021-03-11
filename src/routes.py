@@ -301,7 +301,7 @@ def editarCuenta():
         if info_github.ok:
             githubUsr = info_github.json()
 
-    return render_template("dashboard/edit.html", user=usr, docs=docs, github=githubUsr)
+    return render_template("dashboard/edit.html", user=usr, docs=docs, github=githubUsr, gitReq=True if request.args.get("ctx") == "b1c923ca-66d7-4488-976c-d6b7f9794dfc" else False)
 
 @main_page.route("/dashboard/host")
 @login_required

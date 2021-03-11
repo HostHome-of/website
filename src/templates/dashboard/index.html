@@ -9,7 +9,6 @@
     <title>Dashboard | {{ user["nombre"] }}</title>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/cuenta.css') }}">
     <link rel="stylesheet" href="https://unpkg.com/tippy.js@0.11.3/dist/tippy.css">
 
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
@@ -18,6 +17,10 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.0.0/jquery.magnific-popup.min.js"></script>
+
+    <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cuenta.css') }}">
+
 </head>
 
 <body
@@ -51,7 +54,7 @@
         </div>
         <div class="pagina">
             <div class="index">
-                <div style="max-width: 40%;">
+                <div style="max-width: 40%; z-index: 1;">
                     <p class="titulo">Hola {{ user['nombre'] }}!</p>
                     <p class="desc">Bienvenido a HostHome: Escoje una accion y empieza con el hosting.</p>
                     <hr />
@@ -158,11 +161,12 @@
                 </ul>
             </div>
         </div>
+        <div class="details__figure" style="position: absolute;
+        transform: scale(0.5);
+        top: 35%;
+        left: 10%;"><img class="details__pic js-parallax" data-scale="2" data-orientation="up"
+            src="/src/web/static/images/figure-3.png" alt=""></div>
     </div>
-    
-    <script src="https://unpkg.com/tippy.js@0.11.3/dist/tippy.min.js"></script>
-    <script src="https://unpkg.com/tippy.js@0.11.3/dist/tippy.standalone.js"></script>
-    <script src="https://unpkg.com/tippy.js@0.11.3/dist/tippy.js"></script>
 
     <script>
         new Tippy('.tippy')
