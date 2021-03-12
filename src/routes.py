@@ -335,7 +335,7 @@ def crearHost():
         return redirect(url_for('main_page.Registrarse'))
 
     if not github.authorized:
-        return redirect("/dashboard/edit#apps?ctx=b1c923ca-66d7-4488-976c-d6b7f9794dfc")
+        return redirect("/dashboard/edit?ctx=b1c923ca-66d7-4488-976c-d6b7f9794dfc")
 
     info_github = github.get("/user")
 
