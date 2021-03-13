@@ -48,7 +48,7 @@ def PaginaPrincipal():
     #     return redirect(url_for("main_page.crearHost"))
 
     if usr and request.args.get("r", None) == "true" or not usr:
-        return render_template("index.html", user=usr, usrAdmin=len(Usuario().cojer_admins()), usuarios=len(Usuario().cojer_usuarios()), docs=docs)
+        return render_template("index.html", user=usr, usrAdmin=len(Usuario().cojer_admins), usuarios=len(Usuario().cojer_usuarios), docs=docs)
 
     return redirect(url_for("main_page.Cuenta"))
 

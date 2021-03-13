@@ -4,17 +4,19 @@ import io
 import hashlib
 import os
 
+from src.db import *
+
 salt = open("salt.txt", "r").read().encode()
 
 def abrir():
-    with open("./src/data/users.json", "r") as f:
-        usrs = json.load(f)
 
-    return usrs
+    conn = connect("./src/data/users.db")
+    q = "SELECT * FROM users"
+    return get_db_data( conn, q, json_dict=True )
 
-def cerrar(usrs):
-    with open("./src/data/users.json", "w") as f:
-        json.dump(usrs, f, indent=4)
+def cerrar(q):
+    conn = connect("./src/data/users.db")
+    execute_db(conn, query=q)
 
 def abrirInvites():
     with open("./src/data/invites.json", "r") as f:
@@ -137,11 +139,13 @@ class Usuario():
         cerrarInvites(invites)
         cerrar(usuarios) 
 
+    @property
     def cojer_admins(self):
         data = requests.get("https://raw.githubusercontent.com/HostHome-of/config/main/config.json").json()
 
         return data["admins"]
 
+    @property
     def cojer_usuarios(self):
         return abrir()
 
@@ -186,8 +190,8 @@ class CrearUsuario():
 
         if psw:
 
-            usuarios[id]["psw"]         = str(Password(usuario).crear())
-            usuarios[id]["autorizado"]  = True
+            usuarios[id]["psw"] = str(Password(usuario).crear())
+            usuarios[id]["autorizado"] = True
 
             invites = abrirInvites()
 
@@ -213,7 +217,7 @@ class CrearUsuario():
         USUARIO_EXISTENTE = False
 
         for usr in usuarios:
-            if usuario["email"] == usuarios[usr]["mail"]:
+            if usuario["email"] == usr["mail"]:
                 USUARIO_EXISTENTE = True
 
         if not USUARIO_EXISTENTE:
@@ -227,38 +231,34 @@ class CrearUsuario():
                 sn    = ""
 
 
-            tkN = self.tokenizar()
+            # TODO Contraseña
 
-            usuarios[tkN] = {}
-            usuarios[tkN]["mail"] = email
-            usuarios[tkN]["nombre"] = nombre
+            tkN                     = self.tokenizar()
+            now                     = datetime.datetime.now()
+            usr                     = {}
+            usr["mail"]             = email
+            usr["nombre"]           = nombre
+            usr["pfp"]              = pfp
+            usr["entrada"]          = f"{now.day}/{now.month}/{now.year}"
+            usr["segundoNombre"]    = sn
+            usr["edad"]             = ""
+            usr["autorizado"]       = False
+            usr["emails"]           = {}
+            usr["emails"]["uno"]    = True
+            usr["emails"]["dos"]    = False
+            usr["emails"]["tres"]   = False
+            usr["emails"]["cuatro"] = True
+            usr["google"]           = True
+            usr["id"]               = tkN
 
-            usuarios[tkN]["pfp"] = pfp
-
-            now = datetime.datetime.now()
-            usuarios[tkN]["entrada"] = f"{now.day}/{now.month}/{now.year}"
-
-            usuarios[tkN]["segundoNombre"] = sn
-            usuarios[tkN]["edad"] = ""
-
-            usuarios[tkN]["autorizado"] = False
-
-            usuarios[tkN]["emails"]           = {}
-            usuarios[tkN]["emails"]["uno"]    = True
-            usuarios[tkN]["emails"]["dos"]    = False
-            usuarios[tkN]["emails"]["tres"]   = False
-            usuarios[tkN]["emails"]["cuatro"] = True
-
-            usuarios[tkN]["google"] = True
-
-            cerrar(usuarios)
+            cerrar(usr)
 
             return str(tkN)
         else:
             return None
 
-    def check(self, usuarios, token: str):
-        if token in abrir():
+    def check(self, usuario, token: str):
+        if token in usuario:
             return False
 
     def tokenizar(self):
@@ -269,7 +269,7 @@ class CrearUsuario():
         while not token_valido:
             token = str(random.randint(10000000, 90000000))
             for usr in usuarios:
-                valido = self.check(usuarios[usr], token)
+                valido = self.check(usuarios, token)
                 if not valido:
                     break
             token_valido = True
@@ -281,29 +281,44 @@ class CrearUsuario():
 
         if not self.mail in usuarios:
 
-            tkN = self.tokenizar()
-            usuarios[str(tkN)] = {}
-            usuarios[str(tkN)]["mail"] = self.mail
-            usuarios[str(tkN)]["nombre"] = self.nombre
-            usuarios[str(tkN)]["psw"] = str(Password(self.psw).crear())
-            
-            usuarios[str(tkN)]["pfp"] = f"/src/web/static/pfp/default_hosthome.png" 
-            now = datetime.datetime.now()
-            usuarios[str(tkN)]["entrada"] = f"{now.day}/{now.month}/{now.year}"
+            # En orden para la base de datos
 
-            usuarios[str(tkN)]["segundoNombre"] = "" 
-            usuarios[str(tkN)]["edad"] = "" 
+            tkN                     = self.tokenizar()
+            usr                     = {}
+            now                     = datetime.datetime.now()
+            usr["nombre"]           = self.nombre
+            usr["mail"]             = self.mail
+            usr["psw"]              = Password(self.psw).crear()
+            usr["entrada"]          = f"{now.day}/{now.month}/{now.year}"
+            usr["segundoNombre"]    = "" 
+            usr["edad"]             = "" 
+            usr["autorizado"]       = False
+            usr["tokenEntrada"]     = random.randint(1000, 9000)
+            usr["emails_uno"]       = True
+            usr["emails_dos"]       = False
+            usr["emails_tres"]      = False
+            usr["emails_cuatro"]    = True
+            usr["id"]               = tkN
+            usr["pfp"]              = f"/src/web/static/pfp/default_hosthome.png" 
+            usr["google"]           = False
 
-            usuarios[str(tkN)]["autorizado"] = False
-            usuarios[str(tkN)]["tokenEntrada"] = random.randint(1000, 9000)
+            q = "INSERT INTO users VALUES ("
 
-            usuarios[str(tkN)]["emails"]           = {}
-            usuarios[str(tkN)]["emails"]["uno"]    = True
-            usuarios[str(tkN)]["emails"]["dos"]    = False
-            usuarios[str(tkN)]["emails"]["tres"]   = False
-            usuarios[str(tkN)]["emails"]["cuatro"] = True
+            for i in usr:
+                if type(usr[i]) == str:
+                    q += f" \"{usr[i]}\","
+                elif type(usr[i]) == int:
+                    q += f" {usr[i]},"
+                elif type(usr[i]) == bool:
+                    if usr[i]:
+                        q += f" 1,"
+                    else:
+                        q += f" 0,"
+                elif type(usr[i]) == bytes:
+                    i = str(usr[i]).replace('\\', '\\\\')
+                    q += f" \"{i}\","
 
-            cerrar(usuarios)
+            cerrar(q[:-1] + " )")
 
             return str(tkN)
         

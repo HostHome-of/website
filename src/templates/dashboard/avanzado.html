@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="es-ES">
 
- <head>
-      <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
-  <script src="{{ url_for('static', filename='sw.js') }}"></script>
+<head>
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    <script src="{{ url_for('static', filename='sw.js') }}"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | {{ user["nombre"] }} - avanzado</title>
@@ -23,6 +23,9 @@
         href="{{ url_for('static', filename='vendor/notiflix/notiflix-2.7.0.min.css') }}">
 
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/edit.css') }}">
+
 </head>
 
 <body
@@ -30,157 +33,6 @@
     {% include "/sideNav.html" %}
 
     <div class="wrapper__navy">
-        <style>
-            .navy {
-                display: flex;
-                justify-content: flex-start;
-            }
-
-            .navy p {
-                margin: 0;
-                font-size: 24px;
-                font-weight: 500;
-                color: rgb(54, 73, 98);
-                text-align: left;
-                line-height: 1.5;
-                text-transform: none;
-                overflow: unset;
-                white-space: unset;
-                text-overflow: unset;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                overflow: hidden;
-                flex: 0 1 auto;
-            }
-
-            .navy a {
-                font-size: 24px;
-                font-weight: 500;
-                color: rgb(154, 164, 176);
-                text-align: left;
-                line-height: 1.5;
-                text-transform: none;
-                overflow: unset;
-                white-space: unset;
-                text-overflow: unset;
-                border-bottom: none;
-                text-decoration: none;
-                cursor: pointer;
-                margin-left: 100px;
-            }
-
-
-            .pagina .edit__uno .nav ul {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                /* align-items: center; */
-                margin: 0;
-                padding: 35px 0;
-                background-color: transparent;
-                border-radius: 4px;
-                position: relative;
-                transition: all 0.55s cubic-bezier(0.25, 0.8, 0.25, 1) 0s;
-                cursor: pointer;
-                box-sizing: border-box;
-                margin: 0px;
-                min-width: 0px;
-                -webkit-box-pack: justify;
-                justify-content: space-between;
-                -webkit-box-align: center;
-                /* align-items: center; */
-                display: flex;
-                background: transparent;
-            }
-
-            .pagina .edit__uno .nav ul a {
-                box-sizing: border-box;
-                margin: 3px 0;
-                min-width: 0px;
-                padding: 15px 30px;
-                background-color: transparent;
-                font-size: 16px;
-                font-weight: 600;
-                color: rgb(154, 164, 176);
-                text-align: left;
-                line-height: 1.5;
-                text-transform: none;
-                overflow: unset;
-                white-space: unset;
-                text-overflow: unset;
-                display: flex;
-                align-items: center;
-                justify-content: inherit;
-                transition: .2s;
-                width: 350px;
-            }
-
-            .pagina .edit__uno .nav ul a:hover {
-                box-shadow: rgba(20, 26, 40, 0.15) 0px 7px 42px;
-                transform: scale(1.01);
-            }
-
-            .pagina .edit__uno .nav ul .active {
-                box-sizing: border-box;
-                min-width: 0px;
-                padding: 15px 30px;
-                background-color: rgb(255, 255, 255);
-                font-size: 16px;
-                font-weight: 600;
-                color: rgb(154, 164, 176);
-                text-align: left;
-                line-height: 1.5;
-                text-transform: none;
-                overflow: unset;
-                white-space: unset;
-                text-overflow: unset;
-                display: flex;
-                align-items: center;
-                box-shadow: rgb(235, 241, 255) 0px 16px 20px 0px;
-            }
-
-            .pagina .edit__uno .nav ul a i {
-                color: rgb(54, 73, 98) !important;
-                font-size: 24px;
-                display: flex;
-                margin: 0px 15px 0px 0px;
-            }
-
-            .pagina .edit__uno .nav {
-                width: 300px;
-                position: fixed;
-                left: 13%;
-                top: 20%;
-            }
-
-            .pagina .edit__uno .nav ul a .fa-chevron-right {
-                margin-left: 10px;
-                color: rgb(54, 73, 98);
-                font-size: 20px;
-            }
-
-            .main {
-                width: 55%;
-                height: 70vh;
-                position: relative;
-                margin-right: 150px;
-
-            }
-
-            @media only screen and (max-width: 1400px) {
-                .main {
-                    width: 55%;
-                    height: 70vh;
-                    position: relative;
-                    margin-right: 50px;
-                }
-            }
-
-            .pagina {
-                padding-left: 0 !important;
-                padding-right: 0 !important;
-            }
-        </style>
         <div class="navy" style="justify-content: space-between;">
             <div style="display: flex; align-items: center;">
                 <a href="/dashboard">
@@ -192,128 +44,18 @@
                     Avanzado
                 </p>
             </div>
-            <a class="buttonSingOff"  style="position: relative; display: inline-flex; font-family: 'Public Sans', sans-serif; -webkit-box-align: center; align-items: center; font-weight: 600; white-space: nowrap; font-size: 12px; -webkit-box-pack: center; justify-content: center; text-decoration: none; cursor: pointer; appearance: none; padding: 10px 16px; line-height: 16px; border-radius: 36px; box-sizing: border-box; transition: all 0.2s ease-in-out 0s; background-color: transparent; color: rgb(0, 0, 0); box-shadow: none; border: 2px solid rgb(0, 0, 0); height: 36px;  margin-right: 50px;" href="/dashboard/account/delete">Cerrar sesion</a>
+            <a class="buttonSingOff"
+                style="position: relative; display: inline-flex; font-family: 'Public Sans', sans-serif; -webkit-box-align: center; align-items: center; font-weight: 600; white-space: nowrap; font-size: 12px; -webkit-box-pack: center; justify-content: center; text-decoration: none; cursor: pointer; appearance: none; padding: 10px 16px; line-height: 16px; border-radius: 36px; box-sizing: border-box; transition: all 0.2s ease-in-out 0s; background-color: transparent; color: rgb(0, 0, 0); box-shadow: none; border: 2px solid rgb(0, 0, 0); height: 36px;  margin-right: 50px;"
+                href="/dashboard/account/delete">Cerrar sesion</a>
         </div>
-        <style>
-            #popup {
-                position: absolute;
-                top: 0;
-                left: 0;
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                background: transparent;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                z-index: 999;
-                display: none;
-            }
-
-            #popup .bg {
-                width: 100%;
-                position: absolute;
-                top: 0;
-                left: 0;
-                background: #000;
-                opacity: .5;
-                height: 100%;
-            }
-
-            #popup .wrapper {
-                background: #fff;
-                width: 25%;
-                border-radius: 10px;
-                position: relative;
-                /* height: 300px; */
-                z-index: 999;
-                padding: 35px;
-            }
-
-            #popup .wrapper .input {
-                margin-bottom: 20px;
-            }
-
-            #popup .wrapper .input label p {
-                font-size: 16px;
-                font-weight: 600;
-                color: rgb(54, 73, 98);
-                text-align: left;
-                line-height: 1.5;
-                text-transform: none;
-                overflow: unset;
-                white-space: unset;
-                text-overflow: unset;
-                margin: 0;
-            }
-
-            #popup .wrapper .input input {
-                background-color: transparent;
-                position: relative;
-                display: block;
-                transition: border 0.2s ease-in-out 0s;
-                box-sizing: border-box;
-                cursor: text;
-                padding: 10px 18px;
-                font-family: "Avenir Next", "Helvetica Neue", sans-serif;
-                font-size: 16px;
-                font-weight: 500;
-                line-height: 26px;
-                border: 1px solid rgb(215, 219, 224);
-                width: 100%;
-                color: rgb(54, 73, 98);
-                border-radius: 4px;
-                outline: none;
-                transition: 0s;
-            }
-
-            #popup .wrapper .input input:focus {
-                border: 1px solid #999;
-            }
-
-            #popup .wrapper .input input.error {
-                border: 1px solid #e74c3c;
-            }
-
-            #popup .wrapper .cancelarEliminacion {
-                position: relative;
-                display: inline-flex;
-                font-family: "Avenir Next", "Helvetica Neue", sans-serif;
-                -webkit-box-align: center;
-                align-items: center;
-                font-weight: 700;
-                white-space: nowrap;
-                font-size: 13px;
-                -webkit-box-pack: center;
-                justify-content: center;
-                text-decoration: none;
-                cursor: pointer;
-                appearance: none;
-                padding: 9px 18px;
-                line-height: 28px;
-                border-radius: 4px;
-                box-sizing: border-box;
-                transition: all 0.55s cubic-bezier(0.25, 0.8, 0.25, 1) 0s;
-                background-color: rgb(244, 247, 255);
-                color: rgb(34, 92, 255);
-                box-shadow: none;
-                border: 1px solid rgb(26, 26, 27);
-                text-transform: uppercase;
-                letter-spacing: 0.1em;
-                margin-right: 30px;
-                border: none;
-                outline: none;
-                margin: 0;
-                margin-top: 30px;
-            }
-        </style>
         <div id="popup">
             <div class="wrapper">
                 <div class="input">
                     <label for="contraseñaDestruir">
                         <p>Contraseña</p>
                     </label>
-                    <input oninput="checkPasswordForDestruction(this)" type="password" name="psw" id="contraseñaDestruir">
+                    <input oninput="checkPasswordForDestruction(this)" type="password" name="psw"
+                        id="contraseñaDestruir">
                 </div>
                 <div class="g-recaptcha" data-callback="noEsRobotito" data-sitekey="{{ key }}"></div>
                 <script>
@@ -353,7 +95,8 @@
                     }
                 </script>
                 <div style="width: 100%; display:flex; justify-content: space-between;">
-                    <p class="cancelarEliminacion" id="btnEliminarDestruirCuenta" onclick="eliminarCuenta_destruir(this)">Eliminar</p>
+                    <p class="cancelarEliminacion" id="btnEliminarDestruirCuenta"
+                        onclick="eliminarCuenta_destruir(this)">Eliminar</p>
                     <p class="cancelarEliminacion" onclick="cancelarEliminacion()">Cancelar</p>
                 </div>
             </div>
@@ -363,16 +106,6 @@
             <div class="edit__uno">
                 <div class="nav">
                     <div style="display: flex;" class="info">
-                        <style>
-                            #pfpHolderNavy {
-                                background-image: url("{{ user['pfp'] }}");
-                                background-size: cover;
-                                background-position: center;
-                                width: 44px;
-                                height: 44px;
-                                border-radius: 50%;
-                            }
-                        </style>
                         <div id="pfpHolderNavy"></div>
                         <p
                             style="display: flex; justify-content: center; align-items: center; margin: 0 0 0 10px; font-size: 16px; font-weight: 600; color: rgb(54, 73, 98); text-align: left; line-height: 1.5; text-transform: none; overflow: unset; white-space: unset; text-overflow: unset;">
@@ -384,7 +117,7 @@
                                 class="fas fa-chevron-right"></i>
                         </a>
                         <a href="/dashboard/edit/mail">
-                            <div style="display: flex;"><i class="fas fa-bell"></i>  Notificaciones</div> <i
+                            <div style="display: flex;"><i class="fas fa-bell"></i> Notificaciones</div> <i
                                 class="fas fa-chevron-right"></i>
                         </a>
                         <a href="{{ url_for('main_page.amigos') }}">

@@ -21,6 +21,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.js"
         integrity="sha512-mgZL3SZ/vIooDg2mU2amX6NysMlthFl/jDbscSRgF/k3zmICLe6muAs7YbITZ+61FeUoo1plofYAocoR5Sa1rQ=="
         crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/edit.css') }}">
 
 </head>
 
@@ -28,156 +30,6 @@
     style="display: flex; font-family: Avenir Next,Helvetica Neue,Arial,sans-serif!important; font-feature-settings: 'kern','liga','pnum'; -webkit-font-smoothing: antialiased;">
     {% include "/sideNav.html" %}
     <div class="wrapper__navy">
-        <style>
-            .navy {
-                display: flex;
-                justify-content: flex-start;
-            }
-
-            .navy p {
-                margin: 0;
-                font-size: 24px;
-                font-weight: 500;
-                color: rgb(54, 73, 98);
-                text-align: left;
-                line-height: 1.5;
-                text-transform: none;
-                overflow: unset;
-                white-space: unset;
-                text-overflow: unset;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                overflow: hidden;
-                flex: 0 1 auto;
-            }
-
-            .navy a {
-                font-size: 24px;
-                font-weight: 500;
-                color: rgb(154, 164, 176);
-                text-align: left;
-                line-height: 1.5;
-                text-transform: none;
-                overflow: unset;
-                white-space: unset;
-                text-overflow: unset;
-                border-bottom: none;
-                text-decoration: none;
-                cursor: pointer;
-                margin-left: 100px;
-            }
-
-
-            .pagina .edit__uno .nav ul {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                /* align-items: center; */
-                margin: 0;
-                padding: 35px 0;
-                background-color: transparent;
-                border-radius: 4px;
-                position: relative;
-                transition: all 0.55s cubic-bezier(0.25, 0.8, 0.25, 1) 0s;
-                cursor: pointer;
-                box-sizing: border-box;
-                margin: 0px;
-                min-width: 0px;
-                -webkit-box-pack: justify;
-                justify-content: space-between;
-                -webkit-box-align: center;
-                /* align-items: center; */
-                display: flex;
-                background: transparent;
-            }
-
-            .pagina .edit__uno .nav ul a {
-                box-sizing: border-box;
-                margin: 3px 0;
-                min-width: 0px;
-                padding: 15px 30px;
-                background-color: transparent;
-                font-size: 16px;
-                font-weight: 600;
-                color: rgb(154, 164, 176);
-                text-align: left;
-                line-height: 1.5;
-                text-transform: none;
-                overflow: unset;
-                white-space: unset;
-                text-overflow: unset;
-                display: flex;
-                align-items: center;
-                justify-content: inherit;
-                transition: .2s;
-                width: 350px;
-            }
-
-            .pagina .edit__uno .nav ul a:hover {
-                box-shadow: rgba(20, 26, 40, 0.15) 0px 7px 42px;
-                transform: scale(1.01);
-            }
-
-            .pagina .edit__uno .nav ul .active {
-                box-sizing: border-box;
-                min-width: 0px;
-                padding: 15px 30px;
-                background-color: rgb(255, 255, 255);
-                font-size: 16px;
-                font-weight: 600;
-                color: rgb(154, 164, 176);
-                text-align: left;
-                line-height: 1.5;
-                text-transform: none;
-                overflow: unset;
-                white-space: unset;
-                text-overflow: unset;
-                display: flex;
-                align-items: center;
-                box-shadow: rgb(235, 241, 255) 0px 16px 20px 0px;
-            }
-
-            .pagina .edit__uno .nav ul a i {
-                color: rgb(54, 73, 98);
-                font-size: 24px;
-                display: flex;
-                margin: 0px 15px 0px 0px;
-            }
-
-            .pagina .edit__uno .nav {
-                width: 300px;
-                position: fixed;
-                left: 13%;
-                top: 20%;
-            }
-
-            .pagina .edit__uno .nav ul a .fa-chevron-right {
-                margin-left: 10px;
-                color: rgb(54, 73, 98) !important;
-                font-size: 20px;
-            }
-
-            .main {
-                width: 55%;
-                height: 70vh;
-                position: relative;
-                margin-right: 150px;
-            }
-
-            @media only screen and (max-width: 1400px) {
-                .main {
-                    width: 55%;
-                    height: 70vh;
-                    position: relative;
-                    margin-right: 50px;
-                }
-            }
-
-            .pagina {
-                padding-left: 0 !important;
-                padding-right: 0 !important;
-            }
-        </style>
         <div class="navy" style="justify-content: space-between;">
             <div style="display: flex; align-items: center;">
                 <a href="/dashboard">
@@ -197,16 +49,6 @@
             <div class="edit__uno">
                 <div class="nav">
                     <div style="display: flex;" class="info">
-                        <style>
-                            #pfpHolderNavy {
-                                background-image: url("{{ user['pfp'] }}");
-                                background-size: cover;
-                                background-position: center;
-                                width: 44px;
-                                height: 44px;
-                                border-radius: 50%;
-                            }
-                        </style>
                         <div id="pfpHolderNavy"></div>
                         <p
                             style="display: flex; justify-content: center; align-items: center; margin: 0 0 0 10px; font-size: 16px; font-weight: 600; color: rgb(54, 73, 98); text-align: left; line-height: 1.5; text-transform: none; overflow: unset; white-space: unset; text-overflow: unset;">
