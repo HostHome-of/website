@@ -38,7 +38,19 @@
 				for (i = 0; i < divs.length; i++) {
 					divs[i].classList.add("active")
 				}
-				errorGoogle()
+
+				setTimeout(function() {
+					for (i = 0; i < divs.length; i++) {
+						document.getElementsByClassName("animacion")[i].style.transform = "none";
+						divs[i].classList.remove("active")
+					}
+				}, 1750)
+
+				try {
+					errorGoogle()
+				} catch {
+					console.log("Haz login porfavor")
+				}
 			})
 		</script>
 		<div style="z-index: 9;" class="left">

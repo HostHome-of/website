@@ -169,7 +169,7 @@ body {
 }
 
 .wrapper .left .form .subBtn:active {
-	transform: scale(0.95);
+	transform: scale(0.95) !important;
 }
 
 .wrapper .left .form .extra {

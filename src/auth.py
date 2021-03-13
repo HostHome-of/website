@@ -91,9 +91,13 @@ class Usuario():
 
     def activar(self, tk, codigo):
         usuarios = abrir()
-        if int(usuarios[tk]["tokenEntrada"]) == int(codigo): # Bien
-            del usuarios[tk]["tokenEntrada"]
-            usuarios[tk]["autorizado"] = True
+        for i in usuarios:
+            if i["id"] == tk:
+                usuario = i
+
+        if int(usuario["tokenEntrada"]) == int(codigo): # Bien
+            del usuario["tokenEntrada"]
+            usuario["autorizado"] = True
 
             cerrar(usuarios)
             invites = abrirInvites()
@@ -119,14 +123,21 @@ class Usuario():
 
     def cojer(self):
         usuarios = abrir()
-        if self.tk in usuarios:
-            return usuarios[str(self.tk)]
+
+        for usr in usuarios:
+
+            if usr["id"] == self.tk:
+                return usr
+
         return None
 
     def petar(self, tk):
         usrs = abrir()
-        del usrs[tk]
-        cerrar(usrs)
+
+        for usr in usrs:
+            if usr["id"] == tk:
+                q = "DELETE FROM users WHERE id = " + tk
+                cerrar(q)
 
     def destruir(self):
         usuarios = abrir()
