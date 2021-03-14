@@ -1,1 +1,3 @@
 *.html linguist-vendored=true
+src/static/js/index.js linguist-vendored=true
+src/static/css/index.css linguist-vendored=true
