@@ -1,3 +1,5 @@
 *.html linguist-vendored=true
 src/static/js/index.js linguist-vendored=true
-src/static/css/index.css linguist-vendored=true
+src/static/css/auth.css linguist-vendored=true
+src/static/css/cuenta.css linguist-vendored=true
+src/static/css/style.css linguist-vendored=true
