@@ -5,7 +5,11 @@ import hashlib
 import os
 
 from src.db import *
-
+    
+import src.utilities as Utils
+utils = Utils.Utils()
+docs = utils.docs
+main_url = utils.main_url
 salt = open("salt.txt", "r").read().encode()
 
 def abrir():
@@ -18,15 +22,6 @@ def cerrar(q):
     conn = connect("./src/data/users.db")
     execute_db(conn, query=q)
 
-def abrirInvites():
-    with open("./src/data/invites.json", "r") as f:
-        links = json.load(f)
-
-    return links
-
-def cerrarInvites(invites):
-    with open("./src/data/invites.json", "w") as f:
-        json.dump(invites, f, indent=4)
 
 class HacerLogin():
     def __init__(self, email=None, psw=None):
@@ -80,14 +75,18 @@ class Usuario():
     def __init__(self, tk: str=None):
         self.tk = tk
 
-    def cojerInvite(self, tk):
-        return abrirInvites()[tk]
+    @property
+    def cojerInvite(self):
+        usrs = abrir()
 
-    def crearInviteLink(self):
-        codigoInicial = ""
-        for i in range(16):
-            codigoInicial += random.choice("q,w,e,r,t,y,u,i,o,p,a,s,d,f,g,h,j,k,l,z,x,c,v,b,n,m,1,2,3,4,5,6,7,8,9,0".split(","))
-        return codigoInicial
+        for i in usrs:
+            if i["id"] == self.tk:
+                invites = {}
+
+                invites["codigo"] = i["id"]
+                invites["url"] = main_url + "invite/" + i["id"]
+
+                return invites
 
     def activar(self, tk, codigo):
         usuarios = abrir()
@@ -99,24 +98,11 @@ class Usuario():
             del usuario["tokenEntrada"]
             usuario["autorizado"] = True
 
-            cerrar(usuarios)
-            invites = abrirInvites()
+            q = "UPDATE users SET tokenEntrada = {}, autorizado = 1 WHERE id = {}".format(random.randint(1000, 9999), tk)
+            cerrar(q)
 
-            while True:
-                codigoDeInvite = Usuario().crearInviteLink()
-                for codigo_mail in invites:
-                    if codigoDeInvite == invites[codigo_mail]["codigo"]:
-                        continue
-                break
-
-            invites[tk] = {}
-            invites[tk]["codigo"] =  codigoDeInvite
-
-            url_main = requests.get("https://raw.githubusercontent.com/HostHome-of/config/main/config.json").json()["url"]
-
-            invites[tk]["link"]   =  f"{url_main}invites/{codigoDeInvite}"
-
-            cerrarInvites(invites)
+            
+            
             return True
         else: # Mal
             return False
@@ -141,13 +127,10 @@ class Usuario():
 
     def destruir(self):
         usuarios = abrir()
-        invites = abrirInvites()
 
         if self.tk in usuarios:
             del usuarios[self.tk]
-            del invites[self.tk]
 
-        cerrarInvites(invites)
         cerrar(usuarios) 
 
     @property
@@ -203,24 +186,6 @@ class CrearUsuario():
 
             usuarios[id]["psw"] = str(Password(usuario).crear())
             usuarios[id]["autorizado"] = True
-
-            invites = abrirInvites()
-
-            while True:
-                codigoDeInvite = Usuario().crearInviteLink()
-                for codigo_mail in invites:
-                    if codigoDeInvite == invites[codigo_mail]["codigo"]:
-                        continue
-                break
-
-            invites[id] = {}
-            invites[id]["codigo"] =  codigoDeInvite
-
-            url_main = requests.get("https://raw.githubusercontent.com/HostHome-of/config/main/config.json").json()["url"]
-
-            invites[id]["link"]   =  f"{url_main}invites/{codigoDeInvite}"
-
-            cerrarInvites(invites)
 
             cerrar(usuarios)
             return id

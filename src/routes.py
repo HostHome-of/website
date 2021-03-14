@@ -257,7 +257,7 @@ def activarCuentaCodigo(codigo):
 
     if request.method == "POST":
         data = Usuario().activar(request.cookies.get('user_id'), codigo)
-        if data == False:
+        if not data:
             return {"codigo": 500}
 
         try:
@@ -321,7 +321,7 @@ def mirarHosts():
 def amigos():
 
     usr    = check_usuario()
-    invite = Usuario().cojerInvite(request.cookies.get("user_id"))
+    invite = Usuario(request.cookies.get("user_id")).cojerInvite
 
     return render_template("dashboard/amigos.html", user=usr, invites=invite, url=url_main)
 

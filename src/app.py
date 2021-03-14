@@ -37,6 +37,20 @@ app.register_blueprint(github_blueprint, url_prefix="/github_login")
 app.register_blueprint(main_page)
 app.register_blueprint(serviceworker)
 
+# Utils
+from src.utilities import Utils
+utils               = Utils()
+
+docs                = utils.docs
+check_usuario       = utils.check_usuario
+google_url_login    = utils.google_url_login
+google_url_register = utils.google_url_register
+url_main            = utils.main_url
+login_required      = utils.login_required
+already_logedin     = utils.already_logedin
+check_usuario       = utils.check_usuario
+get_repositories    = utils.get_repositories
+
 
 # ================================== INIT
 def run():
