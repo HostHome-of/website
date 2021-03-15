@@ -59,48 +59,9 @@
                     <p class="titulo">Hola {{ user['nombre'] }}!</p>
                     <p class="desc">Bienvenido a HostHome: Escoje una accion y empieza con el hosting.</p>
                     <hr />
-                    <p style="padding-top: 10px;font-size: 20px; font-weight: 500; color: rgb(0, 0, 0); text-align: left; line-height: 1.5; font-family: 'Public Sans', sans-serif; text-transform: none; overflow: unset; white-space: unset; text-overflow: unset;">¿Te sientes perdido? <a href="{{ docs }}" target="_blank" style="font-weight: 600; color: #000;">Mira la documentacion</a> </p>
+                    <p style="padding-top: 10px;font-size: 20px; font-weight: 500; text-align: left; line-height: 1.5; font-family: 'Public Sans', sans-serif; text-transform: none; overflow: unset; white-space: unset; text-overflow: unset;">¿Te sientes perdido? <a href="{{ docs }}" target="_blank" style="font-weight: 600;">Mira la documentacion</a> </p>
                 </div>
-                <ul>
-                    <style>
-                        .carta .informacion .titulo {
-                            font-size: 20px;
-                            font-weight: 700;
-                            color: rgb(54, 73, 98);
-                            text-align: left;
-                            line-height: 1.5;
-                            text-transform: none;
-                            overflow: unset;
-                            white-space: unset;
-                            text-overflow: unset;
-                            margin: 0;
-                        }
-
-                        .carta .informacion .desc {
-                            font-size: 16px;
-                            font-weight: 600;
-                            color: rgb(119, 134, 153);
-                            text-align: left;
-                            line-height: 1.5;
-                            text-transform: none;
-                            overflow: unset;
-                            white-space: unset;
-                            text-overflow: unset;
-                            margin: 0;
-                        }
-
-                        a:hover {
-                            text-decoration: none !important;
-                        }
-
-                        .carta {
-                            transition: .2s;
-                        }
-
-                        .carta:hover {
-                            transform: translateX(50px);
-                        }
-                    </style>
+                <ul id="indexUl">
                     <a class="carta uno" href="/host/new">
                         <i class="far fa-flag"></i>
                         <div class="informacion">
@@ -133,17 +94,6 @@
                                 ¿No saves que hacer? mirate un video.
                             </p>
                         </div>
-                        <style>
-                            #headerPopup {
-                                width: 75%;
-                                margin: 0 auto;
-                            }
-
-                            #headerPopup iframe {
-                                width: 100%;
-                                margin: 0 auto;
-                            }
-                        </style>
                         <div id="headerPopup" class="mfp-hide embed-responsive embed-responsive-21by9">
                             <iframe class="embed-responsive-item" width="854" height="480"
                                 src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0"
@@ -162,11 +112,11 @@
                 </ul>
             </div>
         </div>
-        <div class="details__figure" style="position: absolute;
+        <!-- <div class="details__figure" style="position: absolute;
         transform: scale(0.5);
         top: 35%;
         left: 10%;"><img class="details__pic js-parallax" data-scale="2" data-orientation="up"
-            src="/src/web/static/images/figure-3.png" alt=""></div>
+            src="/src/web/static/images/figure-3.png" alt=""></div> -->
     </div>
 
     <script>

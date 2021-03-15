@@ -142,22 +142,22 @@
 				<div class="input animacion">
 					<label for="email">Email</label>
 					<input oninput="mirarSiEsValido()" placeholder="nombre@email.com" type="email" name="email"
-						id="email" autocomplete="off">
+						id="email" autocomplete="on">
 				</div>
 				<div class="input animacion">
 					<label for="nombre">Nombre</label>
 					<input oninput="mirarSiEsValido()" placeholder="Nombre" type="text" name="nombre" id="nombre"
-						autocomplete="off">
+						autocomplete="on">
 				</div>
 				<div class="input animacion">
 					<label for="psw">Contraseña</label>
 					<input oninput="mirarSiEsValido()" type="password" placeholder="********" name="psw" id="psw"
-						autocomplete="off">
+						autocomplete="on">
 				</div>
 				<div class="input animacion">
 					<label for="rpsw">Repetir contraseña</label>
 					<input style="-webkit-text-security:disc;" oninput="mirarSiEsValido()" type="password"
-						placeholder="********" name="rpsw" id="rpsw" autocomplete="off">
+						placeholder="********" name="rpsw" id="rpsw" autocomplete="on">
 				</div>
 				<button disabled onclick="cambiarARobot()" class="subBtn animacion" id="btnLogin">Registrarse</button>
 				<style>
@@ -238,7 +238,7 @@
 						margin-bottom: 12px;
 					}
 				</style>
-				<img src="{{ url_for('static', filename='images/secure.png') }}">
+				<!-- <img src="{{ url_for('static', filename='images/secure.png') }}"> -->
 				<h3 style="margin-bottom: 30px;">Demuestra que no eres un robot</h3>
 				<div class="g-recaptcha" data-callback="cambiarAEmail" data-sitekey="{{ key }}"></div>
 			</div>

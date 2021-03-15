@@ -231,6 +231,7 @@ body {
 	color: rgb(54, 73, 98);
 	font-weight: 500;
 	line-height: 26px;
+	border-radius: 100px;
 }
 
 .wrapper .left #emailVer .input label {
@@ -279,6 +280,7 @@ body {
 	border: 1px solid rgb(34, 92, 255);
 	text-transform: uppercase;
 	letter-spacing: 0.1em;
+	border-radius: 100px;
 }
 
 .wrapper .left #emailVer .subBtn:focus {

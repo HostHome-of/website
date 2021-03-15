@@ -29,7 +29,7 @@ get_repositories    = utils.get_repositories
 # Esto es un mal gasto
 @main_page.route("/quitar/window")
 def quitarWindow():
-    return """<html><body onload="cerrar()"><script>function cerrar() {opener.location.reload(1);window.close();}</script></body></html>"""
+    return """<html><body onload="cerrar()"><script>function cerrar() {opener.location.replace('/host/new');window.close();}</script></body></html>"""
 
 # Errores
 @app.errorhandler(404)
@@ -77,7 +77,7 @@ def Imagen():
         if allowed_image(image.filename):
             filename = secure_filename(image.filename)
             image.save(os.path.join("./src/static/pfp/", filename))
-            Usuario().imagen(request.cookies.get('user_id'), filename)
+            Usuario( request.cookies.get('user_id') ).imagen(filename)
 
     return redirect("/dashboard/edit")
 
@@ -100,18 +100,18 @@ def Actualizar():
             tres   = request.args.get("tres", "false")
             cuatro = request.args.get("cuatro", "false")
             
-            uno    = uno    if uno    != "false" else ""
-            dos    = dos    if dos    != "false" else ""
-            tres   = tres   if tres   != "false" else ""
-            cuatro = cuatro if cuatro != "false" else ""
+            uno    = 1    if uno    != "false" else 0
+            dos    = 1    if dos    != "false" else 0
+            tres   = 1    if tres   != "false" else 0
+            cuatro = 1    if cuatro != "false" else 0
 
-            Usuario().actualizarPreferencias(mail, uno, dos, tres, cuatro)
+            Usuario(request.cookies.get('user_id')).actualizarPreferencias(uno, dos, tres, cuatro)
             return {"estado": 200}
 
         segundo = request.args.get("segundo", "")
         edad = request.args.get("edad", "") 
 
-        Usuario().actualizar(mail, nombre, segundo, edad)
+        Usuario(request.cookies.get('user_id')).actualizar(nombre, segundo, edad)
         return {}
     
     return redirect(url_for("main_page.Cuenta"))
@@ -353,9 +353,6 @@ def editarCuentaConPagina(pagina):
 
     usr = check_usuario()
 
-    if usr is None:
-        return redirect(url_for('main_page.Registrarse'))
-
     try:
         return render_template(f"dashboard/{pagina}.html", user=usr, docs=docs, pfp=usr["pfp"], key=env["CAPTCHA_WEB"])
     except:
@@ -382,7 +379,7 @@ def DestruirCuenta():
     usr = check_usuario()
 
     if usr is not None:
-        Usuario(request.cookies.get('user_id')).destruir()
+        Usuario(request.cookies.get('user_id')).petar()
 
     return redirect(url_for('main_page.PaginaPrincipal'))
 

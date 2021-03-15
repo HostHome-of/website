@@ -21,7 +21,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.js"
         integrity="sha512-mgZL3SZ/vIooDg2mU2amX6NysMlthFl/jDbscSRgF/k3zmICLe6muAs7YbITZ+61FeUoo1plofYAocoR5Sa1rQ=="
         crossorigin="anonymous"></script>
-    
+
     <link rel="stylesheet" href="{{ url_for('static', filename='css/edit.css') }}">
 
 </head>
@@ -49,6 +49,16 @@
             <div class="edit__uno">
                 <div class="nav">
                     <div style="display: flex;" class="info">
+                        <style>
+                            #pfpHolderNavy {
+                                background-image: url("{{ user['pfp'] }}");
+                                background-size: cover;
+                                background-position: center;
+                                width: 44px;
+                                height: 44px;
+                                border-radius: 50%;
+                            }
+                        </style>
                         <div id="pfpHolderNavy"></div>
                         <p
                             style="display: flex; justify-content: center; align-items: center; margin: 0 0 0 10px; font-size: 16px; font-weight: 600; color: rgb(54, 73, 98); text-align: left; line-height: 1.5; text-transform: none; overflow: unset; white-space: unset; text-overflow: unset;">
@@ -59,18 +69,18 @@
                             <div style="display: flex;"><i class="far fa-user"></i> Mi cuenta</div> <i
                                 class="fas fa-chevron-right"></i>
                         </a>
-                            <a href="/dashboard/edit/mail">
-                                <div style="display: flex;"><i class="fas fa-bell"></i> Notificaciones</div>
-                                <i class="fas fa-chevron-right"></i>
-                            </a>
-                            <a href="{{ url_for('main_page.amigos') }}" class="active">
-                                <div style="display: flex;"><i class="fas fa-sitemap"></i> Amigos</div> <i
-                                    class="fas fa-chevron-right"></i>
-                            </a>
-                            <a href="/dashboard/edit/avanzado">
-                                <div style="display: flex;"><i class="fas fa-exclamation-circle"></i> Avanzado</div> <i
-                                    class="fas fa-chevron-right"></i>
-                            </a>
+                        <a href="/dashboard/edit/mail">
+                            <div style="display: flex;"><i class="fas fa-bell"></i> Notificaciones</div>
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                        <a href="{{ url_for('main_page.amigos') }}" class="active">
+                            <div style="display: flex;"><i class="fas fa-sitemap"></i> Amigos</div> <i
+                                class="fas fa-chevron-right"></i>
+                        </a>
+                        <a href="/dashboard/edit/avanzado">
+                            <div style="display: flex;"><i class="fas fa-exclamation-circle"></i> Avanzado</div> <i
+                                class="fas fa-chevron-right"></i>
+                        </a>
                     </ul>
                 </div>
 
@@ -237,7 +247,7 @@
                                             <div style="display: flex;">
                                                 <input
                                                     style="width: 100%; border-top-right-radius: 0; border-bottom-right-radius: 0;"
-                                                    class="inputText" placeholder="prueba@email.com, prueba2@email.com"
+                                                    class="inputText" placeholder="nombre@email.com, nombre2@email.com"
                                                     id="inputByEmail">
                                                 <button style="width: auto "
                                                     title="Tiene que estar de la manera en la que pone en el input"
@@ -258,7 +268,7 @@
                                                 font-size: 16px;
                                                 font-weight: 600;
                                                 color: rgb(54, 73, 98);
-                                                text-align: left;
+                                                text-align: center;
                                                 line-height: 1.5;
                                                 text-transform: none;
                                                 overflow: unset;
@@ -315,25 +325,28 @@
                                         <div class="social__link">
                                             <script>
                                                 function abrirFacebook() {
-                                                    window.open('https://www.facebook.com/sharer/sharer.php?u={{ url }}', '_blank', 'height=600,width=1200,top=400,left=400')
+                                                    window.open('https://www.facebook.com/sharer/sharer.php?u={{ invites["link"] }}', '_blank', 'height=600,width=1200,top=400,left=400')
                                                 }
 
                                                 function abrirTwitter() {
-                                                    window.open('https://twitter.com/intent/tweet?text=%C2%A1Ve%20a%20HostHome!%20podras%20hacer%20hostings%20gratis%20seas%20de%20donde%20seas.%20Muy%20facil%20crearse%20una%20cuenta%20muy%20facil%20mente%20y%20en%20menos%20de%201%20hora%20podras%20crearte%20un%20host%20%20{{ url }}', '_blank', 'height=600,width=1200,top=400,left=400')
+                                                    window.open('https://twitter.com/intent/tweet?text=%C2%A1Ve%20a%20HostHome!%20podras%20hacer%20hostings%20gratis%20seas%20de%20donde%20seas.%20Muy%20facil%20crearse%20una%20cuenta%20muy%20facil%20mente%20y%20en%20menos%20de%201%20hora%20podras%20crearte%20un%20host%20%20{{ invites["link"] }}', '_blank', 'height=600,width=1200,top=400,left=400')
                                                 }
 
                                                 function abrirLinkedIn() {
-                                                    window.open('https://www.linkedin.com/shareArticle?mini=true&url={{ url }}&summary=%C2%A1Ve%20a%20HostHome!%20podras%20hacer%20hostings%20gratis%20seas%20de%20donde%20seas.%20Muy%20facil%20crearse%20una%20cuenta%20muy%20facil%20mente%20y%20en%20menos%20de%201%20hora%20podras%20crearte%20un%20host%20%20{{ url }}', '_blank', 'height=600,width=1200,top=400,left=400')
+                                                    window.open('https://www.linkedin.com/shareArticle?mini=true&url={{ url }}&summary=%C2%A1Ve%20a%20HostHome!%20podras%20hacer%20hostings%20gratis%20seas%20de%20donde%20seas.%20Muy%20facil%20crearse%20una%20cuenta%20muy%20facil%20mente%20y%20en%20menos%20de%201%20hora%20podras%20crearte%20un%20host%20%20{{ invites["link"] }}', '_blank', 'height=600,width=1200,top=400,left=400')
                                                 }
                                             </script>
                                             <div class="social__link__item" onclick="abrirTwitter()">
-                                                <i class="fab fa-twitter"></i> <span style="margin-left: 10px;">Twitter</span>
+                                                <i class="fab fa-twitter"></i> <span
+                                                    style="margin-left: 10px;">Twitter</span>
                                             </div>
                                             <div class="social__link__item" onclick="abrirFacebook()">
-                                                <i class="fab fa-facebook"></i> <span style="margin-left: 10px;">Facebook</span>
+                                                <i class="fab fa-facebook"></i> <span
+                                                    style="margin-left: 10px;">Facebook</span>
                                             </div>
                                             <div class="social__link__item" onclick="abrirLinkedIn()">
-                                                <i class="fab fa-linkedin"></i> <span style="margin-left: 10px;">LinkedIn</span>
+                                                <i class="fab fa-linkedin"></i> <span
+                                                    style="margin-left: 10px;">LinkedIn</span>
                                             </div>
                                         </div>
                                     </div>

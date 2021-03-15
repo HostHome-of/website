@@ -45,7 +45,7 @@ class Utils():
                     return redirect(url_for('main_page.login'))
                 if user:
                     if not user.get("autorizado"):
-                        Usuario().petar(user_id)
+                        Usuario(user_id).petar()
                         return redirect(url_for('main_page.login'))
                     return function_to_protect(*args, **kwargs)
                 else:
@@ -67,12 +67,13 @@ class Utils():
         return wrapper 
 
     def check_usuario(self):
-        if request.cookies.get('user_id'):
-            usr = Usuario(request.cookies.get('user_id')).cojer()
+        id = request.cookies.get('user_id')
+        if id:
+            usr = Usuario(id).cojer()
             if usr is None:
                 return None
             if not usr["autorizado"]:
-                Usuario().petar(request.cookies.get('user_id'))
+                Usuario(id).petar()
                 return None
             return usr
         return None

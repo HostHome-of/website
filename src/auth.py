@@ -6,10 +6,9 @@ import os
 
 from src.db import *
     
-import src.utilities as Utils
-utils = Utils.Utils()
-docs = utils.docs
-main_url = utils.main_url
+_config = requests.get("https://raw.githubusercontent.com/HostHome-of/config/main/config.json").json()
+docs = _config["docs"]
+main_url = _config["url"]
 salt = open("salt.txt", "r").read().encode()
 
 def abrir():
@@ -45,11 +44,11 @@ class HacerLogin():
         usuarios = abrir()
 
         for usr in usuarios:
-            if usuarios[usr]["mail"] == self.email:
+            if usr["mail"] == self.email:
                 self.email = usr
 
-        if Password(usuarios[str(self.email)]["psw"]).check(self.psw):
-            return str(self.email)
+        if Password(self.email["psw"]).check(self.psw):
+            return self.email
 
         return False
 
@@ -64,8 +63,10 @@ class Password():
     def check(self, psw):
         psw = hashlib.pbkdf2_hmac('sha256', psw.encode('utf-8'), salt, 100000)
 
-        key = self.texto[2:-1]
-        psw = str(psw)[2:-1]
+        key = self.texto
+        psw = str(psw)
+        print(psw)
+        print(key)
         # psw = psw[2:-1]
         
         return key == psw
@@ -84,7 +85,7 @@ class Usuario():
                 invites = {}
 
                 invites["codigo"] = i["id"]
-                invites["url"] = main_url + "invite/" + i["id"]
+                invites["link"] = main_url + "invite/" + i["id"]
 
                 return invites
 
@@ -117,21 +118,13 @@ class Usuario():
 
         return None
 
-    def petar(self, tk):
+    def petar(self):
         usrs = abrir()
 
         for usr in usrs:
-            if usr["id"] == tk:
-                q = "DELETE FROM users WHERE id = " + tk
+            if usr["id"] == self.tk:
+                q = "DELETE FROM users WHERE id = " + self.tk
                 cerrar(q)
-
-    def destruir(self):
-        usuarios = abrir()
-
-        if self.tk in usuarios:
-            del usuarios[self.tk]
-
-        cerrar(usuarios) 
 
     @property
     def cojer_admins(self):
@@ -143,34 +136,26 @@ class Usuario():
     def cojer_usuarios(self):
         return abrir()
 
-    def imagen(self, usr, nm):
-        mail = usr
-        usrs = abrir()
-        usrs[mail]["pfp"] = f"/src/web/static/pfp/{nm}"
-        cerrar(usrs)
+    def imagen(self, nm):
+        
+        q = "UPDATE users SET pfp = \"/src/web/static/pfp/{}\" WHERE id = {}"
+        q = q.format(nm, self.tk)
 
-    def actualizar(self, mail, nombre, ap, eddad):
-        usuarios = abrir()
+        cerrar(q)
 
-        usuarios[str(mail)]["segundoNombre"] = ap
-        usuarios[str(mail)]["nombre"] = nombre
+    def actualizar(self, nombre, ap, edad):
 
-        usuarios[str(mail)]["edad"] = eddad
+        q = "UPDATE users SET segundoNombre = \"{}\", nombre = \"{}\", edad = {} WHERE id = {}"
+        q = q.format(ap, nombre, edad, self.tk)
 
-        cerrar(usuarios)
+        cerrar(q)
 
-    def actualizarPreferencias(self, mail, uno, dos, tres, cuatro):
-        uno     = bool(uno)
-        dos     = bool(dos)
-        tres    = bool(tres)
-        cuatro  = bool(cuatro)
+    def actualizarPreferencias(self, uno, dos, tres, cuatro):
 
-        usuarios = abrir()
-        usuarios[str(mail)]["emails"]["uno"]    = uno
-        usuarios[str(mail)]["emails"]["dos"]    = dos
-        usuarios[str(mail)]["emails"]["tres"]   = tres
-        usuarios[str(mail)]["emails"]["cuatro"] = cuatro
-        cerrar(usuarios)
+        q = "UPDATE users SET emails_uno = {}, emails_dos = {}, emails_tres = {}, emails_cuatro = {} WHERE id = {}"
+        q = q.format(uno, dos, tres, cuatro, self.tk)
+
+        cerrar(q)
 
 class CrearUsuario():
     def __init__(self, nombre: str=None, psw: str=None, mail: str=None):
@@ -284,7 +269,7 @@ class CrearUsuario():
                 if type(usr[i]) == str:
                     q += f" \"{usr[i]}\","
                 elif type(usr[i]) == int:
-                    q += f" {usr[i]},"
+                    q += f" {int(usr[i])},"
                 elif type(usr[i]) == bool:
                     if usr[i]:
                         q += f" 1,"

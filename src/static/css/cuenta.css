@@ -283,8 +283,8 @@ h6, .h6 {
 }
 
 hr {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
     border: 0;
     border-top: 1px solid rgba(0, 0, 0, .1);
 }
@@ -864,8 +864,8 @@ textarea.form-control {
 .pagina .index .titulo {
     font-size: 48px;
     font-weight: 700;
-    /* color: rgb(54, 73, 98); */
-    color: #000;
+    color: rgb(54, 73, 98);
+    /* color: #000; */
     text-align: left;
     line-height: 1.5;
     text-transform: none;
@@ -877,8 +877,8 @@ textarea.form-control {
 .pagina .index .desc {
     font-size: 24px;
     font-weight: 700;
-    /* color: rgb(54, 73, 98); */
-    color: #000;
+    color: rgb(54, 73, 98);
+    /* color: #000; */
     text-align: left;
     line-height: 1.5;
     text-transform: none;
@@ -2417,4 +2417,52 @@ p {
     position: absolute;
     top: 50%;
     left: 50%;
+}
+
+#headerPopup {
+    width: 75%;
+    margin: 0 auto;
+}
+
+#headerPopup iframe {
+    width: 100%;
+    margin: 0 auto;
+}
+
+#indexUl .carta .informacion .titulo {
+    font-size: 20px;
+    font-weight: 700;
+    color: rgb(54, 73, 98);
+    text-align: left;
+    line-height: 1.5;
+    text-transform: none;
+    overflow: unset;
+    white-space: unset;
+    text-overflow: unset;
+    margin: 0;
+}
+
+#indexUl .carta .informacion .desc {
+    font-size: 16px;
+    font-weight: 600;
+    color: rgb(119, 134, 153);
+    text-align: left;
+    line-height: 1.5;
+    text-transform: none;
+    overflow: unset;
+    white-space: unset;
+    text-overflow: unset;
+    margin: 0;
+}
+
+#indexUl a:hover {
+    text-decoration: none !important;
+}
+
+#indexUl .carta {
+    transition: .2s;
+}
+
+#indexUl .carta:hover {
+    transform: translateX(50px);
 }
